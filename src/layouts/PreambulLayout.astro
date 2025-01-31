@@ -1,0 +1,66 @@
+---
+import Layout from './Layout.astro';
+import PreambulNavigation from '../components/PreambulNavigation.astro';
+
+interface Props {
+  title: string;
+  subtitle: string;
+  articleInfo?: string;
+  quote?: string;
+  images: {
+    src: string;
+    alt: string;
+    caption?: string;
+  }[];
+}
+
+const { title, subtitle, articleInfo, quote, images } = Astro.props;
+
+// Extract current section from the URL
+const currentSection = Astro.url.pathname.split('/').pop() || '';
+---
+
+<Layout>
+  <main class="flex-grow pt-24 pb-16">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="border-b border-gray-800/50 pb-8 mb-12">
+        <h1 class="text-3xl font-serif text-gray-200 mb-4">{title}</h1>
+        <p class="text-lg text-gray-300">{subtitle}</p>
+        {articleInfo && <p class="text-sm text-gray-400 mt-4 italic">{articleInfo}</p>}
+      </div>
+
+      <div class="space-y-12">
+        <div class="prose prose-invert max-w-none">
+          <slot />
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8">
+          {
+            images.map((image) => (
+              <figure class="space-y-3">
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  class="w-full aspect-4/3 object-cover rounded-lg"
+                />
+                {image.caption && (
+                  <figcaption class="text-sm text-gray-400 italic">{image.caption}</figcaption>
+                )}
+              </figure>
+            ))
+          }
+        </div>
+
+        {
+          quote && (
+            <blockquote class="border-l-4 border-yellow-500 pl-6 py-2 my-8">
+              <p class="text-xl font-serif text-gray-200 italic">{quote}</p>
+            </blockquote>
+          )
+        }
+
+        <PreambulNavigation currentSection={currentSection} />
+      </div>
+    </div>
+  </main>
+</Layout>

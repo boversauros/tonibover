@@ -1,0 +1,106 @@
+---
+const links = [
+  { label: 'PREÀMBUL', href: '/preambul' },
+  { label: 'BIOGRAFIA', href: '/biografia' },
+  { label: 'REFLEXIONS', href: '/reflexions' },
+  { label: 'CONTACTE', href: '/contacte' },
+];
+---
+
+<header
+  class="fixed top-0 left-0 right-0 bg-black/95 backdrop-blur-sm z-50 border-b border-gray-800/50"
+>
+  <nav class="max-w-4xl mx-auto px-6">
+    <div class="flex items-center justify-between h-20">
+      <div class="flex items-baseline space-x-3">
+        <h1 class="text-2xl font-serif italic hover:text-gray-200 transition-colors">
+          <a href="/">Toni Bover</a>
+        </h1>
+        <span class="text-sm tracking-wider text-gray-400"> IMAGE MANAGER </span>
+      </div>
+
+      <div class="hidden md:flex items-center space-x-8">
+        {
+          links.map((link) => (
+            <a
+              href={link.href}
+              class="text-sm tracking-wide text-gray-300 hover:text-white transition-colors duration-300"
+            >
+              {link.label}
+            </a>
+          ))
+        }
+      </div>
+
+      <button
+        class="md:hidden p-2 hover:text-gray-300 transition-colors"
+        data-menu-button
+        aria-label="Toggle menu"
+        aria-expanded="false"
+      >
+        <svg
+          id="menuIcon"
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+        <svg
+          id="closeIcon"
+          xmlns="http://www.w3.org/2000/svg"
+          class="hidden h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+
+    <div id="mobileMenu" class="hidden md:hidden border-t border-gray-800/50">
+      <div class="py-4 space-y-2">
+        {
+          links.map((link) => (
+            <a
+              href={link.href}
+              class="block px-4 py-2 text-sm tracking-wide text-gray-300 hover:bg-gray-900 hover:text-white transition-all duration-300"
+            >
+              {link.label}
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </nav>
+</header>
+
+<script>
+  const button = document.querySelector('[data-menu-button]');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const menuIcon = document.getElementById('menuIcon');
+  const closeIcon = document.getElementById('closeIcon');
+
+  if (button && mobileMenu && menuIcon && closeIcon) {
+    button.addEventListener('click', () => {
+      const isMenuOpen = mobileMenu.classList.contains('hidden');
+
+      mobileMenu.classList.toggle('hidden');
+      menuIcon.classList.toggle('hidden');
+      closeIcon.classList.toggle('hidden');
+
+      button.setAttribute('aria-expanded', String(isMenuOpen));
+    });
+  }
+</script>

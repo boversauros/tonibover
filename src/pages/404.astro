@@ -1,0 +1,35 @@
+---
+// src/pages/404.astro
+import Layout from '../layouts/Layout.astro';
+import '../styles/global.css';
+
+const randomPhotographyQuotes = [
+  'La fotografia és la història que falla a les paraules.',
+  'Cada imatge explica una història, fins i tot quan no la trobem.',
+  'La millor càmera és la que tens amb tu.',
+  'Una fotografia és un secret sobre un secret.',
+  'Les fotografies són les petjades de la nostra memòria.',
+];
+
+// Get a random quote
+const randomQuote =
+  randomPhotographyQuotes[Math.floor(Math.random() * randomPhotographyQuotes.length)];
+---
+
+<Layout>
+  <main class="flex-grow flex items-center justify-center min-h-screen">
+    <div class="max-w-xl mx-auto px-6 py-16 text-center">
+      <h1 class="text-8xl font-serif text-white mb-8">404</h1>
+
+      <p class="text-lg text-white/80 mb-12 font-light">
+        {randomQuote}
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+        <a href="/" class="text-white/60 hover:text-white transition-colors duration-300">
+          Tornar a l'inici
+        </a>
+      </div>
+    </div>
+  </main>
+</Layout>

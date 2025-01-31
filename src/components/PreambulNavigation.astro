@@ -1,0 +1,74 @@
+---
+// src/components/PreambulNavigation.astro
+const sections = [
+  { id: '20', title: 'UN PROCÉS TRANS A LA MADURESA' },
+  { id: '40', title: "UN PROCÉS TRANS DE L'ANALÒGIC AL DIGITAL" },
+  { id: '60', title: 'UN PROCÉS TRANS LABORAL' },
+];
+
+interface Props {
+  currentSection: string;
+}
+
+const { currentSection } = Astro.props;
+
+const currentIndex = sections.findIndex((section) => section.id === currentSection);
+const prevSection = currentIndex > 0 ? sections[currentIndex - 1] : null;
+const nextSection = currentIndex < sections.length - 1 ? sections[currentIndex + 1] : null;
+---
+
+<nav class="mt-16 border-t border-gray-800/50 pt-8">
+  <div class="flex justify-between items-center">
+    {
+      prevSection && (
+        <a
+          href={`/preambul/${prevSection.id}`}
+          class="group flex items-center text-gray-400 hover:text-gray-200 transition-colors"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5 mr-2 transform group-hover:-translate-x-1 transition-transform"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L4.414 9H17a1 1 0 110 2H4.414l5.293 5.293a1 1 0 010 1.414z"
+              clip-rule="evenodd"
+            />
+          </svg>
+          <span>
+            <span class="block text-sm text-gray-500">Anterior</span>
+            <span class="block">{prevSection.title}</span>
+          </span>
+        </a>
+      )
+    }
+
+    {
+      nextSection && (
+        <a
+          href={`/preambul/${nextSection.id}`}
+          class="group flex items-center text-right text-gray-400 hover:text-gray-200 transition-colors ml-auto"
+        >
+          <span>
+            <span class="block text-sm text-gray-500">Següent</span>
+            <span class="block">{nextSection.title}</span>
+          </span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5 ml-2 transform group-hover:translate-x-1 transition-transform"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L15.586 11H3a1 1 0 110-2h12.586l-5.293-5.293a1 1 0 010-1.414z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </a>
+      )
+    }
+  </div>
+</nav>

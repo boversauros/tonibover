@@ -1,0 +1,37 @@
+---
+import PreambulContentLayout from '../../layouts/PreambulLayout.astro';
+import '../../styles/global.css';
+
+const images = [
+  {
+    src: 'https://placehold.co/500x600',
+    alt: 'Self portrait with camera',
+    caption: 'Fotografia: Pere Formiguera, Toni Bover i Manel Botet',
+  },
+  {
+    src: 'https://placehold.co/500x600',
+    alt: 'Photographer working with camera',
+    caption: "Els 20 simbolitzen l'etapa de la il·lusió amb la mirada dirigida cap al futur",
+  },
+];
+---
+
+<PreambulContentLayout
+  title="UN PROCÉS TRANS A LA MADURESA"
+  subtitle="Els 20 simbolitzen l'etapa de la il·lusió i la mirada dirigida cap al futur. Unes il·lusions que començaven a tenir trilla amb el pas del temps."
+  articleInfo="Article 20/40/60: Una reflexió sistemàtica de la fotografia com art i cultura, 2020"
+  quote="Entendre la imatge fotogràfica és imprescindible per a l'alfabetització i la comunicació visual."
+  images={images}
+>
+  <p>
+    En els 20 simbolitzen l'etapa de la il·lusió amb la mirada dirigida cap al futur. Unes
+    il·lusions que començaven a tenir trilla amb el pas del temps.
+  </p>
+
+  <p>
+    Per mi, la fotografia va anar obrint molt més que la fotografia i va anar donant-nos-la la
+    metodologia de la fotografia. Familiaritzar-me amb la fotografia va permetre aprendre a mirar,
+    comunicar idees a partir dels signes bàsics, obtenir els elements individuals per entendre els
+    principis del l'estètica i la comunicació.
+  </p>
+</PreambulContentLayout>

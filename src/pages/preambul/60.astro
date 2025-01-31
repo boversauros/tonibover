@@ -1,0 +1,38 @@
+---
+// src/pages/preambul/60.astro
+import PreambulContentLayout from '../../layouts/PreambulLayout.astro';
+import '../../styles/global.css';
+
+const images = [
+  {
+    src: 'https://placehold.co/500x600',
+    alt: 'People viewing an exhibition',
+    caption: "Els 60 signifiquen l'etapa de la reflexió i una continuïtat de les il·lusions.",
+  },
+  {
+    src: 'https://placehold.co/500x600',
+    alt: 'Crowd at exhibition',
+    caption: 'Una mirada cap al futur des del present.',
+  },
+];
+---
+
+<PreambulContentLayout
+  title="UN PROCÉS TRANS LABORAL"
+  subtitle="Els 60 signifiquen l'etapa de la reflexió i una continuïtat de les il·lusions dels 20."
+  articleInfo="Article 20/40/60: Una reflexió sistemàtica de la fotografia com art i cultura, 2020"
+  quote="La comunicació visual ha conegut d'una forma exponencial i vertiginosa durant els darrers anys. Un híbrid entre la semiòtica i l'imatge management que permetrà definir els processos transmedia del futur."
+  images={images}
+>
+  <p>
+    Els 60 signifiquen l'etapa de la reflexió i una continuïtat de les il·lusions dels 20. Una etapa
+    per entendre i afirmar el que he après, i el llenguatge que ha aportat tant en els la
+    construcció de les il·lusions dels 20s en la maduresa dels 40.
+  </p>
+
+  <p>
+    Una mirada del passat des del present, una reflexió de la comunicació visual de les imatges 2D,
+    3D i 4D, més virtuals. Una mirada cap al futur des del present, per reivindicar les imatges HD
+    interactives per permetre l'evolució de la història i de la física quàntica.
+  </p>
+</PreambulContentLayout>

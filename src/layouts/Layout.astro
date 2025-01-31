@@ -1,0 +1,30 @@
+---
+import Navigation from '../components/Navigation.astro';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Toni Bover</title>
+  </head>
+  <body class="min-h-screen bg-black text-white font-sans antialiased flex flex-col">
+    <Navigation />
+    <slot />
+  </body>
+  <footer class="border-t border-gray-800/50 mt-auto">
+    <div class="max-w-4xl mx-auto px-6 py-6">
+      <div class="flex justify-between items-center text-sm">
+        <p class="text-gray-400 font-serif">
+          © Toni Bover, {new Date().getFullYear()}
+        </p>
+        <p class="text-gray-400 hover:text-gray-300 transition-colors">
+          <a href="#">Lleis d'autoria i protecció de dades</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+</html>

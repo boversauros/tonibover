@@ -1,0 +1,38 @@
+---
+// src/pages/preambul/40.astro
+import PreambulContentLayout from '../../layouts/PreambulLayout.astro';
+import '../../styles/global.css';
+
+const images = [
+  {
+    src: 'https://placehold.co/500x600',
+    alt: 'Group of people looking at equipment',
+    caption: 'Explicació dels avantatges de la impressió contínua.',
+  },
+  {
+    src: 'https://placehold.co/500x600',
+    alt: 'Person working at computer',
+    caption: 'El pas cap a la tecnologia digital.',
+  },
+];
+---
+
+<PreambulContentLayout
+  title="UN PROCÉS TRANS DE L'ANALÒGIC AL DIGITAL"
+  subtitle="Els 40 tracten l'etapa de la maduresa i de la reflexió contínua."
+  articleInfo="Article 20/40/60: Una reflexió sistemàtica de la fotografia com art i cultura, 2020"
+  quote="La fotografia ha estat un pas extrem/ing entre el dibuix en perspectiva i el CGI d'estètica realista."
+  images={images}
+>
+  <p>
+    Treballar 20 anys com a professor de fotografia industrial em va permetre entendre les bases de
+    la tecnologia de la fotografia i de la física de la llum. A través de la il·luminació vaig
+    aprendre a descobrir les formes i les textures dels objectes.
+  </p>
+
+  <p>
+    Entrar com a professor en la Universitat i el Doctorat en la Escola d'Arquitectura va permetre
+    entendre i situar els principis de la perspectiva i de la geometria de la imatge, i comprendre
+    les relacions entre el dibuix en perspectiva i el CGI.
+  </p>
+</PreambulContentLayout>
