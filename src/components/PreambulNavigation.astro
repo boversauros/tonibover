@@ -1,5 +1,4 @@
 ---
-// src/components/PreambulNavigation.astro
 const sections = [
   { id: '20', title: 'UN PROCÉS TRANS A LA MADURESA' },
   { id: '40', title: "UN PROCÉS TRANS DE L'ANALÒGIC AL DIGITAL" },
@@ -11,7 +10,6 @@ interface Props {
 }
 
 const { currentSection } = Astro.props;
-
 const currentIndex = sections.findIndex((section) => section.id === currentSection);
 const prevSection = currentIndex > 0 ? sections[currentIndex - 1] : null;
 const nextSection = currentIndex < sections.length - 1 ? sections[currentIndex + 1] : null;

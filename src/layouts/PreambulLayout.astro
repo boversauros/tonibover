@@ -15,8 +15,6 @@ interface Props {
 }
 
 const { title, subtitle, articleInfo, quote, images } = Astro.props;
-
-// Extract current section from the URL
 const currentSection = Astro.url.pathname.split('/').pop() || '';
 ---
 
