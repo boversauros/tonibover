@@ -15,7 +15,7 @@ interface Props {
 }
 
 const { title, subtitle, articleInfo, quote, images } = Astro.props;
-const currentSection = Astro.url.pathname.split('/').pop() || '';
+const currentSection = Astro.url.pathname.replace(/\/$/, '').split('/').pop() || '';
 ---
 
 <Layout>
