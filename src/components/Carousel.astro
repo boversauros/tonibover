@@ -1,0 +1,126 @@
+<div class="relative w-full bg-black pb-8">
+  <div class="max-w-6xl mx-auto px-4 md:px-12">
+    <div class="relative">
+      <!-- Images container with snap scroll -->
+      <div
+        class="flex gap-4 md:gap-8 overflow-x-auto snap-x snap-mandatory hide-scrollbar touch-pan-x"
+        id="carousel-container"
+      >
+        <div class="flex-none snap-start flex items-start">
+          <span
+            class="text-white/60 text-xl md:text-2xl font-serif [writing-mode:vertical-lr] rotate-180 mr-3 md:mr-6 mt-2"
+          >
+            1957
+          </span>
+          <img
+            src="https://placehold.co/300x300"
+            alt="Family photo from 1957"
+            class="w-[250px] md:w-[300px] aspect-square object-cover"
+          />
+        </div>
+
+        <div class="flex-none snap-start flex items-start">
+          <span
+            class="text-white/60 text-xl md:text-2xl font-serif [writing-mode:vertical-lr] rotate-180 mr-3 md:mr-6 mt-2"
+          >
+            1975
+          </span>
+          <img
+            src="https://placehold.co/300x300"
+            alt="Working as photographer in 1975"
+            class="w-[250px] md:w-[300px] aspect-square object-cover"
+          />
+        </div>
+
+        <div class="flex-none snap-start flex items-start">
+          <span
+            class="text-white/60 text-xl md:text-2xl font-serif [writing-mode:vertical-lr] rotate-180 mr-3 md:mr-6 mt-2"
+          >
+            1980
+          </span>
+          <img
+            src="https://placehold.co/300x300"
+            alt="In court 1980"
+            class="w-[250px] md:w-[300px] aspect-square object-cover"
+          />
+        </div>
+
+        <div class="flex-none snap-start flex items-start">
+          <span
+            class="text-white/60 text-xl md:text-2xl font-serif [writing-mode:vertical-lr] rotate-180 mr-3 md:mr-6 mt-2"
+          >
+            2005
+          </span>
+          <img
+            src="https://placehold.co/300x300"
+            alt="At desk 2005"
+            class="w-[250px] md:w-[300px] aspect-square object-cover"
+          />
+        </div>
+      </div>
+
+      <!-- Navigation arrows - hidden on mobile -->
+      <button
+        class="hidden md:block absolute -left-12 top-1/2 -translate-y-1/2 text-white/60 hover:text-white transition-colors"
+        id="prev-btn"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-8 w-8"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"
+          ></path>
+        </svg>
+      </button>
+      <button
+        class="hidden md:block absolute -right-12 top-1/2 -translate-y-1/2 text-white/60 hover:text-white transition-colors"
+        id="next-btn"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-8 w-8"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"
+          ></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+</style>
+
+<script>
+  // Only initialize carousel navigation on desktop
+  if (window.innerWidth >= 768) {
+    const container = document.getElementById('carousel-container');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+
+    if (container && prevBtn && nextBtn) {
+      const scrollAmount = 300 + 32 + 24; // image width + year space + gap
+
+      prevBtn.addEventListener('click', () => {
+        container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+      });
+
+      nextBtn.addEventListener('click', () => {
+        container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      });
+    }
+  }
+</script>

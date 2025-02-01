@@ -19,7 +19,7 @@ const currentSection = Astro.url.pathname.split('/').pop() || '';
 ---
 
 <Layout>
-  <main class="flex-grow pt-24 pb-16">
+  <main class="flex-grow pt-32 pb-16">
     <div class="max-w-4xl mx-auto px-6">
       <div class="border-b border-gray-800/50 pb-8 mb-12">
         <h1 class="text-3xl font-serif text-gray-200 mb-4">{title}</h1>
@@ -36,11 +36,7 @@ const currentSection = Astro.url.pathname.split('/').pop() || '';
           {
             images.map((image) => (
               <figure class="space-y-3">
-                <img
-                  src={image.src}
-                  alt={image.alt}
-                  class="w-full aspect-4/3 object-cover rounded-lg"
-                />
+                <img src={image.src} alt={image.alt} class="w-full aspect-4/3 object-cover" />
                 {image.caption && (
                   <figcaption class="text-sm text-gray-400 italic">{image.caption}</figcaption>
                 )}
