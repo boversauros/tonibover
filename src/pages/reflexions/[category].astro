@@ -1,0 +1,97 @@
+---
+import '../../styles/global.css';
+import Layout from '../../layouts/Layout.astro';
+import { posts } from '../../data/posts';
+
+export function getStaticPaths() {
+  const categories = [
+    { id: 'influencies', name: 'Influències' },
+    { id: 'perspectives', name: 'Perspectives' },
+    { id: 'vivencies', name: 'Vivències' },
+  ];
+
+  return categories.map(({ id }) => ({
+    params: { category: id },
+    props: { categories },
+  }));
+}
+
+const { categories } = Astro.props;
+const { category } = Astro.params;
+const categoryName = categories.find((c) => c.id === category)?.name;
+const filteredPosts = posts.filter((post) => post.category === category);
+const uniqueKeywords = [...new Set(posts.flatMap((post) => post.keywords))];
+---
+
+<Layout>
+  <main class="flex-grow pt-32 pb-16">
+    <div class="max-w-4xl mx-auto px-6">
+      <h2 class="text-xl font-serif italic mb-8 text-gray-200">
+        REFLEXIONS: {categoryName}
+      </h2>
+
+      <nav class="mb-12">
+        <ul class="flex flex-wrap gap-6 text-gray-400">
+          <li>
+            <a href="/reflexions" class="hover:text-white transition-colors"> Tots </a>
+          </li>
+          {
+            categories.map((cat) => (
+              <li>
+                <a
+                  href={`/reflexions/${cat.id}`}
+                  class={`hover:text-white transition-colors ${
+                    cat.id === category ? 'border-b-2 border-white text-white' : ''
+                  }`}
+                >
+                  {cat.name}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+        {
+          filteredPosts.map((post) => (
+            <article class="space-y-4">
+              <a href={`/reflexions/${post.slug}`} class="group">
+                <div class="overflow-hidden">
+                  <img
+                    src={post.image.url}
+                    alt={post.image.title}
+                    class="w-full aspect-4/3 object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                </div>
+                <div class="space-y-2 pt-4">
+                  <p class="text-sm text-gray-400 font-serif">{categoryName}</p>
+                  <h3 class="text-lg font-serif text-gray-100 group-hover:text-white transition-colors">
+                    {post.title}
+                  </h3>
+                  <p class="text-sm text-gray-400">{post.date}</p>
+                </div>
+              </a>
+            </article>
+          ))
+        }
+      </div>
+
+      <div class="border-t border-gray-800 pt-8">
+        <h3 class="text-lg font-serif mb-6 text-gray-200">Paraules Clau</h3>
+        <div class="flex flex-wrap gap-2">
+          {
+            uniqueKeywords.map((keyword) => (
+              <a
+                href={`/reflexions/paraula-clau/${keyword}`}
+                class="px-3 py-1 bg-gray-800 text-sm text-gray-300 rounded-full hover:bg-gray-700 transition-colors"
+              >
+                {keyword}
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>

@@ -1,0 +1,116 @@
+---
+// src/pages/reflexions/[...slug].astro
+import { getCollection, type CollectionEntry } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import type { Post } from '../../types';
+
+export async function getStaticPaths() {
+  const posts: Post[] = await getCollection('posts');
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+interface Props {
+  post: Post;
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+
+const categories = [
+  { id: 'influencies', name: 'Influències' },
+  { id: 'perspectives', name: 'Perspectives' },
+  { id: 'vivencies', name: 'Vivències' },
+];
+
+const categoryName = categories.find((c) => c.id === post.data.category)?.name;
+---
+
+<Layout>
+  <main class="flex-grow pt-32 pb-16">
+    <div class="max-w-4xl mx-auto px-6">
+      <!-- Navigation breadcrumb -->
+      <nav class="mb-12">
+        <ol class="flex items-center space-x-2 text-sm text-gray-400">
+          <li>
+            <a href="/reflexions" class="hover:text-white transition-colors"> Reflexions </a>
+          </li>
+          <li>/</li>
+          <li>
+            <a
+              href={`/reflexions/${post.data.category}`}
+              class="hover:text-white transition-colors"
+            >
+              {categoryName}
+            </a>
+          </li>
+        </ol>
+      </nav>
+
+      <article class="space-y-12">
+        <!-- Header -->
+        <header class="space-y-4">
+          <h1 class="text-3xl font-serif text-gray-100">
+            {post.data.title}
+          </h1>
+          <p class="text-sm text-gray-400">
+            {post.data.date}
+          </p>
+        </header>
+
+        <!-- Main image -->
+        <div class="space-y-2">
+          <img src={post.data.image.url} alt={post.data.image.title} class="w-full rounded-lg" />
+          <p class="text-sm text-gray-400 font-serif italic">
+            {post.data.image.title}
+          </p>
+        </div>
+
+        <!-- Content -->
+        <div class="prose prose-invert max-w-none">
+          <Content />
+        </div>
+
+        <!-- References -->
+        <div class="border-t border-gray-800 pt-8">
+          <h2 class="text-xl font-serif mb-6">Referències</h2>
+          <ul class="space-y-4 text-gray-400">
+            {
+              post.data.references.images.map((ref) => (
+                <li>
+                  <span class="text-gray-300">Imatge:</span> {ref}
+                </li>
+              ))
+            }
+            {
+              post.data.references.texts.map((ref) => (
+                <li>
+                  <span class="text-gray-300">Text:</span> {ref}
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <!-- Keywords -->
+        <div class="border-t border-gray-800 pt-8">
+          <h2 class="text-xl font-serif mb-6">Paraules Clau</h2>
+          <div class="flex flex-wrap gap-2">
+            {
+              post.data.keywords.map((keyword) => (
+                <a
+                  href={`/reflexions/paraula-clau/${keyword}`}
+                  class="px-3 py-1 bg-gray-800 text-sm text-gray-300 rounded-full hover:bg-gray-700 transition-colors"
+                >
+                  {keyword}
+                </a>
+              ))
+            }
+          </div>
+        </div>
+      </article>
+    </div>
+  </main>
+</Layout>
