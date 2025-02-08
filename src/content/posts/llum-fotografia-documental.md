@@ -3,15 +3,17 @@ title: 'La llum en la fotografia documental'
 category: 'influencies'
 date: '2024-02-07'
 image:
-url: 'https://placehold.co/600x400'
-title: 'Estudi de llum natural, Barcelona 1985'
+  url: 'https://placehold.co/600x400'
+  title: 'Estudi de llum natural, Barcelona 1985'
 keywords:
-- llum
-- documentalisme
-- tècnica
+  - llum
+  - documentalisme
+  - tècnica
 references:
-  images: - 'Arxiu personal, Barcelona 1985'
-  texts: - 'Història de la Fotografia, Editorial, 2020'
+  images:
+    - 'Arxiu personal, Barcelona 1985'
+  texts:
+    - 'Història de la Fotografia, Editorial, 2020'
 ---
 
 # LLum Fotografia Documental

@@ -2,8 +2,9 @@
 import '../../styles/global.css';
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
+import type { Post } from '../../types';
 
-const posts = await getCollection('posts');
+const posts: Post[] = await getCollection('posts');
 const categories = [
   { id: 'influencies', name: 'Influències' },
   { id: 'perspectives', name: 'Perspectives' },
@@ -47,19 +48,19 @@ const uniqueKeywords = [...new Set(posts.flatMap((post) => post.data.keywords))]
               <a href={`/reflexions/${post.slug}`} class="group">
                 <div class="overflow-hidden">
                   <img
-                    src={post.image.url}
-                    alt={post.image.title}
+                    src={post.data.image.url}
+                    alt={post.data.image.title}
                     class="w-full aspect-4/3 object-cover transition-transform duration-300 group-hover:scale-105"
                   />
                 </div>
                 <div class="space-y-2 pt-4">
                   <p class="text-sm text-gray-400 font-serif">
-                    {categories.find((c) => c.id === post.category)?.name}
+                    {categories.find((c) => c.id === post.data.category)?.name}
                   </p>
                   <h3 class="text-lg font-serif text-gray-100 group-hover:text-white transition-colors">
-                    {post.title}
+                    {post.data.title}
                   </h3>
-                  <p class="text-sm text-gray-400">{post.date}</p>
+                  <p class="text-sm text-gray-400">{post.data.date}</p>
                 </div>
               </a>
             </article>
