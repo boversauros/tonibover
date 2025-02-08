@@ -2,21 +2,19 @@
 import '../../../styles/global.css';
 import Layout from '../../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
+import type { Post } from '../../../types';
 
-const posts = await getCollection('posts');
-
-export function getStaticPaths() {
+export async function getStaticPaths() {
+  const posts: Post[] = await getCollection('posts');
   const keywords = [...new Set(posts.flatMap((post) => post.data.keywords))];
 
   return keywords.map((keyword) => ({
     params: { keyword },
-    props: { keyword },
+    props: { keyword, posts: posts.filter((post) => post.data.keywords.includes(keyword)) },
   }));
 }
 
-const { keyword } = Astro.props;
-
-const filteredPosts = posts.filter((post) => post.data.keywords.includes(keyword));
+const { keyword, posts } = Astro.props;
 
 const categories = [
   { id: 'influencies', name: 'Influències' },
@@ -53,7 +51,7 @@ const uniqueKeywords = [...new Set(posts.flatMap((post) => post.data.keywords))]
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
         {
-          filteredPosts.map((post) => (
+          posts.map((post) => (
             <article class="space-y-4">
               <a href={`/reflexions/${post.data.category}`} class="group">
                 <div class="overflow-hidden">
