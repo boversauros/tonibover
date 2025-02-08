@@ -53,7 +53,7 @@ const uniqueKeywords = [...new Set(posts.flatMap((post) => post.data.keywords))]
         {
           posts.map((post) => (
             <article class="space-y-4">
-              <a href={`/reflexions/${post.data.category}`} class="group">
+              <a href={`/reflexions/${post.slug}`} class="group">
                 <div class="overflow-hidden">
                   <img
                     src={post.data.image.url}
