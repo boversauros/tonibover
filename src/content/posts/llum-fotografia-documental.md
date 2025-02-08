@@ -3,7 +3,7 @@ title: 'La llum en la fotografia documental'
 category: 'influencies'
 date: '2024-02-07'
 image:
-  url: 'https://placehold.co/600x400'
+  url: 'https://picsum.photos/600/400'
   title: 'Estudi de llum natural, Barcelona 1985'
 keywords:
   - llum

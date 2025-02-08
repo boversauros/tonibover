@@ -3,7 +3,7 @@ title: "L'evolució de la càmera digital"
 category: 'perspectives'
 date: '2024-02-06'
 image:
-  url: 'https://placehold.co/600x400'
+  url: 'https://picsum.photos/600/400'
   title: 'Primera càmera digital professional, 1990'
 keywords:
   - tècnica
