@@ -4,12 +4,22 @@ import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 import type { Post } from '../../types';
 
+const currentPage = Number(Astro.url.searchParams.get('page') || '1');
+const postsPerPage = 6;
+
 const posts: Post[] = await getCollection('posts');
 const categories = [
   { id: 'influencies', name: 'Influències' },
   { id: 'perspectives', name: 'Perspectives' },
   { id: 'vivencies', name: 'Vivències' },
 ];
+
+// Calculate pagination values
+const totalPosts = posts.length;
+const totalPages = Math.ceil(totalPosts / postsPerPage);
+const startIndex = (currentPage - 1) * postsPerPage;
+const endIndex = startIndex + postsPerPage;
+const paginatedPosts = posts.slice(startIndex, endIndex);
 
 const uniqueKeywords = [...new Set(posts.flatMap((post) => post.data.keywords))];
 ---
@@ -43,7 +53,7 @@ const uniqueKeywords = [...new Set(posts.flatMap((post) => post.data.keywords))]
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
         {
-          posts.map((post) => (
+          paginatedPosts.map((post) => (
             <article class="space-y-4">
               <a href={`/reflexions/${post.slug}`} class="group">
                 <div class="overflow-hidden">
@@ -68,6 +78,49 @@ const uniqueKeywords = [...new Set(posts.flatMap((post) => post.data.keywords))]
         }
       </div>
 
+      {/* Pagination Controls */}
+      {
+        totalPages > 1 && (
+          <nav class="flex justify-center items-center gap-8 mb-16" aria-label="Pagination">
+            {currentPage > 1 && (
+              <a
+                href={`/reflexions?page=${currentPage - 1}`}
+                class="text-gray-400 hover:text-white transition-colors text-sm"
+                aria-label="Previous page"
+              >
+                ←
+              </a>
+            )}
+
+            <div class="flex items-center gap-4 text-sm">
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => (
+                <a
+                  href={`/reflexions?page=${pageNum}`}
+                  class={`transition-colors ${
+                    Number(currentPage) === pageNum
+                      ? 'text-white border-b border-white'
+                      : 'text-gray-400 hover:text-white'
+                  }`}
+                  aria-current={Number(currentPage) === pageNum ? 'page' : undefined}
+                >
+                  {pageNum}
+                </a>
+              ))}
+            </div>
+
+            {currentPage < totalPages && (
+              <a
+                href={`/reflexions?page=${currentPage + 1}`}
+                class="text-gray-400 hover:text-white transition-colors text-sm"
+                aria-label="Next page"
+              >
+                →
+              </a>
+            )}
+          </nav>
+        )
+      }
+
       <div class="border-t border-gray-800 pt-8">
         <h3 class="text-lg font-serif mb-6 text-gray-200">Paraules Clau</h3>
         <div class="flex flex-wrap gap-2">
@@ -75,7 +128,7 @@ const uniqueKeywords = [...new Set(posts.flatMap((post) => post.data.keywords))]
             uniqueKeywords.map((keyword) => (
               <a
                 href={`/reflexions/paraula-clau/${keyword}`}
-                class="px-3 py-1 bg-gray-800 text-sm text-gray-300 rounded-full hover:bg-gray-700 transition-colors"
+                class="text-gray-400 hover:text-white transition-colors text-sm border-b border-transparent hover:border-white"
               >
                 {keyword}
               </a>
