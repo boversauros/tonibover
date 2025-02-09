@@ -1,1 +1,16 @@
 @import 'tailwindcss';
+
+@layer components {
+  .prose {
+    font-size: var(--text-sm);
+    line-height: var(--tw-leading, var(--text-sm--line-height));
+
+    & p {
+      margin-bottom: 1em;
+    }
+
+    & p:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
