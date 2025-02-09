@@ -3,7 +3,7 @@ title: 'La llum natural'
 category: 'influencies'
 date: '2024-02-07'
 images:
-  - url: 'https://picsum.photos/601/400'
+  - url: 'https://picsum.photos/600/400'
     title: 'Contrast al Barri Gòtic, 1986'
 portraitImage:
   url: 'https://picsum.photos/600/400'

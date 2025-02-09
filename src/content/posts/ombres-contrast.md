@@ -5,9 +5,9 @@ date: '2024-02-08'
 images:
   - url: 'https://picsum.photos/600/400'
     title: 'Ombres al Raval, Barcelona 1985'
-  - url: 'https://picsum.photos/601/400'
+  - url: 'https://picsum.photos/600/400'
     title: 'Contrast al Barri Gòtic, 1986'
-  - url: 'https://picsum.photos/602/400'
+  - url: 'https://picsum.photos/600/400'
     title: 'Llum lateral a Gràcia, 1987'
 portraitImage:
   url: 'https://picsum.photos/600/400'
