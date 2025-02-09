@@ -48,8 +48,8 @@ const uniqueKeywords = [...new Set(posts.flatMap((post) => post.data.keywords))]
               <a href={`/reflexions/${post.slug}`} class="group">
                 <div class="overflow-hidden">
                   <img
-                    src={post.data.image.url}
-                    alt={post.data.image.title}
+                    src={post.data.portraitImage.url}
+                    alt={post.data.portraitImage.title}
                     class="w-full aspect-4/3 object-cover transition-transform duration-300 group-hover:scale-105"
                   />
                 </div>

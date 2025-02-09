@@ -2,7 +2,10 @@
 title: "L'evolució de la càmera digital"
 category: 'perspectives'
 date: '2024-02-06'
-image:
+images:
+  - url: 'https://picsum.photos/600/400'
+    title: 'Estudi de llum natural, Barcelona 1985'
+portraitImage:
   url: 'https://picsum.photos/600/400'
   title: 'Primera càmera digital professional, 1990'
 keywords:

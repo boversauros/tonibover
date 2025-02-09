@@ -6,7 +6,13 @@ const posts = defineCollection({
     title: z.string(),
     category: z.enum(['influencies', 'perspectives', 'vivencies']),
     date: z.string(),
-    image: z.object({
+    images: z.array(
+      z.object({
+        url: z.string(),
+        title: z.string(),
+      })
+    ).min(1),
+    portraitImage: z.object({
       url: z.string(),
       title: z.string(),
     }),
