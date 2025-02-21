@@ -1,6 +1,7 @@
 ---
 import '../../../styles/global.css';
 import Layout from '../../../layouts/Layout.astro';
+import PostsListLayout from '../../../layouts/PostsListLayout.astro';
 import { getCollection } from 'astro:content';
 import type { GetStaticPathsOptions } from 'astro';
 
@@ -31,119 +32,11 @@ const uniqueKeywords = [...new Set(page.data.flatMap((post) => post.data.keyword
 ---
 
 <Layout>
-  <main class="flex-grow pt-32 pb-16">
-    <div class="max-w-4xl mx-auto px-6">
-      <h2 class="text-xl font-serif italic mb-8 text-gray-200">
-        REFLEXIONS: {categoryName}
-      </h2>
-
-      <nav class="mb-12">
-        <ul class="flex flex-wrap gap-6 text-gray-400">
-          <li>
-            <a href="/reflexions" class="hover:text-white transition-colors"> Tots </a>
-          </li>
-          {
-            categories.map((cat) => (
-              <li>
-                <a
-                  href={`/reflexions/${cat.id}`}
-                  class={`hover:text-white transition-colors ${
-                    cat.id === category ? 'border-b-2 border-white text-white' : ''
-                  }`}
-                >
-                  {cat.name}
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-      </nav>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-        {
-          page.data.map((post) => (
-            <article class="space-y-4">
-              <a href={`/reflexions/${post.slug}`} class="group">
-                <div class="overflow-hidden">
-                  <img
-                    src={post.data.portraitImage.url}
-                    alt={post.data.portraitImage.title}
-                    class="w-full aspect-4/3 object-cover transition-transform duration-300 group-hover:scale-105"
-                  />
-                </div>
-                <div class="space-y-2 pt-4">
-                  <p class="text-sm text-gray-400 font-serif">
-                    {categories.find((c) => c.id === post.data.category)?.name}
-                  </p>
-                  <h3 class="text-lg font-serif text-gray-100 group-hover:text-white transition-colors">
-                    {post.data.title}
-                  </h3>
-                  <p class="text-sm text-gray-400">{post.data.date}</p>
-                </div>
-              </a>
-            </article>
-          ))
-        }
-      </div>
-
-      {/* Pagination Controls */}
-      {
-        page.total > 1 && (
-          <nav class="flex justify-center items-center gap-8 mb-16" aria-label="Pagination">
-            {page.url.prev && (
-              <a
-                href={page.url.prev}
-                class="text-gray-400 hover:text-white transition-colors text-sm"
-                aria-label="Previous page"
-              >
-                ←
-              </a>
-            )}
-
-            <div class="flex items-center gap-4 text-sm">
-              {Array.from({ length: page.lastPage }, (_, i) => i + 1).map((pageNum) => (
-                <a
-                  href={`/reflexions/${categoryName?.toLowerCase()}/${pageNum > 1 ? pageNum : ''}`}
-                  class={`transition-colors ${
-                    page.currentPage === pageNum
-                      ? 'text-white border-b border-white'
-                      : 'text-gray-400 hover:text-white'
-                  }`}
-                  aria-current={page.currentPage === pageNum ? 'page' : undefined}
-                >
-                  {pageNum}
-                </a>
-              ))}
-            </div>
-
-            {page.url.next && (
-              <a
-                href={page.url.next}
-                class="text-gray-400 hover:text-white transition-colors text-sm"
-                aria-label="Next page"
-              >
-                →
-              </a>
-            )}
-          </nav>
-        )
-      }
-
-      <div class="border-t border-gray-800 pt-8">
-        <h3 class="text-lg font-serif mb-6 text-gray-200">Paraules Clau</h3>
-        <div class="flex flex-wrap gap-2">
-          {
-            uniqueKeywords.map((keyword) => (
-              <a
-                href={`/reflexions/paraula-clau/${keyword}`}
-                class="text-gray-400 hover:text-white transition-colors text-sm border-b border-transparent hover:border-white"
-              >
-                {keyword}
-              </a>
-            ))
-          }
-        </div>
-      </div>
-    </div>
-  </main>
+  <PostsListLayout
+    title={`REFLEXIONS: ${categoryName}`}
+    categories={categories}
+    page={page}
+    keywords={uniqueKeywords}
+    activeCategory={category}
+  />
 </Layout>

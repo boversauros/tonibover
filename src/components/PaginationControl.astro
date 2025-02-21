@@ -1,0 +1,53 @@
+---
+import type { Page } from 'astro';
+
+interface Props {
+  page: Page;
+}
+
+const { page } = Astro.props;
+---
+
+<nav class="flex justify-center items-center gap-8 mb-16" aria-label="Pagination">
+  {
+    page.url.prev && (
+      <a
+        href={page.url.prev}
+        class="text-gray-400 hover:text-white transition-colors text-sm"
+        aria-label="Previous page"
+      >
+        ←
+      </a>
+    )
+  }
+
+  <div class="flex items-center gap-4 text-sm">
+    {
+      Array.from({ length: page.lastPage }, (_, i) => i + 1).map((pageNum) => (
+        <a
+          href={`/reflexions/${pageNum > 1 ? pageNum : ''}`}
+          class={`transition-colors ${
+            page.currentPage === pageNum
+              ? 'text-white border-b border-white'
+              : 'text-gray-400 hover:text-white'
+          }`}
+          aria-current={page.currentPage === pageNum ? 'page' : undefined}
+        >
+          {pageNum}
+        </a>
+      ))
+    }
+  </div>
+
+  {
+    page.url.next && (
+      <a
+        href={page.url.next}
+        class="text-gray-400 hover:text-white transition-colors text-sm"
+        aria-label="Next page"
+      >
+        →
+      </a>
+    )
+  }
+</nav>

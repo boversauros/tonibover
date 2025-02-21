@@ -1,0 +1,37 @@
+---
+import type { Post } from '../types';
+
+interface Props {
+  posts: Array<Post>;
+  categories: Array<{ id: string; name: string }>;
+}
+
+const { posts, categories } = Astro.props;
+---
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+  {
+    posts.map((post) => (
+      <article class="space-y-4">
+        <a href={`/reflexions/${post.slug}`} class="group">
+          <div class="overflow-hidden">
+            <img
+              src={post.data.portraitImage.url}
+              alt={post.data.portraitImage.title}
+              class="w-full aspect-4/3 object-cover transition-transform duration-300 group-hover:scale-105"
+            />
+          </div>
+          <div class="space-y-2 pt-4">
+            <p class="text-sm text-gray-400 font-serif">
+              {categories.find((c) => c.id === post.data.category)?.name}
+            </p>
+            <h3 class="text-lg font-serif text-gray-100 group-hover:text-white transition-colors">
+              {post.data.title}
+            </h3>
+            <p class="text-sm text-gray-400">{post.data.date}</p>
+          </div>
+        </a>
+      </article>
+    ))
+  }
+</div>

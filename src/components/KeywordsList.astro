@@ -1,0 +1,23 @@
+---
+interface Props {
+  keywords: Array<string>;
+}
+
+const { keywords } = Astro.props;
+---
+
+<div class="border-t border-gray-800 pt-8">
+  <h3 class="text-lg font-serif mb-6 text-gray-200">Paraules Clau</h3>
+  <div class="flex flex-wrap gap-2">
+    {
+      keywords.map((keyword) => (
+        <a
+          href={`/reflexions/paraula-clau/${keyword}`}
+          class="text-gray-400 hover:text-white transition-colors text-sm border-b border-transparent hover:border-white"
+        >
+          {keyword}
+        </a>
+      ))
+    }
+  </div>
+</div>

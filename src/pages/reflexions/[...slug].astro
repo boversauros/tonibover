@@ -2,6 +2,7 @@
 import '../../styles/global.css';
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
+import KeywordsList from '../../components/KeywordsList.astro';
 import type { Post } from '../../types';
 
 export async function getStaticPaths() {
@@ -109,21 +110,7 @@ const categoryName = categories.find((c) => c.id === post.data.category)?.name;
         </div>
 
         <!-- Keywords -->
-        <div class="border-t border-gray-800 pt-8">
-          <h2 class="text-xl font-serif mb-6">Paraules Clau</h2>
-          <div class="flex flex-wrap gap-2">
-            {
-              post.data.keywords.map((keyword) => (
-                <a
-                  href={`/reflexions/paraula-clau/${keyword}`}
-                  class="px-3 py-1 bg-gray-800 text-sm text-gray-300 rounded-full hover:bg-gray-700 transition-colors"
-                >
-                  {keyword}
-                </a>
-              ))
-            }
-          </div>
-        </div>
+        <KeywordsList keywords={post.data.keywords} />
       </article>
     </div>
   </main>

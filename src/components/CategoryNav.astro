@@ -1,0 +1,30 @@
+---
+interface Props {
+  categories: Array<{ id: string; name: string }>;
+  activeCategory?: string;
+}
+
+const { categories, activeCategory } = Astro.props;
+---
+
+<nav class="mb-12">
+  <ul class="flex flex-wrap gap-6 text-gray-400">
+    <li>
+      <a href="/reflexions" class="hover:text-white transition-colors"> Tots </a>
+    </li>
+    {
+      categories.map((cat) => (
+        <li>
+          <a
+            href={`/reflexions/${cat.id}`}
+            class={`hover:text-white transition-colors ${
+              cat.id === activeCategory ? 'border-b-2 border-white text-white' : ''
+            }`}
+          >
+            {cat.name}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
