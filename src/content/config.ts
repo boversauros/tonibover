@@ -5,13 +5,14 @@ const posts = defineCollection({
   schema: z.object({
     title: z.string(),
     category: z.enum(['influencies', 'perspectives', 'vivencies']),
-    date: z.string(),
-    images: z.array(
-      z.object({
-        url: z.string(),
-        title: z.string(),
-      })
-    ).min(1),
+    images: z
+      .array(
+        z.object({
+          url: z.string(),
+          title: z.string(),
+        })
+      )
+      .min(1),
     portraitImage: z.object({
       url: z.string(),
       title: z.string(),
