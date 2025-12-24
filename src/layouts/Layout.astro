@@ -11,17 +11,17 @@ import Navigation from '../components/Navigation.astro';
     <meta name="generator" content={Astro.generator} />
     <title>Toni Bover</title>
   </head>
-  <body class="min-h-screen bg-black text-white font-sans antialiased flex flex-col">
+  <body class="min-h-screen bg-background text-primary font-sans antialiased flex flex-col">
     <Navigation />
     <slot />
   </body>
-  <footer class="border-t border-gray-800/50 mt-auto">
+  <footer class="border-t border-subtle mt-auto">
     <div class="max-w-4xl mx-auto px-6 py-6">
       <div class="flex justify-between items-center text-sm">
-        <p class="text-gray-400 font-serif">
+        <p class="text-muted font-serif">
           © Toni Bover, {new Date().getFullYear()}
         </p>
-        <p class="text-gray-400 hover:text-gray-300 transition-colors">
+        <p class="text-muted hover:text-body transition-colors-default">
           <a href="#">Lleis d'autoria i protecció de dades</a>
         </p>
       </div>

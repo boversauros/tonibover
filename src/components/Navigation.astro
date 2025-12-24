@@ -8,15 +8,15 @@ const links = [
 ---
 
 <header
-  class="fixed top-0 left-0 right-0 bg-black/95 backdrop-blur-sm z-50 border-b border-gray-800/50"
+  class="fixed top-0 left-0 right-0 bg-nav backdrop-blur-sm z-50 border-b border-subtle"
 >
   <nav class="max-w-4xl mx-auto px-6">
     <div class="flex items-center justify-between h-20">
       <div class="flex items-baseline space-x-3">
-        <h1 class="text-2xl font-serif italic hover:text-gray-200 transition-colors">
+        <h1 class="text-2xl font-serif italic hover:text-secondary transition-colors-default">
           <a href="/">Toni Bover</a>
         </h1>
-        <span class="text-sm tracking-wider text-gray-400"> IMAGE MANAGER </span>
+        <span class="text-sm tracking-wider text-muted"> IMAGE MANAGER </span>
       </div>
 
       <div class="hidden md:flex items-center space-x-8">
@@ -24,7 +24,7 @@ const links = [
           links.map((link) => (
             <a
               href={link.href}
-              class="text-sm tracking-wide text-gray-300 hover:text-white transition-colors duration-300"
+              class="text-sm tracking-wide text-body hover:text-primary transition-colors-default"
             >
               {link.label}
             </a>
@@ -33,7 +33,7 @@ const links = [
       </div>
 
       <button
-        class="md:hidden p-2 hover:text-gray-300 transition-colors"
+        class="md:hidden p-2 hover:text-body transition-colors-default"
         data-menu-button
         aria-label="Toggle menu"
         aria-expanded="false"
@@ -69,13 +69,13 @@ const links = [
       </button>
     </div>
 
-    <div id="mobileMenu" class="hidden md:hidden border-t border-gray-800/50">
+    <div id="mobileMenu" class="hidden md:hidden border-t border-subtle">
       <div class="py-4 space-y-2">
         {
           links.map((link) => (
             <a
               href={link.href}
-              class="block px-4 py-2 text-sm tracking-wide text-gray-300 hover:bg-gray-900 hover:text-white transition-all duration-300"
+              class="block px-4 py-2 text-sm tracking-wide text-body hover:bg-surface hover:text-primary transition-all duration-300"
             >
               {link.label}
             </a>

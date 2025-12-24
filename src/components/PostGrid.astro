@@ -22,10 +22,10 @@ const { posts, categories } = Astro.props;
             />
           </div>
           <div class="space-y-2 pt-4">
-            <p class="text-sm text-gray-400 font-serif">
+            <p class="text-sm text-muted font-serif">
               {categories.find((c) => c.id === post.data.category)?.name}
             </p>
-            <h3 class="text-lg font-serif text-gray-100 group-hover:text-white transition-colors">
+            <h3 class="text-lg font-serif text-secondary group-hover:text-primary transition-colors-default">
               {post.data.title}
             </h3>
           </div>

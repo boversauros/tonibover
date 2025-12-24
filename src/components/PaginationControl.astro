@@ -13,7 +13,7 @@ const { page } = Astro.props;
     page.url.prev && (
       <a
         href={page.url.prev}
-        class="text-gray-400 hover:text-white transition-colors text-sm"
+        class="text-muted hover:text-primary transition-colors-default text-sm"
         aria-label="Previous page"
       >
         ←
@@ -26,10 +26,10 @@ const { page } = Astro.props;
       Array.from({ length: page.lastPage }, (_, i) => i + 1).map((pageNum) => (
         <a
           href={`/reflexions/${pageNum > 1 ? pageNum : ''}`}
-          class={`transition-colors ${
+          class={`transition-colors-default ${
             page.currentPage === pageNum
-              ? 'text-white border-b border-white'
-              : 'text-gray-400 hover:text-white'
+              ? 'text-primary border-b border-primary'
+              : 'text-muted hover:text-primary'
           }`}
           aria-current={page.currentPage === pageNum ? 'page' : undefined}
         >
@@ -43,7 +43,7 @@ const { page } = Astro.props;
     page.url.next && (
       <a
         href={page.url.next}
-        class="text-gray-400 hover:text-white transition-colors text-sm"
+        class="text-muted hover:text-primary transition-colors-default text-sm"
         aria-label="Next page"
       >
         →

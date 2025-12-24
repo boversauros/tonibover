@@ -21,10 +21,10 @@ const currentSection = Astro.url.pathname.replace(/\/$/, '').split('/').pop() ||
 <Layout>
   <main class="flex-grow pt-32 pb-16">
     <div class="max-w-4xl mx-auto px-6">
-      <div class="border-b border-gray-800/50 pb-8 mb-12">
-        <h1 class="text-3xl font-serif text-gray-200 mb-4">{title}</h1>
-        <p class="text-lg text-gray-300">{subtitle}</p>
-        {articleInfo && <p class="text-sm text-gray-400 mt-4 italic">{articleInfo}</p>}
+      <div class="border-b border-subtle pb-8 mb-12">
+        <h1 class="text-3xl font-serif text-secondary mb-4">{title}</h1>
+        <p class="text-lg text-body">{subtitle}</p>
+        {articleInfo && <p class="text-sm text-muted mt-4 italic">{articleInfo}</p>}
       </div>
 
       <div class="space-y-12">
@@ -38,7 +38,7 @@ const currentSection = Astro.url.pathname.replace(/\/$/, '').split('/').pop() ||
               <figure class="space-y-3">
                 <img src={image.src} alt={image.alt} class="w-full aspect-4/3 object-cover" />
                 {image.caption && (
-                  <figcaption class="text-sm text-gray-400 italic">{image.caption}</figcaption>
+                  <figcaption class="text-sm text-muted italic">{image.caption}</figcaption>
                 )}
               </figure>
             ))
@@ -47,8 +47,8 @@ const currentSection = Astro.url.pathname.replace(/\/$/, '').split('/').pop() ||
 
         {
           quote && (
-            <blockquote class="border-l-4 border-yellow-500 pl-6 py-2 my-8">
-              <p class="text-xl font-serif text-gray-200 italic">{quote}</p>
+            <blockquote class="border-l-4 border-accent pl-6 py-2 my-8">
+              <p class="text-xl font-serif text-secondary italic">{quote}</p>
             </blockquote>
           )
         }

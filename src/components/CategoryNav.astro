@@ -8,17 +8,17 @@ const { categories, activeCategory } = Astro.props;
 ---
 
 <nav class="mb-12">
-  <ul class="flex flex-wrap gap-6 text-gray-400">
+  <ul class="flex flex-wrap gap-6 text-muted">
     <li>
-      <a href="/reflexions" class="hover:text-white transition-colors"> Tots </a>
+      <a href="/reflexions" class="hover:text-primary transition-colors-default"> Tots </a>
     </li>
     {
       categories.map((cat) => (
         <li>
           <a
             href={`/reflexions/${cat.id}`}
-            class={`hover:text-white transition-colors ${
-              cat.id === activeCategory ? 'border-b-2 border-white text-white' : ''
+            class={`hover:text-primary transition-colors-default ${
+              cat.id === activeCategory ? 'border-b-2 border-primary text-primary' : ''
             }`}
           >
             {cat.name}
