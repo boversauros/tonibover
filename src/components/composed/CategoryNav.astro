@@ -1,4 +1,6 @@
 ---
+import Link from '../ui/Link.astro';
+
 interface Props {
   categories: Array<{ id: string; name: string }>;
   activeCategory?: string;
@@ -10,19 +12,20 @@ const { categories, activeCategory } = Astro.props;
 <nav class="mb-12">
   <ul class="flex flex-wrap gap-6 text-muted">
     <li>
-      <a href="/reflexions" class="hover:text-primary transition-colors-default"> Tots </a>
+      <Link href="/reflexions" variant="muted" active={!activeCategory}>
+        Tots
+      </Link>
     </li>
     {
       categories.map((cat) => (
         <li>
-          <a
+          <Link
             href={`/reflexions/${cat.id}`}
-            class={`hover:text-primary transition-colors-default ${
-              cat.id === activeCategory ? 'border-b-2 border-primary text-primary' : ''
-            }`}
+            variant="muted"
+            active={cat.id === activeCategory}
           >
             {cat.name}
-          </a>
+          </Link>
         </li>
       ))
     }

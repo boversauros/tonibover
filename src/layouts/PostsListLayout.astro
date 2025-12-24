@@ -1,9 +1,9 @@
 ---
 import Layout from './Layout.astro';
-import CategoryNav from '../components/CategoryNav.astro';
-import PostGrid from '../components/PostGrid.astro';
-import KeywordsList from '../components/KeywordsList.astro';
-import PaginationControl from '../components/PaginationControl.astro';
+import CategoryNav from '../components/composed/CategoryNav.astro';
+import PostGrid from '../components/app/PostGrid.astro';
+import KeywordsList from '../components/composed/KeywordsList.astro';
+import PaginationControl from '../components/composed/PaginationControl.astro';
 import type { Page } from 'astro';
 
 interface Props {
@@ -19,7 +19,7 @@ const { title, categories, activeCategory, page, keywords } = Astro.props;
 
 <main class="flex-grow pt-32 pb-16">
   <div class="max-w-4xl mx-auto px-6">
-    <h2 class="text-xl font-serif italic mb-8 text-gray-200">{title}</h2>
+    <h2 class="text-xl font-serif italic mb-8 text-secondary">{title}</h2>
     <CategoryNav categories={categories} activeCategory={activeCategory} />
     <PostGrid posts={page.data} categories={categories} />
     {page.total > 1 && <PaginationControl page={page} />}
