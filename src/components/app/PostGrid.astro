@@ -1,5 +1,6 @@
 ---
 import type { Post } from '../types';
+import Link from '../ui/Link.astro';
 
 interface Props {
   posts: Array<Post>;
@@ -13,7 +14,7 @@ const { posts, categories } = Astro.props;
   {
     posts.map((post) => (
       <article class="space-y-4">
-        <a href={`/reflexions/${post.slug}`} class="group">
+        <Link href={`/reflexions/${post.slug}`} class="group block">
           <div class="overflow-hidden">
             <img
               src={post.data.portraitImage.url}
@@ -29,7 +30,7 @@ const { posts, categories } = Astro.props;
               {post.data.title}
             </h3>
           </div>
-        </a>
+        </Link>
       </article>
     ))
   }

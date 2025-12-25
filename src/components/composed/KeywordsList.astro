@@ -1,4 +1,6 @@
 ---
+import Link from '../ui/Link.astro';
+
 interface Props {
   keywords: Array<string>;
 }
@@ -11,12 +13,13 @@ const { keywords } = Astro.props;
   <div class="flex flex-wrap gap-2">
     {
       keywords.map((keyword) => (
-        <a
+        <Link
           href={`/reflexions/paraula-clau/${keyword}`}
-          class="text-muted hover:text-primary transition-colors-default text-sm border-b border-transparent hover:border-primary"
+          variant="accent-border"
+          class="text-sm"
         >
           {keyword}
-        </a>
+        </Link>
       ))
     }
   </div>
