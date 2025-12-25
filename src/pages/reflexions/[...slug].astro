@@ -1,10 +1,10 @@
 ---
-import '../../styles/global.css';
+import '@styles/global.css';
 import { getCollection } from 'astro:content';
-import Layout from '../../layouts/Layout.astro';
-import KeywordsList from '../../components/composed/KeywordsList.astro';
-import Link from '../../components/ui/Link.astro';
-import type { Post } from '../../types';
+import Layout from '@layouts/Layout.astro';
+import KeywordsList from '@components/composed/KeywordsList.astro';
+import Link from '@components/ui/Link.astro';
+import type { Post } from '@/types';
 
 export async function getStaticPaths() {
   const posts: Post[] = await getCollection('posts');
