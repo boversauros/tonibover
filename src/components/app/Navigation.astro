@@ -1,5 +1,6 @@
 ---
 import Link from '../ui/Link.astro';
+import Button from '../ui/Button.astro';
 
 const links = [
   { label: 'PREÀMBUL', href: '/preambul' },
@@ -34,8 +35,9 @@ const links = [
         }
       </div>
 
-      <button
-        class="md:hidden p-2 hover:text-body transition-colors-default"
+      <Button
+        variant="icon"
+        class="md:hidden"
         data-menu-button
         aria-label="Toggle menu"
         aria-expanded="false"
@@ -68,7 +70,7 @@ const links = [
             stroke-width="2"
             d="M6 18L18 6M6 6l12 12"></path>
         </svg>
-      </button>
+      </Button>
     </div>
 
     <div id="mobileMenu" class="hidden md:hidden border-t border-subtle">

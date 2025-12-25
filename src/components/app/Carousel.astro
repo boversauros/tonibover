@@ -1,3 +1,7 @@
+---
+import Button from '../ui/Button.astro';
+---
+
 <div class="relative w-full bg-background pb-8">
   <div class="max-w-6xl mx-auto px-4 md:px-12">
     <div class="relative">
@@ -58,9 +62,11 @@
         </div>
       </div>
 
-      <button
-        class="hidden md:block absolute -left-12 top-1/2 -translate-y-1/2 text-primary-60 hover:text-primary transition-colors-default"
+      <Button
+        variant="icon"
+        class="hidden md:block absolute -left-12 top-1/2 -translate-y-1/2 text-primary-60"
         id="prev-btn"
+        aria-label="Previous image"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -72,10 +78,12 @@
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"
           ></path>
         </svg>
-      </button>
-      <button
-        class="hidden md:block absolute -right-12 top-1/2 -translate-y-1/2 text-primary-60 hover:text-primary transition-colors-default"
+      </Button>
+      <Button
+        variant="icon"
+        class="hidden md:block absolute -right-12 top-1/2 -translate-y-1/2 text-primary-60"
         id="next-btn"
+        aria-label="Next image"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -87,7 +95,7 @@
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"
           ></path>
         </svg>
-      </button>
+      </Button>
     </div>
   </div>
 </div>
