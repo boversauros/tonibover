@@ -1,22 +1,25 @@
 ---
 import Layout from '@layouts/Layout.astro';
 import Link from '@components/ui/Link.astro';
+import SectionTitle from '@components/ui/SectionTitle.astro';
+import Heading from '@components/ui/Heading.astro';
+import Text from '@components/ui/Text.astro';
 import '@styles/global.css';
 ---
 
 <Layout>
   <main class="flex-grow pt-32 pb-16">
     <div class="max-w-4xl mx-auto px-6">
-      <h2 class="text-xl font-serif italic mb-8 text-gray-200">PREÀMBUL</h2>
+      <SectionTitle>PREÀMBUL</SectionTitle>
 
       <div class="mb-16">
-        <p class="text-base leading-relaxed text-gray-300">
+        <Text variant="body">
           Els 20/40/60 són períodes temporals exactes, són processos de les capacitats
           d'aprenentatge de cada persona.
-        </p>
-        <p class="text-sm text-gray-400 mt-4 italic">
+        </Text>
+        <Text variant="small" italic class="mt-4">
           Article 20/40/60: Una reflexió sistemàtica de la fotografia com art i cultura, 2020.
-        </p>
+        </Text>
       </div>
 
       <div class="grid md:grid-cols-3 gap-8">
@@ -28,11 +31,11 @@ import '@styles/global.css';
               class="w-full aspect-square object-cover transition-opacity duration-700 group-hover:opacity-90"
             />
             <div class="space-y-2">
-              <span class="text-3xl font-serif text-gray-200">20</span>
-              <h3 class="text-lg font-serif text-gray-200">UN PROCÉS TRANS A LA MÀQUINA</h3>
-              <p class="text-sm text-gray-400 group-hover:text-gray-300 transition-colors">
+              <Heading as="span" size="3xl" variant="secondary" class="block">20</Heading>
+              <Heading as="h3" size="2xl" variant="secondary" class="mb-0">UN PROCÉS TRANS A LA MÀQUINA</Heading>
+              <Text variant="small" class="group-hover:text-body transition-colors">
                 Descobrir més →
-              </p>
+              </Text>
             </div>
           </div>
         </Link>
@@ -45,13 +48,13 @@ import '@styles/global.css';
               class="w-full aspect-square object-cover transition-opacity duration-700 group-hover:opacity-90"
             />
             <div class="space-y-2">
-              <span class="text-3xl font-serif text-gray-200">40</span>
-              <h3 class="text-lg font-serif text-gray-200">
+              <Heading as="span" size="3xl" variant="secondary" class="block">40</Heading>
+              <Heading as="h3" size="2xl" variant="secondary" class="mb-0">
                 UN PROCÉS TRANS DE L'ANALÒGIC AL DIGITAL
-              </h3>
-              <p class="text-sm text-gray-400 group-hover:text-gray-300 transition-colors">
+              </Heading>
+              <Text variant="small" class="group-hover:text-body transition-colors">
                 Descobrir més →
-              </p>
+              </Text>
             </div>
           </div>
         </Link>
@@ -64,11 +67,11 @@ import '@styles/global.css';
               class="w-full aspect-square object-cover transition-opacity duration-700 group-hover:opacity-90"
             />
             <div class="space-y-2">
-              <span class="text-3xl font-serif text-gray-200">60</span>
-              <h3 class="text-lg font-serif text-gray-200">UN PROCÉS TRANS LABORAL</h3>
-              <p class="text-sm text-gray-400 group-hover:text-gray-300 transition-colors">
+              <Heading as="span" size="3xl" variant="secondary" class="block">60</Heading>
+              <Heading as="h3" size="2xl" variant="secondary" class="mb-0">UN PROCÉS TRANS LABORAL</Heading>
+              <Text variant="small" class="group-hover:text-body transition-colors">
                 Descobrir més →
-              </p>
+              </Text>
             </div>
           </div>
         </Link>

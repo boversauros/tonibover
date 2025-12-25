@@ -2,16 +2,19 @@
 import Layout from '@layouts/Layout.astro';
 import Carousel from '@components/app/Carousel.astro';
 import Link from '@components/ui/Link.astro';
+import SectionTitle from '@components/ui/SectionTitle.astro';
+import Heading from '@components/ui/Heading.astro';
+import Text from '@components/ui/Text.astro';
 import '@styles/global.css';
 ---
 
 <Layout>
   <main class="flex-grow pt-32 pb-16">
     <div class="max-w-4xl mx-auto px-6">
-      <h2 class="text-xl font-serif italic mb-8 text-secondary">BIOGRAFIA</h2>
-      <h1 class="text-4xl font-serif text-primary mb-2">Antoni Bover Tanyà</h1>
-      <p class="text-lg text-primary-80 mb-8">Vic, 15 de juny de 1954</p>
-      <p class="text-primary-60 mb-12">Especialista en Image Management (comunicació visual)</p>
+      <SectionTitle>BIOGRAFIA</SectionTitle>
+      <Heading as="h1" size="4xl" variant="primary">Antoni Bover Tanyà</Heading>
+      <Text variant="body" class="text-lg text-primary-80 mb-8">Vic, 15 de juny de 1954</Text>
+      <Text variant="body" class="text-primary-60 mb-12">Especialista en Image Management (comunicació visual)</Text>
 
       <Carousel />
 
@@ -21,7 +24,7 @@ import '@styles/global.css';
 
       <div class="mt-16 space-y-12">
         <section>
-          <h3 class="text-primary text-2xl mb-6">Formació Acadèmica</h3>
+          <Heading as="h3" size="2xl" variant="primary">Formació Acadèmica</Heading>
           <ul class="space-y-4 text-primary-80">
             <li>
               Doctor UPC, <em>Cum Laude</em>, en Comunicació Visual en arquitectura i disseny, any
@@ -37,7 +40,7 @@ import '@styles/global.css';
         </section>
 
         <section>
-          <h3 class="text-primary text-2xl mb-6">Activitats Docents</h3>
+          <Heading as="h3" size="2xl" variant="primary">Activitats Docents</Heading>
           <ul class="space-y-4 text-primary-80">
             <li>
               Professor CITM / UPC Terrassa: Il·luminació, Fotografia i CGI, Fotografia
@@ -68,7 +71,7 @@ import '@styles/global.css';
         </section>
 
         <section>
-          <h2 class="text-primary text-2xl mb-6">Experiència Professional</h2>
+          <Heading as="h2" size="2xl" variant="primary">Experiència Professional</Heading>
           <ul class="space-y-4 text-primary-80">
             <li>
               Membre del "Consell Assessor Territorial de la Catalunya Central" (Departament de

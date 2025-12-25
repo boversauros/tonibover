@@ -1,0 +1,13 @@
+---
+import Heading from '@components/ui/Heading.astro';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+---
+
+<Heading as="h2" size="xl" variant="secondary" italic class={className}>
+  <slot />
+</Heading>

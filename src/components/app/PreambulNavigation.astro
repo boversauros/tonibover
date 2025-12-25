@@ -15,13 +15,13 @@ const prevSection = currentIndex > 0 ? sections[currentIndex - 1] : null;
 const nextSection = currentIndex < sections.length - 1 ? sections[currentIndex + 1] : null;
 ---
 
-<nav class="mt-16 border-t border-gray-800/50 pt-8">
+<nav class="mt-16 border-t border-default/50 pt-8">
   <div class="flex justify-between items-center">
     {
       prevSection && (
         <a
           href={`/preambul/${prevSection.id}`}
-          class="group flex items-center text-gray-400 hover:text-gray-200 transition-colors"
+          class="group flex items-center text-muted hover:text-secondary transition-colors"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -36,7 +36,7 @@ const nextSection = currentIndex < sections.length - 1 ? sections[currentIndex +
             />
           </svg>
           <span>
-            <span class="block text-sm text-gray-500">Anterior</span>
+            <span class="block text-sm text-subtle">Anterior</span>
             <span class="block">{prevSection.title}</span>
           </span>
         </a>
@@ -47,10 +47,10 @@ const nextSection = currentIndex < sections.length - 1 ? sections[currentIndex +
       nextSection && (
         <a
           href={`/preambul/${nextSection.id}`}
-          class="group flex items-center text-right text-gray-400 hover:text-gray-200 transition-colors ml-auto"
+          class="group flex items-center text-right text-muted hover:text-secondary transition-colors ml-auto"
         >
           <span>
-            <span class="block text-sm text-gray-500">Següent</span>
+            <span class="block text-sm text-subtle">Següent</span>
             <span class="block">{nextSection.title}</span>
           </span>
           <svg

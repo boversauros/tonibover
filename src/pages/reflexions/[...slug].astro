@@ -4,6 +4,8 @@ import { getCollection } from 'astro:content';
 import Layout from '@layouts/Layout.astro';
 import KeywordsList from '@components/composed/KeywordsList.astro';
 import Link from '@components/ui/Link.astro';
+import Heading from '@components/ui/Heading.astro';
+import Text from '@components/ui/Text.astro';
 import type { Post } from '@/types';
 
 export async function getStaticPaths() {
@@ -55,9 +57,9 @@ const categoryName = categories.find((c) => c.id === post.data.category)?.name;
       <article class="space-y-16">
         <!-- Header -->
         <header class="space-y-6">
-          <h1 class="text-4xl md:text-5xl font-serif text-primary leading-tight">
+          <Heading as="h1" size="4xl" variant="primary" class="leading-tight">
             {post.data.title}
-          </h1>
+          </Heading>
         </header>
 
         <!-- Main image -->
@@ -93,10 +95,10 @@ const categoryName = categories.find((c) => c.id === post.data.category)?.name;
 
         <!-- References -->
         <section class="border-t border-default pt-10 space-y-6">
-          <h2 class="text-xl font-serif text-secondary mb-6">Referències</h2>
+          <Heading as="h2" size="xl" variant="secondary">Referències</Heading>
           <div class="space-y-5">
             <div>
-              <h3 class="text-base font-serif text-body mb-3">Text:</h3>
+              <Heading as="h3" size="2xl" variant="body" class="text-base mb-3">Text:</Heading>
               <ul class="space-y-2 text-sm text-muted leading-relaxed">
                 {
                   post.data.references.texts.map((ref) => (
@@ -109,7 +111,7 @@ const categoryName = categories.find((c) => c.id === post.data.category)?.name;
               </ul>
             </div>
             <div>
-              <h3 class="text-base font-serif text-body mb-3">Imatge:</h3>
+              <Heading as="h3" size="2xl" variant="body" class="text-base mb-3">Imatge:</Heading>
               <ul class="space-y-2 text-sm text-muted leading-relaxed">
                 {
                   post.data.references.images.map((ref) => (
