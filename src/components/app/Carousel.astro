@@ -1,6 +1,7 @@
 ---
 import Button from '@components/ui/Button.astro';
 import Image from '@components/ui/Image.astro';
+import Icon from '@components/ui/Icon.astro';
 ---
 
 <div class="relative w-full bg-background pb-8">
@@ -77,16 +78,7 @@ import Image from '@components/ui/Image.astro';
         id="prev-btn"
         aria-label="Previous image"
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-8 w-8"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"
-          ></path>
-        </svg>
+        <Icon name="chevron-left" size="8" />
       </Button>
       <Button
         variant="icon"
@@ -94,16 +86,7 @@ import Image from '@components/ui/Image.astro';
         id="next-btn"
         aria-label="Next image"
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-8 w-8"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"
-          ></path>
-        </svg>
+        <Icon name="chevron-right" size="8" />
       </Button>
     </div>
   </div>

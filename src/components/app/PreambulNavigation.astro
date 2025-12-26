@@ -1,4 +1,6 @@
 ---
+import Icon from '@components/ui/Icon.astro';
+
 const sections = [
   { id: '20', title: 'UN PROCÉS TRANS A LA MADURESA' },
   { id: '40', title: "UN PROCÉS TRANS DE L'ANALÒGIC AL DIGITAL" },
@@ -23,18 +25,11 @@ const nextSection = currentIndex < sections.length - 1 ? sections[currentIndex +
           href={`/preambul/${prevSection.id}`}
           class="group flex items-center text-muted hover:text-secondary transition-colors"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-5 w-5 mr-2 transform group-hover:-translate-x-1 transition-transform"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L4.414 9H17a1 1 0 110 2H4.414l5.293 5.293a1 1 0 010 1.414z"
-              clip-rule="evenodd"
-            />
-          </svg>
+          <Icon
+            name="arrow-left"
+            size="5"
+            class="mr-2 transform group-hover:-translate-x-1 transition-transform"
+          />
           <span>
             <span class="block text-sm text-subtle">Anterior</span>
             <span class="block">{prevSection.title}</span>
@@ -53,18 +48,11 @@ const nextSection = currentIndex < sections.length - 1 ? sections[currentIndex +
             <span class="block text-sm text-subtle">Següent</span>
             <span class="block">{nextSection.title}</span>
           </span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-5 w-5 ml-2 transform group-hover:translate-x-1 transition-transform"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L15.586 11H3a1 1 0 110-2h12.586l-5.293-5.293a1 1 0 010-1.414z"
-              clip-rule="evenodd"
-            />
-          </svg>
+          <Icon
+            name="arrow-right"
+            size="5"
+            class="ml-2 transform group-hover:translate-x-1 transition-transform"
+          />
         </a>
       )
     }
