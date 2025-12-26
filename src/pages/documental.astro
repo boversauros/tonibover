@@ -1,5 +1,6 @@
 ---
 import Layout from '@layouts/Layout.astro';
+import Container from '@components/ui/Container.astro';
 import { YouTube } from 'astro-lazy-youtube-embed';
 import SectionTitle from '@components/ui/SectionTitle.astro';
 import Heading from '@components/ui/Heading.astro';
@@ -8,70 +9,68 @@ import '@styles/global.css';
 ---
 
 <Layout>
-  <main class="flex-grow pt-32 pb-16">
-    <div class="max-w-4xl mx-auto px-6">
-      <SectionTitle>DOCUMENTAL</SectionTitle>
+  <Container>
+    <SectionTitle>DOCUMENTAL</SectionTitle>
 
-      <div class="space-y-8">
-        <YouTube title="Toni Bover. Image Manager // Xef Vila, 2020" videoId="x6hNCbrUDcc" />
+    <div class="space-y-8">
+      <YouTube title="Toni Bover. Image Manager // Xef Vila, 2020" videoId="x6hNCbrUDcc" />
 
-        <div class="border-t border-default pt-8">
-          <Heading as="h3" size="2xl" variant="secondary" class="mb-6">Fitxa Tècnica</Heading>
-          <dl class="grid grid-cols-1 md:grid-cols-2 gap-4 text-body">
-            <div>
-              <dt class="font-medium">Producció:</dt>
-              <dd class="text-muted">Ajuntament de Vic i Fundació Puig-Porret</dd>
-            </div>
-            <div>
-              <dt class="font-medium">Guió i Direcció:</dt>
-              <dd class="text-muted">Xef Vila</dd>
-            </div>
-            <div>
-              <dt class="font-medium">Música:</dt>
-              <dd class="text-muted">Jordi Torrents</dd>
-            </div>
-            <div>
-              <dt class="font-medium">Muntatge:</dt>
-              <dd class="text-muted">Xef Vila</dd>
-            </div>
-            <div>
-              <dt class="font-medium">Durada:</dt>
-              <dd class="text-muted">35 min</dd>
-            </div>
-            <div>
-              <dt class="font-medium">Versió Original:</dt>
-              <dd class="text-muted">Català</dd>
-            </div>
-          </dl>
-        </div>
+      <div class="border-t border-default pt-8">
+        <Heading as="h3" size="2xl" variant="secondary" class="mb-6">Fitxa Tècnica</Heading>
+        <dl class="grid grid-cols-1 md:grid-cols-2 gap-4 text-body">
+          <div>
+            <dt class="font-medium">Producció:</dt>
+            <dd class="text-muted">Ajuntament de Vic i Fundació Puig-Porret</dd>
+          </div>
+          <div>
+            <dt class="font-medium">Guió i Direcció:</dt>
+            <dd class="text-muted">Xef Vila</dd>
+          </div>
+          <div>
+            <dt class="font-medium">Música:</dt>
+            <dd class="text-muted">Jordi Torrents</dd>
+          </div>
+          <div>
+            <dt class="font-medium">Muntatge:</dt>
+            <dd class="text-muted">Xef Vila</dd>
+          </div>
+          <div>
+            <dt class="font-medium">Durada:</dt>
+            <dd class="text-muted">35 min</dd>
+          </div>
+          <div>
+            <dt class="font-medium">Versió Original:</dt>
+            <dd class="text-muted">Català</dd>
+          </div>
+        </dl>
+      </div>
 
-        <!-- Description -->
-        <div class="border-t border-default pt-8">
-          <Heading as="h3" size="2xl" variant="secondary" class="mb-6">Resum</Heading>
-          <Text variant="body">
-            Aquest documental resumeix la trajectòria professional i artística del fotògraf i
-            comunicador visual Toni Bover, amb motiu de la seva jubilació. El relat mostra el seu
-            recorregut des del seu endinsament cap a la professió i passa per la seva tasca en
-            publicitat, els treballs artístics, la docència a la UPC i els diferents projectes de
-            fotografia i urbanisme que va desenvolupar a La Farinera, Centre d'Arts Visuals de Vic,
-            de la qual en va ser director fins al 2020. Addicionalment, és una reflexió sobre el
-            orígens de la imatge fotogràfica, el seu present i algunes especulacions sobre el seu
-            futur.
-          </Text>
-        </div>
+      <!-- Description -->
+      <div class="border-t border-default pt-8">
+        <Heading as="h3" size="2xl" variant="secondary" class="mb-6">Resum</Heading>
+        <Text variant="body">
+          Aquest documental resumeix la trajectòria professional i artística del fotògraf i
+          comunicador visual Toni Bover, amb motiu de la seva jubilació. El relat mostra el seu
+          recorregut des del seu endinsament cap a la professió i passa per la seva tasca en
+          publicitat, els treballs artístics, la docència a la UPC i els diferents projectes de
+          fotografia i urbanisme que va desenvolupar a La Farinera, Centre d'Arts Visuals de Vic,
+          de la qual en va ser director fins al 2020. Addicionalment, és una reflexió sobre el
+          orígens de la imatge fotogràfica, el seu present i algunes especulacions sobre el seu
+          futur.
+        </Text>
+      </div>
 
-        <!-- Director Bio -->
-        <div class="border-t border-default pt-8">
-          <Heading as="h3" size="2xl" variant="secondary" class="mb-6">Sobre el Director</Heading>
-          <Text variant="body">
-            Xef Vila (Vic, 1971), músic i realitzador audiovisual. Els seus inicis se situen en el
-            món del curtmetratge Low Cost. S'endinsa en el món del vídeo digital l'any 2002 com a
-            membre del grup seleccionat per al Taller Bigas Luna de Reus. Actualment dirigeix la
-            seva pròpia productora on realitza audiovisuals en diversos àmbits, sobretot pel que fa
-            la món al món cultural, social i a la memòria històrica.
-          </Text>
-        </div>
+      <!-- Director Bio -->
+      <div class="border-t border-default pt-8">
+        <Heading as="h3" size="2xl" variant="secondary" class="mb-6">Sobre el Director</Heading>
+        <Text variant="body">
+          Xef Vila (Vic, 1971), músic i realitzador audiovisual. Els seus inicis se situen en el
+          món del curtmetratge Low Cost. S'endinsa en el món del vídeo digital l'any 2002 com a
+          membre del grup seleccionat per al Taller Bigas Luna de Reus. Actualment dirigeix la
+          seva pròpia productora on realitza audiovisuals en diversos àmbits, sobretot pel que fa
+          la món al món cultural, social i a la memòria històrica.
+        </Text>
       </div>
     </div>
-  </main>
+  </Container>
 </Layout>

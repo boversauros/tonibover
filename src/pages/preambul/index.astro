@@ -1,5 +1,6 @@
 ---
 import Layout from '@layouts/Layout.astro';
+import Container from '@components/ui/Container.astro';
 import Card from '@components/ui/Card.astro';
 import SectionTitle from '@components/ui/SectionTitle.astro';
 import Heading from '@components/ui/Heading.astro';
@@ -9,78 +10,76 @@ import '@styles/global.css';
 ---
 
 <Layout>
-  <main class="grow pt-32 pb-16">
-    <div class="max-w-4xl mx-auto px-6">
-      <SectionTitle>PREÀMBUL</SectionTitle>
+  <Container>
+    <SectionTitle>PREÀMBUL</SectionTitle>
 
-      <div class="mb-16">
-        <Text variant="body">
-          Els 20/40/60 són períodes temporals exactes, són processos de les capacitats
-          d'aprenentatge de cada persona.
-        </Text>
-        <Text variant="small" italic class="mt-4">
-          Article 20/40/60: Una reflexió sistemàtica de la fotografia com art i cultura, 2020.
-        </Text>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-8">
-        <Card href="/preambul/20" aria-label="Descobrir més sobre procés trans a la màquina">
-          <Image
-            slot="image"
-            src="https://picsum.photos/400/300"
-            alt="Un procés trans a la màquina"
-            aspect="square"
-            hover="opacity"
-          />
-          <div class="space-y-2">
-            <span class="block text-3xl font-serif text-secondary">20</span>
-            <Heading as="h3" size="2xl" variant="secondary" class="mb-0"
-              >UN PROCÉS TRANS A LA MÀQUINA</Heading
-            >
-            <Text variant="small" class="group-hover:text-body transition-colors">
-              Descobrir més →
-            </Text>
-          </div>
-        </Card>
-
-        <Card href="/preambul/40" aria-label="Descobrir més sobre procés trans de l'analògic al digital">
-          <Image
-            slot="image"
-            src="https://picsum.photos/400/300"
-            alt="Un procés trans de l'analògic al digital"
-            aspect="square"
-            hover="opacity"
-          />
-          <div class="space-y-2">
-            <span class="block text-3xl font-serif text-secondary">40</span>
-            <Heading as="h3" size="2xl" variant="secondary" class="mb-0">
-              UN PROCÉS TRANS DE L'ANALÒGIC AL DIGITAL
-            </Heading>
-            <Text variant="small" class="group-hover:text-body transition-colors">
-              Descobrir més →
-            </Text>
-          </div>
-        </Card>
-
-        <Card href="/preambul/60" aria-label="Descobrir més sobre procés trans laboral">
-          <Image
-            slot="image"
-            src="https://picsum.photos/400/300"
-            alt="Un procés trans laboral"
-            aspect="square"
-            hover="opacity"
-          />
-          <div class="space-y-2">
-            <span class="block text-3xl font-serif text-secondary">60</span>
-            <Heading as="h3" size="2xl" variant="secondary" class="mb-0"
-              >UN PROCÉS TRANS LABORAL</Heading
-            >
-            <Text variant="small" class="group-hover:text-body transition-colors">
-              Descobrir més →
-            </Text>
-          </div>
-        </Card>
-      </div>
+    <div class="mb-16">
+      <Text variant="body">
+        Els 20/40/60 són períodes temporals exactes, són processos de les capacitats
+        d'aprenentatge de cada persona.
+      </Text>
+      <Text variant="small" italic class="mt-4">
+        Article 20/40/60: Una reflexió sistemàtica de la fotografia com art i cultura, 2020.
+      </Text>
     </div>
-  </main>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      <Card href="/preambul/20" aria-label="Descobrir més sobre procés trans a la màquina">
+        <Image
+          slot="image"
+          src="https://picsum.photos/400/300"
+          alt="Un procés trans a la màquina"
+          aspect="square"
+          hover="opacity"
+        />
+        <div class="space-y-2">
+          <span class="block text-3xl font-serif text-secondary">20</span>
+          <Heading as="h3" size="2xl" variant="secondary" class="mb-0"
+            >UN PROCÉS TRANS A LA MÀQUINA</Heading
+          >
+          <Text variant="small" class="group-hover:text-body transition-colors">
+            Descobrir més →
+          </Text>
+        </div>
+      </Card>
+
+      <Card href="/preambul/40" aria-label="Descobrir més sobre procés trans de l'analògic al digital">
+        <Image
+          slot="image"
+          src="https://picsum.photos/400/300"
+          alt="Un procés trans de l'analògic al digital"
+          aspect="square"
+          hover="opacity"
+        />
+        <div class="space-y-2">
+          <span class="block text-3xl font-serif text-secondary">40</span>
+          <Heading as="h3" size="2xl" variant="secondary" class="mb-0">
+            UN PROCÉS TRANS DE L'ANALÒGIC AL DIGITAL
+          </Heading>
+          <Text variant="small" class="group-hover:text-body transition-colors">
+            Descobrir més →
+          </Text>
+        </div>
+      </Card>
+
+      <Card href="/preambul/60" aria-label="Descobrir més sobre procés trans laboral">
+        <Image
+          slot="image"
+          src="https://picsum.photos/400/300"
+          alt="Un procés trans laboral"
+          aspect="square"
+          hover="opacity"
+        />
+        <div class="space-y-2">
+          <span class="block text-3xl font-serif text-secondary">60</span>
+          <Heading as="h3" size="2xl" variant="secondary" class="mb-0"
+            >UN PROCÉS TRANS LABORAL</Heading
+          >
+          <Text variant="small" class="group-hover:text-body transition-colors">
+            Descobrir més →
+          </Text>
+        </div>
+      </Card>
+    </div>
+  </Container>
 </Layout>

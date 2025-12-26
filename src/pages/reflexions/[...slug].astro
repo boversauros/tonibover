@@ -2,6 +2,7 @@
 import '@styles/global.css';
 import { getCollection } from 'astro:content';
 import Layout from '@layouts/Layout.astro';
+import Container from '@components/ui/Container.astro';
 import KeywordsList from '@components/composed/KeywordsList.astro';
 import Link from '@components/ui/Link.astro';
 import Heading from '@components/ui/Heading.astro';
@@ -34,105 +35,103 @@ const categoryName = categories.find((c) => c.id === post.data.category)?.name;
 ---
 
 <Layout>
-  <main class="grow pt-32 pb-16">
-    <div class="max-w-4xl mx-auto px-6">
-      <!-- Navigation breadcrumb -->
-      <nav class="mb-12">
-        <ol class="flex items-center space-x-2 text-sm text-muted">
-          <li>
-            <Link href="/reflexions" variant="muted" class="hover:text-white">Reflexions</Link>
-          </li>
-          <li>/</li>
-          <li>
-            <Link
-              href={`/reflexions/${post.data.category}`}
-              variant="muted"
-              class="hover:text-white"
-            >
-              {categoryName}
-            </Link>
-          </li>
-        </ol>
-      </nav>
-
-      <article class="space-y-16">
-        <!-- Header -->
-        <header class="space-y-6">
-          <Heading as="h1" size="4xl" variant="primary" class="leading-tight">
-            {post.data.title}
-          </Heading>
-        </header>
-
-        <!-- Main image -->
-        <figure class="space-y-8">
-          <div
-            class={`grid gap-8 ${
-              post.data.images.length === 1
-                ? 'grid-cols-1'
-                : post.data.images.length === 2
-                  ? 'grid-cols-1 md:grid-cols-2'
-                  : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
-            }`}
+  <Container>
+    <!-- Navigation breadcrumb -->
+    <nav class="mb-12">
+      <ol class="flex items-center space-x-2 text-sm text-muted">
+        <li>
+          <Link href="/reflexions" variant="muted" class="hover:text-white">Reflexions</Link>
+        </li>
+        <li>/</li>
+        <li>
+          <Link
+            href={`/reflexions/${post.data.category}`}
+            variant="muted"
+            class="hover:text-white"
           >
-            {
-              post.data.images.map((image) => (
-                <Image
-                  src={image.url}
-                  alt={image.title}
-                  height="h-[400px]"
-                  hover="none"
-                  loading="eager"
-                >
-                  <span slot="caption">{image.title}</span>
-                </Image>
-              ))
-            }
-          </div>
-        </figure>
+            {categoryName}
+          </Link>
+        </li>
+      </ol>
+    </nav>
 
-        <!-- Content -->
+    <article class="space-y-16">
+      <!-- Header -->
+      <header class="space-y-6">
+        <Heading as="h1" size="4xl" variant="primary" class="leading-tight">
+          {post.data.title}
+        </Heading>
+      </header>
+
+      <!-- Main image -->
+      <figure class="space-y-8">
         <div
-          class="prose prose-xl max-w-none prose-headings:font-serif prose-headings:text-primary prose-p:text-body prose-p:leading-relaxed prose-p:text-lg"
+          class={`grid gap-8 ${
+            post.data.images.length === 1
+              ? 'grid-cols-1'
+              : post.data.images.length === 2
+                ? 'grid-cols-1 md:grid-cols-2'
+                : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
+          }`}
         >
-          <Content />
+          {
+            post.data.images.map((image) => (
+              <Image
+                src={image.url}
+                alt={image.title}
+                height="h-[400px]"
+                hover="none"
+                loading="eager"
+              >
+                <span slot="caption">{image.title}</span>
+              </Image>
+            ))
+          }
         </div>
+      </figure>
 
-        <!-- References -->
-        <section class="border-t border-default pt-10 space-y-6">
-          <Heading as="h2" size="xl" variant="secondary">Referències</Heading>
-          <div class="space-y-5">
-            <div>
-              <Heading as="h3" size="2xl" variant="body" class="text-base mb-3">Text:</Heading>
-              <ul class="space-y-2 text-sm text-muted leading-relaxed">
-                {
-                  post.data.references.texts.map((ref) => (
-                    <li class="pl-4">
-                      <span class="text-body mr-2">-</span>
-                      {ref}
-                    </li>
-                  ))
-                }
-              </ul>
-            </div>
-            <div>
-              <Heading as="h3" size="2xl" variant="body" class="text-base mb-3">Imatge:</Heading>
-              <ul class="space-y-2 text-sm text-muted leading-relaxed">
-                {
-                  post.data.references.images.map((ref) => (
-                    <li class="pl-4">
-                      <span class="text-body mr-2">-</span>
-                      {ref}
-                    </li>
-                  ))
-                }
-              </ul>
-            </div>
+      <!-- Content -->
+      <div
+        class="prose prose-xl max-w-none prose-headings:font-serif prose-headings:text-primary prose-p:text-body prose-p:leading-relaxed prose-p:text-lg"
+      >
+        <Content />
+      </div>
+
+      <!-- References -->
+      <section class="border-t border-default pt-10 space-y-6">
+        <Heading as="h2" size="xl" variant="secondary">Referències</Heading>
+        <div class="space-y-5">
+          <div>
+            <Heading as="h3" size="2xl" variant="body" class="text-base mb-3">Text:</Heading>
+            <ul class="space-y-2 text-sm text-muted leading-relaxed">
+              {
+                post.data.references.texts.map((ref) => (
+                  <li class="pl-4">
+                    <span class="text-body mr-2">-</span>
+                    {ref}
+                  </li>
+                ))
+              }
+            </ul>
           </div>
-        </section>
+          <div>
+            <Heading as="h3" size="2xl" variant="body" class="text-base mb-3">Imatge:</Heading>
+            <ul class="space-y-2 text-sm text-muted leading-relaxed">
+              {
+                post.data.references.images.map((ref) => (
+                  <li class="pl-4">
+                    <span class="text-body mr-2">-</span>
+                    {ref}
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        </div>
+      </section>
 
-        <!-- Keywords -->
-        <KeywordsList keywords={post.data.keywords} />
-      </article>
-    </div>
-  </main>
+      <!-- Keywords -->
+      <KeywordsList keywords={post.data.keywords} />
+    </article>
+  </Container>
 </Layout>

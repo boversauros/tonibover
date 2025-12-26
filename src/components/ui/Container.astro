@@ -1,0 +1,40 @@
+---
+type Size = 'default' | 'wide' | 'full';
+type Spacing = 'default' | 'compact' | 'loose' | 'none';
+
+interface Props {
+  as?: 'main' | 'div' | 'section' | 'article';
+  size?: Size;
+  spacing?: Spacing;
+  class?: string;
+}
+
+const {
+  as: Wrapper = 'main',
+  size = 'default' as Size,
+  spacing = 'default' as Spacing,
+  class: className = '',
+} = Astro.props;
+
+const sizeClasses: Record<NonNullable<Props['size']>, string> = {
+  default: 'max-w-4xl',
+  wide: 'max-w-6xl',
+  full: 'max-w-full',
+};
+
+const spacingClasses: Record<NonNullable<Props['spacing']>, string> = {
+  default: 'pt-32 pb-16',
+  compact: 'pt-16 pb-8',
+  loose: 'pt-40 pb-24',
+  none: '',
+};
+
+const wrapperClasses = `grow ${spacingClasses[spacing]}`.trim();
+const innerClasses = `${sizeClasses[size]} mx-auto px-6 ${className}`.trim();
+---
+
+<Wrapper class={wrapperClasses}>
+  <div class={innerClasses}>
+    <slot />
+  </div>
+</Wrapper>

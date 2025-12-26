@@ -1,5 +1,6 @@
 ---
 import Layout from '@layouts/Layout.astro';
+import Container from '@components/ui/Container.astro';
 import SectionTitle from '@components/ui/SectionTitle.astro';
 import Text from '@components/ui/Text.astro';
 import Image from '@components/ui/Image.astro';
@@ -7,28 +8,26 @@ import '@styles/global.css';
 ---
 
 <Layout>
-  <main class="grow pt-32 pb-16">
-    <div class="max-w-4xl mx-auto px-6">
-      <SectionTitle>INICI</SectionTitle>
+  <Container>
+    <SectionTitle>INICI</SectionTitle>
 
-      <div class="space-y-8">
-        <Image
-          src="https://picsum.photos/1200/800"
-          alt="Artistic Photography"
-          aspect="auto"
-          hover="opacity"
-          loading="eager"
-        >
-          <span slot="caption">Fotografia Toni Bover, 1990</span>
-        </Image>
+    <div class="space-y-8">
+      <Image
+        src="https://picsum.photos/1200/800"
+        alt="Artistic Photography"
+        aspect="auto"
+        hover="opacity"
+        loading="eager"
+      >
+        <span slot="caption">Fotografia Toni Bover, 1990</span>
+      </Image>
 
-        <Text variant="body">
-          Aquesta web és un espai iconotextual per reflexionar sobre la comunicació visual. Els
-          continguts es van ampliant al llarg del temps i tracten la relació de l'art amb la
-          ciència, la semiòtica de la imatge fotogràfica, exposen temes impartits en les classes de
-          cultura visual i presenten influències visuals.
-        </Text>
-      </div>
+      <Text variant="body">
+        Aquesta web és un espai iconotextual per reflexionar sobre la comunicació visual. Els
+        continguts es van ampliant al llarg del temps i tracten la relació de l'art amb la
+        ciència, la semiòtica de la imatge fotogràfica, exposen temes impartits en les classes de
+        cultura visual i presenten influències visuals.
+      </Text>
     </div>
-  </main>
+  </Container>
 </Layout>
