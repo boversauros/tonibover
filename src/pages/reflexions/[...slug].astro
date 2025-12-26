@@ -6,6 +6,7 @@ import KeywordsList from '@components/composed/KeywordsList.astro';
 import Link from '@components/ui/Link.astro';
 import Heading from '@components/ui/Heading.astro';
 import Text from '@components/ui/Text.astro';
+import Image from '@components/ui/Image.astro';
 import type { Post } from '@/types';
 
 export async function getStaticPaths() {
@@ -75,12 +76,15 @@ const categoryName = categories.find((c) => c.id === post.data.category)?.name;
           >
             {
               post.data.images.map((image) => (
-                <figure class="space-y-3">
-                  <img src={image.url} alt={image.title} class="w-full h-[400px] object-cover" />
-                  <figcaption class="text-sm text-muted font-serif italic leading-relaxed">
-                    {image.title}
-                  </figcaption>
-                </figure>
+                <Image
+                  src={image.url}
+                  alt={image.title}
+                  height="h-[400px]"
+                  hover="none"
+                  loading="eager"
+                >
+                  <span slot="caption">{image.title}</span>
+                </Image>
               ))
             }
           </div>

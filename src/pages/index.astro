@@ -2,21 +2,25 @@
 import Layout from '@layouts/Layout.astro';
 import SectionTitle from '@components/ui/SectionTitle.astro';
 import Text from '@components/ui/Text.astro';
+import Image from '@components/ui/Image.astro';
 import '@styles/global.css';
 ---
 
 <Layout>
-  <main class="flex-grow pt-32 pb-16">
+  <main class="grow pt-32 pb-16">
     <div class="max-w-4xl mx-auto px-6">
       <SectionTitle>INICI</SectionTitle>
 
       <div class="space-y-8">
-        <img
+        <Image
           src="https://picsum.photos/1200/800"
           alt="Artistic Photography"
-          class="w-full transition-opacity duration-700 hover:opacity-95"
-        />
-        <Text variant="caption">Fotografia Toni Bover, 1990</Text>
+          aspect="auto"
+          hover="opacity"
+          loading="eager"
+        >
+          <span slot="caption">Fotografia Toni Bover, 1990</span>
+        </Image>
 
         <Text variant="body">
           Aquesta web és un espai iconotextual per reflexionar sobre la comunicació visual. Els

@@ -4,11 +4,12 @@ import Link from '@components/ui/Link.astro';
 import SectionTitle from '@components/ui/SectionTitle.astro';
 import Heading from '@components/ui/Heading.astro';
 import Text from '@components/ui/Text.astro';
+import Image from '@components/ui/Image.astro';
 import '@styles/global.css';
 ---
 
 <Layout>
-  <main class="flex-grow pt-32 pb-16">
+  <main class="grow pt-32 pb-16">
     <div class="max-w-4xl mx-auto px-6">
       <SectionTitle>PREÀMBUL</SectionTitle>
 
@@ -25,14 +26,17 @@ import '@styles/global.css';
       <div class="grid md:grid-cols-3 gap-8">
         <Link href="/preambul/20" class="group block">
           <div class="space-y-4">
-            <img
+            <Image
               src="https://picsum.photos/400/300"
               alt="Un procés trans a la màquina"
-              class="w-full aspect-square object-cover transition-opacity duration-700 group-hover:opacity-90"
+              aspect="square"
+              hover="opacity"
             />
             <div class="space-y-2">
-              <Heading as="span" size="3xl" variant="secondary" class="block">20</Heading>
-              <Heading as="h3" size="2xl" variant="secondary" class="mb-0">UN PROCÉS TRANS A LA MÀQUINA</Heading>
+              <span class="block text-3xl font-serif text-secondary">20</span>
+              <Heading as="h3" size="2xl" variant="secondary" class="mb-0"
+                >UN PROCÉS TRANS A LA MÀQUINA</Heading
+              >
               <Text variant="small" class="group-hover:text-body transition-colors">
                 Descobrir més →
               </Text>
@@ -42,13 +46,14 @@ import '@styles/global.css';
 
         <Link href="/preambul/40" class="group block">
           <div class="space-y-4">
-            <img
+            <Image
               src="https://picsum.photos/400/300"
               alt="Un procés trans de l'analògic al digital"
-              class="w-full aspect-square object-cover transition-opacity duration-700 group-hover:opacity-90"
+              aspect="square"
+              hover="opacity"
             />
             <div class="space-y-2">
-              <Heading as="span" size="3xl" variant="secondary" class="block">40</Heading>
+              <span class="block text-3xl font-serif text-secondary">40</span>
               <Heading as="h3" size="2xl" variant="secondary" class="mb-0">
                 UN PROCÉS TRANS DE L'ANALÒGIC AL DIGITAL
               </Heading>
@@ -61,14 +66,17 @@ import '@styles/global.css';
 
         <Link href="/preambul/60" class="group block">
           <div class="space-y-4">
-            <img
+            <Image
               src="https://picsum.photos/400/300"
               alt="Un procés trans laboral"
-              class="w-full aspect-square object-cover transition-opacity duration-700 group-hover:opacity-90"
+              aspect="square"
+              hover="opacity"
             />
             <div class="space-y-2">
-              <Heading as="span" size="3xl" variant="secondary" class="block">60</Heading>
-              <Heading as="h3" size="2xl" variant="secondary" class="mb-0">UN PROCÉS TRANS LABORAL</Heading>
+              <span class="block text-3xl font-serif text-secondary">60</span>
+              <Heading as="h3" size="2xl" variant="secondary" class="mb-0"
+                >UN PROCÉS TRANS LABORAL</Heading
+              >
               <Text variant="small" class="group-hover:text-body transition-colors">
                 Descobrir més →
               </Text>
