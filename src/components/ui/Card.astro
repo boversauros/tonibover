@@ -1,0 +1,29 @@
+---
+import Link from '@components/ui/Link.astro';
+
+interface Props {
+  href: string;
+  as?: 'article' | 'div';
+  class?: string;
+  'aria-label'?: string;
+}
+
+const {
+  href,
+  as: Wrapper = 'div',
+  class: className = '',
+  'aria-label': ariaLabel,
+} = Astro.props;
+
+const hasImageSlot = Astro.slots.has('image');
+const cardClasses = `space-y-4 ${className}`.trim();
+---
+
+<Wrapper class={cardClasses}>
+  <Link href={href} class="group block" aria-label={ariaLabel}>
+    {hasImageSlot && (
+      <slot name="image" />
+    )}
+    <slot />
+  </Link>
+</Wrapper>
