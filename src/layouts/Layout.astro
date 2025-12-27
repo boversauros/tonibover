@@ -1,5 +1,6 @@
 ---
-import Navigation from '../components/Navigation.astro';
+import Navigation from '@components/app/Navigation.astro';
+import Link from '@components/ui/Link.astro';
 ---
 
 <!doctype html>
@@ -22,7 +23,7 @@ import Navigation from '../components/Navigation.astro';
           © Toni Bover, {new Date().getFullYear()}
         </p>
         <p class="text-muted hover:text-body transition-colors-default">
-          <a href="#">Lleis d'autoria i protecció de dades</a>
+          <Link href="#" variant="muted">Lleis d'autoria i protecció de dades</Link>
         </p>
       </div>
     </div>

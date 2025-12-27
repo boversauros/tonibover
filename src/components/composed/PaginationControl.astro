@@ -1,5 +1,6 @@
 ---
 import type { Page } from 'astro';
+import Link from '@components/ui/Link.astro';
 
 interface Props {
   page: Page;
@@ -11,43 +12,42 @@ const { page } = Astro.props;
 <nav class="flex justify-center items-center gap-8 mb-16" aria-label="Pagination">
   {
     page.url.prev && (
-      <a
+      <Link
         href={page.url.prev}
-        class="text-muted hover:text-primary transition-colors-default text-sm"
+        variant="muted"
+        class="text-sm"
         aria-label="Previous page"
       >
         ←
-      </a>
+      </Link>
     )
   }
 
   <div class="flex items-center gap-4 text-sm">
     {
       Array.from({ length: page.lastPage }, (_, i) => i + 1).map((pageNum) => (
-        <a
+        <Link
           href={`/reflexions/${pageNum > 1 ? pageNum : ''}`}
-          class={`transition-colors-default ${
-            page.currentPage === pageNum
-              ? 'text-primary border-b border-primary'
-              : 'text-muted hover:text-primary'
-          }`}
+          variant="muted"
+          active={page.currentPage === pageNum}
           aria-current={page.currentPage === pageNum ? 'page' : undefined}
         >
           {pageNum}
-        </a>
+        </Link>
       ))
     }
   </div>
 
   {
     page.url.next && (
-      <a
+      <Link
         href={page.url.next}
-        class="text-muted hover:text-primary transition-colors-default text-sm"
+        variant="muted"
+        class="text-sm"
         aria-label="Next page"
       >
         →
-      </a>
+      </Link>
     )
   }
 </nav>

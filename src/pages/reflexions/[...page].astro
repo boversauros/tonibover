@@ -1,9 +1,9 @@
 ---
-import '../../styles/global.css';
-import Layout from '../../layouts/Layout.astro';
-import PostsListLayout from '../../layouts/PostsListLayout.astro';
+import '@styles/global.css';
+import Layout from '@layouts/Layout.astro';
+import PostsListLayout from '@layouts/PostsListLayout.astro';
 import { getCollection } from 'astro:content';
-import type { Post } from '../../types';
+import type { Post } from '@/types';
 import type { GetStaticPathsOptions } from 'astro';
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {

@@ -1,4 +1,8 @@
 ---
+import Link from '@components/ui/Link.astro';
+import Button from '@components/ui/Button.astro';
+import Icon from '@components/ui/Icon.astro';
+
 const links = [
   { label: 'PREÀMBUL', href: '/preambul' },
   { label: 'BIOGRAFIA', href: '/biografia' },
@@ -14,7 +18,7 @@ const links = [
     <div class="flex items-center justify-between h-20">
       <div class="flex items-baseline space-x-3">
         <h1 class="text-2xl font-serif italic hover:text-secondary transition-colors-default">
-          <a href="/">Toni Bover</a>
+          <Link href="/">Toni Bover</Link>
         </h1>
         <span class="text-sm tracking-wider text-muted"> IMAGE MANAGER </span>
       </div>
@@ -22,63 +26,38 @@ const links = [
       <div class="hidden md:flex items-center space-x-8">
         {
           links.map((link) => (
-            <a
+            <Link
               href={link.href}
-              class="text-sm tracking-wide text-body hover:text-primary transition-colors-default"
+              class="text-sm tracking-wide"
             >
               {link.label}
-            </a>
+            </Link>
           ))
         }
       </div>
 
-      <button
-        class="md:hidden p-2 hover:text-body transition-colors-default"
+      <Button
+        variant="icon"
+        class="md:hidden"
         data-menu-button
         aria-label="Toggle menu"
         aria-expanded="false"
       >
-        <svg
-          id="menuIcon"
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-6 w-6"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M4 6h16M4 12h16M4 18h16"></path>
-        </svg>
-        <svg
-          id="closeIcon"
-          xmlns="http://www.w3.org/2000/svg"
-          class="hidden h-6 w-6"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M6 18L18 6M6 6l12 12"></path>
-        </svg>
-      </button>
+        <Icon name="menu" size="6" id="menuIcon" />
+        <Icon name="close" size="6" id="closeIcon" class="hidden" />
+      </Button>
     </div>
 
     <div id="mobileMenu" class="hidden md:hidden border-t border-subtle">
       <div class="py-4 space-y-2">
         {
           links.map((link) => (
-            <a
+            <Link
               href={link.href}
-              class="block px-4 py-2 text-sm tracking-wide text-body hover:bg-surface hover:text-primary transition-all duration-300"
+              class="block px-4 py-2 text-sm tracking-wide hover:bg-surface transition-all duration-300"
             >
               {link.label}
-            </a>
+            </Link>
           ))
         }
       </div>

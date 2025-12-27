@@ -1,0 +1,102 @@
+---
+interface Props {
+  name: 'menu' | 'close' | 'chevron-left' | 'chevron-right' | 'arrow-left' | 'arrow-right';
+  size?: '4' | '5' | '6' | '8' | '10' | '12';
+  variant?: 'outline' | 'solid';
+  class?: string;
+  'aria-hidden'?: 'true' | 'false';
+  [key: string]: any;
+}
+
+const {
+  name,
+  size = '6',
+  variant,
+  class: className = '',
+  'aria-hidden': ariaHidden = 'true',
+  ...rest
+} = Astro.props;
+
+// Icon definitions
+const icons = {
+  'menu': {
+    variant: 'outline',
+    viewBox: '0 0 24 24',
+    path: 'M4 6h16M4 12h16M4 18h16',
+  },
+  'close': {
+    variant: 'outline',
+    viewBox: '0 0 24 24',
+    path: 'M6 18L18 6M6 6l12 12',
+  },
+  'chevron-left': {
+    variant: 'outline',
+    viewBox: '0 0 24 24',
+    path: 'M15 19l-7-7 7-7',
+  },
+  'chevron-right': {
+    variant: 'outline',
+    viewBox: '0 0 24 24',
+    path: 'M9 5l7 7-7 7',
+  },
+  'arrow-left': {
+    variant: 'solid',
+    viewBox: '0 0 20 20',
+    path: 'M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L4.414 9H17a1 1 0 110 2H4.414l5.293 5.293a1 1 0 010 1.414z',
+  },
+  'arrow-right': {
+    variant: 'solid',
+    viewBox: '0 0 20 20',
+    path: 'M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L15.586 11H3a1 1 0 110-2h12.586l-5.293-5.293a1 1 0 010-1.414z',
+  },
+};
+
+const icon = icons[name];
+const finalVariant = variant || icon.variant;
+
+const sizeClasses = {
+  '4': 'h-4 w-4',
+  '5': 'h-5 w-5',
+  '6': 'h-6 w-6',
+  '8': 'h-8 w-8',
+  '10': 'h-10 w-10',
+  '12': 'h-12 w-12',
+};
+
+const finalClasses = `${sizeClasses[size]} ${className}`.trim();
+
+// SVG attributes based on variant
+const svgAttrs = finalVariant === 'outline'
+  ? {
+      fill: 'none',
+      stroke: 'currentColor',
+      'stroke-width': '2',
+    }
+  : {
+      fill: 'currentColor',
+    };
+
+const pathAttrs = finalVariant === 'outline'
+  ? {
+      'stroke-linecap': 'round' as const,
+      'stroke-linejoin': 'round' as const,
+    }
+  : {
+      'fill-rule': 'evenodd' as const,
+      'clip-rule': 'evenodd' as const,
+    };
+---
+
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  class={finalClasses}
+  viewBox={icon.viewBox}
+  aria-hidden={ariaHidden}
+  {...svgAttrs}
+  {...rest}
+>
+  <path
+    d={icon.path}
+    {...pathAttrs}
+  />
+</svg>

@@ -1,6 +1,7 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import '../styles/global.css';
+import Layout from '@layouts/Layout.astro';
+import Link from '@components/ui/Link.astro';
+import '@styles/global.css';
 
 const randomPhotographyQuotes = [
   'La fotografia és la història que falla a les paraules.',
@@ -15,7 +16,7 @@ const randomQuote =
 ---
 
 <Layout>
-  <main class="flex-grow flex items-center justify-center min-h-screen">
+  <main class="grow flex items-center justify-center min-h-screen">
     <div class="max-w-xl mx-auto px-6 py-16 text-center">
       <h1 class="text-8xl font-serif text-white mb-8">404</h1>
 
@@ -24,9 +25,9 @@ const randomQuote =
       </p>
 
       <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
-        <a href="/" class="text-white/60 hover:text-white transition-colors duration-300">
+        <Link href="/" class="text-white/60 hover:text-white transition-colors duration-300">
           Tornar a l'inici
-        </a>
+        </Link>
       </div>
     </div>
   </main>

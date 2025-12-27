@@ -1,0 +1,47 @@
+---
+interface Props {
+  as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+  size?: 'xl' | '2xl' | '3xl' | '4xl' | '5xl';
+  variant?: 'primary' | 'secondary' | 'body' | 'muted';
+  italic?: boolean;
+  class?: string;
+}
+
+const {
+  as: Element = 'h2',
+  size = '2xl',
+  variant = 'primary',
+  italic = false,
+  class: className = '',
+} = Astro.props;
+
+const sizeClasses: Record<NonNullable<Props['size']>, string> = {
+  xl: 'text-xl',
+  '2xl': 'text-2xl',
+  '3xl': 'text-3xl',
+  '4xl': 'text-4xl md:text-5xl',
+  '5xl': 'text-5xl',
+};
+
+const variantClasses: Record<NonNullable<Props['variant']>, string> = {
+  primary: 'text-primary',
+  secondary: 'text-secondary',
+  body: 'text-body',
+  muted: 'text-muted',
+};
+
+const marginClasses: Record<NonNullable<Props['size']>, string> = {
+  xl: 'mb-8',
+  '2xl': 'mb-6',
+  '3xl': 'mb-4',
+  '4xl': 'mb-2',
+  '5xl': 'mb-2',
+};
+
+const italicClass = italic ? 'italic' : '';
+const finalClasses = `font-serif ${sizeClasses[size]} ${variantClasses[variant]} ${marginClasses[size]} ${italicClass} ${className}`.trim();
+---
+
+<Element class={finalClasses}>
+  <slot />
+</Element>
