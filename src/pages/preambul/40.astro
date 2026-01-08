@@ -1,37 +1,33 @@
 ---
 import PreambulContentLayout from '@layouts/PreambulLayout.astro';
+import Text from '@components/ui/Text.astro';
 import '@styles/global.css';
 
-const images = [
-  {
-    src: 'https://picsum.photos/500/600',
-    alt: 'Group of people looking at equipment',
-    caption: 'Explicació dels avantatges de la impressió contínua.',
-  },
-  {
-    src: 'https://picsum.photos/500/600',
-    alt: 'Person working at computer',
-    caption: 'El pas cap a la tecnologia digital.',
-  },
-];
+const image = {
+  src: '/images/preambul-40-02.webp',
+  alt: 'Dos fotografies, Toni Bover en un despatx i un grup de persones en una oficina',
+  caption:
+    'Fotografies Frank Gómez i Miquel Bigas. Anys 90 del segle XX i primera dècada del segle XXI',
+};
 ---
 
 <PreambulContentLayout
   title="UN PROCÉS TRANS DE L'ANALÒGIC AL DIGITAL"
-  subtitle="Els 40 tracten l'etapa de la maduresa i de la reflexió contínua."
+  subtitle="Els 40 obren l’etapa de la maduresa i de la millora continua, moment en què prenc consciència del que estimo i on es consoliden les idees dels 20. Aquesta fase serveix per entendre i aprofundir els coneixements sobre la fotografia i la seva relació amb la comunicació visual."
   articleInfo="Article 20/40/60: Una reflexió sistemàtica de la fotografia com art i cultura, 2020"
-  quote="La fotografia ha estat un pas extrem/ing entre el dibuix en perspectiva i el CGI d'estètica realista."
-  images={images}
+  quote="La fotografia ha estat un pas entre el dibuix en perspectiva i el CGI d’estètica realista."
+  image={image}
 >
-  <p>
-    Treballar 20 anys com a professor de fotografia industrial em va permetre entendre les bases de
-    la tecnologia de la fotografia i de la física de la llum. A través de la il·luminació vaig
-    aprendre a descobrir les formes i les textures dels objectes.
-  </p>
+  <Text variant="body">
+    Treballar deu anys professionalment en fotografia industrial em va permetre assimilar les bases
+    de la tecnologia fotogràfica i de la física de la llum. Mitjançant la il·luminació vaig aprendre
+    a descriure les formes i les textures dels objectes.
+  </Text>
 
-  <p>
-    Entrar com a professor en la Universitat i el Doctorat en la Escola d'Arquitectura va permetre
-    entendre i situar els principis de la perspectiva i de la geometria de la imatge, i comprendre
-    les relacions entre el dibuix en perspectiva i el CGI.
-  </p>
+  <Text variant="body">
+    L’entrada com a professor a la Universitat i fer el doctorat a l’Escola d’Arquitectura em va
+    facilitar comprendre i aplicar els principis de la perspectiva i de la geometria de la imatge, i
+    interessar-me per les relacions entre el dibuix, la fotografia i la imatge generada per
+    ordinador (CGI).
+  </Text>
 </PreambulContentLayout>

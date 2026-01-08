@@ -1,37 +1,29 @@
 ---
 import PreambulContentLayout from '@layouts/PreambulLayout.astro';
+import Text from '@components/ui/Text.astro';
 import '@styles/global.css';
 
-const images = [
-  {
-    src: 'https://picsum.photos/500/600',
-    alt: 'Self portrait with camera',
-    caption: 'Fotografia: Pere Formiguera, Toni Bover i Manel Botet',
-  },
-  {
-    src: 'https://picsum.photos/500/600',
-    alt: 'Photographer working with camera',
-    caption: "Els 20 simbolitzen l'etapa de la il·lusió amb la mirada dirigida cap al futur",
-  },
-];
+const image = {
+  src: '/images/preambul-20-02.webp',
+  alt: 'Dos fotografies, Toni Bover fent una foto i aguantant una càmera',
+  caption: 'Fotografies Arxiu Familiar i Pere Moscoso. Anys 70 i 80 del segle XX',
+};
 ---
 
 <PreambulContentLayout
   title="UN PROCÉS TRANS A LA MADURESA"
-  subtitle="Els 20 simbolitzen l'etapa de la il·lusió i la mirada dirigida cap al futur. Unes il·lusions que començaven a tenir trilla amb el pas del temps."
+  subtitle="Els 20 simbolitzen l’edat de la il·lusió, quan la mirada s’orienta cap al futur. Aquestes il·lusions i idees m’han acompanyat al llarg de la vida."
   articleInfo="Article 20/40/60: Una reflexió sistemàtica de la fotografia com art i cultura, 2020"
-  quote="Entendre la imatge fotogràfica és imprescindible per a l'alfabetització i la comunicació visual."
-  images={images}
+  quote="Entendre la imatge fotogràfica és imprescindible per a l’alfabetització iconotextual i la comunicació visual."
+  image={image}
 >
-  <p>
-    En els 20 simbolitzen l'etapa de la il·lusió amb la mirada dirigida cap al futur. Unes
-    il·lusions que començaven a tenir trilla amb el pas del temps.
-  </p>
+  <Text variant="body">
+    L’interès per les matemàtiques i la filosofia va anar derivant cap a la semiòtica de la imatge.
+  </Text>
 
-  <p>
-    Per mi, la fotografia va anar obrint molt més que la fotografia i va anar donant-nos-la la
-    metodologia de la fotografia. Familiaritzar-me amb la fotografia va permetre aprendre a mirar,
-    comunicar idees a partir dels signes bàsics, obtenir els elements individuals per entendre els
-    principis del l'estètica i la comunicació.
-  </p>
+  <Text variant="body">
+    Familiaritzar-me amb la fotografia em va permetre aprendre a mirar, comunicar idees a partir
+    dels signes icònics i a ordenar els elements de la imatge per comprendre els principis de
+    l’estètica i de la comunicació visual.
+  </Text>
 </PreambulContentLayout>

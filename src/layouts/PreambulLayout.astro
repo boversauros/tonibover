@@ -8,14 +8,14 @@ interface Props {
   subtitle: string;
   articleInfo?: string;
   quote?: string;
-  images: {
+  image: {
     src: string;
     alt: string;
     caption?: string;
-  }[];
+  };
 }
 
-const { title, subtitle, articleInfo, quote, images } = Astro.props;
+const { title, subtitle, articleInfo, quote, image } = Astro.props;
 const currentSection = Astro.url.pathname.replace(/\/$/, '').split('/').pop() || '';
 ---
 
@@ -33,14 +33,10 @@ const currentSection = Astro.url.pathname.replace(/\/$/, '').split('/').pop() ||
           <slot />
         </div>
 
-        <div class="grid md:grid-cols-2 gap-8">
-          {
-            images.map((image) => (
-              <Image src={image.src} alt={image.alt} aspect="4/3" hover="none">
-                {image.caption && <span slot="caption">{image.caption}</span>}
-              </Image>
-            ))
-          }
+        <div class="w-full">
+          <Image src={image.src} alt={image.alt} aspect="auto" hover="none">
+            {image.caption && <span slot="caption">{image.caption}</span>}
+          </Image>
         </div>
 
         {
