@@ -7,13 +7,11 @@ const links = [
   { label: 'PREÀMBUL', href: '/preambul' },
   { label: 'BIOGRAFIA', href: '/biografia' },
   { label: 'DOCUMENTAL', href: '/documental' },
-  { label: 'REFLEXIONS', href: '/reflexions' },
+  // { label: 'REFLEXIONS', href: '/reflexions' },
 ];
 ---
 
-<header
-  class="fixed top-0 left-0 right-0 bg-nav backdrop-blur-sm z-50 border-b border-subtle"
->
+<header class="fixed top-0 left-0 right-0 bg-nav backdrop-blur-sm z-50 border-b border-subtle">
   <nav class="max-w-4xl mx-auto px-6">
     <div class="flex items-center justify-between h-20">
       <div class="flex items-baseline space-x-3">
@@ -26,10 +24,7 @@ const links = [
       <div class="hidden md:flex items-center space-x-8">
         {
           links.map((link) => (
-            <Link
-              href={link.href}
-              class="text-sm tracking-wide"
-            >
+            <Link href={link.href} class="text-sm tracking-wide">
               {link.label}
             </Link>
           ))

@@ -1,5 +1,9 @@
 ---
-interface Props {
+import type { HTMLAttributes } from 'astro/types';
+
+type AnchorProps = HTMLAttributes<'a'>;
+
+interface Props extends AnchorProps {
   href: string;
   variant?: 'primary' | 'muted' | 'secondary' | 'accent-border';
   active?: boolean;
@@ -22,19 +26,14 @@ const variantClasses = {
   primary: 'text-body hover:text-primary transition-colors-default',
   muted: 'text-muted hover:text-primary transition-colors-default',
   secondary: 'text-primary-60 hover:text-primary transition-colors-default',
-  'accent-border': 'text-muted border-b border-transparent hover:text-primary hover:border-primary transition-colors-default',
+  'accent-border':
+    'text-muted border-b border-transparent hover:text-primary hover:border-primary transition-colors-default',
 };
 
 const activeClasses = active ? 'border-b-2 border-primary text-primary' : '';
 const finalClasses = `${variantClasses[variant]} ${activeClasses} ${className}`.trim();
 ---
 
-<a
-  href={href}
-  class={finalClasses}
-  aria-label={ariaLabel}
-  aria-current={ariaCurrent}
-  {...rest}
->
+<a href={href} class={finalClasses} aria-label={ariaLabel} aria-current={ariaCurrent} {...rest}>
   <slot />
 </a>
