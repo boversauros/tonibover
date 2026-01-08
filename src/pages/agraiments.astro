@@ -1,0 +1,35 @@
+---
+import Layout from '@layouts/Layout.astro';
+import Container from '@components/ui/Container.astro';
+import Heading from '@components/ui/Heading.astro';
+import Text from '@components/ui/Text.astro';
+import '@styles/global.css';
+---
+
+<Layout>
+  <Container>
+    <Heading as="h1" size="4xl" variant="primary" class="text-center mb-12">Agraïments</Heading>
+
+    <div class="space-y-8">
+      <div class="space-y-4">
+        <Text variant="body" class="text-primary-80">
+          A l'Eva Tordera Nuño, disseny web i contribució conceptual.
+        </Text>
+        <Text variant="body" class="text-primary-80">
+          A l'Oriol Bover Vila, programació web i interactivitat.
+        </Text>
+        <Text variant="body" class="text-primary-80">
+          A en Josep Matas Balaguer i la Yesenia Rosa Guerrero (Legalment), assessorament legal.
+        </Text>
+      </div>
+
+      <Text variant="body" italic class="text-primary-80 mt-8">
+        A les companyes i companys de feina, alumnes, família, amigues i amics amb qui he compartit <strong
+          class="italic">influències</strong
+        >, diferents <strong class="italic">perspectives</strong> i <strong class="italic"
+          >vivències</strong
+        > sobre la fotografia i la comunicació visual.
+      </Text>
+    </div>
+  </Container>
+</Layout>

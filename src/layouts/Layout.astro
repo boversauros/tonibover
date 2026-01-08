@@ -22,9 +22,10 @@ import Link from '@components/ui/Link.astro';
         <p class="text-muted font-serif">
           © Toni Bover, {new Date().getFullYear()}
         </p>
-        <p class="text-muted hover:text-body transition-colors-default">
+        <div class="flex gap-6 text-muted">
+          <Link href="/agraiments" variant="muted">Agraïments</Link>
           <Link href="#" variant="muted">Lleis d'autoria i protecció de dades</Link>
-        </p>
+        </div>
       </div>
     </div>
   </footer>
