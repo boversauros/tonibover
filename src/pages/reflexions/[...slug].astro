@@ -44,11 +44,7 @@ const categoryName = categories.find((c) => c.id === post.data.category)?.name;
         </li>
         <li>/</li>
         <li>
-          <Link
-            href={`/reflexions/${post.data.category}`}
-            variant="muted"
-            class="hover:text-white"
-          >
+          <Link href={`/reflexions/${post.data.category}`} variant="muted" class="hover:text-white">
             {categoryName}
           </Link>
         </li>
@@ -58,7 +54,7 @@ const categoryName = categories.find((c) => c.id === post.data.category)?.name;
     <article class="space-y-16">
       <!-- Header -->
       <header class="space-y-6">
-        <Heading as="h1" size="4xl" variant="primary" class="leading-tight">
+        <Heading as="h1" size="3xl" variant="primary" class="leading-tight">
           {post.data.title}
         </Heading>
       </header>
