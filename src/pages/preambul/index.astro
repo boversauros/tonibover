@@ -6,6 +6,7 @@ import SectionTitle from '@components/ui/SectionTitle.astro';
 import Heading from '@components/ui/Heading.astro';
 import Text from '@components/ui/Text.astro';
 import Image from '@components/ui/Image.astro';
+import Link from '@/components/ui/Link.astro';
 import '@styles/global.css';
 ---
 
@@ -23,10 +24,18 @@ import '@styles/global.css';
         Els 20, els 40 i els 60 no són períodes temporals exactes, sinó processos de transició que
         depenen de les actituds i de les capacitats d’aprenentatge de cada persona.
       </Text>
-      <Text variant="small" italic class="mt-4">
-        Article: 20/40/60. Una reflexió iconotextual de la fotografia com a art i ciència. Temps
-        d’Educació, UB. 2021
-      </Text>
+      <Link
+        href="https://raco.cat/index.php/TempsEducacio/article/view/400669/494221"
+        target="_blank"
+        rel="noopener noreferrer"
+        variant="muted"
+        class="mt-4 block"
+      >
+        <Text variant="small" italic class="hover:text-primary transition-colors-default">
+          Article: 20/40/60. Una reflexió iconotextual de la fotografia com a art i ciència. Temps
+          d’Educació, UB. 2021
+        </Text>
+      </Link>
     </div>
 
     <div class="grid md:grid-cols-3 gap-8">
