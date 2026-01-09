@@ -2,11 +2,12 @@
 import Layout from '@layouts/Layout.astro';
 import PreambulNavigation from '@components/app/PreambulNavigation.astro';
 import Image from '@components/ui/Image.astro';
+import Link from '@/components/ui/Link.astro';
+import Text from '@components/ui/Text.astro';
 
 interface Props {
   title: string;
   subtitle: string;
-  articleInfo?: string;
   quote?: string;
   image: {
     src: string;
@@ -15,7 +16,7 @@ interface Props {
   };
 }
 
-const { title, subtitle, articleInfo, quote, image } = Astro.props;
+const { title, subtitle, quote, image } = Astro.props;
 const currentSection = Astro.url.pathname.replace(/\/$/, '').split('/').pop() || '';
 ---
 
@@ -25,7 +26,18 @@ const currentSection = Astro.url.pathname.replace(/\/$/, '').split('/').pop() ||
       <div class="border-b border-subtle pb-8 mb-12">
         <h1 class="text-3xl font-serif text-secondary mb-4">{title}</h1>
         <p class="text-lg text-body">{subtitle}</p>
-        {articleInfo && <p class="text-sm text-muted mt-4 italic">{articleInfo}</p>}
+        <Link
+          href="https://raco.cat/index.php/TempsEducacio/article/view/400669"
+          target="_blank"
+          rel="noopener noreferrer"
+          variant="muted"
+          class="mt-4 block"
+        >
+          <Text variant="small" italic class="hover:text-primary transition-colors-default">
+            Article: 20/40/60. Una reflexió iconotextual de la fotografia com a art i ciència. Temps
+            d’Educació, UB. 2021
+          </Text>
+        </Link>
       </div>
 
       <div class="space-y-12">
