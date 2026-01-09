@@ -12,6 +12,7 @@ export default {
   'nav.biografia': 'BIOGRAFIA',
   'nav.documental': 'DOCUMENTAL',
   // Footer
+  'footer.contact': 'Contacte',
   'footer.acknowledgments': 'Agraïments',
   'footer.legal': "Lleis d'autoria i protecció de dades",
 } as const;

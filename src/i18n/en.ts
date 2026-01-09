@@ -11,6 +11,7 @@ export default {
   'nav.biografia': 'BIOGRAPHY',
   'nav.documental': 'DOCUMENTARY',
   // Footer
+  'footer.contact': 'Contact',
   'footer.acknowledgments': 'Acknowledgments',
   'footer.legal': 'Copyright and data protection laws',
 } as const;
