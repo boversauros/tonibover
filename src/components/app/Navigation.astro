@@ -3,7 +3,7 @@ import Link from '@components/ui/Link.astro';
 import Button from '@components/ui/Button.astro';
 import Icon from '@components/ui/Icon.astro';
 import LanguageSwitcher from '@components/ui/LanguageSwitcher.astro';
-import { defaultLang, useTranslations, type Lang } from '@/i18n';
+import { defaultLang, useTranslations, getLocalizedPath, type Lang } from '@/i18n';
 
 interface Props {
   lang?: Lang;
@@ -14,9 +14,9 @@ const { lang = defaultLang, currentPath = '/' } = Astro.props;
 const t = useTranslations(lang);
 
 const links = [
-  { label: t('nav.preambul'), href: '/preambul' },
-  { label: t('nav.biografia'), href: '/biografia' },
-  { label: t('nav.documental'), href: '/documental' },
+  { label: t('nav.preambul'), href: getLocalizedPath('/preambul', lang) },
+  { label: t('nav.biografia'), href: getLocalizedPath('/biografia', lang) },
+  { label: t('nav.documental'), href: getLocalizedPath('/documental', lang) },
 ];
 ---
 
@@ -25,7 +25,7 @@ const links = [
     <div class="flex items-center justify-between h-20">
       <div class="flex items-baseline space-x-3">
         <h1 class="text-2xl font-serif italic hover:text-secondary transition-colors-default">
-          <Link href="/">Toni Bover</Link>
+          <Link href={getLocalizedPath('/', lang)}>Toni Bover</Link>
         </h1>
         <span class="text-sm tracking-wider text-muted"> IMAGE MANAGER </span>
       </div>
