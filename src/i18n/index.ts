@@ -6,9 +6,4 @@ export {
   type TranslationKey,
 } from './translations';
 
-export {
-  getLangFromUrl,
-  useTranslations,
-  getLocalizedPath,
-  getAlternateLanguage,
-} from './utils';
+export { getLangFromUrl, useTranslations, getLocalizedPath, getAlternateLanguage } from './utils';

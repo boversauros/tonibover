@@ -14,11 +14,7 @@ const { posts, categories } = Astro.props;
 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
   {
     posts.map((post) => (
-      <Card
-        href={`/reflexions/${post.slug}`}
-        as="article"
-        aria-label={`Read ${post.data.title}`}
-      >
+      <Card href={`/reflexions/${post.slug}`} as="article" aria-label={`Read ${post.data.title}`}>
         <Image
           slot="image"
           src={post.data.portraitImage.url}

@@ -1,9 +1,4 @@
-import {
-  translations,
-  defaultLang,
-  type Lang,
-  type TranslationKey,
-} from './translations';
+import { translations, defaultLang, type Lang, type TranslationKey } from './translations';
 
 export function getLangFromUrl(url: URL): Lang {
   const [, lang] = url.pathname.split('/');

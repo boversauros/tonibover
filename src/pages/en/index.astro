@@ -14,17 +14,10 @@ const t = useTranslations('en');
 <Layout lang="en">
   <Container>
     <SectionTitle>{t('index.section')}</SectionTitle>
-    <Heading as="h1" size="3xl" variant="primary"
-      >{t('index.title')}</Heading
-    >
+    <Heading as="h1" size="3xl" variant="primary">{t('index.title')} </Heading>
 
     <div class="space-y-8">
-      <Image
-        src="/images/inici_img.webp"
-        alt={t('index.imageAlt')}
-        aspect="auto"
-        loading="eager"
-      >
+      <Image src="/images/inici_img.webp" alt={t('index.imageAlt')} aspect="auto" loading="eager">
         <span slot="caption">{t('index.caption')}</span>
       </Image>
 

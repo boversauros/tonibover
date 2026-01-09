@@ -21,27 +21,29 @@ Create a reusable Image component (`/src/components/ui/Image.astro`) to standard
 
 ```typescript
 interface Props {
-  src: string;                                    // Required
-  alt: string;                                    // Required
-  aspect?: 'square' | '4/3' | 'video' | 'auto';  // Default: 'auto'
-  hover?: 'opacity' | 'scale' | 'none';          // Default: 'opacity'
-  loading?: 'lazy' | 'eager';                    // Default: 'lazy'
-  width?: string;                                // Default: 'w-full'
-  height?: string;                               // Default: ''
-  class?: string;                                // Custom overrides
-  [key: string]: any;                            // Pass-through attributes
+  src: string; // Required
+  alt: string; // Required
+  aspect?: 'square' | '4/3' | 'video' | 'auto'; // Default: 'auto'
+  hover?: 'opacity' | 'scale' | 'none'; // Default: 'opacity'
+  loading?: 'lazy' | 'eager'; // Default: 'lazy'
+  width?: string; // Default: 'w-full'
+  height?: string; // Default: ''
+  class?: string; // Custom overrides
+  [key: string]: any; // Pass-through attributes
 }
 ```
 
 ### Variants
 
 **Aspect Ratios:**
+
 - `square` → `aspect-square` (1:1) - Used in Carousel, Preambul cards
 - `4/3` → `aspect-4/3` - Used in PostGrid, PreambulLayout
 - `video` → `aspect-video` (16/9) - Future-proofing
 - `auto` → No aspect class - Natural dimensions
 
 **Hover Effects:**
+
 - `opacity` → `group-hover:opacity-90 transition-opacity duration-700` - Most common pattern
 - `scale` → `group-hover:scale-105 transition-transform duration-300` - Used in PostGrid
 - `none` → No hover effect - Used in Carousel
@@ -97,48 +99,39 @@ const {
 const hasCaption = Astro.slots.has('caption');
 
 const aspectClasses = {
-  'square': 'aspect-square',
+  square: 'aspect-square',
   '4/3': 'aspect-4/3',
-  'video': 'aspect-video',
-  'auto': '',
+  video: 'aspect-video',
+  auto: '',
 };
 
 const hoverClasses = {
-  'opacity': 'group-hover:opacity-90 transition-opacity duration-700',
-  'scale': 'group-hover:scale-105 transition-transform duration-300',
-  'none': '',
+  opacity: 'group-hover:opacity-90 transition-opacity duration-700',
+  scale: 'group-hover:scale-105 transition-transform duration-300',
+  none: '',
 };
 
-const imageClasses = `${width} ${height} ${aspectClasses[aspect]} object-cover ${hoverClasses[hover]} ${className}`.trim();
+const imageClasses =
+  `${width} ${height} ${aspectClasses[aspect]} object-cover ${hoverClasses[hover]} ${className}`.trim();
 const overflowClass = hover === 'scale' ? 'overflow-hidden' : '';
 ---
 
-{hasCaption ? (
-  <figure class="space-y-3">
+{
+  hasCaption ? (
+    <figure class="space-y-3">
+      <div class={`group ${overflowClass}`}>
+        <img src={src} alt={alt} loading={loading} class={imageClasses} {...rest} />
+      </div>
+      <figcaption class="text-sm text-muted font-serif italic leading-relaxed">
+        <slot name="caption" />
+      </figcaption>
+    </figure>
+  ) : (
     <div class={`group ${overflowClass}`}>
-      <img
-        src={src}
-        alt={alt}
-        loading={loading}
-        class={imageClasses}
-        {...rest}
-      />
+      <img src={src} alt={alt} loading={loading} class={imageClasses} {...rest} />
     </div>
-    <figcaption class="text-sm text-muted font-serif italic leading-relaxed">
-      <slot name="caption" />
-    </figcaption>
-  </figure>
-) : (
-  <div class={`group ${overflowClass}`}>
-    <img
-      src={src}
-      alt={alt}
-      loading={loading}
-      class={imageClasses}
-      {...rest}
-    />
-  </div>
-)}
+  )
+}
 ```
 
 ---
@@ -146,13 +139,16 @@ const overflowClass = hover === 'scale' ? 'overflow-hidden' : '';
 ## Migration Strategy
 
 ### Phase 1: Create Component
+
 1. Create `/src/components/ui/Image.astro` with implementation above
 2. No breaking changes - component is additive only
 
 ### Phase 2: Migrate Files (In Order)
 
 #### 1. `/src/pages/index.astro` (lines 14-19)
+
 **Before:**
+
 ```astro
 <img
   src="https://picsum.photos/1200/800"
@@ -163,6 +159,7 @@ const overflowClass = hover === 'scale' ? 'overflow-hidden' : '';
 ```
 
 **After:**
+
 ```astro
 <Image
   src="https://picsum.photos/1200/800"
@@ -180,24 +177,20 @@ const overflowClass = hover === 'scale' ? 'overflow-hidden' : '';
 ---
 
 #### 2. `/src/layouts/PreambulLayout.astro` (lines 35-46)
+
 **Before:**
+
 ```astro
 <figure class="space-y-3">
   <img src={image.src} alt={image.alt} class="w-full aspect-4/3 object-cover" />
-  {image.caption && (
-    <figcaption class="text-sm text-muted italic">{image.caption}</figcaption>
-  )}
+  {image.caption && <figcaption class="text-sm text-muted italic">{image.caption}</figcaption>}
 </figure>
 ```
 
 **After:**
+
 ```astro
-<Image
-  src={image.src}
-  alt={image.alt}
-  aspect="4/3"
-  hover="none"
->
+<Image src={image.src} alt={image.alt} aspect="4/3" hover="none">
   {image.caption && <span slot="caption">{image.caption}</span>}
 </Image>
 ```
@@ -205,7 +198,9 @@ const overflowClass = hover === 'scale' ? 'overflow-hidden' : '';
 ---
 
 #### 3. `/src/components/app/Carousel.astro` (lines 18-61)
+
 **Before:**
+
 ```astro
 <img
   src="https://picsum.photos/300/300"
@@ -215,6 +210,7 @@ const overflowClass = hover === 'scale' ? 'overflow-hidden' : '';
 ```
 
 **After:**
+
 ```astro
 <Image
   src="https://picsum.photos/300/300"
@@ -230,9 +226,11 @@ const overflowClass = hover === 'scale' ? 'overflow-hidden' : '';
 ---
 
 #### 4. `/src/pages/preambul/index.astro` (lines 26-77)
+
 **Context:** Images are wrapped in Link components with `group` class
 
 **Before:**
+
 ```astro
 <Link href="/preambul/20" class="group block">
   <img
@@ -244,6 +242,7 @@ const overflowClass = hover === 'scale' ? 'overflow-hidden' : '';
 ```
 
 **After:**
+
 ```astro
 <Link href="/preambul/20" class="group block">
   <Image
@@ -260,9 +259,11 @@ const overflowClass = hover === 'scale' ? 'overflow-hidden' : '';
 ---
 
 #### 5. `/src/components/app/PostGrid.astro` (lines 17-24)
+
 **Context:** Image wrapped in Link with overflow-hidden div
 
 **Before:**
+
 ```astro
 <Link href={`/reflexions/${post.slug}`} class="group block">
   <div class="overflow-hidden">
@@ -276,6 +277,7 @@ const overflowClass = hover === 'scale' ? 'overflow-hidden' : '';
 ```
 
 **After:**
+
 ```astro
 <Link href={`/reflexions/${post.slug}`} class="group block">
   <Image
@@ -292,7 +294,9 @@ const overflowClass = hover === 'scale' ? 'overflow-hidden' : '';
 ---
 
 #### 6. `/src/pages/reflexions/[...slug].astro` (lines 77-84)
+
 **Before:**
+
 ```astro
 <figure class="space-y-3">
   <img src={image.url} alt={image.title} class="w-full h-[400px] object-cover" />
@@ -303,14 +307,9 @@ const overflowClass = hover === 'scale' ? 'overflow-hidden' : '';
 ```
 
 **After:**
+
 ```astro
-<Image
-  src={image.url}
-  alt={image.title}
-  height="h-[400px]"
-  hover="none"
-  loading="eager"
->
+<Image src={image.url} alt={image.title} height="h-[400px]" hover="none" loading="eager">
   <span slot="caption">{image.title}</span>
 </Image>
 ```
@@ -322,6 +321,7 @@ const overflowClass = hover === 'scale' ? 'overflow-hidden' : '';
 ### Phase 3: Verification
 
 After each migration:
+
 1. **Visual test**: Verify page looks identical to before
 2. **Hover test**: Check hover effects work (opacity fade or scale zoom)
 3. **Responsive test**: Test mobile and desktop breakpoints
@@ -333,9 +333,11 @@ After each migration:
 ## Critical Files
 
 ### Files to Create:
+
 1. `/src/components/ui/Image.astro` - New component
 
 ### Files to Modify:
+
 1. `/src/pages/index.astro` - Hero image + caption (lines 14-19)
 2. `/src/layouts/PreambulLayout.astro` - Image grid with captions (lines 35-46)
 3. `/src/components/app/Carousel.astro` - 4 carousel images (lines 18-61)
@@ -363,24 +365,31 @@ After each migration:
 ## Key Implementation Notes
 
 ### Hover Effect Decision
+
 Using `group-hover` pattern exclusively because:
+
 1. Most images are wrapped in Link components (primary use case)
 2. Component adds `group` wrapper automatically when needed
 3. Provides consistent behavior regardless of parent context
 
 ### Caption Pattern
+
 Using named slot (`<slot name="caption" />`) because:
+
 1. More flexible than prop (supports HTML content)
 2. Explicit usage: `<span slot="caption">Text</span>`
 3. Conditional figure wrapper only when caption exists
 
 ### Performance
+
 Lazy loading enabled by default:
+
 - Below-fold images: `loading="lazy"` (default)
 - Above-fold images: explicitly set `loading="eager"`
 - First implementation of lazy loading in this codebase
 
 ### Edge Cases Handled
+
 1. **Custom widths**: Carousel uses `w-[250px] md:w-[300px]` (via `width` prop)
 2. **Fixed heights**: Reflexions uses `h-[400px]` (via `height` prop)
 3. **Overflow control**: Automatic `overflow-hidden` when `hover="scale"`

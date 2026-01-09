@@ -26,45 +26,36 @@ const {
 const hasCaption = Astro.slots.has('caption');
 
 const aspectClasses = {
-  'square': 'aspect-square',
+  square: 'aspect-square',
   '4/3': 'aspect-4/3',
-  'video': 'aspect-video',
-  'auto': '',
+  video: 'aspect-video',
+  auto: '',
 };
 
 const hoverClasses = {
-  'opacity': 'group-hover:opacity-90 transition-opacity duration-700',
-  'scale': 'group-hover:scale-105 transition-transform duration-300',
-  'none': '',
+  opacity: 'group-hover:opacity-90 transition-opacity duration-700',
+  scale: 'group-hover:scale-105 transition-transform duration-300',
+  none: '',
 };
 
-const imageClasses = `${width} ${height} ${aspectClasses[aspect]} object-cover ${hoverClasses[hover]} ${className}`.trim();
+const imageClasses =
+  `${width} ${height} ${aspectClasses[aspect]} object-cover ${hoverClasses[hover]} ${className}`.trim();
 const overflowClass = hover === 'scale' ? 'overflow-hidden' : '';
 ---
 
-{hasCaption ? (
-  <figure class="space-y-3">
+{
+  hasCaption ? (
+    <figure class="space-y-3">
+      <div class={`group ${overflowClass}`}>
+        <img src={src} alt={alt} loading={loading} class={imageClasses} {...rest} />
+      </div>
+      <figcaption class="text-sm text-muted font-serif italic leading-relaxed">
+        <slot name="caption" />
+      </figcaption>
+    </figure>
+  ) : (
     <div class={`group ${overflowClass}`}>
-      <img
-        src={src}
-        alt={alt}
-        loading={loading}
-        class={imageClasses}
-        {...rest}
-      />
+      <img src={src} alt={alt} loading={loading} class={imageClasses} {...rest} />
     </div>
-    <figcaption class="text-sm text-muted font-serif italic leading-relaxed">
-      <slot name="caption" />
-    </figcaption>
-  </figure>
-) : (
-  <div class={`group ${overflowClass}`}>
-    <img
-      src={src}
-      alt={alt}
-      loading={loading}
-      class={imageClasses}
-      {...rest}
-    />
-  </div>
-)}
+  )
+}
