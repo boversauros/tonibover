@@ -2,12 +2,21 @@
 import Link from '@components/ui/Link.astro';
 import Button from '@components/ui/Button.astro';
 import Icon from '@components/ui/Icon.astro';
+import LanguageSwitcher from '@components/ui/LanguageSwitcher.astro';
+import { defaultLang, useTranslations, type Lang } from '@/i18n';
+
+interface Props {
+  lang?: Lang;
+  currentPath?: string;
+}
+
+const { lang = defaultLang, currentPath = '/' } = Astro.props;
+const t = useTranslations(lang);
 
 const links = [
-  { label: 'PREÀMBUL', href: '/preambul' },
-  { label: 'BIOGRAFIA', href: '/biografia' },
-  { label: 'DOCUMENTAL', href: '/documental' },
-  // { label: 'REFLEXIONS', href: '/reflexions' },
+  { label: t('nav.preambul'), href: '/preambul' },
+  { label: t('nav.biografia'), href: '/biografia' },
+  { label: t('nav.documental'), href: '/documental' },
 ];
 ---
 
@@ -29,6 +38,7 @@ const links = [
             </Link>
           ))
         }
+        <LanguageSwitcher lang={lang} currentPath={currentPath} />
       </div>
 
       <Button
@@ -55,6 +65,9 @@ const links = [
             </Link>
           ))
         }
+        <div class="px-4 py-2">
+          <LanguageSwitcher lang={lang} currentPath={currentPath} />
+        </div>
       </div>
     </div>
   </nav>
