@@ -93,4 +93,11 @@ export default {
   'documental.director.title': 'About the Director',
   'documental.director.bio':
     '(Vic, 1971), musician and audiovisual director. His beginnings are situated in the world of low-cost short films. He entered the world of digital video in 2002 as a member of the group selected for the Bigas Luna Workshop in Reus. He currently runs his own production company where he produces audiovisual works in various fields, especially in the cultural and social world and historical memory.',
+  // 404 page
+  '404.quote1': 'Photography is the story that fails in words.',
+  '404.quote2': 'Every image tells a story, even when we cannot find it.',
+  '404.quote3': 'The best camera is the one you have with you.',
+  '404.quote4': 'A photograph is a secret about a secret.',
+  '404.quote5': 'Photographs are the footprints of our memory.',
+  '404.backToHome': 'Back to home',
 } as const;

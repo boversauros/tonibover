@@ -94,4 +94,11 @@ export default {
   'documental.director.title': 'Sobre el Director',
   'documental.director.bio':
     "(Vic, 1971), músic i realitzador audiovisual. Els seus inicis se situen en el món del curtmetratge low cost. S'endinsa en el món del vídeo digital l'any 2002 com a membre del grup seleccionat per al Taller Bigas Luna de Reus. Actualment dirigeix la seva pròpia productora on realitza audiovisuals en diversos àmbits, sobretot pel que fa al món cultural, social i a la memòria històrica.",
+  // 404 page
+  '404.quote1': 'La fotografia és la història que falla a les paraules.',
+  '404.quote2': 'Cada imatge explica una història, fins i tot quan no la trobem.',
+  '404.quote3': 'La millor càmera és la que tens amb tu.',
+  '404.quote4': 'Una fotografia és un secret sobre un secret.',
+  '404.quote5': 'Les fotografies són les petjades de la nostra memòria.',
+  '404.backToHome': "Tornar a l'inici",
 } as const;

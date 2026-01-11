@@ -1,21 +1,28 @@
 ---
 import Layout from '@layouts/Layout.astro';
 import Link from '@components/ui/Link.astro';
+import { getLangFromUrl, useTranslations } from '@/i18n';
+import type { TranslationKey } from '@/i18n';
 import '@styles/global.css';
 
-const randomPhotographyQuotes = [
-  'La fotografia és la història que falla a les paraules.',
-  'Cada imatge explica una història, fins i tot quan no la trobem.',
-  'La millor càmera és la que tens amb tu.',
-  'Una fotografia és un secret sobre un secret.',
-  'Les fotografies són les petjades de la nostra memòria.',
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const quoteKeys: TranslationKey[] = [
+  '404.quote1',
+  '404.quote2',
+  '404.quote3',
+  '404.quote4',
+  '404.quote5',
 ];
 
-const randomQuote =
-  randomPhotographyQuotes[Math.floor(Math.random() * randomPhotographyQuotes.length)];
+const randomQuoteKey = quoteKeys[Math.floor(Math.random() * quoteKeys.length)];
+const randomQuote = t(randomQuoteKey);
+
+const homeLink = lang === 'ca' ? '/' : '/en';
 ---
 
-<Layout>
+<Layout lang={lang}>
   <main class="grow flex items-center justify-center min-h-screen">
     <div class="max-w-xl mx-auto px-6 py-16 text-center">
       <h1 class="text-8xl font-serif text-white mb-8">404</h1>
@@ -25,8 +32,8 @@ const randomQuote =
       </p>
 
       <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
-        <Link href="/" class="text-white/60 hover:text-white transition-colors duration-300">
-          Tornar a l'inici
+        <Link href={homeLink} class="text-white/60 hover:text-white transition-colors duration-300">
+          {t('404.backToHome')}
         </Link>
       </div>
     </div>
