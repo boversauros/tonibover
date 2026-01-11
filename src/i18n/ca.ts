@@ -64,4 +64,12 @@ export default {
     'Fotògraf professional especialitzat en fotografia industrial (1985-1994).',
   'biografia.other.research':
     'Reflexió i recerca sobre comunicació textual i visual des del perspectivisme (des del 2020).',
+  // Acknowledgments page
+  'agraiments.title': 'Agraïments',
+  'agraiments.eva': "A l'Eva Tordera Nuño, disseny web i contribució conceptual.",
+  'agraiments.oriol': "A l'Oriol Bover Vila, programació web i interactivitat.",
+  'agraiments.legal':
+    'A en Josep Matas Balaguer i la Yesenia Rosa Guerrero (Legalment), assessorament legal.',
+  'agraiments.closing':
+    'A les companyes i companys de feina, alumnes, família, amigues i amics amb qui he compartit influències, diferents perspectives i vivències sobre la fotografia i la comunicació visual.',
 } as const;

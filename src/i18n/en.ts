@@ -63,4 +63,12 @@ export default {
     'Professional photographer specializing in industrial photography (1985-1994).',
   'biografia.other.research':
     'Reflection and research on textual and visual communication from perspectivism (since 2020).',
+  // Acknowledgments page
+  'agraiments.title': 'Acknowledgments',
+  'agraiments.eva': 'To Eva Tordera Nuño, web design and conceptual contribution.',
+  'agraiments.oriol': 'To Oriol Bover Vila, web programming and interactivity.',
+  'agraiments.legal':
+    'To Josep Matas Balaguer and Yesenia Rosa Guerrero (Legalment), legal advice.',
+  'agraiments.closing':
+    'To my colleagues, students, family, and friends with whom I have shared influences, different perspectives and experiences about photography and visual communication.',
 } as const;
