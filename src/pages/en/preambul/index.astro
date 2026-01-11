@@ -10,10 +10,10 @@ import Link from '@/components/ui/Link.astro';
 import { useTranslations } from '@/i18n';
 import '@styles/global.css';
 
-const t = useTranslations('ca');
+const t = useTranslations('en');
 ---
 
-<Layout lang="ca">
+<Layout lang="en">
   <Container>
     <SectionTitle>{t('preambul.section')}</SectionTitle>
 
@@ -38,7 +38,7 @@ const t = useTranslations('ca');
     </div>
 
     <div class="grid md:grid-cols-3 gap-8">
-      <Card href="/preambul/20" aria-label={t('preambul.card20.alt')}>
+      <Card href="/en/preambul/20" aria-label={t('preambul.card20.alt')}>
         <Image
           slot="image"
           src="/images/preambul-20-01.webp"
@@ -58,7 +58,7 @@ const t = useTranslations('ca');
       </Card>
 
       <Card
-        href="/preambul/40"
+        href="/en/preambul/40"
         aria-label={t('preambul.card40.alt')}
       >
         <Image
@@ -79,7 +79,7 @@ const t = useTranslations('ca');
         </div>
       </Card>
 
-      <Card href="/preambul/60" aria-label={t('preambul.card60.alt')}>
+      <Card href="/en/preambul/60" aria-label={t('preambul.card60.alt')}>
         <Image
           slot="image"
           src="/images/preambul-60-01.webp"

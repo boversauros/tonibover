@@ -101,4 +101,60 @@ export default {
   '404.quote4': 'Una fotografia és un secret sobre un secret.',
   '404.quote5': 'Les fotografies són les petjades de la nostra memòria.',
   '404.backToHome': "Tornar a l'inici",
+  // Preambul index page
+  'preambul.section': 'PREÀMBUL',
+  'preambul.intro1':
+    "Aquesta web és un relat interactiu, subjectiu i amb components autobiogràfics sobre l'image management. Hi descric l'aprenentatge i l'autoaprenentatge de la comunicació visual dels darrers 40 anys.",
+  'preambul.intro2':
+    "Els 20, els 40 i els 60 no són períodes temporals exactes, sinó processos de transició que depenen de les actituds i de les capacitats d'aprenentatge de cada persona.",
+  'preambul.articleLink':
+    "Article: 20/40/60. Una reflexió iconotextual de la fotografia com a art i ciència. Temps d'Educació, UB. 2021",
+  'preambul.card20.alt': 'Un procés trans a la màquina',
+  'preambul.card20.title': 'UN PROCÉS TRANS A LA MADURESA',
+  'preambul.card40.alt': "Un procés trans de l'analògic al digital",
+  'preambul.card40.title': "UN PROCÉS TRANS DE L'ANALÒGIC AL DIGITAL",
+  'preambul.card60.alt': 'Un procés trans laboral',
+  'preambul.card60.title': 'UN PROCÉS TRANS LABORAL',
+  'preambul.discoverMore': 'Descobrir més →',
+  // Preambul 20 page
+  'preambul.20.title': 'UN PROCÉS TRANS A LA MADURESA',
+  'preambul.20.subtitle':
+    "Els 20 simbolitzen l'edat de la il·lusió, quan la mirada s'orienta cap al futur. Aquestes il·lusions i idees m'han acompanyat al llarg de la vida.",
+  'preambul.20.quote':
+    "Entendre la imatge fotogràfica és imprescindible per a l'alfabetització iconotextual i la comunicació visual.",
+  'preambul.20.imageAlt': 'Dos fotografies, Toni Bover fent una foto i aguantant una càmera',
+  'preambul.20.imageCaption': 'Fotografies Arxiu Familiar i Pere Moscoso. Anys 70 i 80 del segle XX',
+  'preambul.20.paragraph1':
+    "L'interès per les matemàtiques i la filosofia va anar derivant cap a la semiòtica de la imatge.",
+  'preambul.20.paragraph2':
+    "Familiaritzar-me amb la fotografia em va permetre aprendre a mirar, comunicar idees a partir dels signes icònics i a ordenar els elements de la imatge per comprendre els principis de l'estètica i de la comunicació visual.",
+  // Preambul 40 page
+  'preambul.40.title': "UN PROCÉS TRANS DE L'ANALÒGIC AL DIGITAL",
+  'preambul.40.subtitle':
+    "Els 40 obren l'etapa de la maduresa i de la millora continua, moment en què prenc consciència del que estimo i on es consoliden les idees dels 20. Aquesta fase serveix per entendre i aprofundir els coneixements sobre la fotografia i la seva relació amb la comunicació visual.",
+  'preambul.40.quote':
+    "La fotografia ha estat un pas entre el dibuix en perspectiva i el CGI d'estètica realista.",
+  'preambul.40.imageAlt':
+    'Dos fotografies, Toni Bover en un despatx i un grup de persones en una oficina',
+  'preambul.40.imageCaption':
+    'Fotografies Frank Gómez i Miquel Bigas. Anys 90 del segle XX i primera dècada del segle XXI',
+  'preambul.40.paragraph1':
+    'Treballar deu anys professionalment en fotografia industrial em va permetre assimilar les bases de la tecnologia fotogràfica i de la física de la llum. Mitjançant la il·luminació vaig aprendre a descriure les formes i les textures dels objectes.',
+  'preambul.40.paragraph2':
+    "L'entrada com a professor a la Universitat i fer el doctorat a l'Escola d'Arquitectura em va facilitar comprendre i aplicar els principis de la perspectiva i de la geometria de la imatge, i interessar-me per les relacions entre el dibuix, la fotografia i la imatge generada per ordinador (CGI).",
+  // Preambul 60 page
+  'preambul.60.title': 'UN PROCÉS TRANS LABORAL',
+  'preambul.60.subtitle':
+    "Els 60 signifiquen l'etapa de la reflexió i la continuació de les il·lusions dels 20. Un temps per endreçar i arxivar el que ha servit, i per llençar el que ha aportat poc o res a la consolidació de les il·lusions dels 20 o a la maduresa dels 40.",
+  'preambul.60.quote':
+    "La comunicació visual ha canviat de forma exponencial i vertiginosa durant els darrers anys. La imatge fotogràfica evolucionarà des de la Intel·ligència Artificial Generativa i els processos transmèdia.",
+  'preambul.60.imageAlt': 'People viewing an exhibition',
+  'preambul.60.imageCaption': 'Fotografies Miquel Bigas. 2016',
+  'preambul.60.paragraph1':
+    'És una mirada del passat des del present, una reflexió de la comunicació visual de les imatges 2D, 3D i 4D, reals i virtuals.',
+  'preambul.60.paragraph2':
+    "Una mirada cap el futur des del present, per intuir les imatges nD interactives que permetran l'evolució de la fotònica i de la física quàntica.",
+  // Preambul navigation
+  'preambul.nav.previous': 'Anterior',
+  'preambul.nav.next': 'Següent',
 } as const;

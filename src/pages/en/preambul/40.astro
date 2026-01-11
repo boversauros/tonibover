@@ -4,27 +4,27 @@ import Text from '@components/ui/Text.astro';
 import { useTranslations } from '@/i18n';
 import '@styles/global.css';
 
-const t = useTranslations('ca');
+const t = useTranslations('en');
 
 const image = {
-  src: '/images/preambul-20-02.webp',
-  alt: t('preambul.20.imageAlt'),
-  caption: t('preambul.20.imageCaption'),
+  src: '/images/preambul-40-02.webp',
+  alt: t('preambul.40.imageAlt'),
+  caption: t('preambul.40.imageCaption'),
 };
 ---
 
 <PreambulContentLayout
-  lang="ca"
-  title={t('preambul.20.title')}
-  subtitle={t('preambul.20.subtitle')}
-  quote={t('preambul.20.quote')}
+  lang="en"
+  title={t('preambul.40.title')}
+  subtitle={t('preambul.40.subtitle')}
+  quote={t('preambul.40.quote')}
   image={image}
 >
   <Text variant="body">
-    {t('preambul.20.paragraph1')}
+    {t('preambul.40.paragraph1')}
   </Text>
 
   <Text variant="body">
-    {t('preambul.20.paragraph2')}
+    {t('preambul.40.paragraph2')}
   </Text>
 </PreambulContentLayout>

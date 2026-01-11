@@ -1,28 +1,30 @@
 ---
 import PreambulContentLayout from '@layouts/PreambulLayout.astro';
 import Text from '@components/ui/Text.astro';
+import { useTranslations } from '@/i18n';
 import '@styles/global.css';
+
+const t = useTranslations('ca');
 
 const image = {
   src: '/images/preambul-60-02.webp',
-  alt: 'People viewing an exhibition',
-  caption: 'Fotografies Miquel Bigas. 2016',
+  alt: t('preambul.60.imageAlt'),
+  caption: t('preambul.60.imageCaption'),
 };
 ---
 
 <PreambulContentLayout
-  title="UN PROCÉS TRANS LABORAL"
-  subtitle="Els 60 signifiquen l’etapa de la reflexió i la continuació de les il·lusions dels 20. Un temps per endreçar i arxivar el que ha servit, i per llençar el que ha aportat poc o res a la consolidació de les il·lusions dels 20 o a la maduresa dels 40."
-  quote="La comunicació visual ha canviat de forma exponencial i vertiginosa durant els darrers anys. La imatge fotogràfica evolucionarà des de la Intel·ligència Artificial Generativa i els processos transmèdia."
+  lang="ca"
+  title={t('preambul.60.title')}
+  subtitle={t('preambul.60.subtitle')}
+  quote={t('preambul.60.quote')}
   image={image}
 >
   <Text variant="body">
-    És una mirada del passat des del present, una reflexió de la comunicació visual de les imatges
-    2D, 3D i 4D, reals i virtuals.
+    {t('preambul.60.paragraph1')}
   </Text>
 
   <Text variant="body">
-    Una mirada cap el futur des del present, per intuir les imatges nD interactives que permetran
-    l’evolució de la fotònica i de la física quàntica.
+    {t('preambul.60.paragraph2')}
   </Text>
 </PreambulContentLayout>

@@ -100,4 +100,59 @@ export default {
   '404.quote4': 'A photograph is a secret about a secret.',
   '404.quote5': 'Photographs are the footprints of our memory.',
   '404.backToHome': 'Back to home',
+  // Preambul index page
+  'preambul.section': 'PREAMBLE',
+  'preambul.intro1':
+    'This website is an interactive, subjective narrative with autobiographical components about image management. It describes my learning and self-learning of visual communication over the last 40 years.',
+  'preambul.intro2':
+    'The 20s, 40s and 60s are not exact time periods, but transition processes that depend on the attitudes and learning capacities of each person.',
+  'preambul.articleLink':
+    'Article: 20/40/60. An iconotextual reflection on photography as art and science. Temps d\'Educació, UB. 2021',
+  'preambul.card20.alt': 'A transition process to maturity',
+  'preambul.card20.title': 'A TRANSITION PROCESS TO MATURITY',
+  'preambul.card40.alt': 'A transition process from analog to digital',
+  'preambul.card40.title': 'A TRANSITION PROCESS FROM ANALOG TO DIGITAL',
+  'preambul.card60.alt': 'A work transition process',
+  'preambul.card60.title': 'A WORK TRANSITION PROCESS',
+  'preambul.discoverMore': 'Discover more →',
+  // Preambul 20 page
+  'preambul.20.title': 'A TRANSITION PROCESS TO MATURITY',
+  'preambul.20.subtitle':
+    'The 20s symbolize the age of illusion, when the gaze is oriented towards the future. These illusions and ideas have accompanied me throughout life.',
+  'preambul.20.quote':
+    'Understanding the photographic image is essential for iconotextual literacy and visual communication.',
+  'preambul.20.imageAlt': 'Two photographs, Toni Bover taking a photo and holding a camera',
+  'preambul.20.imageCaption': 'Photographs Family Archive and Pere Moscoso. 70s and 80s of the 20th century',
+  'preambul.20.paragraph1':
+    'Interest in mathematics and philosophy gradually shifted towards image semiotics.',
+  'preambul.20.paragraph2':
+    'Familiarizing myself with photography allowed me to learn to look, communicate ideas from iconic signs, and organize the elements of the image to understand the principles of aesthetics and visual communication.',
+  // Preambul 40 page
+  'preambul.40.title': 'A TRANSITION PROCESS FROM ANALOG TO DIGITAL',
+  'preambul.40.subtitle':
+    'The 40s open the stage of maturity and continuous improvement, the moment when I become aware of what I love and where the ideas of the 20s are consolidated. This phase serves to understand and deepen knowledge about photography and its relationship with visual communication.',
+  'preambul.40.quote':
+    'Photography has been a step between perspective drawing and realistic CGI aesthetics.',
+  'preambul.40.imageAlt': 'Two photographs, Toni Bover in an office and a group of people in an office',
+  'preambul.40.imageCaption':
+    'Photographs Frank Gómez and Miquel Bigas. 90s of the 20th century and first decade of the 21st century',
+  'preambul.40.paragraph1':
+    'Working professionally in industrial photography for ten years allowed me to assimilate the basics of photographic technology and the physics of light. Through lighting I learned to describe the shapes and textures of objects.',
+  'preambul.40.paragraph2':
+    'Entering as a professor at the University and doing my doctorate at the School of Architecture made it easier for me to understand and apply the principles of perspective and image geometry, and to become interested in the relationships between drawing, photography and computer-generated imagery (CGI).',
+  // Preambul 60 page
+  'preambul.60.title': 'A WORK TRANSITION PROCESS',
+  'preambul.60.subtitle':
+    'The 60s signify the stage of reflection and continuation of the illusions of the 20s. A time to tidy up and archive what has served, and to discard what has contributed little or nothing to the consolidation of the illusions of the 20s or the maturity of the 40s.',
+  'preambul.60.quote':
+    'Visual communication has changed exponentially and vertiginously in recent years. The photographic image will evolve from Generative Artificial Intelligence and transmedia processes.',
+  'preambul.60.imageAlt': 'People viewing an exhibition',
+  'preambul.60.imageCaption': 'Photographs Miquel Bigas. 2016',
+  'preambul.60.paragraph1':
+    'It is a look at the past from the present, a reflection on visual communication of 2D, 3D and 4D images, real and virtual.',
+  'preambul.60.paragraph2':
+    'A look towards the future from the present, to intuit the interactive nD images that will allow the evolution of photonics and quantum physics.',
+  // Preambul navigation
+  'preambul.nav.previous': 'Previous',
+  'preambul.nav.next': 'Next',
 } as const;
