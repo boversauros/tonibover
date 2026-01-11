@@ -72,4 +72,26 @@ export default {
     'A en Josep Matas Balaguer i la Yesenia Rosa Guerrero (Legalment), assessorament legal.',
   'agraiments.closing':
     'A les companyes i companys de feina, alumnes, família, amigues i amics amb qui he compartit influències, diferents perspectives i vivències sobre la fotografia i la comunicació visual.',
+  // Documentary page
+  'documental.section': 'DOCUMENTAL',
+  'documental.videoTitle': 'Toni Bover. Image Manager // Xef Vila, 2020',
+  'documental.credits.title': 'Fitxa Tècnica',
+  'documental.credits.production': 'Producció:',
+  'documental.credits.productionValue': 'Ajuntament de Vic i Fundació Puig-Porret',
+  'documental.credits.scriptDirection': 'Guió i Direcció:',
+  'documental.credits.scriptDirectionValue': 'Xef Vila',
+  'documental.credits.music': 'Música:',
+  'documental.credits.musicValue': 'Jordi Torrents',
+  'documental.credits.editing': 'Muntatge:',
+  'documental.credits.editingValue': 'Xef Vila',
+  'documental.credits.duration': 'Durada:',
+  'documental.credits.durationValue': '35 min',
+  'documental.credits.originalVersion': 'Versió Original:',
+  'documental.credits.originalVersionValue': 'Català',
+  'documental.summary.title': 'Resum',
+  'documental.summary.description':
+    "Aquest documental resumeix la trajectòria professional i artística del fotògraf i comunicador visual Toni Bover amb motiu de la seva jubilació. El relat mostra el recorregut des del seu endinsament en la professió i passa per la seva feina en publicitat, els treballs artístics, la docència a la UPC i els diferents projectes de fotografia i urbanisme que va desenvolupar a La Farinera, Centre d'Arts Visuals de Vic, de la qual va ser director fins al 2020. Addicionalment, és una reflexió sobre el orígens de la imatge fotogràfica, el seu present i algunes especulacions sobre el seu futur.",
+  'documental.director.title': 'Sobre el Director',
+  'documental.director.bio':
+    "(Vic, 1971), músic i realitzador audiovisual. Els seus inicis se situen en el món del curtmetratge low cost. S'endinsa en el món del vídeo digital l'any 2002 com a membre del grup seleccionat per al Taller Bigas Luna de Reus. Actualment dirigeix la seva pròpia productora on realitza audiovisuals en diversos àmbits, sobretot pel que fa al món cultural, social i a la memòria històrica.",
 } as const;

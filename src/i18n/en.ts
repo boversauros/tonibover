@@ -71,4 +71,26 @@ export default {
     'To Josep Matas Balaguer and Yesenia Rosa Guerrero (Legalment), legal advice.',
   'agraiments.closing':
     'To my colleagues, students, family, and friends with whom I have shared influences, different perspectives and experiences about photography and visual communication.',
+  // Documentary page
+  'documental.section': 'DOCUMENTARY',
+  'documental.videoTitle': 'Toni Bover. Image Manager // Xef Vila, 2020',
+  'documental.credits.title': 'Technical Information',
+  'documental.credits.production': 'Production:',
+  'documental.credits.productionValue': 'Vic City Council and Puig-Porret Foundation',
+  'documental.credits.scriptDirection': 'Script and Direction:',
+  'documental.credits.scriptDirectionValue': 'Xef Vila',
+  'documental.credits.music': 'Music:',
+  'documental.credits.musicValue': 'Jordi Torrents',
+  'documental.credits.editing': 'Editing:',
+  'documental.credits.editingValue': 'Xef Vila',
+  'documental.credits.duration': 'Duration:',
+  'documental.credits.durationValue': '35 min',
+  'documental.credits.originalVersion': 'Original Version:',
+  'documental.credits.originalVersionValue': 'Catalan',
+  'documental.summary.title': 'Summary',
+  'documental.summary.description':
+    'This documentary summarizes the professional and artistic career of photographer and visual communicator Toni Bover on the occasion of his retirement. The narrative shows the journey from his immersion in the profession and goes through his work in advertising, artistic projects, teaching at UPC and the various photography and urbanism projects that he developed at La Farinera, Visual Arts Centre of Vic, of which he was director until 2020. Additionally, it is a reflection on the origins of the photographic image, its present and some speculations about its future.',
+  'documental.director.title': 'About the Director',
+  'documental.director.bio':
+    '(Vic, 1971), musician and audiovisual director. His beginnings are situated in the world of low-cost short films. He entered the world of digital video in 2002 as a member of the group selected for the Bigas Luna Workshop in Reus. He currently runs his own production company where he produces audiovisual works in various fields, especially in the cultural and social world and historical memory.',
 } as const;
