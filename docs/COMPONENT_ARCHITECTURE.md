@@ -9,7 +9,7 @@ Create a foundational component library with Button and Link primitives, reorgan
 1. ✅ Create Button and Link primitive components
 2. ✅ Establish /ui, /composed, /app directory structure
 3. ✅ Refactor CategoryNav as demonstration
-4. ✅ Standardize all styles to semantic tokens (text-gray-* → text-muted, etc.)
+4. ✅ Standardize all styles to semantic tokens (text-gray-\* → text-muted, etc.)
 5. ✅ Maintain visual consistency (zero regressions)
 
 ---
@@ -43,6 +43,7 @@ Create a foundational component library with Button and Link primitives, reorgan
 **Purpose:** Standardize all link patterns with consistent hover states and semantic tokens
 
 **Props:**
+
 ```typescript
 interface Props {
   href: string;
@@ -56,18 +57,20 @@ interface Props {
 
 **Variants:**
 
-| Variant | Base Style | Hover Style | Usage |
-|---------|-----------|-------------|-------|
-| `primary` | `text-body` | `hover:text-primary` | Navigation links |
-| `muted` (default for CategoryNav) | `text-muted` | `hover:text-primary` | Filters, pagination |
-| `secondary` | `text-primary-60` | `hover:text-primary` | Carousel labels |
-| `accent-border` | `text-muted border-b border-transparent` | `hover:text-primary hover:border-primary` | Keywords |
+| Variant                           | Base Style                               | Hover Style                               | Usage               |
+| --------------------------------- | ---------------------------------------- | ----------------------------------------- | ------------------- |
+| `primary`                         | `text-body`                              | `hover:text-primary`                      | Navigation links    |
+| `muted` (default for CategoryNav) | `text-muted`                             | `hover:text-primary`                      | Filters, pagination |
+| `secondary`                       | `text-primary-60`                        | `hover:text-primary`                      | Carousel labels     |
+| `accent-border`                   | `text-muted border-b border-transparent` | `hover:text-primary hover:border-primary` | Keywords            |
 
 **Active State:**
+
 - When `active={true}`: adds `border-b-2 border-primary text-primary`
 - Used in CategoryNav and PaginationControl
 
 **Key Features:**
+
 - All variants use `transition-colors-default` (300ms)
 - Supports custom classes via `class` prop
 - ARIA attributes for accessibility
@@ -80,6 +83,7 @@ interface Props {
 **Purpose:** Standardize button patterns for navigation toggles and icon buttons
 
 **Props:**
+
 ```typescript
 interface Props {
   variant?: 'ghost' | 'icon';
@@ -94,12 +98,13 @@ interface Props {
 
 **Variants:**
 
-| Variant | Style | Usage |
-|---------|-------|-------|
-| `ghost` | `px-4 py-2 tracking-wide text-body hover:bg-surface hover:text-primary` | Mobile menu items |
-| `icon` | `p-2 hover:text-primary` with auto `h-8 w-8` size | Menu toggle, carousel arrows |
+| Variant | Style                                                                   | Usage                        |
+| ------- | ----------------------------------------------------------------------- | ---------------------------- |
+| `ghost` | `px-4 py-2 tracking-wide text-body hover:bg-surface hover:text-primary` | Mobile menu items            |
+| `icon`  | `p-2 hover:text-primary` with auto `h-8 w-8` size                       | Menu toggle, carousel arrows |
 
 **Key Features:**
+
 - Default `type="button"` (prevents accidental form submission)
 - Supports `data-*` attributes (e.g., `data-menu-button`)
 - Icon variant auto-applies icon sizing
@@ -112,23 +117,25 @@ interface Props {
 ### Current Implementation (`/src/components/CategoryNav.astro`)
 
 **Issues:**
+
 - Inline conditional classes: `` `hover:text-primary ${cat.id === activeCategory ? 'border-b-2...' : ''}` ``
 - Mixed styling logic in template
 - Active state handling verbose
 
 **Lines 18-22:**
+
 ```astro
 <a
   href={`/reflexions/${cat.id}`}
   class={`hover:text-primary transition-colors-default ${
     cat.id === activeCategory ? 'border-b-2 border-primary text-primary' : ''
-  }`}
->
+  }`}></a>
 ```
 
 ### New Implementation (`/src/components/composed/CategoryNav.astro`)
 
 **After refactoring:**
+
 ```astro
 ---
 import Link from '../ui/Link.astro';
@@ -144,26 +151,23 @@ const { categories, activeCategory } = Astro.props;
 <nav class="mb-12">
   <ul class="flex flex-wrap gap-6 text-muted">
     <li>
-      <Link href="/reflexions" variant="muted" active={!activeCategory}>
-        Tots
-      </Link>
+      <Link href="/reflexions" variant="muted" active={!activeCategory}> Tots </Link>
     </li>
-    {categories.map((cat) => (
-      <li>
-        <Link
-          href={`/reflexions/${cat.id}`}
-          variant="muted"
-          active={cat.id === activeCategory}
-        >
-          {cat.name}
-        </Link>
-      </li>
-    ))}
+    {
+      categories.map((cat) => (
+        <li>
+          <Link href={`/reflexions/${cat.id}`} variant="muted" active={cat.id === activeCategory}>
+            {cat.name}
+          </Link>
+        </li>
+      ))
+    }
   </ul>
 </nav>
 ```
 
 **Benefits:**
+
 - ✅ 70% reduction in inline class logic
 - ✅ Active state simplified to boolean prop
 - ✅ All styling delegated to Link component
@@ -176,6 +180,7 @@ const { categories, activeCategory } = Astro.props;
 ### Phase 1: Create UI Primitives
 
 **Step 1.1: Create Link Component**
+
 - File: `/src/components/ui/Link.astro`
 - Implement 4 variants (primary, muted, secondary, accent-border)
 - Add active state handling
@@ -183,12 +188,14 @@ const { categories, activeCategory } = Astro.props;
 - Use semantic tokens throughout
 
 **Step 1.2: Create Button Component**
+
 - File: `/src/components/ui/Button.astro`
 - Implement 2 variants (ghost, icon)
-- Support data-* attributes
+- Support data-\* attributes
 - Default type="button"
 
 **Testing:**
+
 - Create `/src/pages/test-ui.astro` to test all variants visually
 - Verify hover states
 - Check active states
@@ -197,6 +204,7 @@ const { categories, activeCategory } = Astro.props;
 ### Phase 2: Refactor CategoryNav
 
 **Step 2.1: Move and Refactor**
+
 - Create: `/src/components/composed/CategoryNav.astro`
 - Import Link component
 - Replace all `<a>` tags with `<Link>` components
@@ -204,16 +212,19 @@ const { categories, activeCategory } = Astro.props;
 - Simplify active state to boolean props
 
 **Step 2.2: Update Imports**
+
 - Update `/src/layouts/PostsListLayout.astro`:
   ```astro
   import CategoryNav from '../components/composed/CategoryNav.astro';
   ```
 
 **Step 2.3: Clean Up**
+
 - Delete old `/src/components/CategoryNav.astro`
 - Verify all pages work correctly
 
 **Testing:**
+
 - Navigate to `/reflexions` page
 - Verify all categories display
 - Test active state highlighting
@@ -223,6 +234,7 @@ const { categories, activeCategory } = Astro.props;
 ### Phase 3: Organize Remaining Components
 
 **Step 3.1: Create App Directory**
+
 - Create `/src/components/app/`
 - Move existing components:
   - `Navigation.astro` → `/app/`
@@ -233,6 +245,7 @@ const { categories, activeCategory } = Astro.props;
   - `PaginationControl.astro` → `/composed/`
 
 **Step 3.2: Update All Imports**
+
 - Search for all component imports in `/src/layouts/` and `/src/pages/`
 - Update to new paths
 - Test each page after updating
@@ -243,16 +256,16 @@ const { categories, activeCategory } = Astro.props;
 
 ### Conversions to Make
 
-| Old Class | New Semantic Token |
-|-----------|-------------------|
-| `text-gray-200` | `text-secondary` |
-| `text-gray-300` | `text-body` |
-| `text-gray-400` | `text-muted` |
-| `text-gray-500` | `text-subtle` |
-| `text-white` | `text-primary` |
-| `text-yellow-500` | `text-accent` |
-| `border-gray-800` | `border-default` |
-| `bg-gray-900` | `bg-surface` |
+| Old Class         | New Semantic Token |
+| ----------------- | ------------------ |
+| `text-gray-200`   | `text-secondary`   |
+| `text-gray-300`   | `text-body`        |
+| `text-gray-400`   | `text-muted`       |
+| `text-gray-500`   | `text-subtle`      |
+| `text-white`      | `text-primary`     |
+| `text-yellow-500` | `text-accent`      |
+| `border-gray-800` | `border-default`   |
+| `bg-gray-900`     | `bg-surface`       |
 
 **Note:** This will be handled automatically by using the Link and Button components, which use semantic tokens exclusively.
 
@@ -284,6 +297,7 @@ const { categories, activeCategory } = Astro.props;
 ### Files to Update (imports)
 
 Search and update imports in:
+
 - `/src/layouts/Layout.astro` - Navigation import
 - `/src/layouts/PostsListLayout.astro` - CategoryNav import
 - `/src/layouts/PreambulLayout.astro` - PreambulNavigation import

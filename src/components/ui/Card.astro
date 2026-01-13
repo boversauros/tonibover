@@ -8,12 +8,7 @@ interface Props {
   'aria-label'?: string;
 }
 
-const {
-  href,
-  as: Wrapper = 'div',
-  class: className = '',
-  'aria-label': ariaLabel,
-} = Astro.props;
+const { href, as: Wrapper = 'div', class: className = '', 'aria-label': ariaLabel } = Astro.props;
 
 const hasImageSlot = Astro.slots.has('image');
 const cardClasses = `space-y-4 ${className}`.trim();
@@ -21,9 +16,7 @@ const cardClasses = `space-y-4 ${className}`.trim();
 
 <Wrapper class={cardClasses}>
   <Link href={href} class="group block" aria-label={ariaLabel}>
-    {hasImageSlot && (
-      <slot name="image" />
-    )}
+    {hasImageSlot && <slot name="image" />}
     <slot />
   </Link>
 </Wrapper>

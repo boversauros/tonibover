@@ -1,0 +1,35 @@
+---
+import { languages, defaultLang, type Lang, getLocalizedPath } from '@/i18n';
+
+interface Props {
+  lang: Lang;
+  currentPath?: string;
+}
+
+const { lang, currentPath = '/' } = Astro.props;
+
+// Get the path without any language prefix for building alternate URLs
+function getPathWithoutLang(path: string): string {
+  const segments = path.split('/').filter(Boolean);
+  if (segments[0] === 'en') {
+    return '/' + segments.slice(1).join('/') || '/';
+  }
+  return path;
+}
+
+const basePath = getPathWithoutLang(currentPath);
+const otherLang: Lang = lang === 'ca' ? 'en' : 'ca';
+const otherLangPath = getLocalizedPath(basePath, otherLang);
+---
+
+<div class="flex items-center gap-2 text-sm">
+  <span class="text-primary font-medium">{languages[lang]}</span>
+  <span class="text-muted">/</span>
+  <a
+    href={otherLangPath}
+    class="text-muted hover:text-primary transition-colors-default"
+    aria-label={`Switch to ${languages[otherLang]}`}
+  >
+    {languages[otherLang]}
+  </a>
+</div>

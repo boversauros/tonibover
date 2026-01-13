@@ -1,10 +1,20 @@
 ---
 import Navigation from '@components/app/Navigation.astro';
 import Link from '@components/ui/Link.astro';
+import { defaultLang, useTranslations, getLocalizedPath, type Lang } from '@/i18n';
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = defaultLang } = Astro.props;
+const t = useTranslations(lang);
+const legalFileName = lang === 'ca' ? 'CAT_avis_proteccio.pdf' : 'ENG_avis_proteccio.pdf';
+const currentPath = Astro.url.pathname;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -13,7 +23,7 @@ import Link from '@components/ui/Link.astro';
     <title>Toni Bover</title>
   </head>
   <body class="min-h-screen bg-background text-primary font-sans antialiased flex flex-col">
-    <Navigation />
+    <Navigation lang={lang} currentPath={currentPath} />
     <slot />
   </body>
   <footer class="border-t border-subtle mt-auto">
@@ -23,18 +33,24 @@ import Link from '@components/ui/Link.astro';
           © Toni Bover, {new Date().getFullYear()}
         </p>
         <div class="flex flex-col gap-4 md:flex-row md:gap-6 text-muted">
-          <Link href="/agraiments" variant="muted">Agraïments</Link>
+          <Link href={getLocalizedPath('/agraiments', lang)} variant="muted"
+            >{t('footer.acknowledgments')}</Link
+          >
           <Link
             href="mailto:contact.webtonibover@gmail.com"
             variant="muted"
-            aria-label="Contactar per correu electrònic">Contacte</Link
+            aria-label="Contactar per correu electrònic"
           >
+            {t('footer.contact')}
+          </Link>
           <Link
-            href="/files/CAT_avis_proteccio.pdf"
+            href={`/files/${legalFileName}`}
             variant="muted"
             target="_blank"
-            rel="noopener noreferrer">Lleis d'autoria i protecció de dades</Link
+            rel="noopener noreferrer"
           >
+            {t('footer.legal')}
+          </Link>
         </div>
       </div>
     </div>

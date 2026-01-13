@@ -19,26 +19,28 @@ Create a reusable Icon component to consolidate 8 duplicated SVG instances acros
 ### Icon Component (`/src/components/ui/Icon.astro`)
 
 **Props Interface:**
+
 ```typescript
 interface Props {
   name: 'menu' | 'close' | 'chevron-left' | 'chevron-right' | 'arrow-left' | 'arrow-right';
-  size?: '4' | '5' | '6' | '8' | '10' | '12';  // Default: '6'
-  variant?: 'outline' | 'solid';  // Default: auto-detected from icon
+  size?: '4' | '5' | '6' | '8' | '10' | '12'; // Default: '6'
+  variant?: 'outline' | 'solid'; // Default: auto-detected from icon
   class?: string;
-  'aria-hidden'?: 'true' | 'false';  // Default: 'true'
-  [key: string]: any;  // Pass-through attributes (id, data-*, etc.)
+  'aria-hidden'?: 'true' | 'false'; // Default: 'true'
+  [key: string]: any; // Pass-through attributes (id, data-*, etc.)
 }
 ```
 
 **Icon Definitions:**
+
 ```typescript
 const icons = {
-  'menu': {
+  menu: {
     variant: 'outline',
     viewBox: '0 0 24 24',
     path: 'M4 6h16M4 12h16M4 18h16',
   },
-  'close': {
+  close: {
     variant: 'outline',
     viewBox: '0 0 24 24',
     path: 'M6 18L18 6M6 6l12 12',
@@ -67,6 +69,7 @@ const icons = {
 ```
 
 **Implementation:**
+
 ```astro
 ---
 import type { HTMLAttributes } from 'astro/types';
@@ -91,12 +94,12 @@ const {
 
 // Icon definitions
 const icons = {
-  'menu': {
+  menu: {
     variant: 'outline',
     viewBox: '0 0 24 24',
     path: 'M4 6h16M4 12h16M4 18h16',
   },
-  'close': {
+  close: {
     variant: 'outline',
     viewBox: '0 0 24 24',
     path: 'M6 18L18 6M6 6l12 12',
@@ -138,25 +141,27 @@ const sizeClasses = {
 const finalClasses = `${sizeClasses[size]} ${className}`.trim();
 
 // SVG attributes based on variant
-const svgAttrs = finalVariant === 'outline'
-  ? {
-      fill: 'none',
-      stroke: 'currentColor',
-      'stroke-width': '2',
-    }
-  : {
-      fill: 'currentColor',
-    };
+const svgAttrs =
+  finalVariant === 'outline'
+    ? {
+        fill: 'none',
+        stroke: 'currentColor',
+        'stroke-width': '2',
+      }
+    : {
+        fill: 'currentColor',
+      };
 
-const pathAttrs = finalVariant === 'outline'
-  ? {
-      'stroke-linecap': 'round',
-      'stroke-linejoin': 'round',
-    }
-  : {
-      'fill-rule': 'evenodd',
-      'clip-rule': 'evenodd',
-    };
+const pathAttrs =
+  finalVariant === 'outline'
+    ? {
+        'stroke-linecap': 'round',
+        'stroke-linejoin': 'round',
+      }
+    : {
+        'fill-rule': 'evenodd',
+        'clip-rule': 'evenodd',
+      };
 ---
 
 <svg
@@ -167,10 +172,7 @@ const pathAttrs = finalVariant === 'outline'
   {...svgAttrs}
   {...rest}
 >
-  <path
-    d={icon.path}
-    {...pathAttrs}
-  />
+  <path d={icon.path} {...pathAttrs}></path>
 </svg>
 ```
 
@@ -181,6 +183,7 @@ const pathAttrs = finalVariant === 'outline'
 ### Phase 1: Create Icon Component
 
 **Step 1: Create `/src/components/ui/Icon.astro`**
+
 - Define TypeScript Props interface with icon name enum
 - Add icon definitions object with path data
 - Implement size mapping (4, 5, 6, 8, 10, 12)
@@ -189,6 +192,7 @@ const pathAttrs = finalVariant === 'outline'
 - Support custom classes and pass-through attributes
 
 **Verification:**
+
 - TypeScript compiles without errors
 - All 6 icons defined correctly
 - Size classes map to Tailwind utilities
@@ -201,6 +205,7 @@ const pathAttrs = finalVariant === 'outline'
 **Step 2.1: Update `/src/components/app/Navigation.astro`**
 
 **Changes (lines 45-72):**
+
 1. Add import: `import Icon from '@components/ui/Icon.astro';`
 2. Replace hamburger menu SVG (lines 45-58) with:
    ```astro
@@ -212,6 +217,7 @@ const pathAttrs = finalVariant === 'outline'
    ```
 
 **Step 2.2: Test Navigation**
+
 - Navigate to any page with navigation
 - Verify menu icon displays correctly
 - Click menu button, verify close icon shows
@@ -225,6 +231,7 @@ const pathAttrs = finalVariant === 'outline'
 **Step 3.1: Update `/src/components/app/Carousel.astro`**
 
 **Changes:**
+
 1. Add import: `import Icon from '@components/ui/Icon.astro';`
 2. Replace previous arrow SVG (lines 80-89) with:
    ```astro
@@ -236,6 +243,7 @@ const pathAttrs = finalVariant === 'outline'
    ```
 
 **Step 3.2: Test Carousel**
+
 - Navigate to home page (carousel section)
 - Verify both arrow icons display
 - Test navigation buttons work
@@ -249,6 +257,7 @@ const pathAttrs = finalVariant === 'outline'
 **Step 4.1: Update `/src/components/app/PreambulNavigation.astro`**
 
 **Changes:**
+
 1. Add import: `import Icon from '@components/ui/Icon.astro';`
 2. Replace previous arrow SVG (lines 26-37) with:
    ```astro
@@ -268,6 +277,7 @@ const pathAttrs = finalVariant === 'outline'
    ```
 
 **Step 4.2: Test PreambulNavigation**
+
 - Navigate to any Preambul detail page (/preambul/20, /preambul/40, /preambul/60)
 - Verify both navigation arrows display
 - Test hover animations (arrow slides on hover)
@@ -279,6 +289,7 @@ const pathAttrs = finalVariant === 'outline'
 ### Phase 5: Final Verification
 
 **Visual Regression Testing:**
+
 - Compare before/after of Navigation menu icons
 - Compare before/after of Carousel arrows
 - Compare before/after of PreambulNavigation arrows
@@ -286,13 +297,15 @@ const pathAttrs = finalVariant === 'outline'
 - Verify all colors use currentColor correctly
 
 **Functional Testing:**
+
 - All buttons with icons remain clickable
 - Hover states work correctly
 - Icons inherit parent text color
 - Custom classes apply properly (transforms, spacing)
-- Pass-through attributes work (id, data-*)
+- Pass-through attributes work (id, data-\*)
 
 **Code Quality:**
+
 - No console errors
 - TypeScript compiles successfully
 - All imports use path aliases (`@components/ui/Icon.astro`)
@@ -304,14 +317,18 @@ const pathAttrs = finalVariant === 'outline'
 ## Critical Files
 
 ### Files to Create:
+
 1. `/src/components/ui/Icon.astro` - New Icon component
 
 ### Files to Modify:
+
 1. `/src/components/app/Navigation.astro` (lines 45-72)
+
    - Add Icon import
    - Replace 2 SVG instances with Icon component
 
 2. `/src/components/app/Carousel.astro` (lines 80-106)
+
    - Add Icon import
    - Replace 2 SVG instances with Icon component
 
@@ -320,6 +337,7 @@ const pathAttrs = finalVariant === 'outline'
    - Replace 2 SVG instances with Icon component
 
 ### Files to Reference:
+
 1. `/src/components/ui/Button.astro` - Component pattern reference
 2. `/src/components/ui/Link.astro` - Variant mapping pattern
 
@@ -328,30 +346,35 @@ const pathAttrs = finalVariant === 'outline'
 ## Design Decisions
 
 **Icon Name Enum:**
+
 - Type safety prevents typos
 - IDE autocomplete for available icons
 - Self-documenting which icons exist
 - Follows Button/Link variant pattern
 
 **Auto-Variant Detection:**
+
 - Simplifies API - users don't need to specify outline vs solid
 - Each icon has a natural variant (chevron=outline, arrow=solid)
 - Override available for edge cases
 - Reduces cognitive load
 
 **CurrentColor Usage:**
+
 - Icons inherit parent text color automatically
 - Works seamlessly with semantic tokens
 - Hover effects work without extra configuration
 - Follows existing SVG pattern in codebase
 
 **Size as String Numbers:**
+
 - Matches Tailwind convention (h-6 = size "6")
 - Clear intent and direct mapping
 - Easy to extend with new sizes
 - Type-safe with literal union
 
 **Pass-Through Attributes:**
+
 - Supports `id` for JavaScript targeting (menu toggle)
 - Supports `data-*` attributes if needed
 - Maintains flexibility for edge cases
@@ -362,14 +385,16 @@ const pathAttrs = finalVariant === 'outline'
 ## Success Criteria
 
 **Functional:**
+
 - Icon component renders all 6 icon variants correctly
 - Size prop works for all 6 size options
 - Variant auto-detection selects correct style (outline/solid)
 - Custom classes via `class` prop apply correctly
-- Pass-through attributes work (id, data-*)
+- Pass-through attributes work (id, data-\*)
 - TypeScript types prevent invalid icon names
 
 **Visual:**
+
 - Zero regressions on Navigation menu icons
 - Zero regressions on Carousel arrow icons
 - Zero regressions on PreambulNavigation arrow icons
@@ -378,6 +403,7 @@ const pathAttrs = finalVariant === 'outline'
 - Icon sizes match original (h-5, h-6, h-8)
 
 **Code Quality:**
+
 - TypeScript compilation succeeds
 - No console errors or warnings
 - Path aliases used consistently
@@ -386,6 +412,7 @@ const pathAttrs = finalVariant === 'outline'
 - Icon definitions well-structured and maintainable
 
 **Migration Impact:**
+
 - 8 SVG instances reduced to 8 Icon components
 - ~96 lines of SVG markup reduced to ~8 lines
 - Easier to add new icons in the future
@@ -396,26 +423,31 @@ const pathAttrs = finalVariant === 'outline'
 ## Why This Approach?
 
 **Composition over Configuration:**
+
 - Simple, focused API with smart defaults
 - Easy to use for common cases
 - Flexible for edge cases via `class` prop
 
 **Type Safety:**
+
 - Icon name enum prevents typos
 - Size literal types ensure valid Tailwind classes
 - Catches errors at compile time
 
 **Follows Established Patterns:**
+
 - Props destructuring matches Button/Link/Image
 - Variant mapping follows existing conventions
 - Class concatenation consistent with other components
 
 **Reduces Duplication:**
+
 - 6 unique SVG paths stored once
 - Consistent attributes applied automatically
 - Easier maintenance and updates
 
 **Future-Proof:**
+
 - Easy to add new icon names
 - Easy to add new sizes
 - Supports customization via class prop

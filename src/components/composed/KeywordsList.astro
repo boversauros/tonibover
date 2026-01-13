@@ -13,11 +13,7 @@ const { keywords } = Astro.props;
   <div class="flex flex-wrap gap-2">
     {
       keywords.map((keyword) => (
-        <Link
-          href={`/reflexions/paraula-clau/${keyword}`}
-          variant="accent-border"
-          class="text-sm"
-        >
+        <Link href={`/reflexions/paraula-clau/${keyword}`} variant="accent-border" class="text-sm">
           {keyword}
         </Link>
       ))

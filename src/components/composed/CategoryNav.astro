@@ -12,18 +12,12 @@ const { categories, activeCategory } = Astro.props;
 <nav class="mb-12">
   <ul class="flex flex-wrap gap-6 text-muted">
     <li>
-      <Link href="/reflexions" variant="muted" active={!activeCategory}>
-        Tots
-      </Link>
+      <Link href="/reflexions" variant="muted" active={!activeCategory}> Tots </Link>
     </li>
     {
       categories.map((cat) => (
         <li>
-          <Link
-            href={`/reflexions/${cat.id}`}
-            variant="muted"
-            active={cat.id === activeCategory}
-          >
+          <Link href={`/reflexions/${cat.id}`} variant="muted" active={cat.id === activeCategory}>
             {cat.name}
           </Link>
         </li>

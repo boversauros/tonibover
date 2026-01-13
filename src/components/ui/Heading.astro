@@ -39,7 +39,8 @@ const marginClasses: Record<NonNullable<Props['size']>, string> = {
 };
 
 const italicClass = italic ? 'italic' : '';
-const finalClasses = `font-serif ${sizeClasses[size]} ${variantClasses[variant]} ${marginClasses[size]} ${italicClass} ${className}`.trim();
+const finalClasses =
+  `font-serif ${sizeClasses[size]} ${variantClasses[variant]} ${marginClasses[size]} ${italicClass} ${className}`.trim();
 ---
 
 <Element class={finalClasses}>

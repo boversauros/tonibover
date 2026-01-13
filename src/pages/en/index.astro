@@ -8,13 +8,13 @@ import Image from '@components/ui/Image.astro';
 import { useTranslations } from '@/i18n';
 import '@styles/global.css';
 
-const t = useTranslations('ca');
+const t = useTranslations('en');
 ---
 
-<Layout lang="ca">
+<Layout lang="en">
   <Container>
     <SectionTitle>{t('index.section')}</SectionTitle>
-    <Heading as="h1" size="3xl" variant="primary">{t('index.title')}</Heading>
+    <Heading as="h1" size="3xl" variant="primary">{t('index.title')} </Heading>
 
     <div class="space-y-8">
       <Image src="/images/inici_img.webp" alt={t('index.imageAlt')} aspect="auto" loading="eager">
