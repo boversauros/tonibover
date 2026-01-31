@@ -31,7 +31,7 @@ const variantClasses: Record<NonNullable<Props['variant']>, string> = {
 };
 
 const marginClasses: Record<NonNullable<Props['size']>, string> = {
-  xl: 'mb-8',
+  xl: 'mb-6',
   '2xl': 'mb-6',
   '3xl': 'mb-4',
   '4xl': 'mb-2',
@@ -39,8 +39,9 @@ const marginClasses: Record<NonNullable<Props['size']>, string> = {
 };
 
 const italicClass = italic ? 'italic' : '';
+const fontWeightClass = Element === 'h1' ? 'font-semibold' : '';
 const finalClasses =
-  `font-serif ${sizeClasses[size]} ${variantClasses[variant]} ${marginClasses[size]} ${italicClass} ${className}`.trim();
+  `font-serif ${sizeClasses[size]} ${variantClasses[variant]} ${marginClasses[size]} ${italicClass} ${fontWeightClass} ${className}`.trim();
 ---
 
 <Element class={finalClasses}>
