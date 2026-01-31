@@ -25,10 +25,10 @@ function isActive(href: string, path: string) {
 ---
 
 <header class="fixed top-0 left-0 right-0 bg-nav backdrop-blur-sm z-50 border-b border-subtle">
-  <nav class="max-w-4xl mx-auto px-6">
+  <nav class="max-w-4xl mx-auto px-sp-6">
     <div class="flex items-center justify-between h-20">
-      <h1 class="flex items-baseline space-x-3">
-        <Link href={getLocalizedPath('/', lang)} class="flex items-baseline space-x-3">
+      <h1 class="flex items-baseline space-x-sp-3">
+        <Link href={getLocalizedPath('/', lang)} class="flex items-baseline space-x-sp-3">
           <span
             class="text-2xl font-serif italic font-semibold text-body hover:text-secondary transition-colors-default"
           >
@@ -38,7 +38,7 @@ function isActive(href: string, path: string) {
         </Link>
       </h1>
 
-      <div class="hidden md:flex items-center space-x-8">
+      <div class="hidden md:flex items-center space-x-sp-8">
         {
           links.map((link) => {
             const active = isActive(link.href, currentPath);
@@ -68,21 +68,21 @@ function isActive(href: string, path: string) {
     </div>
 
     <div id="mobileMenu" class="hidden md:hidden border-t border-subtle">
-      <div class="py-4 space-y-2">
+      <div class="py-sp-4 space-y-sp-2">
         {
           links.map((link) => {
             const active = isActive(link.href, currentPath);
             return (
               <Link
                 href={link.href}
-                class={`block px-4 py-2 text-sm tracking-wide hover:bg-surface transition-all duration-300 ${active ? 'underline underline-offset-4' : ''}`}
+                class={`block px-sp-4 py-sp-2 text-sm tracking-wide hover:bg-surface transition-all duration-300 ${active ? 'underline underline-offset-4' : ''}`}
               >
                 {link.label}
               </Link>
             );
           })
         }
-        <div class="px-4 py-2">
+        <div class="px-sp-4 py-sp-2">
           <LanguageSwitcher lang={lang} currentPath={currentPath} />
         </div>
       </div>

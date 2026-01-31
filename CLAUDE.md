@@ -45,6 +45,26 @@ Three-tier component organization:
 - Semantic utility classes defined in `@layer utilities` (e.g., `text-primary`, `bg-surface`, `border-subtle`)
 - Fonts: Nunito (sans) and Bodoni Moda Variable (serif) via @fontsource
 
+### Spacing System
+
+All spacing uses design tokens via `sp-` prefixed utility classes defined in `global.css`:
+
+**Tokens** (`--spacing-*`): 1, 2, 3, 4, 5, 6, 8, 10, 12, 16, 24, 32, 40
+
+**Utility classes**:
+- Margins: `mb-sp-*`, `mt-sp-*`, `my-sp-*`, `mr-sp-*`, `ml-sp-*`
+- Padding: `pt-sp-*`, `pb-sp-*`, `py-sp-*`, `px-sp-*`, `pl-sp-*`, `p-sp-*`
+- Gap: `gap-sp-*`
+- Space: `space-y-sp-*`, `space-x-sp-*`
+- Responsive: `md:px-sp-*`, `md:gap-sp-*`
+
+**Container presets** (in `@layer components`):
+- `container-spacing-default` - `pt-32 pb-16`
+- `container-spacing-compact` - `pt-16 pb-8`
+- `container-spacing-loose` - `pt-40 pb-24`
+
+Always use `sp-` classes instead of raw Tailwind spacing (e.g., `mb-sp-6` not `mb-6`).
+
 ### Path Aliases
 
 ```

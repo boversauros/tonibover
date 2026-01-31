@@ -17,8 +17,8 @@ const t = useTranslations('en');
   <Container>
     <SectionTitle>{t('preambul.section')}</SectionTitle>
 
-    <div class="mb-16">
-      <Text variant="body" class="mb-4">
+    <div class="mb-sp-16">
+      <Text variant="body" class="mb-sp-4">
         {t('preambul.intro1')}
       </Text>
       <Text variant="body">
@@ -29,7 +29,7 @@ const t = useTranslations('en');
         target="_blank"
         rel="noopener noreferrer"
         variant="muted"
-        class="mt-4 block"
+        class="mt-sp-4 block"
       >
         <Text variant="small" italic class="hover:text-primary transition-colors-default">
           {t('preambul.articleLink')}
@@ -37,7 +37,7 @@ const t = useTranslations('en');
       </Link>
     </div>
 
-    <div class="grid md:grid-cols-3 gap-8">
+    <div class="grid md:grid-cols-3 gap-sp-8">
       <Card href="/en/preambul/20" aria-label={t('preambul.card20.alt')}>
         <Image
           slot="image"
@@ -46,7 +46,7 @@ const t = useTranslations('en');
           aspect="square"
           hover="opacity"
         />
-        <div class="space-y-2">
+        <div class="space-y-sp-2">
           <span class="block text-3xl text-secondary">20</span>
           <Heading as="h3" size="2xl" variant="secondary" class="mb-0"
             >{t('preambul.card20.title')}</Heading
@@ -57,10 +57,7 @@ const t = useTranslations('en');
         </div>
       </Card>
 
-      <Card
-        href="/en/preambul/40"
-        aria-label={t('preambul.card40.alt')}
-      >
+      <Card href="/en/preambul/40" aria-label={t('preambul.card40.alt')}>
         <Image
           slot="image"
           src="/images/preambul-40-01.webp"
@@ -68,7 +65,7 @@ const t = useTranslations('en');
           aspect="square"
           hover="opacity"
         />
-        <div class="space-y-2">
+        <div class="space-y-sp-2">
           <span class="block text-3xl text-secondary">40</span>
           <Heading as="h3" size="2xl" variant="secondary" class="mb-0">
             {t('preambul.card40.title')}
@@ -87,7 +84,7 @@ const t = useTranslations('en');
           aspect="square"
           hover="opacity"
         />
-        <div class="space-y-2">
+        <div class="space-y-sp-2">
           <span class="block text-3xl text-secondary">60</span>
           <Heading as="h3" size="2xl" variant="secondary" class="mb-0"
             >{t('preambul.card60.title')}</Heading

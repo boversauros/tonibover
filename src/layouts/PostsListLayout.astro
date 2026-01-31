@@ -18,7 +18,7 @@ const { title, categories, activeCategory, page, keywords } = Astro.props;
 ---
 
 <Container>
-  <h2 class="text-xl font-serif italic mb-8 text-secondary">{title}</h2>
+  <h2 class="text-xl font-serif italic mb-sp-8 text-secondary">{title}</h2>
   <CategoryNav categories={categories} activeCategory={activeCategory} />
   <PostGrid posts={page.data} categories={categories} />
   {page.total > 1 && <PaginationControl page={page} />}

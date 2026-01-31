@@ -24,14 +24,14 @@ const homeLink = lang === 'ca' ? '/' : '/en';
 
 <Layout lang={lang}>
   <main class="grow flex items-center justify-center min-h-screen">
-    <div class="max-w-xl mx-auto px-6 py-16 text-center">
-      <h1 class="text-8xl font-serif text-white mb-8">404</h1>
+    <div class="max-w-xl mx-auto px-sp-6 py-sp-16 text-center">
+      <h1 class="text-8xl font-serif text-white mb-sp-8">404</h1>
 
-      <p class="text-lg text-white/80 mb-12 font-light">
+      <p class="text-lg text-white/80 mb-sp-12 font-light">
         {randomQuote}
       </p>
 
-      <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+      <div class="flex flex-col sm:flex-row gap-sp-6 justify-center items-center">
         <Link href={homeLink} class="text-white/60 hover:text-white transition-colors duration-300">
           {t('404.backToHome')}
         </Link>

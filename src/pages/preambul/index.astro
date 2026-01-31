@@ -14,7 +14,7 @@ const t = useTranslations('ca');
 
 <Layout lang="ca">
   <Container>
-    <div class="mb-16">
+    <div class="mb-sp-16">
       <Text variant="body" class="mb-4">
         {t('preambul.intro1')}
       </Text>
@@ -22,11 +22,11 @@ const t = useTranslations('ca');
         {t('preambul.intro2')}
       </Text>
     </div>
-    <div class="mb-4 text-sm text-primary-60 text-left">
+    <div class="mb-sp-4 text-sm text-primary-60 text-left">
       {t('preambul.imageCredits')}
     </div>
 
-    <div class="grid md:grid-cols-3 gap-8">
+    <div class="grid md:grid-cols-3 gap-sp-8">
       <Card href="/preambul/20" aria-label={t('preambul.card20.alt')}>
         <Image
           slot="image"
@@ -35,7 +35,7 @@ const t = useTranslations('ca');
           aspect="square"
           hover="opacity"
         />
-        <div class="space-y-2 mt-6">
+        <div class="space-y-sp-2 mt-sp-6">
           <span class="block text-3xl font-serif text-secondary">20</span>
           <Heading as="h3" size="2xl" variant="secondary" class="mb-0"
             >{t('preambul.card20.title')}</Heading
@@ -54,7 +54,7 @@ const t = useTranslations('ca');
           aspect="square"
           hover="opacity"
         />
-        <div class="space-y-2 mt-6">
+        <div class="space-y-sp-2 mt-sp-6">
           <span class="block text-3xl font-serif text-secondary">40</span>
           <Heading as="h3" size="2xl" variant="secondary" class="mb-0">
             {t('preambul.card40.title')}
@@ -73,7 +73,7 @@ const t = useTranslations('ca');
           aspect="square"
           hover="opacity"
         />
-        <div class="space-y-2 mt-6">
+        <div class="space-y-sp-2 mt-sp-6">
           <span class="block text-3xl font-serif text-secondary">60</span>
           <Heading as="h3" size="2xl" variant="secondary" class="mb-0"
             >{t('preambul.card60.title')}</Heading
@@ -90,7 +90,7 @@ const t = useTranslations('ca');
       target="_blank"
       rel="noopener noreferrer"
       variant="muted"
-      class="mt-16 block"
+      class="mt-sp-16 block"
     >
       <Text variant="small" italic class="hover:text-primary transition-colors-default">
         {t('preambul.articleLink')}

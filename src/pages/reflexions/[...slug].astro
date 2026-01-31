@@ -37,8 +37,8 @@ const categoryName = categories.find((c) => c.id === post.data.category)?.name;
 <Layout>
   <Container>
     <!-- Navigation breadcrumb -->
-    <nav class="mb-12">
-      <ol class="flex items-center space-x-2 text-sm text-muted">
+    <nav class="mb-sp-12">
+      <ol class="flex items-center space-x-sp-2 text-sm text-muted">
         <li>
           <Link href="/reflexions" variant="muted" class="hover:text-white">Reflexions</Link>
         </li>
@@ -51,18 +51,18 @@ const categoryName = categories.find((c) => c.id === post.data.category)?.name;
       </ol>
     </nav>
 
-    <article class="space-y-16">
+    <article class="space-y-sp-16">
       <!-- Header -->
-      <header class="space-y-6">
+      <header class="space-y-sp-6">
         <Heading as="h1" size="3xl" variant="primary" class="leading-tight">
           {post.data.title}
         </Heading>
       </header>
 
       <!-- Main image -->
-      <figure class="space-y-8">
+      <figure class="space-y-sp-8">
         <div
-          class={`grid gap-8 ${
+          class={`grid gap-sp-8 ${
             post.data.images.length === 1
               ? 'grid-cols-1'
               : post.data.images.length === 2
@@ -94,15 +94,15 @@ const categoryName = categories.find((c) => c.id === post.data.category)?.name;
       </div>
 
       <!-- References -->
-      <section class="border-t border-default pt-10 space-y-6">
+      <section class="border-t border-default pt-sp-10 space-y-sp-6">
         <Heading as="h2" size="xl" variant="secondary">Referències</Heading>
-        <div class="space-y-5">
+        <div class="space-y-sp-5">
           <div>
-            <Heading as="h3" size="2xl" variant="body" class="text-base mb-3">Text:</Heading>
-            <ul class="space-y-2 text-sm text-muted leading-relaxed">
+            <Heading as="h3" size="2xl" variant="body" class="text-base mb-sp-3">Text:</Heading>
+            <ul class="space-y-sp-2 text-sm text-muted leading-relaxed">
               {
                 post.data.references.texts.map((ref) => (
-                  <li class="pl-4">
+                  <li class="pl-sp-4">
                     <span class="text-body mr-2">-</span>
                     {ref}
                   </li>
@@ -111,11 +111,11 @@ const categoryName = categories.find((c) => c.id === post.data.category)?.name;
             </ul>
           </div>
           <div>
-            <Heading as="h3" size="2xl" variant="body" class="text-base mb-3">Imatge:</Heading>
-            <ul class="space-y-2 text-sm text-muted leading-relaxed">
+            <Heading as="h3" size="2xl" variant="body" class="text-base mb-sp-3">Imatge:</Heading>
+            <ul class="space-y-sp-2 text-sm text-muted leading-relaxed">
               {
                 post.data.references.images.map((ref) => (
-                  <li class="pl-4">
+                  <li class="pl-sp-4">
                     <span class="text-body mr-2">-</span>
                     {ref}
                   </li>
