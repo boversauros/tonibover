@@ -9,10 +9,10 @@ importers:
   .:
     dependencies:
       '@fontsource-variable/bodoni-moda':
-        specifier: ^5.2.7
+        specifier: 5.2.7
         version: 5.2.7
       '@fontsource/nunito':
-        specifier: ^5.2.7
+        specifier: 5.2.7
         version: 5.2.7
       '@tailwindcss/vite':
         specifier: 4.1.18
