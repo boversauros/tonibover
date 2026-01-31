@@ -21,17 +21,9 @@ const t = useTranslations('ca');
       <Text variant="body">
         {t('preambul.intro2')}
       </Text>
-      <Link
-        href="https://raco.cat/index.php/TempsEducacio/article/view/400669"
-        target="_blank"
-        rel="noopener noreferrer"
-        variant="muted"
-        class="mt-4 block"
-      >
-        <Text variant="small" italic class="hover:text-primary transition-colors-default">
-          {t('preambul.articleLink')}
-        </Text>
-      </Link>
+    </div>
+    <div class="mb-4 text-sm text-primary-60 italic text-left">
+      {t('preambul.imageCredits')}
     </div>
 
     <div class="grid md:grid-cols-3 gap-8">
@@ -43,7 +35,7 @@ const t = useTranslations('ca');
           aspect="square"
           hover="opacity"
         />
-        <div class="space-y-2">
+        <div class="space-y-2 mt-6">
           <span class="block text-3xl font-serif text-secondary">20</span>
           <Heading as="h3" size="2xl" variant="secondary" class="mb-0"
             >{t('preambul.card20.title')}</Heading
@@ -62,7 +54,7 @@ const t = useTranslations('ca');
           aspect="square"
           hover="opacity"
         />
-        <div class="space-y-2">
+        <div class="space-y-2 mt-6">
           <span class="block text-3xl font-serif text-secondary">40</span>
           <Heading as="h3" size="2xl" variant="secondary" class="mb-0">
             {t('preambul.card40.title')}
@@ -81,7 +73,7 @@ const t = useTranslations('ca');
           aspect="square"
           hover="opacity"
         />
-        <div class="space-y-2">
+        <div class="space-y-2 mt-6">
           <span class="block text-3xl font-serif text-secondary">60</span>
           <Heading as="h3" size="2xl" variant="secondary" class="mb-0"
             >{t('preambul.card60.title')}</Heading
@@ -92,5 +84,17 @@ const t = useTranslations('ca');
         </div>
       </Card>
     </div>
+
+    <Link
+      href="https://raco.cat/index.php/TempsEducacio/article/view/400669"
+      target="_blank"
+      rel="noopener noreferrer"
+      variant="muted"
+      class="mt-16 block"
+    >
+      <Text variant="small" italic class="hover:text-primary transition-colors-default">
+        {t('preambul.articleLink')}
+      </Text>
+    </Link>
   </Container>
 </Layout>

@@ -103,6 +103,7 @@ export default {
     'The 20s, 40s and 60s are not exact time periods, but transition processes that depend on the attitudes and learning capacities of each person.',
   'preambul.articleLink':
     "Article: 20/40/60. An iconotextual reflection on photography as art and science. Temps d'Educació, UB. 2021",
+  'preambul.imageCredits': 'Photographs: Pere Moscoso, Frank Gómez and Miquel Bigas.',
   'preambul.card20.alt': 'A transition process to maturity',
   'preambul.card20.title': 'A TRANSITION PROCESS TO MATURITY',
   'preambul.card40.alt': 'A transition process from analog to digital',

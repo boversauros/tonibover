@@ -104,6 +104,7 @@ export default {
     "Els 20, els 40 i els 60 no són períodes temporals exactes, sinó processos de transició que depenen de les actituds i de les capacitats d'aprenentatge de cada persona.",
   'preambul.articleLink':
     "Article: 20/40/60. Una reflexió iconotextual de la fotografia com a art i ciència. Temps d'Educació, UB. 2021",
+  'preambul.imageCredits': 'Fotografies: Pere Moscoso, Frank Gómez i Miquel Bigas.',
   'preambul.card20.alt': 'Un procés trans a la màquina',
   'preambul.card20.title': 'UN PROCÉS TRANS A LA MADURESA',
   'preambul.card40.alt': "Un procés trans de l'analògic al digital",
