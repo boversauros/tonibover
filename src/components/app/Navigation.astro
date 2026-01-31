@@ -18,6 +18,10 @@ const links = [
   { label: t('nav.biografia'), href: getLocalizedPath('/biografia', lang) },
   { label: t('nav.documental'), href: getLocalizedPath('/documental', lang) },
 ];
+
+function isActive(href: string, path: string) {
+  return path === href || (href !== '/' && path.startsWith(href + '/'));
+}
 ---
 
 <header class="fixed top-0 left-0 right-0 bg-nav backdrop-blur-sm z-50 border-b border-subtle">
@@ -32,11 +36,17 @@ const links = [
 
       <div class="hidden md:flex items-center space-x-8">
         {
-          links.map((link) => (
-            <Link href={link.href} class="text-sm tracking-wide">
-              {link.label}
-            </Link>
-          ))
+          links.map((link) => {
+            const active = isActive(link.href, currentPath);
+            return (
+              <Link
+                href={link.href}
+                class={`text-sm tracking-wide ${active ? 'underline underline-offset-4' : ''}`}
+              >
+                {link.label}
+              </Link>
+            );
+          })
         }
         <LanguageSwitcher lang={lang} currentPath={currentPath} />
       </div>
@@ -56,14 +66,17 @@ const links = [
     <div id="mobileMenu" class="hidden md:hidden border-t border-subtle">
       <div class="py-4 space-y-2">
         {
-          links.map((link) => (
-            <Link
-              href={link.href}
-              class="block px-4 py-2 text-sm tracking-wide hover:bg-surface transition-all duration-300"
-            >
-              {link.label}
-            </Link>
-          ))
+          links.map((link) => {
+            const active = isActive(link.href, currentPath);
+            return (
+              <Link
+                href={link.href}
+                class={`block px-4 py-2 text-sm tracking-wide hover:bg-surface transition-all duration-300 ${active ? 'underline underline-offset-4' : ''}`}
+              >
+                {link.label}
+              </Link>
+            );
+          })
         }
         <div class="px-4 py-2">
           <LanguageSwitcher lang={lang} currentPath={currentPath} />
