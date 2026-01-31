@@ -18,7 +18,7 @@ const t = useTranslations('en');
 
     <div class="space-y-8">
       <Image src="/images/inici_img.webp" alt={t('index.imageAlt')} aspect="auto" loading="eager">
-        <span slot="caption">{t('index.caption')}</span>
+        <span slot="caption" set:html={`Toni Bover. <span class="font-serif">Light as a metaphor for language</span>. 1990-94.`}></span>
       </Image>
 
       <Text variant="body">

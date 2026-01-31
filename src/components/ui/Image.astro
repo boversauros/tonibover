@@ -49,7 +49,7 @@ const overflowClass = hover === 'scale' ? 'overflow-hidden' : '';
       <div class={`group ${overflowClass}`}>
         <img src={src} alt={alt} loading={loading} class={imageClasses} {...rest} />
       </div>
-      <figcaption class="text-sm text-muted font-serif italic leading-relaxed">
+      <figcaption class="text-sm text-muted italic leading-relaxed">
         <slot name="caption" />
       </figcaption>
     </figure>
