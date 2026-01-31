@@ -27,12 +27,16 @@ function isActive(href: string, path: string) {
 <header class="fixed top-0 left-0 right-0 bg-nav backdrop-blur-sm z-50 border-b border-subtle">
   <nav class="max-w-4xl mx-auto px-6">
     <div class="flex items-center justify-between h-20">
-      <div class="flex items-baseline space-x-3">
-        <h1 class="text-2xl font-serif italic hover:text-secondary transition-colors-default">
-          <Link href={getLocalizedPath('/', lang)}>Toni Bover</Link>
-        </h1>
-        <span class="text-lg tracking-wider text-muted"> IMAGE MANAGER </span>
-      </div>
+      <h1 class="flex items-baseline space-x-3">
+        <Link href={getLocalizedPath('/', lang)} class="flex items-baseline space-x-3">
+          <span
+            class="text-2xl font-serif italic font-semibold text-body hover:text-secondary transition-colors-default"
+          >
+            Toni Bover
+          </span>
+          <span class="text-lg tracking-wider text-muted"> IMAGE MANAGER </span>
+        </Link>
+      </h1>
 
       <div class="hidden md:flex items-center space-x-8">
         {
