@@ -1,7 +1,6 @@
 ---
 import Layout from '@layouts/Layout.astro';
 import Container from '@components/ui/Container.astro';
-import SectionTitle from '@components/ui/SectionTitle.astro';
 import Heading from '@components/ui/Heading.astro';
 import Text from '@components/ui/Text.astro';
 import Image from '@components/ui/Image.astro';
@@ -14,7 +13,6 @@ const t = useTranslations('ca');
 
 <Layout lang="ca">
   <Container>
-    <SectionTitle>{t('index.section')}</SectionTitle>
     <Heading as="h1" size="3xl" variant="primary" class="text-[32px]">{t('index.title')}</Heading>
 
     <div class="space-y-8">

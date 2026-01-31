@@ -2,7 +2,6 @@
 import Layout from '@layouts/Layout.astro';
 import Container from '@components/ui/Container.astro';
 import Card from '@components/ui/Card.astro';
-import SectionTitle from '@components/ui/SectionTitle.astro';
 import Heading from '@components/ui/Heading.astro';
 import Text from '@components/ui/Text.astro';
 import Image from '@components/ui/Image.astro';
@@ -15,8 +14,6 @@ const t = useTranslations('ca');
 
 <Layout lang="ca">
   <Container>
-    <SectionTitle>{t('preambul.section')}</SectionTitle>
-
     <div class="mb-16">
       <Text variant="body" class="mb-4">
         {t('preambul.intro1')}
@@ -47,7 +44,7 @@ const t = useTranslations('ca');
           hover="opacity"
         />
         <div class="space-y-2">
-          <span class="block text-3xl text-secondary">20</span>
+          <span class="block text-3xl font-serif text-secondary">20</span>
           <Heading as="h3" size="2xl" variant="secondary" class="mb-0"
             >{t('preambul.card20.title')}</Heading
           >
@@ -57,10 +54,7 @@ const t = useTranslations('ca');
         </div>
       </Card>
 
-      <Card
-        href="/preambul/40"
-        aria-label={t('preambul.card40.alt')}
-      >
+      <Card href="/preambul/40" aria-label={t('preambul.card40.alt')}>
         <Image
           slot="image"
           src="/images/preambul-40-01.webp"
@@ -69,7 +63,7 @@ const t = useTranslations('ca');
           hover="opacity"
         />
         <div class="space-y-2">
-          <span class="block text-3xl text-secondary">40</span>
+          <span class="block text-3xl font-serif text-secondary">40</span>
           <Heading as="h3" size="2xl" variant="secondary" class="mb-0">
             {t('preambul.card40.title')}
           </Heading>
@@ -88,7 +82,7 @@ const t = useTranslations('ca');
           hover="opacity"
         />
         <div class="space-y-2">
-          <span class="block text-3xl text-secondary">60</span>
+          <span class="block text-3xl font-serif text-secondary">60</span>
           <Heading as="h3" size="2xl" variant="secondary" class="mb-0"
             >{t('preambul.card60.title')}</Heading
           >

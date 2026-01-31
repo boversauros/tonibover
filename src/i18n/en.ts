@@ -1,6 +1,5 @@
 export default {
   // Index page
-  'index.section': 'HOME',
   'index.title': '100 iconotextual reflections on visual communication and photography',
   'index.imageAlt': 'Light as a metaphor for language, photographic work by Toni Bover (1990-94)',
   'index.description':
@@ -14,7 +13,6 @@ export default {
   'footer.acknowledgments': 'Acknowledgments',
   'footer.legal': 'Copyright and data protection laws',
   // Biography page
-  'biografia.section': 'BIOGRAPHY',
   'biografia.name': 'Antoni Bover Tanyà',
   'biografia.birthInfo': 'Vic, June 15, 1954',
   'biografia.imageCaption': 'Photographs Family Archive, Dolors Vila and Miquel Bigas, 1957-2020.',
@@ -71,7 +69,6 @@ export default {
   'agraiments.closing':
     'To my colleagues, students, family, and friends with whom I have shared influences, different perspectives and experiences about photography and visual communication.',
   // Documentary page
-  'documental.section': 'DOCUMENTARY',
   'documental.videoTitle': 'Toni Bover. Image Manager // Xef Vila, 2020',
   'documental.credits.title': 'Technical Information',
   'documental.credits.production': 'Production:',
@@ -100,13 +97,12 @@ export default {
   '404.quote5': 'Photographs are the footprints of our memory.',
   '404.backToHome': 'Back to home',
   // Preambul index page
-  'preambul.section': 'PREAMBLE',
   'preambul.intro1':
     'This website is an interactive, subjective narrative with autobiographical components about image management. It describes my learning and self-learning of visual communication over the last 40 years.',
   'preambul.intro2':
     'The 20s, 40s and 60s are not exact time periods, but transition processes that depend on the attitudes and learning capacities of each person.',
   'preambul.articleLink':
-    'Article: 20/40/60. An iconotextual reflection on photography as art and science. Temps d\'Educació, UB. 2021',
+    "Article: 20/40/60. An iconotextual reflection on photography as art and science. Temps d'Educació, UB. 2021",
   'preambul.card20.alt': 'A transition process to maturity',
   'preambul.card20.title': 'A TRANSITION PROCESS TO MATURITY',
   'preambul.card40.alt': 'A transition process from analog to digital',
@@ -121,7 +117,8 @@ export default {
   'preambul.20.quote':
     'Understanding the photographic image is essential for iconotextual literacy and visual communication.',
   'preambul.20.imageAlt': 'Two photographs, Toni Bover taking a photo and holding a camera',
-  'preambul.20.imageCaption': 'Photographs Family Archive and Pere Moscoso. 70s and 80s of the 20th century',
+  'preambul.20.imageCaption':
+    'Photographs Family Archive and Pere Moscoso. 70s and 80s of the 20th century',
   'preambul.20.paragraph1':
     'Interest in mathematics and philosophy gradually shifted towards image semiotics.',
   'preambul.20.paragraph2':
@@ -132,7 +129,8 @@ export default {
     'The 40s open the stage of maturity and continuous improvement, the moment when I become aware of what I love and where the ideas of the 20s are consolidated. This phase serves to understand and deepen knowledge about photography and its relationship with visual communication.',
   'preambul.40.quote':
     'Photography has been a step between perspective drawing and realistic CGI aesthetics.',
-  'preambul.40.imageAlt': 'Two photographs, Toni Bover in an office and a group of people in an office',
+  'preambul.40.imageAlt':
+    'Two photographs, Toni Bover in an office and a group of people in an office',
   'preambul.40.imageCaption':
     'Photographs Frank Gómez and Miquel Bigas. 90s of the 20th century and first decade of the 21st century',
   'preambul.40.paragraph1':

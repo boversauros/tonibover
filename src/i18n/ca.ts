@@ -1,6 +1,5 @@
 export default {
   // Index page
-  'index.section': 'INICI',
   'index.title': '100 reflexions iconotextuals sobre la comunicació visual i la fotografia',
   'index.imageAlt':
     'La llum com a metàfora del llenguatge, obra fotogràfica de Toni Bover (1990-94)',
@@ -15,7 +14,6 @@ export default {
   'footer.acknowledgments': 'Agraïments',
   'footer.legal': "Lleis d'autoria i protecció de dades",
   // Biography page
-  'biografia.section': 'BIOGRAFIA',
   'biografia.name': 'Antoni Bover Tanyà',
   'biografia.birthInfo': 'Vic, 15 de juny de 1954',
   'biografia.imageCaption': 'Fotografies Arxiu Familiar, Dolors Vila i Miquel Bigas, 1957-2020.',
@@ -42,7 +40,7 @@ export default {
   'biografia.cultural.director':
     "Director de La Farinera, Centre d'Arts Visuals de Vic (Ajuntament de Vic) (2010-2020).",
   'biografia.cultural.coDirector':
-    "Codirector de la Fundació Educació i Art (Ajuntament de Vic) (2014-2020).",
+    'Codirector de la Fundació Educació i Art (Ajuntament de Vic) (2014-2020).',
   'biografia.cultural.coordinatorCiutats':
     "Coordinador del projecte Ciutats invisibles, La Farinera Centre d'Activitats (2010-2020).",
   'biografia.cultural.coordinatorFotografia':
@@ -72,7 +70,6 @@ export default {
   'agraiments.closing':
     'A les companyes i companys de feina, alumnes, família, amigues i amics amb qui he compartit influències, diferents perspectives i vivències sobre la fotografia i la comunicació visual.',
   // Documentary page
-  'documental.section': 'DOCUMENTAL',
   'documental.videoTitle': 'Toni Bover. Image Manager // Xef Vila, 2020',
   'documental.credits.title': 'Fitxa Tècnica',
   'documental.credits.production': 'Producció:',
@@ -101,7 +98,6 @@ export default {
   '404.quote5': 'Les fotografies són les petjades de la nostra memòria.',
   '404.backToHome': "Tornar a l'inici",
   // Preambul index page
-  'preambul.section': 'PREÀMBUL',
   'preambul.intro1':
     "Aquesta web és un relat interactiu, subjectiu i amb components autobiogràfics sobre l'image management. Hi descric l'aprenentatge i l'autoaprenentatge de la comunicació visual dels darrers 40 anys.",
   'preambul.intro2':
@@ -122,7 +118,8 @@ export default {
   'preambul.20.quote':
     "Entendre la imatge fotogràfica és imprescindible per a l'alfabetització iconotextual i la comunicació visual.",
   'preambul.20.imageAlt': 'Dos fotografies, Toni Bover fent una foto i aguantant una càmera',
-  'preambul.20.imageCaption': 'Fotografies Arxiu Familiar i Pere Moscoso. Anys 70 i 80 del segle XX',
+  'preambul.20.imageCaption':
+    'Fotografies Arxiu Familiar i Pere Moscoso. Anys 70 i 80 del segle XX',
   'preambul.20.paragraph1':
     "L'interès per les matemàtiques i la filosofia va anar derivant cap a la semiòtica de la imatge.",
   'preambul.20.paragraph2':
@@ -146,7 +143,7 @@ export default {
   'preambul.60.subtitle':
     "Els 60 signifiquen l'etapa de la reflexió i la continuació de les il·lusions dels 20. Un temps per endreçar i arxivar el que ha servit, i per llençar el que ha aportat poc o res a la consolidació de les il·lusions dels 20 o a la maduresa dels 40.",
   'preambul.60.quote':
-    "La comunicació visual ha canviat de forma exponencial i vertiginosa durant els darrers anys. La imatge fotogràfica evolucionarà des de la Intel·ligència Artificial Generativa i els processos transmèdia.",
+    'La comunicació visual ha canviat de forma exponencial i vertiginosa durant els darrers anys. La imatge fotogràfica evolucionarà des de la Intel·ligència Artificial Generativa i els processos transmèdia.',
   'preambul.60.imageAlt': 'People viewing an exhibition',
   'preambul.60.imageCaption': 'Fotografies Miquel Bigas. 2016',
   'preambul.60.paragraph1':

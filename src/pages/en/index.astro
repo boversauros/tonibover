@@ -1,7 +1,6 @@
 ---
 import Layout from '@layouts/Layout.astro';
 import Container from '@components/ui/Container.astro';
-import SectionTitle from '@components/ui/SectionTitle.astro';
 import Heading from '@components/ui/Heading.astro';
 import Text from '@components/ui/Text.astro';
 import Image from '@components/ui/Image.astro';
@@ -14,12 +13,14 @@ const t = useTranslations('en');
 
 <Layout lang="en">
   <Container>
-    <SectionTitle>{t('index.section')}</SectionTitle>
     <Heading as="h1" size="3xl" variant="primary" class="text-[32px]">{t('index.title')} </Heading>
 
     <div class="space-y-8">
       <Image src="/images/inici_img.webp" alt={t('index.imageAlt')} aspect="auto" loading="eager">
-        <span slot="caption" set:html={`Toni Bover. <span class="font-serif">Light as a metaphor for language</span>. 1990-94.`}></span>
+        <span
+          slot="caption"
+          set:html={`Toni Bover. <span class="font-serif">Light as a metaphor for language</span>. 1990-94.`}
+        />
       </Image>
 
       <Text variant="body">

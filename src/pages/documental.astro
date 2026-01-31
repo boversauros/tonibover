@@ -2,7 +2,6 @@
 import Layout from '@layouts/Layout.astro';
 import Container from '@components/ui/Container.astro';
 import { YouTube } from 'astro-lazy-youtube-embed';
-import SectionTitle from '@components/ui/SectionTitle.astro';
 import Heading from '@components/ui/Heading.astro';
 import Text from '@components/ui/Text.astro';
 import { useTranslations } from '@/i18n';
@@ -13,13 +12,13 @@ const t = useTranslations('ca');
 
 <Layout lang="ca">
   <Container>
-    <SectionTitle>{t('documental.section')}</SectionTitle>
-
     <div class="space-y-8">
       <YouTube title={t('documental.videoTitle')} videoId="x6hNCbrUDcc" />
 
       <div class="border-t border-default pt-8">
-        <Heading as="h3" size="2xl" variant="secondary" class="mb-6">{t('documental.credits.title')}</Heading>
+        <Heading as="h3" size="2xl" variant="secondary" class="mb-6"
+          >{t('documental.credits.title')}</Heading
+        >
         <dl class="grid grid-cols-1 md:grid-cols-2 gap-4 text-body">
           <div>
             <dt class="font-medium">{t('documental.credits.production')}</dt>
@@ -50,7 +49,9 @@ const t = useTranslations('ca');
 
       <!-- Description -->
       <div class="border-t border-default pt-8">
-        <Heading as="h3" size="2xl" variant="secondary" class="mb-6">{t('documental.summary.title')}</Heading>
+        <Heading as="h3" size="2xl" variant="secondary" class="mb-6"
+          >{t('documental.summary.title')}</Heading
+        >
         <Text variant="body">
           {t('documental.summary.description')}
         </Text>
@@ -58,7 +59,9 @@ const t = useTranslations('ca');
 
       <!-- Director Bio -->
       <div class="border-t border-default pt-8">
-        <Heading as="h3" size="2xl" variant="secondary" class="mb-6">{t('documental.director.title')}</Heading>
+        <Heading as="h3" size="2xl" variant="secondary" class="mb-6"
+          >{t('documental.director.title')}</Heading
+        >
         <Text variant="body">
           {t('documental.director.bio')}
         </Text>
