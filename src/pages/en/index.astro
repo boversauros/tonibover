@@ -5,6 +5,7 @@ import SectionTitle from '@components/ui/SectionTitle.astro';
 import Heading from '@components/ui/Heading.astro';
 import Text from '@components/ui/Text.astro';
 import Image from '@components/ui/Image.astro';
+import Icon from '@components/ui/Icon.astro';
 import { useTranslations } from '@/i18n';
 import '@styles/global.css';
 
@@ -25,7 +26,8 @@ const t = useTranslations('en');
         {t('index.description')}
       </Text>
 
-      <blockquote class="border-l-4 border-accent pl-6 py-2 my-8">
+      <blockquote class="flex gap-4 py-2 my-8">
+        <Icon name="quote-close" size="8" class="text-accent shrink-0 mt-1" />
         <p class="text-xl font-serif text-secondary italic">
           "Think global, act local."
           <br />
