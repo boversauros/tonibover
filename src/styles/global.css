@@ -44,8 +44,8 @@
 
   /* ===== Typography ===== */
   /* Font Families */
-  --font-serif: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
-  --font-sans: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+  --font-serif: 'Bodoni Moda Variable', ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
+  --font-sans: 'Nunito', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
     'Segoe UI Symbol', 'Noto Color Emoji';
 
   /* Font Sizes */
@@ -70,7 +70,8 @@
 
   /* Font Weights */
   --font-light: 300;
-  --font-medium: 500;
+  --font-regular: 400;
+  --font-semibold: 600;
 
   /* ===== Spacing ===== */
   --spacing-2: 0.5rem; /* 8px */
