@@ -105,14 +105,14 @@ export default {
     "Article: 20/40/60. An iconotextual reflection on photography as art and science. Temps d'Educació, UB. 2021",
   'preambul.imageCredits': 'Photographs: Pere Moscoso, Frank Gómez and Miquel Bigas.',
   'preambul.card20.alt': 'A transition process to maturity',
-  'preambul.card20.title': 'A TRANSITION PROCESS TO MATURITY',
+  'preambul.card20.title': 'A transition process to maturity',
   'preambul.card40.alt': 'A transition process from analog to digital',
-  'preambul.card40.title': 'A TRANSITION PROCESS FROM ANALOG TO DIGITAL',
+  'preambul.card40.title': 'A transition process from analog to digital',
   'preambul.card60.alt': 'A work transition process',
-  'preambul.card60.title': 'A WORK TRANSITION PROCESS',
+  'preambul.card60.title': 'A work transition process',
   'preambul.discoverMore': 'Discover more →',
   // Preambul 20 page
-  'preambul.20.title': 'A TRANSITION PROCESS TO MATURITY',
+  'preambul.20.title': 'A transition process to maturity',
   'preambul.20.subtitle':
     'The 20s symbolize the age of illusion, when the gaze is oriented towards the future. These illusions and ideas have accompanied me throughout life.',
   'preambul.20.quote':
@@ -125,7 +125,7 @@ export default {
   'preambul.20.paragraph2':
     'Familiarizing myself with photography allowed me to learn to look, communicate ideas from iconic signs, and organize the elements of the image to understand the principles of aesthetics and visual communication.',
   // Preambul 40 page
-  'preambul.40.title': 'A TRANSITION PROCESS FROM ANALOG TO DIGITAL',
+  'preambul.40.title': 'A transition process from analog to digital',
   'preambul.40.subtitle':
     'The 40s open the stage of maturity and continuous improvement, the moment when I become aware of what I love and where the ideas of the 20s are consolidated. This phase serves to understand and deepen knowledge about photography and its relationship with visual communication.',
   'preambul.40.quote':
@@ -139,7 +139,7 @@ export default {
   'preambul.40.paragraph2':
     'Entering as a professor at the University and doing my doctorate at the School of Architecture made it easier for me to understand and apply the principles of perspective and image geometry, and to become interested in the relationships between drawing, photography and computer-generated imagery (CGI).',
   // Preambul 60 page
-  'preambul.60.title': 'A WORK TRANSITION PROCESS',
+  'preambul.60.title': 'A work transition process',
   'preambul.60.subtitle':
     'The 60s signify the stage of reflection and continuation of the illusions of the 20s. A time to tidy up and archive what has served, and to discard what has contributed little or nothing to the consolidation of the illusions of the 20s or the maturity of the 40s.',
   'preambul.60.quote':

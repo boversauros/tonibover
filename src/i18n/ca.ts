@@ -106,14 +106,14 @@ export default {
     "Article: 20/40/60. Una reflexió iconotextual de la fotografia com a art i ciència. Temps d'Educació, UB. 2021",
   'preambul.imageCredits': 'Fotografies: Pere Moscoso, Frank Gómez i Miquel Bigas.',
   'preambul.card20.alt': 'Un procés trans a la màquina',
-  'preambul.card20.title': 'UN PROCÉS TRANS A LA MADURESA',
+  'preambul.card20.title': 'Un procés trans a la maduresa',
   'preambul.card40.alt': "Un procés trans de l'analògic al digital",
-  'preambul.card40.title': "UN PROCÉS TRANS DE L'ANALÒGIC AL DIGITAL",
+  'preambul.card40.title': "Un procés trans de l'analògic al digital",
   'preambul.card60.alt': 'Un procés trans laboral',
-  'preambul.card60.title': 'UN PROCÉS TRANS LABORAL',
+  'preambul.card60.title': 'Un procés trans laboral',
   'preambul.discoverMore': 'Descobrir més →',
   // Preambul 20 page
-  'preambul.20.title': 'UN PROCÉS TRANS A LA MADURESA',
+  'preambul.20.title': 'Un procés trans a la maduresa',
   'preambul.20.subtitle':
     "Els 20 simbolitzen l'edat de la il·lusió, quan la mirada s'orienta cap al futur. Aquestes il·lusions i idees m'han acompanyat al llarg de la vida.",
   'preambul.20.quote':
@@ -126,7 +126,7 @@ export default {
   'preambul.20.paragraph2':
     "Familiaritzar-me amb la fotografia em va permetre aprendre a mirar, comunicar idees a partir dels signes icònics i a ordenar els elements de la imatge per comprendre els principis de l'estètica i de la comunicació visual.",
   // Preambul 40 page
-  'preambul.40.title': "UN PROCÉS TRANS DE L'ANALÒGIC AL DIGITAL",
+  'preambul.40.title': "Un procés trans de l'analògic al digital",
   'preambul.40.subtitle':
     "Els 40 obren l'etapa de la maduresa i de la millora continua, moment en què prenc consciència del que estimo i on es consoliden les idees dels 20. Aquesta fase serveix per entendre i aprofundir els coneixements sobre la fotografia i la seva relació amb la comunicació visual.",
   'preambul.40.quote':
@@ -140,7 +140,7 @@ export default {
   'preambul.40.paragraph2':
     "L'entrada com a professor a la Universitat i fer el doctorat a l'Escola d'Arquitectura em va facilitar comprendre i aplicar els principis de la perspectiva i de la geometria de la imatge, i interessar-me per les relacions entre el dibuix, la fotografia i la imatge generada per ordinador (CGI).",
   // Preambul 60 page
-  'preambul.60.title': 'UN PROCÉS TRANS LABORAL',
+  'preambul.60.title': 'Un procés trans laboral',
   'preambul.60.subtitle':
     "Els 60 signifiquen l'etapa de la reflexió i la continuació de les il·lusions dels 20. Un temps per endreçar i arxivar el que ha servit, i per llençar el que ha aportat poc o res a la consolidació de les il·lusions dels 20 o a la maduresa dels 40.",
   'preambul.60.quote':
