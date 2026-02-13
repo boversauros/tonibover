@@ -9,7 +9,7 @@ import { useTranslations, type Lang } from '@/i18n';
 interface Props {
   lang: Lang;
   title: string;
-  subtitle: string;
+
   quote?: string;
   image: {
     src: string;
@@ -18,7 +18,7 @@ interface Props {
   };
 }
 
-const { lang, title, subtitle, quote, image } = Astro.props;
+const { lang, title, quote, image } = Astro.props;
 const t = useTranslations(lang);
 const currentSection = Astro.url.pathname.replace(/\/$/, '').split('/').pop() || '';
 ---
@@ -26,13 +26,10 @@ const currentSection = Astro.url.pathname.replace(/\/$/, '').split('/').pop() ||
 <Layout lang={lang}>
   <main class="grow container-spacing-default">
     <div class="max-w-4xl mx-auto px-sp-6">
-      <div class="border-b border-subtle pb-sp-8 mb-sp-8">
-        <Text variant="body" class="text-lg">
-          {t('preambul.intro2')}
-        </Text>
-        <h1 class="text-3xl font-serif text-secondary my-sp-8 font-semibold">{title}</h1>
-        <Text variant="body">{subtitle}</Text>
-      </div>
+      <Text variant="body" class="text-lg">
+        {t('preambul.intro2')}
+      </Text>
+      <h1 class="text-3xl font-serif text-secondary my-sp-8 font-semibold">{title}</h1>
 
       <div class="space-y-sp-10">
         <div class="prose max-w-none">
