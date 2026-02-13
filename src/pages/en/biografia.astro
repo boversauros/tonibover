@@ -3,7 +3,6 @@ import Layout from '@layouts/Layout.astro';
 import Container from '@components/ui/Container.astro';
 import Carousel from '@components/app/Carousel.astro';
 import Link from '@components/ui/Link.astro';
-import SectionTitle from '@components/ui/SectionTitle.astro';
 import Heading from '@components/ui/Heading.astro';
 import Text from '@components/ui/Text.astro';
 import { useTranslations } from '@/i18n';
@@ -14,17 +13,16 @@ const t = useTranslations('en');
 
 <Layout lang="en">
   <Container>
-    <SectionTitle>{t('biografia.section')}</SectionTitle>
     <Heading as="h1" size="3xl" variant="primary">{t('biografia.name')}</Heading>
     <Text variant="body" class="text-lg text-primary-80 mb-sp-8">{t('biografia.birthInfo')}</Text>
 
     <Carousel />
 
-    <div class="mt-sp-12 text-sm text-primary-60 italic">
+    <div class="text-sm text-primary-60 italic">
       {t('biografia.imageCaption')}
     </div>
 
-    <div class="mt-sp-16 space-y-sp-12">
+    <div class="mt-sp-10 space-y-sp-10">
       <section>
         <Heading as="h3" size="2xl" variant="primary">{t('biografia.education.title')}</Heading>
         <ul class="space-y-sp-4 text-primary-80">

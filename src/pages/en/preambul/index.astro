@@ -1,12 +1,10 @@
 ---
 import Layout from '@layouts/Layout.astro';
 import Container from '@components/ui/Container.astro';
-import Card from '@components/ui/Card.astro';
-import SectionTitle from '@components/ui/SectionTitle.astro';
 import Heading from '@components/ui/Heading.astro';
 import Text from '@components/ui/Text.astro';
 import Image from '@components/ui/Image.astro';
-import Link from '@/components/ui/Link.astro';
+import Icon from '@components/ui/Icon.astro';
 import { useTranslations } from '@/i18n';
 import '@styles/global.css';
 
@@ -15,87 +13,28 @@ const t = useTranslations('en');
 
 <Layout lang="en">
   <Container>
-    <div class="mb-sp-16">
-      <Text variant="body" class="mb-4">
-        {t('preambul.intro1')}
-      </Text>
+    <Heading as="h1" size="3xl" variant="primary" class="text-[32px]">{t('index.title')}</Heading>
+
+    <div class="space-y-sp-8">
+      <Image src="/images/inici_img.webp" alt={t('index.imageAlt')} aspect="auto" loading="eager">
+        <span
+          slot="caption"
+          set:html={`Toni Bover. <span class="font-serif">La llum com a metàfora del llenguatge</span>. 1990-94.`}
+        />
+      </Image>
+
       <Text variant="body">
-        {t('preambul.intro2')}
+        {t('index.description')}
       </Text>
+
+      <blockquote class="flex gap-sp-4 py-sp-2 my-sp-8">
+        <Icon name="quote-close" class="h-10 w-10 md:h-12 md:w-12 text-secondary shrink-0 mt-1" />
+        <p class="text-xl font-serif text-secondary italic">
+          Think global, act local.
+          <br />
+          <span class="text-sm text-muted italic"> Patrick Geddes </span>
+        </p>
+      </blockquote>
     </div>
-    <div class="mb-sp-4 text-sm text-primary-60 text-left">
-      {t('preambul.imageCredits')}
-    </div>
-
-    <div class="grid md:grid-cols-3 gap-sp-8">
-      <Card href="/preambul/20" aria-label={t('preambul.card20.alt')}>
-        <Image
-          slot="image"
-          src="/images/preambul-20-01.webp"
-          alt={t('preambul.card20.alt')}
-          aspect="square"
-          hover="opacity"
-        />
-        <div class="space-y-sp-2 mt-sp-6">
-          <span class="block text-3xl font-serif text-secondary">20</span>
-          <Heading as="h3" size="2xl" variant="secondary" class="mb-0"
-            >{t('preambul.card20.title')}</Heading
-          >
-          <Text variant="small" class="group-hover:text-body transition-colors">
-            {t('preambul.discoverMore')}
-          </Text>
-        </div>
-      </Card>
-
-      <Card href="/preambul/40" aria-label={t('preambul.card40.alt')}>
-        <Image
-          slot="image"
-          src="/images/preambul-40-01.webp"
-          alt={t('preambul.card40.alt')}
-          aspect="square"
-          hover="opacity"
-        />
-        <div class="space-y-sp-2 mt-sp-6">
-          <span class="block text-3xl font-serif text-secondary">40</span>
-          <Heading as="h3" size="2xl" variant="secondary" class="mb-0">
-            {t('preambul.card40.title')}
-          </Heading>
-          <Text variant="small" class="group-hover:text-body transition-colors">
-            {t('preambul.discoverMore')}
-          </Text>
-        </div>
-      </Card>
-
-      <Card href="/preambul/60" aria-label={t('preambul.card60.alt')}>
-        <Image
-          slot="image"
-          src="/images/preambul-60-01.webp"
-          alt={t('preambul.card60.alt')}
-          aspect="square"
-          hover="opacity"
-        />
-        <div class="space-y-sp-2 mt-sp-6">
-          <span class="block text-3xl font-serif text-secondary">60</span>
-          <Heading as="h3" size="2xl" variant="secondary" class="mb-0"
-            >{t('preambul.card60.title')}</Heading
-          >
-          <Text variant="small" class="group-hover:text-body transition-colors">
-            {t('preambul.discoverMore')}
-          </Text>
-        </div>
-      </Card>
-    </div>
-
-    <Link
-      href="https://raco.cat/index.php/TempsEducacio/article/view/400669"
-      target="_blank"
-      rel="noopener noreferrer"
-      variant="muted"
-      class="mt-sp-16 block"
-    >
-      <Text variant="muted" class="hover:text-primary transition-colors-default">
-        {t('preambul.articleLink')}
-      </Text>
-    </Link>
   </Container>
 </Layout>
