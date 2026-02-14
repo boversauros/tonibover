@@ -13,6 +13,7 @@ export default {
   'footer.contact': 'Contacte',
   'footer.acknowledgments': 'Agraïments',
   'footer.legal': "Lleis d'autoria i protecció de dades",
+  'footer.language': 'Idioma',
   // Biography page
   'biografia.name': 'Antoni Bover Tanyà',
   'biografia.birthInfo': 'Vic, 15 de juny de 1954',

@@ -6,7 +6,7 @@ import Heading from '@components/ui/Heading.astro';
 import Text from '@components/ui/Text.astro';
 import Image from '@components/ui/Image.astro';
 import Link from '@/components/ui/Link.astro';
-import { useTranslations } from '@/i18n';
+import { useTranslations, getLocalizedPath } from '@/i18n';
 import '@styles/global.css';
 
 const t = useTranslations('ca');
@@ -27,7 +27,7 @@ const t = useTranslations('ca');
     </div>
 
     <div class="grid md:grid-cols-3 gap-sp-8">
-      <Card href="/preambul/20" aria-label={t('preambul.card20.alt')}>
+      <Card href={getLocalizedPath('/preambul/20', 'ca')} aria-label={t('preambul.card20.alt')}>
         <Image
           slot="image"
           src="/images/preambul-20-01.webp"
@@ -46,7 +46,7 @@ const t = useTranslations('ca');
         </div>
       </Card>
 
-      <Card href="/preambul/40" aria-label={t('preambul.card40.alt')}>
+      <Card href={getLocalizedPath('/preambul/40', 'ca')} aria-label={t('preambul.card40.alt')}>
         <Image
           slot="image"
           src="/images/preambul-40-01.webp"
@@ -65,7 +65,7 @@ const t = useTranslations('ca');
         </div>
       </Card>
 
-      <Card href="/preambul/60" aria-label={t('preambul.card60.alt')}>
+      <Card href={getLocalizedPath('/preambul/60', 'ca')} aria-label={t('preambul.card60.alt')}>
         <Image
           slot="image"
           src="/images/preambul-60-01.webp"

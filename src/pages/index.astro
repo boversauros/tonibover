@@ -1,40 +1,81 @@
 ---
-import Layout from '@layouts/Layout.astro';
-import Container from '@components/ui/Container.astro';
-import Heading from '@components/ui/Heading.astro';
-import Text from '@components/ui/Text.astro';
-import Image from '@components/ui/Image.astro';
-import Icon from '@components/ui/Icon.astro';
-import { useTranslations } from '@/i18n';
+import '@fontsource-variable/bodoni-moda';
+import '@fontsource/nunito/300.css';
+import '@fontsource/nunito/400.css';
 import '@styles/global.css';
-
-const t = useTranslations('ca');
 ---
 
-<Layout lang="ca">
-  <Container>
-    <Heading as="h1" size="3xl" variant="primary" class="text-[32px]">{t('index.title')}</Heading>
+<!doctype html>
+<html lang="ca">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Toni Bover</title>
+  </head>
+  <body class="min-h-screen bg-background text-primary font-sans antialiased">
+    <main
+      id="lang-page"
+      class="flex items-center justify-center min-h-screen opacity-0 transition-opacity duration-700"
+    >
+      <div class="max-w-md mx-auto px-sp-6 text-center">
+        <h1 class="text-5xl font-serif italic font-semibold text-primary mb-sp-3">Toni Bover</h1>
+        <p class="text-sm tracking-[0.3em] text-muted mb-sp-16">IMAGE MANAGER</p>
 
-    <div class="space-y-sp-8">
-      <Image src="/images/inici_img.webp" alt={t('index.imageAlt')} aspect="auto" loading="eager">
-        <span
-          slot="caption"
-          set:html={`Toni Bover. <span class="font-serif">La llum com a metàfora del llenguatge</span>. 1990-94.`}
-        />
-      </Image>
+        <nav class="flex items-center justify-center gap-sp-8">
+          <a href="/ca/" data-lang="ca" class="lang-link text-lg tracking-wide text-body hover:text-primary transition-colors-default font-semibold">
+            Catal&agrave;
+          </a>
+          <span class="text-subtle">/</span>
+          <a href="/en/" data-lang="en" class="lang-link text-lg tracking-wide text-body hover:text-primary transition-colors-default font-semibold">
+            English
+          </a>
+        </nav>
+      </div>
+    </main>
 
-      <Text variant="body">
-        {t('index.description')}
-      </Text>
+    <style>
+      .lang-link {
+        position: relative;
+        padding-bottom: 2px;
+      }
+      .lang-link::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 1px;
+        background-color: var(--color-text-primary);
+        transform: scaleX(0);
+        transition: transform var(--duration-fast) ease;
+      }
+      .lang-link:hover::after {
+        transform: scaleX(1);
+      }
+    </style>
 
-      <blockquote class="flex gap-sp-4 py-sp-2 my-sp-8">
-        <Icon name="quote-close" class="h-10 w-10 md:h-12 md:w-12 text-secondary shrink-0 mt-1" />
-        <p class="text-xl font-serif text-secondary italic">
-          Think global, act local.
-          <br />
-          <span class="text-sm text-muted italic"> Patrick Geddes </span>
-        </p>
-      </blockquote>
-    </div>
-  </Container>
-</Layout>
+    <script>
+      const page = document.getElementById('lang-page');
+      const preferredLang = localStorage.getItem('preferred-lang');
+
+      if (preferredLang === 'ca' || preferredLang === 'en') {
+        window.location.replace(`/${preferredLang}/`);
+      } else {
+        page?.classList.remove('opacity-0');
+      }
+
+      document.querySelectorAll<HTMLAnchorElement>('[data-lang]').forEach((link) => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const lang = link.dataset.lang;
+          if (lang) {
+            localStorage.setItem('preferred-lang', lang);
+            window.location.href = `/${lang}/`;
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -19,7 +19,7 @@ const quoteKeys: TranslationKey[] = [
 const randomQuoteKey = quoteKeys[Math.floor(Math.random() * quoteKeys.length)];
 const randomQuote = t(randomQuoteKey);
 
-const homeLink = lang === 'ca' ? '/' : '/en';
+const homeLink = lang === 'ca' ? '/ca' : '/en';
 ---
 
 <Layout lang={lang}>

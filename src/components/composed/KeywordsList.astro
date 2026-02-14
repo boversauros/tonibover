@@ -1,11 +1,13 @@
 ---
 import Link from '@components/ui/Link.astro';
+import { getLangFromUrl, getLocalizedPath } from '@/i18n';
 
 interface Props {
   keywords: Array<string>;
 }
 
 const { keywords } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
 ---
 
 <div class="border-t border-default pt-sp-8">
@@ -13,7 +15,11 @@ const { keywords } = Astro.props;
   <div class="flex flex-wrap gap-sp-2">
     {
       keywords.map((keyword) => (
-        <Link href={`/reflexions/paraula-clau/${keyword}`} variant="accent-border" class="text-sm">
+        <Link
+          href={getLocalizedPath(`/reflexions/paraula-clau/${keyword}`, lang)}
+          variant="accent-border"
+          class="text-sm"
+        >
           {keyword}
         </Link>
       ))

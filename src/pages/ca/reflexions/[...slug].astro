@@ -9,6 +9,7 @@ import Heading from '@components/ui/Heading.astro';
 import Text from '@components/ui/Text.astro';
 import Image from '@components/ui/Image.astro';
 import type { Post } from '@/types';
+import { getLocalizedPath } from '@/i18n';
 
 export async function getStaticPaths() {
   const posts: Post[] = await getCollection('posts');
@@ -40,11 +41,19 @@ const categoryName = categories.find((c) => c.id === post.data.category)?.name;
     <nav class="mb-sp-12">
       <ol class="flex items-center space-x-sp-2 text-sm text-muted">
         <li>
-          <Link href="/reflexions" variant="muted" class="hover:text-white">Reflexions</Link>
+          <Link
+            href={getLocalizedPath('/reflexions', 'ca')}
+            variant="muted"
+            class="hover:text-white">Reflexions</Link
+          >
         </li>
         <li>/</li>
         <li>
-          <Link href={`/reflexions/${post.data.category}`} variant="muted" class="hover:text-white">
+          <Link
+            href={getLocalizedPath(`/reflexions/${post.data.category}`, 'ca')}
+            variant="muted"
+            class="hover:text-white"
+          >
             {categoryName}
           </Link>
         </li>

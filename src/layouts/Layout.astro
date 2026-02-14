@@ -56,8 +56,14 @@ const currentPath = Astro.url.pathname;
           >
             {t('footer.legal')}
           </Link>
+          <Link href="/" variant="muted" data-lang-switch>{t('footer.language')}</Link>
         </div>
       </div>
     </div>
   </footer>
+  <script>
+    document.querySelector('[data-lang-switch]')?.addEventListener('click', () => {
+      localStorage.removeItem('preferred-lang');
+    });
+  </script>
 </html>

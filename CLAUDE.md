@@ -52,6 +52,7 @@ All spacing uses design tokens via `sp-` prefixed utility classes defined in `gl
 **Tokens** (`--spacing-*`): 1, 2, 3, 4, 5, 6, 8, 10, 12, 16, 24, 32, 40
 
 **Utility classes**:
+
 - Margins: `mb-sp-*`, `mt-sp-*`, `my-sp-*`, `mr-sp-*`, `ml-sp-*`
 - Padding: `pt-sp-*`, `pb-sp-*`, `py-sp-*`, `px-sp-*`, `pl-sp-*`, `p-sp-*`
 - Gap: `gap-sp-*`
@@ -59,6 +60,7 @@ All spacing uses design tokens via `sp-` prefixed utility classes defined in `gl
 - Responsive: `md:px-sp-*`, `md:gap-sp-*`
 
 **Container presets** (in `@layer components`):
+
 - `container-spacing-default` - `pt-32 pb-16`
 - `container-spacing-compact` - `pt-16 pb-8`
 - `container-spacing-loose` - `pt-40 pb-24`

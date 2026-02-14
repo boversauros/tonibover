@@ -13,7 +13,6 @@ export function useTranslations(lang: Lang) {
 }
 
 export function getLocalizedPath(path: string, lang: Lang): string {
-  if (lang === defaultLang) return path;
   return `/${lang}${path}`;
 }
 

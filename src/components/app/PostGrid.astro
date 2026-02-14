@@ -2,6 +2,7 @@
 import type { Post } from '@/types';
 import Card from '@components/ui/Card.astro';
 import Image from '@components/ui/Image.astro';
+import { getLangFromUrl, getLocalizedPath } from '@/i18n';
 
 interface Props {
   posts: Array<Post>;
@@ -9,12 +10,17 @@ interface Props {
 }
 
 const { posts, categories } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
 ---
 
 <div class="grid grid-cols-1 md:grid-cols-2 gap-sp-8 mb-sp-16">
   {
     posts.map((post) => (
-      <Card href={`/reflexions/${post.slug}`} as="article" aria-label={`Read ${post.data.title}`}>
+      <Card
+        href={getLocalizedPath(`/reflexions/${post.slug}`, lang)}
+        as="article"
+        aria-label={`Read ${post.data.title}`}
+      >
         <Image
           slot="image"
           src={post.data.portraitImage.url}
