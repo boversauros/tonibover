@@ -7,6 +7,7 @@ interface Props extends AnchorProps {
   href: string;
   variant?: 'primary' | 'muted' | 'secondary' | 'accent-border';
   active?: boolean;
+  underline?: boolean;
   class?: string;
   'aria-label'?: string;
   'aria-current'?: 'page' | 'step' | 'location' | 'date' | 'time' | 'true' | 'false';
@@ -16,6 +17,7 @@ const {
   href,
   variant = 'primary',
   active = false,
+  underline = false,
   class: className = '',
   'aria-label': ariaLabel,
   'aria-current': ariaCurrent,
@@ -30,10 +32,38 @@ const variantClasses = {
     'text-muted border-b border-transparent hover:text-primary hover:border-primary transition-colors-default',
 };
 
-const activeClasses = active ? 'border-b-2 border-primary text-primary' : '';
-const finalClasses = `${variantClasses[variant]} ${activeClasses} ${className}`.trim();
+const underlineClasses = underline ? 'link-underline' : '';
+const activeClasses = active
+  ? underline
+    ? 'link-underline--active text-primary'
+    : 'border-b-2 border-primary text-primary'
+  : '';
+const finalClasses =
+  `${variantClasses[variant]} ${underlineClasses} ${activeClasses} ${className}`.trim();
 ---
 
 <a href={href} class={finalClasses} aria-label={ariaLabel} aria-current={ariaCurrent} {...rest}>
   <slot />
 </a>
+
+<style>
+  .link-underline {
+    position: relative;
+    padding-bottom: 2px;
+  }
+  .link-underline::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background-color: var(--color-text-primary);
+    transform: scaleX(0);
+    transition: transform var(--duration-fast) ease;
+  }
+  .link-underline:hover::after,
+  .link-underline--active::after {
+    transform: scaleX(1);
+  }
+</style>
