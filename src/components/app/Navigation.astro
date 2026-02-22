@@ -42,17 +42,15 @@ function isActive(href: string, path: string) {
           links.map((link) => {
             const active = isActive(link.href, currentPath);
             return (
-              <Link
-                href={link.href}
-                underline
-                active={active}
-                class="text-sm tracking-wide"
-              >
+              <Link href={link.href} underline active={active} class="text-sm tracking-wide">
                 {link.label}
               </Link>
             );
           })
         }
+        <Link href="/" underline data-lang-switch class="text-sm tracking-wide">
+          {t('nav.language')}
+        </Link>
       </div>
 
       <Button
@@ -84,6 +82,14 @@ function isActive(href: string, path: string) {
             );
           })
         }
+        <Link
+          href="/"
+          underline
+          data-lang-switch
+          class="block px-sp-4 py-sp-2 text-sm tracking-wide hover:bg-surface transition-all duration-300"
+        >
+          {t('nav.language')}
+        </Link>
       </div>
     </div>
   </nav>
