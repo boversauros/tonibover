@@ -2,7 +2,6 @@
 import Layout from '@layouts/Layout.astro';
 import Container from '@components/ui/Container.astro';
 import { YouTube } from 'astro-lazy-youtube-embed';
-import SectionTitle from '@components/ui/SectionTitle.astro';
 import Heading from '@components/ui/Heading.astro';
 import Text from '@components/ui/Text.astro';
 import { useTranslations } from '@/i18n';
@@ -14,7 +13,14 @@ const t = useTranslations('en');
 <Layout lang="en">
   <Container>
     <div class="space-y-sp-8">
-      <YouTube title={t('documental.videoTitle')} videoId="x6hNCbrUDcc" />
+      <YouTube
+        title={t('documental.videoTitle')}
+        videoId="x6hNCbrUDcc"
+        embedParams={{
+          cc_load_policy: 1,
+          cc_lang_pref: 'en',
+        }}
+      />
 
       <div class="border-t border-default pt-sp-8">
         <Heading as="h3" size="3xl" variant="secondary" class="mb-sp-6"
