@@ -3,6 +3,7 @@ import Layout from '@layouts/Layout.astro';
 import Container from '@components/ui/Container.astro';
 import PreambulNavigation from '@components/app/PreambulNavigation.astro';
 import Image from '@components/ui/Image.astro';
+import Icon from '@components/ui/Icon.astro';
 import Link from '@/components/ui/Link.astro';
 import Text from '@components/ui/Text.astro';
 import { useTranslations, type Lang } from '@/i18n';
@@ -40,7 +41,8 @@ const currentSection = Astro.url.pathname.replace(/\/$/, '').split('/').pop() ||
 
       {
         quote && (
-          <blockquote class="border-l-4 border-accent pl-sp-6 py-sp-2 my-sp-8">
+          <blockquote class="flex gap-sp-4 py-sp-2 my-sp-8">
+            <Icon name="quote-close" class="h-10 w-10 md:h-12 md:w-12 text-secondary shrink-0 mt-1" />
             <p class="text-xl font-serif text-secondary italic">{quote}</p>
           </blockquote>
         )
