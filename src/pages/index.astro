@@ -4,6 +4,7 @@ import '@fontsource/nunito/300.css';
 import '@fontsource/nunito/400.css';
 import '@styles/global.css';
 import Link from '@components/ui/Link.astro';
+import Image from '@components/ui/Image.astro';
 ---
 
 <!doctype html>
@@ -18,13 +19,23 @@ import Link from '@components/ui/Link.astro';
   <body class="min-h-screen bg-background text-primary font-sans antialiased">
     <main
       id="lang-page"
-      class="flex items-center justify-center min-h-screen opacity-0 transition-opacity duration-700"
+      class="flex items-center justify-center min-h-svh opacity-0 transition-opacity duration-700"
     >
-      <div class="max-w-md mx-auto px-sp-6 text-center">
+      <div class="max-w-lg mx-auto px-sp-6 text-center">
         <h1 class="text-5xl font-serif italic font-semibold text-primary mb-sp-3">Toni Bover</h1>
-        <p class="text-sm tracking-[0.3em] text-muted mb-sp-16">IMAGE MANAGER</p>
+        <p class="text-sm tracking-[0.3em] text-muted mb-sp-6">IMAGE MANAGER</p>
 
-        <nav class="flex items-center justify-center gap-sp-8">
+        <div class="max-w-[485px] max-h-[580px] mx-auto mb-sp-10">
+          <Image
+            src="/images/lang_selector.webp"
+            alt="Toni Bover"
+            hover="none"
+            loading="eager"
+            class="max-h-[45svh] object-contain mx-auto"
+          />
+        </div>
+
+        <nav class="flex items-center justify-center gap-sp-8 mt-sp-6">
           <Link href="/ca/" underline data-lang="ca" class="text-lg tracking-wide">
             Catal&agrave;
           </Link>
