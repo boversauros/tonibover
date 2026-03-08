@@ -83,7 +83,7 @@ export default {
   'documental.credits.duration': 'Duration:',
   'documental.credits.durationValue': '35 min',
   'documental.credits.originalVersion': 'Original Version:',
-  'documental.credits.originalVersionValue': 'Catalan',
+  'documental.credits.originalVersionValue': 'Catalan (English subtitles)',
   'documental.summary.title': 'Summary',
   'documental.summary.description':
     'This documentary summarizes the professional and artistic career of photographer and visual communicator Toni Bover on the occasion of his retirement. The narrative shows the journey from his immersion in the profession and goes through his work in advertising, artistic projects, teaching at UPC and the various photography and urbanism projects that he developed at La Farinera, Visual Arts Centre of Vic, of which he was director until 2020. Additionally, it is a reflection on the origins of the photographic image, its present and some speculations about its future.',
@@ -103,7 +103,7 @@ export default {
   'preambul.intro2':
     'The 20s, 40s and 60s are not exact time periods, but transition processes that depend on the attitudes and learning capacities of each person.',
   'preambul.articleLink':
-    "Article: 20/40/60. 20/40/60. An Iconotextual Reflection on Photography as Art and Science. Temps d'Educació, UB. 2021",
+    "Article: 20/40/60. An Iconotextual Reflection on Photography as Art and Science. Temps d'Educació, UB. 2021",
   'preambul.imageCredits': 'Photographs: Pere Moscoso, Frank Gómez and Miquel Bigas.',
   'preambul.card20.alt': 'A transition process to maturity',
   'preambul.card20.title': 'A transition process to maturity',
