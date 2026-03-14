@@ -47,17 +47,32 @@ const currentSection = Astro.url.pathname.replace(/\/$/, '').split('/').pop() ||
           </blockquote>
         )
       }
-      <Link
-        href="https://raco.cat/index.php/TempsEducacio/article/view/400669"
-        target="_blank"
-        rel="noopener noreferrer"
-        variant="muted"
-        class="mt-sp-4 block"
-      >
-        <Text variant="muted" class="hover:text-primary transition-colors-default">
-          {t('preambul.articleLink')}
-        </Text>
-      </Link>
+      <div class="mt-sp-4 space-y-sp-2">
+        <Link
+          href="https://raco.cat/index.php/TempsEducacio/article/view/400669"
+          target="_blank"
+          rel="noopener noreferrer"
+          variant="muted"
+          class="block"
+        >
+          <Text variant="muted" class="hover:text-primary transition-colors-default">
+            {t('preambul.articleLink')}
+          </Text>
+        </Link>
+        {lang === 'en' && (
+          <Link
+            href="/files/Toni%20Article_204060_ENG.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            variant="muted"
+            class="block"
+          >
+            <Text variant="muted" class="text-sm hover:text-primary transition-colors-default">
+              {t('preambul.articleTranslationLink')}
+            </Text>
+          </Link>
+        )}
+      </div>
 
       <PreambulNavigation lang={lang} currentSection={currentSection} />
     </div>
