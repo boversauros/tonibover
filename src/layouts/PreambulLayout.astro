@@ -42,7 +42,10 @@ const currentSection = Astro.url.pathname.replace(/\/$/, '').split('/').pop() ||
       {
         quote && (
           <blockquote class="flex gap-sp-4 py-sp-2 my-sp-8">
-            <Icon name="quote-close" class="h-10 w-10 md:h-12 md:w-12 text-secondary shrink-0 mt-1" />
+            <Icon
+              name="quote-close"
+              class="h-10 w-10 md:h-12 md:w-12 text-secondary shrink-0 mt-1"
+            />
             <p class="text-xl font-serif text-secondary italic">{quote}</p>
           </blockquote>
         )
@@ -59,19 +62,21 @@ const currentSection = Astro.url.pathname.replace(/\/$/, '').split('/').pop() ||
             {t('preambul.articleLink')}
           </Text>
         </Link>
-        {lang === 'en' && (
-          <Link
-            href="/files/Toni%20Article_204060_ENG.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            variant="muted"
-            class="block"
-          >
-            <Text variant="muted" class="text-sm hover:text-primary transition-colors-default">
-              {t('preambul.articleTranslationLink')}
-            </Text>
-          </Link>
-        )}
+        {
+          lang === 'en' && (
+            <Link
+              href="/files/Toni%20Article_204060_ENG.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              variant="muted"
+              class="block"
+            >
+              <Text variant="muted" class="text-sm hover:text-primary transition-colors-default">
+                {t('preambul.articleTranslationLink')}
+              </Text>
+            </Link>
+          )
+        }
       </div>
 
       <PreambulNavigation lang={lang} currentSection={currentSection} />
