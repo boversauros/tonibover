@@ -2,6 +2,12 @@
 
 Source PRD: `PRD-issue.md` (companion: `PRD.md`, `ASTRO_INTEGRATION.md`)
 
+## Status
+
+- **Phase 0 — Admin prerequisites: ✅ DONE** (Supabase project provisioned; `posts`, `post_translations`, `post_keywords`, `keywords`, `post_references`, `categories`, `category_translations`, `images`, `languages` tables live; admin UI in place; seed posts (6) inserted; RLS policies on read paths verified by anon SELECT through Astro loader).
+- **Phase 1 — CA-only tracer bullet: ✅ DONE** (delivered on branch `feat/phase-1-posts-loader`; see Phase 1 section below for what shipped + deltas).
+- Phase 2–6: pending.
+
 ## Architectural decisions
 
 Durable across all phases:
@@ -19,9 +25,20 @@ Durable across all phases:
 - **Build trigger**: Supabase DB webhook → Vercel deploy hook (signed). Vercel coalesces bursts.
 - **Pure modules to extract** (all testable in isolation): keyword slug encoder, HTML sanitizer, post entry normalizer, reference list normalizer, validation gate, Supabase content fetcher.
 
-## Phase 1 — CA-only tracer bullet: post pipeline live
+## Phase 1 — CA-only tracer bullet: post pipeline live ✅ DONE
 
 User stories: 1, 9, 15, 16, 17, 22 (partial), 38 (partial).
+
+### Delivery notes (post-merge)
+
+Shipped on branch `feat/phase-1-posts-loader`. Deltas vs. original plan text:
+
+- Placeholder MD count was 100 (not 30); all deleted.
+- Loader uses `astro:env/server` for `SUPABASE_URL` / `SUPABASE_ANON_KEY` (typed, build-time validation).
+- `src/components/ui/Image.astro` branches on URL: remote (`http(s)://*`) routes through `astro:assets` `<Image>` with `inferSize`; local public paths (`/images/...`) fall through to plain `<img>` so existing pages (`biografia`, `documental`, etc.) keep working.
+- Phase 1 stop-gap: posts with both `image_id` and `thumbnail_id` NULL get a placeholder thumbnail (`/images/inici_img.webp`) so they still appear in listings. Hero figure remains omitted when `image` is absent (per plan). Remove placeholder branch once admin attaches real images.
+- References render as a single flat list sorted by `sort_order` (per implementation plan decision); `type`-grouped rendering deferred.
+- `sharp` build script approved via `pnpm.onlyBuiltDependencies` in `package.json` (needed by `astro:assets`).
 
 ### What to build
 

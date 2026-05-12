@@ -6,7 +6,6 @@ import Container from '@components/ui/Container.astro';
 import KeywordsList from '@components/composed/KeywordsList.astro';
 import Link from '@components/ui/Link.astro';
 import Heading from '@components/ui/Heading.astro';
-import Text from '@components/ui/Text.astro';
 import Image from '@components/ui/Image.astro';
 import type { Post } from '@/types';
 import { getLocalizedPath } from '@/i18n';
@@ -14,7 +13,7 @@ import { getLocalizedPath } from '@/i18n';
 export async function getStaticPaths() {
   const posts: Post[] = await getCollection('posts');
   return posts.map((post) => ({
-    params: { slug: post.slug },
+    params: { slug: post.data.slug },
     props: { post },
   }));
 }
@@ -24,7 +23,6 @@ interface Props {
 }
 
 const { post } = Astro.props;
-const { Content } = await post.render();
 
 const categories = [
   { id: 'influencies', name: 'Influències' },
@@ -68,72 +66,53 @@ const categoryName = categories.find((c) => c.id === post.data.category)?.name;
         </Heading>
       </header>
 
-      <!-- Main image -->
-      <figure class="space-y-sp-8">
-        <div
-          class={`grid gap-sp-8 ${
-            post.data.images.length === 1
-              ? 'grid-cols-1'
-              : post.data.images.length === 2
-                ? 'grid-cols-1 md:grid-cols-2'
-                : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
-          }`}
-        >
-          {
-            post.data.images.map((image) => (
-              <Image
-                src={image.url}
-                alt={image.title}
-                height="h-[400px]"
-                hover="none"
-                loading="eager"
-              >
-                <span slot="caption">{image.title}</span>
-              </Image>
-            ))
-          }
-        </div>
-      </figure>
+      <!-- Hero image (optional) -->
+      {
+        post.data.image && (
+          <figure class="space-y-sp-8">
+            <Image
+              src={post.data.image.url}
+              alt={post.data.image.alt}
+              height="h-[400px]"
+              hover="none"
+              loading="eager"
+            >
+              <span slot="caption">{post.data.image.alt}</span>
+            </Image>
+          </figure>
+        )
+      }
 
       <!-- Content -->
       <div
         class="prose prose-xl max-w-none prose-headings:font-serif prose-headings:text-primary prose-p:text-body prose-p:leading-relaxed prose-p:text-lg"
       >
-        <Content />
+        <Fragment set:html={post.data.html} />
       </div>
 
       <!-- References -->
-      <section class="border-t border-default pt-sp-10 space-y-sp-6">
-        <Heading as="h2" size="xl" variant="secondary">Referències</Heading>
-        <div class="space-y-sp-5">
-          <div>
-            <Heading as="h3" size="2xl" variant="body" class="text-base mb-sp-3">Text:</Heading>
-            <ul class="space-y-sp-2 text-sm text-muted leading-relaxed">
-              {
-                post.data.references.texts.map((ref) => (
-                  <li class="pl-sp-4">
-                    <span class="text-body mr-2">-</span>
-                    {ref}
-                  </li>
-                ))
-              }
+      {
+        post.data.references.length > 0 && (
+          <section class="border-t border-default pt-sp-10 space-y-sp-6">
+            <Heading as="h2" size="xl" variant="secondary">
+              Referències
+            </Heading>
+            <ul class="space-y-sp-4 text-sm text-muted leading-relaxed">
+              {post.data.references.map((ref) => (
+                <li class="pl-sp-4">
+                  <span class="text-body mr-2">-</span>
+                  <span>{ref.reference}</span>
+                  {ref.blockquote && (
+                    <blockquote class="mt-sp-2 ml-sp-4 italic border-l border-default pl-sp-3">
+                      {ref.blockquote}
+                    </blockquote>
+                  )}
+                </li>
+              ))}
             </ul>
-          </div>
-          <div>
-            <Heading as="h3" size="2xl" variant="body" class="text-base mb-sp-3">Imatge:</Heading>
-            <ul class="space-y-sp-2 text-sm text-muted leading-relaxed">
-              {
-                post.data.references.images.map((ref) => (
-                  <li class="pl-sp-4">
-                    <span class="text-body mr-2">-</span>
-                    {ref}
-                  </li>
-                ))
-              }
-            </ul>
-          </div>
-        </div>
-      </section>
+          </section>
+        )
+      }
 
       <!-- Keywords -->
       <KeywordsList keywords={post.data.keywords} />

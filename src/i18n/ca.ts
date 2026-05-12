@@ -7,6 +7,7 @@ export default {
     'Aquesta web constitueix un espai iconotextual interactiu que articula 100 reflexions sobre la comunicació visual i la fotografia, així com sobre les relacions entre art i ciència, humanisme i tecnologia, i entre la mirada exterior i la mirada interior. Les reflexions es poden llegir de manera seqüencial, per àmbits temàtics o a través de paraules clau. En elles hi exposo perspectives de cultura visual i de semiòtica de la imatge, influències rebudes i vivències autobiogràfiques.',
   // Navigation
   'nav.preambul': 'PREÀMBUL',
+  'nav.reflexions': 'REFLEXIONS',
   'nav.biografia': 'BIOGRAFIA',
   'nav.documental': 'DOCUMENTAL',
   'nav.language': 'IDIOMA',
@@ -105,7 +106,7 @@ export default {
     "Els 20, els 40 i els 60 no són períodes temporals exactes, sinó processos de transició que depenen de les actituds i de les capacitats d'aprenentatge de cada persona.",
   'preambul.articleLink':
     "Article: 20/40/60. Una reflexió iconotextual de la fotografia com a art i ciència. Temps d'Educació, UB. 2021",
-  'preambul.articleTranslationLink': 'Traducció de l\'article (PDF)',
+  'preambul.articleTranslationLink': "Traducció de l'article (PDF)",
   'preambul.imageCredits': 'Fotografies: Pere Moscoso, Frank Gómez i Miquel Bigas.',
   'preambul.card20.alt': 'Un procés trans a la màquina',
   'preambul.card20.title': 'Un procés trans a la maduresa',
