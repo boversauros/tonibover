@@ -25,17 +25,17 @@ Same values as `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` in
 
 ### Tables
 
-| Table | Key Columns | Notes |
-|-------|-------------|-------|
-| `posts` | `id`, `category_id`, `thumbnail_id`, `image_id`, `author`, `date`, `is_published` | Root post record |
-| `post_translations` | `id`, `post_id`, `language_id`, `title`, `slug`, `content` | language_id: 1=CA, 2=EN |
-| `post_keywords` | `post_translation_id`, `keyword_id` | Junction table |
-| `keywords` | `id`, `keyword`, `language_id` | Shared keyword bank |
-| `post_references` | `id`, `post_translation_id`, `type`, `reference`, `blockquote`, `sort_order` | type: 'image' or 'text' |
-| `categories` | `id`, `slug` | slug: vivencies, influencies, perspectives |
-| `category_translations` | `category_id`, `language_id`, `name` | Localized category names |
-| `images` | `id`, `url`, `title`, `alt` | Supabase Storage URLs |
-| `languages` | `id`, `code`, `name` | 1=ca (Catalan), 2=en (English) |
+| Table                   | Key Columns                                                                       | Notes                                      |
+| ----------------------- | --------------------------------------------------------------------------------- | ------------------------------------------ |
+| `posts`                 | `id`, `category_id`, `thumbnail_id`, `image_id`, `author`, `date`, `is_published` | Root post record                           |
+| `post_translations`     | `id`, `post_id`, `language_id`, `title`, `slug`, `content`                        | language_id: 1=CA, 2=EN                    |
+| `post_keywords`         | `post_translation_id`, `keyword_id`                                               | Junction table                             |
+| `keywords`              | `id`, `keyword`, `language_id`                                                    | Shared keyword bank                        |
+| `post_references`       | `id`, `post_translation_id`, `type`, `reference`, `blockquote`, `sort_order`      | type: 'image' or 'text'                    |
+| `categories`            | `id`, `slug`                                                                      | slug: vivencies, influencies, perspectives |
+| `category_translations` | `category_id`, `language_id`, `name`                                              | Localized category names                   |
+| `images`                | `id`, `url`, `title`, `alt`                                                       | Supabase Storage URLs                      |
+| `languages`             | `id`, `code`, `name`                                                              | 1=ca (Catalan), 2=en (English)             |
 
 ### Language IDs
 
@@ -63,16 +63,16 @@ export interface Image {
 
 export interface Reference {
   id: string;
-  type: ReferenceType;   // 'image' | 'text'
-  reference: string;     // URL for image, citation text for text
-  blockquote: string;    // quote text
+  type: ReferenceType; // 'image' | 'text'
+  reference: string; // URL for image, citation text for text
+  blockquote: string; // quote text
   sort_order: number;
 }
 
 export interface PostTranslation {
   language: Language;
   title: string;
-  content: string;       // HTML or rich text
+  content: string; // HTML or rich text
   slug: string;
   keywords: string[];
   references: Reference[];
@@ -87,7 +87,7 @@ export interface StoredPost {
   image_id: string | null;
   image?: Image | null;
   is_published: boolean;
-  date: string;          // ISO date string
+  date: string; // ISO date string
   author: string;
   created_at: string;
   updated_at: string;
@@ -115,21 +115,21 @@ const supabase = createClient(
 export async function getAllPosts() {
   const { data: posts, error } = await supabase
     .from('posts')
-    .select(`
+    .select(
+      `
       *,
       post_translations (id, language_id, title, content, slug),
       thumbnail:images!posts_thumbnail_id_fkey (id, url, title, alt),
       image:images!posts_image_id_fkey (id, url, title, alt)
-    `)
+    `
+    )
     .eq('is_published', true)
     .order('date', { ascending: false });
 
   if (error) throw error;
   if (!posts?.length) return [];
 
-  const translationIds = posts.flatMap(p =>
-    p.post_translations?.map((t: any) => t.id) ?? []
-  );
+  const translationIds = posts.flatMap((p) => p.post_translations?.map((t: any) => t.id) ?? []);
 
   const [{ data: kwData }, { data: refData }] = await Promise.all([
     supabase
@@ -197,11 +197,11 @@ export async function getAllPosts() {
 
 3 categories exist:
 
-| id | slug | name_ca | name_en |
-|----|------|---------|---------|
-| 1 | vivencies | Vivències | Experiences |
-| 2 | influencies | Influències | Influences |
-| 3 | perspectives | Perspectives | Perspectives |
+| id  | slug         | name_ca      | name_en      |
+| --- | ------------ | ------------ | ------------ |
+| 1   | vivencies    | Vivències    | Experiences  |
+| 2   | influencies  | Influències  | Influences   |
+| 3   | perspectives | Perspectives | Perspectives |
 
 Fetch categories:
 
@@ -223,6 +223,7 @@ The `content` field in `post_translations` is stored as **HTML** (from a rich te
 ## References
 
 Each translation can have ordered references with:
+
 - `type: 'image'` — `reference` is an image URL, `blockquote` is caption
 - `type: 'text'` — `reference` is a citation/source, `blockquote` is the quoted text
 
@@ -235,6 +236,7 @@ Render after the post body or inline depending on design.
 Images live in **Supabase Storage**. The `url` field is a full URL. Use directly in `<img src={post.thumbnail.url} alt={post.thumbnail.alt} />`.
 
 Two image fields per post:
+
 - `thumbnail` — card/list view image
 - `image` — full hero/article image
 
@@ -250,7 +252,7 @@ Fetch in `getStaticPaths` for per-language post pages:
 // src/pages/[lang]/[slug].astro
 export async function getStaticPaths() {
   const posts = await getAllPosts();
-  return posts.flatMap(post => [
+  return posts.flatMap((post) => [
     { params: { lang: 'ca', slug: post.translations.ca.slug }, props: { post, lang: 'ca' } },
     { params: { lang: 'en', slug: post.translations.en.slug }, props: { post, lang: 'en' } },
   ]);
@@ -273,22 +275,21 @@ Each file frontmatter:
 
 ```yaml
 ---
-id: "42"
-title: "Post Title"
-slug: "post-slug"
-lang: "ca"
-date: "2024-01-15"
-author: "Toni Bover"
-category_id: "1"
-category_slug: "vivencies"
+id: '42'
+title: 'Post Title'
+slug: 'post-slug'
+lang: 'ca'
+date: '2024-01-15'
+author: 'Toni Bover'
+category_id: '1'
+category_slug: 'vivencies'
 is_published: true
-keywords: ["keyword1", "keyword2"]
-thumbnail_url: "https://..."
-thumbnail_alt: "..."
-image_url: "https://..."
-image_alt: "..."
+keywords: ['keyword1', 'keyword2']
+thumbnail_url: 'https://...'
+thumbnail_alt: '...'
+image_url: 'https://...'
+image_alt: '...'
 ---
-
 <!-- content HTML here -->
 ```
 
@@ -330,11 +331,13 @@ export const collections = { posts };
 ## Recommended Approach
 
 **Use Option A (direct Supabase at build time)** if you want:
+
 - No file generation step
 - Always fresh on `astro build`
 - Simpler pipeline
 
 **Use Option B (markdown files)** if you want:
+
 - Version-controlled content in git
 - Astro Content Collections type safety
 - Offline dev without Supabase connection
@@ -357,6 +360,7 @@ export const collections = { posts };
 ## Admin → Astro Rebuild Trigger (optional)
 
 Admin uses Supabase. To auto-rebuild the Astro site when content changes:
+
 - Add a **Supabase Database Webhook** on `posts` table INSERT/UPDATE
 - Point it at your Astro hosting deploy hook (Vercel/Netlify/Cloudflare)
 
@@ -364,11 +368,11 @@ Admin uses Supabase. To auto-rebuild the Astro site when content changes:
 
 ## Key Files in This Admin Repo
 
-| File | Purpose |
-|------|---------|
-| `lib/types/post.ts` | All TypeScript types |
-| `lib/types/database.ts` | Auto-generated Supabase types |
-| `lib/api/posts.ts` | Full fetch logic (reference for Astro port) |
-| `lib/api/categories.ts` | Category fetch |
-| `lib/supabase.ts` | Supabase client init |
-| `.env.example` | Env var names needed |
+| File                    | Purpose                                     |
+| ----------------------- | ------------------------------------------- |
+| `lib/types/post.ts`     | All TypeScript types                        |
+| `lib/types/database.ts` | Auto-generated Supabase types               |
+| `lib/api/posts.ts`      | Full fetch logic (reference for Astro port) |
+| `lib/api/categories.ts` | Category fetch                              |
+| `lib/supabase.ts`       | Supabase client init                        |
+| `.env.example`          | Env var names needed                        |

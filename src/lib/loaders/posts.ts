@@ -61,7 +61,13 @@ const PLACEHOLDER_IMAGE_ALT = 'Imatge no disponible';
 // Phase 4 tightens this allowlist against the admin's actual editor output.
 function sanitize(input: string): string {
   return sanitizeHtml(input, {
-    allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img', 'h1', 'h2', 'figure', 'figcaption']),
+    allowedTags: sanitizeHtml.defaults.allowedTags.concat([
+      'img',
+      'h1',
+      'h2',
+      'figure',
+      'figcaption',
+    ]),
     allowedAttributes: {
       ...sanitizeHtml.defaults.allowedAttributes,
       img: ['src', 'alt', 'title'],
@@ -88,9 +94,7 @@ export function postsLoader() {
     const rows = posts as unknown as RawPostRow[];
 
     const caTranslationIds = rows.flatMap((p) =>
-      (p.post_translations ?? [])
-        .filter((t) => t.language_id === CA_LANGUAGE_ID)
-        .map((t) => t.id)
+      (p.post_translations ?? []).filter((t) => t.language_id === CA_LANGUAGE_ID).map((t) => t.id)
     );
 
     const [kwResult, refResult] = await Promise.all([
@@ -109,7 +113,10 @@ export function postsLoader() {
 
     const kwMap = new Map<number, string[]>();
     for (const row of kwResult.data ?? []) {
-      const r = row as { post_translation_id: number; keywords: { keyword: string } | { keyword: string }[] | null };
+      const r = row as {
+        post_translation_id: number;
+        keywords: { keyword: string } | { keyword: string }[] | null;
+      };
       const arr = kwMap.get(r.post_translation_id) ?? [];
       const kw = Array.isArray(r.keywords) ? r.keywords[0]?.keyword : r.keywords?.keyword;
       if (kw) arr.push(kw);

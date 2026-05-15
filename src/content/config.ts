@@ -1,5 +1,7 @@
 import { defineCollection, z } from 'astro:content';
 import { postsLoader } from '@/lib/loaders/posts';
+import { categoriesLoader } from '@/lib/loaders/categories';
+import { keywordsLoader } from '@/lib/loaders/keywords';
 
 const posts = defineCollection({
   loader: postsLoader(),
@@ -33,6 +35,25 @@ const posts = defineCollection({
   }),
 });
 
+const categories = defineCollection({
+  loader: categoriesLoader(),
+  schema: z.object({
+    slug: z.string(),
+    name: z.string(),
+  }),
+});
+
+const keywords = defineCollection({
+  loader: keywordsLoader(),
+  schema: z.object({
+    slug: z.string(),
+    label: z.string(),
+    postIds: z.array(z.string()),
+  }),
+});
+
 export const collections = {
   posts,
+  categories,
+  keywords,
 };

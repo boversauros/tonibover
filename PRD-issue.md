@@ -121,7 +121,7 @@ The Content Loader composes the fetcher, normalizer, validation gate, and (via t
 **Modules to test (recommended scope, please confirm):**
 
 1. **Keyword slug encoder.** High-leverage, pure, edge-case rich (diacritics, casing, whitespace runs, punctuation, collisions across two keywords differing only in accent). Must test.
-2. **HTML sanitizer.** Verifies allowlist boundary: known-bad tags (script, iframe, on*-handlers, javascript: URLs) are stripped; allowed tags (p, h2, em, a with safe href) survive. Must test.
+2. **HTML sanitizer.** Verifies allowlist boundary: known-bad tags (script, iframe, on\*-handlers, javascript: URLs) are stripped; allowed tags (p, h2, em, a with safe href) survive. Must test.
 3. **Post entry normalizer.** Covers the language-pivot logic: Catalan-only post emits one entry, both-languages emits two, empty English row emits one. Soft-fallbacks (alt ← title, thumbnail ← image) verified. Must test.
 4. **Validation gate.** Each hard-fail rule has a positive and a negative case. Must test.
 5. **Reference list normalizer.** Sort order + type bucketing. Should test.

@@ -6,34 +6,36 @@ import { getCollection } from 'astro:content';
 import type { GetStaticPathsOptions } from 'astro';
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
-  const post = await getCollection('posts');
+  const [posts, keywordEntries] = await Promise.all([
+    getCollection('posts'),
+    getCollection('keywords'),
+  ]);
   const pageSize = 6;
-  const keywords = [...new Set(post.flatMap((post) => post.data.keywords))];
 
-  return keywords.flatMap((keyword) => {
-    const keywordPosts = post.filter((post) => post.data.keywords.includes(keyword));
+  return keywordEntries.flatMap((kw) => {
+    const ids = new Set(kw.data.postIds);
+    const keywordPosts = posts.filter((p) => ids.has(p.id));
     return paginate(keywordPosts, {
-      params: { keyword },
-      props: { keyword },
+      params: { keyword: kw.data.slug },
+      props: { label: kw.data.label },
       pageSize,
     });
   });
 }
 
-const { keyword, page } = Astro.props;
+const { label, page } = Astro.props;
 
-const categories = [
-  { id: 'influencies', name: 'Influències' },
-  { id: 'perspectives', name: 'Perspectives' },
-  { id: 'vivencies', name: 'Vivències' },
-];
+const categoryEntries = await getCollection('categories');
+const categories = categoryEntries
+  .map((c) => ({ id: c.data.slug, name: c.data.name }))
+  .sort((a, b) => a.name.localeCompare(b.name, 'ca'));
 
 const uniqueKeywords = [...new Set(page.data.flatMap((post) => post.data.keywords))];
 ---
 
 <Layout>
   <PostsListLayout
-    title={`REFLEXIONS: Paraula Clau "${keyword}"`}
+    title={`REFLEXIONS: Paraula Clau "${label}"`}
     categories={categories}
     page={page}
     keywords={uniqueKeywords}
