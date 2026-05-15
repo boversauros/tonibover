@@ -1,4 +1,6 @@
 ---
+import { Image as AstroImage } from 'astro:assets';
+
 interface Props {
   src: string;
   alt: string;
@@ -41,13 +43,21 @@ const hoverClasses = {
 const imageClasses =
   `${width} ${height} ${aspectClasses[aspect]} object-cover ${hoverClasses[hover]} ${className}`.trim();
 const overflowClass = hover === 'scale' ? 'overflow-hidden' : '';
+
+// astro:assets <Image> can optimize remote URLs (with inferSize) but not public-folder paths.
+// Local public paths (e.g. /images/foo.webp) fall through to a plain <img>.
+const isRemote = /^https?:\/\//.test(src);
 ---
 
 {
   hasCaption ? (
     <figure class="space-y-sp-3">
       <div class={`group ${overflowClass}`}>
-        <img src={src} alt={alt} loading={loading} class={imageClasses} {...rest} />
+        {isRemote ? (
+          <AstroImage src={src} alt={alt} inferSize loading={loading} class={imageClasses} {...rest} />
+        ) : (
+          <img src={src} alt={alt} loading={loading} class={imageClasses} {...rest} />
+        )}
       </div>
       <figcaption class="text-sm text-muted leading-relaxed">
         <slot name="caption" />
@@ -55,7 +65,11 @@ const overflowClass = hover === 'scale' ? 'overflow-hidden' : '';
     </figure>
   ) : (
     <div class={`group ${overflowClass}`}>
-      <img src={src} alt={alt} loading={loading} class={imageClasses} {...rest} />
+      {isRemote ? (
+        <AstroImage src={src} alt={alt} inferSize loading={loading} class={imageClasses} {...rest} />
+      ) : (
+        <img src={src} alt={alt} loading={loading} class={imageClasses} {...rest} />
+      )}
     </div>
   )
 }

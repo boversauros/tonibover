@@ -17,14 +17,14 @@ const lang = getLangFromUrl(Astro.url);
   {
     posts.map((post) => (
       <Card
-        href={getLocalizedPath(`/reflexions/${post.slug}`, lang)}
+        href={getLocalizedPath(`/reflexions/${post.data.slug}`, lang)}
         as="article"
         aria-label={`Read ${post.data.title}`}
       >
         <Image
           slot="image"
-          src={post.data.portraitImage.url}
-          alt={post.data.portraitImage.title}
+          src={post.data.thumbnail.url}
+          alt={post.data.thumbnail.alt}
           aspect="4/3"
           hover="scale"
         />
