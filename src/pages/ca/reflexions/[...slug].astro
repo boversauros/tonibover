@@ -24,11 +24,10 @@ interface Props {
 
 const { post } = Astro.props;
 
-const categories = [
-  { id: 'influencies', name: 'Influències' },
-  { id: 'perspectives', name: 'Perspectives' },
-  { id: 'vivencies', name: 'Vivències' },
-];
+const categoryEntries = await getCollection('categories');
+const categories = categoryEntries
+  .map((c) => ({ id: c.data.slug, name: c.data.name }))
+  .sort((a, b) => a.name.localeCompare(b.name, 'ca'));
 
 const categoryName = categories.find((c) => c.id === post.data.category)?.name;
 ---

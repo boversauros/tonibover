@@ -6,7 +6,8 @@ Source PRD: `PRD-issue.md` (companion: `PRD.md`, `ASTRO_INTEGRATION.md`)
 
 - **Phase 0 — Admin prerequisites: ✅ DONE** (Supabase project provisioned; `posts`, `post_translations`, `post_keywords`, `keywords`, `post_references`, `categories`, `category_translations`, `images`, `languages` tables live; admin UI in place; seed posts (6) inserted; RLS policies on read paths verified by anon SELECT through Astro loader).
 - **Phase 1 — CA-only tracer bullet: ✅ DONE** (delivered on branch `feat/phase-1-posts-loader`; see Phase 1 section below for what shipped + deltas).
-- Phase 2–6: pending.
+- **Phase 2 — Categories + keywords as collections (CA): ✅ DONE** (delivered on branch `feat/phase-2-categories-keywords`; see Phase 2 section below for what shipped + deltas).
+- Phase 3–6: pending.
 
 ## Architectural decisions
 
@@ -56,9 +57,21 @@ Categories stay hardcoded in pages this phase (replaced in Phase 2). Validation/
 - All 30 placeholder MD files removed; `pnpm dev` runs without referencing them.
 - `SUPABASE_URL` / `SUPABASE_ANON_KEY` documented in `.env.example`.
 
-## Phase 2 — Categories + keywords as collections (CA)
+## Phase 2 — Categories + keywords as collections (CA) ✅ DONE
 
 User stories: 12, 13, 25, 27.
+
+### Delivery notes (post-merge)
+
+Shipped on branch `feat/phase-2-categories-keywords`. Deltas vs. original plan text:
+
+- Slug encoder lives at `src/lib/slugify.ts` (NFD diacritic strip, lowercase, non-alnum→dash, trim). Used at render time in `KeywordsList.astro` (label→href) and inside `keywords` loader (DB row→entry slug). Post entry schema `keywords: z.array(z.string())` left unchanged — single source of truth = encoder module.
+- `keywords` loader emits `{ id: slug, slug, label, postIds: string[] }`. Joins go through `posts → post_translations (lang=1, is_published) → post_keywords`. `postIds` are post-row ids (matching Phase 1 entry id `String(posts.id)`), not translation ids.
+- Slug-collision behavior: silent merge. One entry per slug; `postIds` = union; display label = keyword row with smallest `keywords.id`.
+- Orphan keywords (no published post) dropped from collection so `/paraula-clau/<orphan>` doesn't generate.
+- `categories` loader emits flat `{ id: slug, slug, name }` (CA name only). Phase 3 will widen to `name: { ca, en }`.
+- Category listing order: alphabetical by CA name via `localeCompare('ca')` at render time. Done in all four CA pages.
+- Four CA pages had hardcoded category arrays inlined; all replaced. Keyword route page now iterates `getCollection('keywords')` and filters posts by `postIds.includes(p.id)` — no more re-flatMapping `post.data.keywords` across all posts.
 
 ### What to build
 
@@ -70,10 +83,10 @@ The keyword slug encoder is extracted as its own module here — it's reused by 
 
 ### Acceptance criteria
 
-- `/ca/reflexions/vivencies/` (and the other two slugs) lists posts in that category, sourced from collection — zero hardcoded category arrays remain in CA pages.
-- `/ca/reflexions/paraula-clau/<encoded-slug>/` lists posts with that keyword.
-- Keyword link rendered on a post detail page routes to the matching keyword index.
-- Diacritic-folded keywords (`Vivència` and `vivencia`) collapse to one slug.
+- ✅ `/ca/reflexions/vivencies/` (and the other two slugs) lists posts in that category, sourced from collection — zero hardcoded category arrays remain in CA pages.
+- ✅ `/ca/reflexions/paraula-clau/<encoded-slug>/` lists posts with that keyword. 12 keyword pages generated (`infancia`, `mallorca`, `viatge`, `introspeccio`, `llull`, `filosofia`, `musica`, `mediterrania`, `lentitud`, `reflexio`, `identitat`, `arrels`) — all diacritic-stripped.
+- ✅ Keyword link rendered on a post detail page routes to the matching keyword index (via `slugify(keyword)` in `KeywordsList.astro`).
+- ✅ Diacritic-folded keywords (`Vivència` and `vivencia`) collapse to one slug — loader-side merge with deterministic label selection.
 
 ## Phase 3 — English mirror + language switcher
 
@@ -104,6 +117,7 @@ User stories: 22, 23, 24, 31, 32, 33, 34, 35, 36.
 Lock the loader contract. Extract the deep modules per PRD §Implementation Decisions, formalize Zod schemas at the collection boundary, generate Supabase types, add Vitest, cover the pure modules.
 
 Modules under `src/lib/`:
+
 - `lib/sanitize.ts` — `sanitize-html` configured with allowlist matching the admin's editor (allowlist finalized once editor identity confirmed in Phase 0).
 - `lib/slugify.ts` — keyword slug encoder (already extracted in Phase 2; tighten + test here).
 - `lib/loaders/normalize-post.ts` — pure transform: raw joined Supabase row → array of zero/one/two flat entries with soft-fallbacks resolved.
@@ -113,7 +127,7 @@ Modules under `src/lib/`:
 
 The Content Loader composes fetcher → normalizer → sanitizer (via normalizer) → validation gate. Zod schemas validate each entry before it enters the collection. `pnpm types:gen` script runs `supabase gen types typescript --project-id ... > src/lib/database.types.ts`; output committed.
 
-Vitest setup added. Tests written: keyword slug encoder (diacritics, casing, whitespace runs, punctuation, collisions); HTML sanitizer (script/iframe/on*-handlers/javascript: URLs stripped, allowed tags survive); post entry normalizer (CA-only emits one, both-langs emits two, empty EN row emits one, alt fallback, thumbnail fallback); validation gate (positive + negative case per hard-fail rule); reference list normalizer (sort order + type bucketing). Fetcher skipped at unit level — covered by Phase 6 end-to-end build.
+Vitest setup added. Tests written: keyword slug encoder (diacritics, casing, whitespace runs, punctuation, collisions); HTML sanitizer (script/iframe/on\*-handlers/javascript: URLs stripped, allowed tags survive); post entry normalizer (CA-only emits one, both-langs emits two, empty EN row emits one, alt fallback, thumbnail fallback); validation gate (positive + negative case per hard-fail rule); reference list normalizer (sort order + type bucketing). Fetcher skipped at unit level — covered by Phase 6 end-to-end build.
 
 Server-only env var enforcement verified (no `PUBLIC_` prefix; loader fails in CI if missing).
 

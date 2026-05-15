@@ -28,29 +28,29 @@ Replace the placeholder Markdown content collection in this Astro 5 site with a 
 
 ## 4. Architecture decisions (locked)
 
-| # | Area | Decision |
-|---|---|---|
-| 1 | Source of truth | Supabase. Existing placeholder MDs deleted. |
-| 2 | Fetch strategy | Build-time fetch via Astro Content Loader. Static output. |
-| 3 | API surface | Custom Content Loader (`defineCollection({ loader, schema })`). Pages use `getCollection()`. |
-| 4 | Collection shape | Flat: one entry per `(post, lang)`. EN entry only if admin has a non-empty translation row. |
-| 5 | URL slugs | Admin-defined, per-language. No legacy redirect map (placeholder MDs ⇒ no live URLs to preserve). |
-| 6 | Content format | HTML in DB, rendered with `<Fragment set:html />`. |
-| 7 | Language switcher | When EN translation absent: toggle visible but disabled, tooltip "Not yet translated". |
-| 8 | Image pipeline | Astro `<Image>` component with `image.remotePatterns` for `*.supabase.co`. Update `src/components/ui/Image.astro`. |
-| 9 | Categories | Loaded as a separate collection from Supabase (`categories` + `category_translations`). Replace 4+ inline hardcoded arrays. |
-| 10 | Keywords | Slugified in loader (lowercase + diacritic strip + dash-join). Loaded as a third collection (slug → label per lang + post refs). |
-| 11 | Image fields | Single `image` + `thumbnail`. Drop `images[]` array and dead grid logic in `[...slug].astro`. |
-| 12 | Build trigger | Supabase Database Webhook → Vercel Deploy Hook. Fires on insert/update/delete of `posts`, `post_translations`, `post_keywords`, `post_references`, `images`, `categories`, `category_translations`. |
-| 13 | Hosting | Vercel. |
-| 14 | Local dev | Astro content layer cache + digest-based incremental sync. `.env.local` required; cache fallback when offline. |
-| 15 | Drafts | Strict. Loader filters `is_published = true`. No preview deployment. |
-| 16 | Env vars | Server-only `SUPABASE_URL` + `SUPABASE_ANON_KEY` (no `PUBLIC_` prefix). Loader runs in Node at build time only. RLS policy gates client-visible rows. |
-| 17 | Types | `pnpm types:gen` runs `supabase gen types typescript --project-id ... > src/lib/database.types.ts`. Output committed. |
-| 18 | Validation | Hybrid. Hard-fail on missing title/slug/content/category/category-FK. Soft-fallback on missing alt (use title), missing thumbnail (use main image), missing image (omit hero figure). |
-| 19 | Sanitization | Defense-in-depth. Admin sanitizes on write; Astro loader sanitizes on read with `sanitize-html` allowlist matching the editor's tag set. |
-| 20 | SEO surfaces | Add `@astrojs/sitemap` (multi-locale). Add per-language RSS feeds (`/ca/rss.xml`, `/en/rss.xml`). |
-| 21 | Post ordering | `posts.sort_order ASC, date DESC` (tiebreaker). Requires admin schema change. |
+| #   | Area              | Decision                                                                                                                                                                                            |
+| --- | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1   | Source of truth   | Supabase. Existing placeholder MDs deleted.                                                                                                                                                         |
+| 2   | Fetch strategy    | Build-time fetch via Astro Content Loader. Static output.                                                                                                                                           |
+| 3   | API surface       | Custom Content Loader (`defineCollection({ loader, schema })`). Pages use `getCollection()`.                                                                                                        |
+| 4   | Collection shape  | Flat: one entry per `(post, lang)`. EN entry only if admin has a non-empty translation row.                                                                                                         |
+| 5   | URL slugs         | Admin-defined, per-language. No legacy redirect map (placeholder MDs ⇒ no live URLs to preserve).                                                                                                   |
+| 6   | Content format    | HTML in DB, rendered with `<Fragment set:html />`.                                                                                                                                                  |
+| 7   | Language switcher | When EN translation absent: toggle visible but disabled, tooltip "Not yet translated".                                                                                                              |
+| 8   | Image pipeline    | Astro `<Image>` component with `image.remotePatterns` for `*.supabase.co`. Update `src/components/ui/Image.astro`.                                                                                  |
+| 9   | Categories        | Loaded as a separate collection from Supabase (`categories` + `category_translations`). Replace 4+ inline hardcoded arrays.                                                                         |
+| 10  | Keywords          | Slugified in loader (lowercase + diacritic strip + dash-join). Loaded as a third collection (slug → label per lang + post refs).                                                                    |
+| 11  | Image fields      | Single `image` + `thumbnail`. Drop `images[]` array and dead grid logic in `[...slug].astro`.                                                                                                       |
+| 12  | Build trigger     | Supabase Database Webhook → Vercel Deploy Hook. Fires on insert/update/delete of `posts`, `post_translations`, `post_keywords`, `post_references`, `images`, `categories`, `category_translations`. |
+| 13  | Hosting           | Vercel.                                                                                                                                                                                             |
+| 14  | Local dev         | Astro content layer cache + digest-based incremental sync. `.env.local` required; cache fallback when offline.                                                                                      |
+| 15  | Drafts            | Strict. Loader filters `is_published = true`. No preview deployment.                                                                                                                                |
+| 16  | Env vars          | Server-only `SUPABASE_URL` + `SUPABASE_ANON_KEY` (no `PUBLIC_` prefix). Loader runs in Node at build time only. RLS policy gates client-visible rows.                                               |
+| 17  | Types             | `pnpm types:gen` runs `supabase gen types typescript --project-id ... > src/lib/database.types.ts`. Output committed.                                                                               |
+| 18  | Validation        | Hybrid. Hard-fail on missing title/slug/content/category/category-FK. Soft-fallback on missing alt (use title), missing thumbnail (use main image), missing image (omit hero figure).               |
+| 19  | Sanitization      | Defense-in-depth. Admin sanitizes on write; Astro loader sanitizes on read with `sanitize-html` allowlist matching the editor's tag set.                                                            |
+| 20  | SEO surfaces      | Add `@astrojs/sitemap` (multi-locale). Add per-language RSS feeds (`/ca/rss.xml`, `/en/rss.xml`).                                                                                                   |
+| 21  | Post ordering     | `posts.sort_order ASC, date DESC` (tiebreaker). Requires admin schema change.                                                                                                                       |
 
 ## 5. Schema changes required in admin (Supabase)
 
@@ -91,7 +91,14 @@ Outside this repo, but blocking integration:
 ### `categories` collection
 
 ```ts
-{ id: string; slug: 'vivencies' | 'influencies' | 'perspectives'; name: { ca: string; en: string } }
+{
+  id: string;
+  slug: 'vivencies' | 'influencies' | 'perspectives';
+  name: {
+    ca: string;
+    en: string;
+  }
+}
 ```
 
 ### `keywords` collection
@@ -115,28 +122,28 @@ Use the same path component on CA (`paraula-clau`) translated to `keyword` on EN
 
 ## 8. Files affected (summary)
 
-| Path | Change |
-|------|--------|
-| `package.json` | Add deps: `@supabase/supabase-js`, `sanitize-html`, `@astrojs/sitemap`, `@astrojs/rss`, `slugify`. Add scripts: `types:gen`, optionally `content:sync`. |
-| `astro.config.mjs` | Add `sitemap()` integration. Configure `image.remotePatterns` for Supabase Storage. |
-| `src/content/config.ts` | Replace MD `posts` schema with Supabase-loader collections (`posts`, `categories`, `keywords`). |
-| `src/lib/supabase.ts` (new) | Supabase client init from `SUPABASE_URL` + `SUPABASE_ANON_KEY`. |
-| `src/lib/loaders/posts.ts` (new) | Custom Content Loader. Fetch + transform + sanitize + Zod-validate. |
-| `src/lib/loaders/categories.ts` (new) | Categories loader. |
-| `src/lib/loaders/keywords.ts` (new) | Derive keywords collection (slugify) from `post_keywords` join. |
-| `src/lib/database.types.ts` (new, generated) | `pnpm types:gen` output. |
-| `src/lib/sanitize.ts` (new) | `sanitize-html` config. Allowlist depends on admin's editor (TBD). |
-| `src/components/ui/Image.astro` | Switch raw `<img>` to Astro's `<Image>` (or wrap, preserving the existing API). |
-| `src/components/app/PostGrid.astro` | Read `thumbnail` (was `portraitImage`). Use category collection. |
-| `src/pages/ca/reflexions/[...page].astro` | Drop hardcoded categories; use category collection. Filter by `lang === 'ca'`. |
-| `src/pages/ca/reflexions/[category]/[...page].astro` | Same. |
-| `src/pages/ca/reflexions/paraula-clau/[keyword]/[...page].astro` | Use keyword slug from collection. |
-| `src/pages/ca/reflexions/[...slug].astro` | Drop `images[]` grid. Render `<Fragment set:html={content}>`. References use new shape. Same. |
-| `src/pages/en/reflexions/...` (new, 4 files) | Mirror CA routes. |
-| `src/pages/ca/rss.xml.ts`, `src/pages/en/rss.xml.ts` (new) | Per-language RSS. |
-| `src/content/posts/*.md` | **Delete all 30 placeholder files.** |
-| `.env.example` (new/updated) | `SUPABASE_URL=`, `SUPABASE_ANON_KEY=`. |
-| `README.md` | Document env setup, `pnpm types:gen`, deploy hook configuration. |
+| Path                                                             | Change                                                                                                                                                  |
+| ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `package.json`                                                   | Add deps: `@supabase/supabase-js`, `sanitize-html`, `@astrojs/sitemap`, `@astrojs/rss`, `slugify`. Add scripts: `types:gen`, optionally `content:sync`. |
+| `astro.config.mjs`                                               | Add `sitemap()` integration. Configure `image.remotePatterns` for Supabase Storage.                                                                     |
+| `src/content/config.ts`                                          | Replace MD `posts` schema with Supabase-loader collections (`posts`, `categories`, `keywords`).                                                         |
+| `src/lib/supabase.ts` (new)                                      | Supabase client init from `SUPABASE_URL` + `SUPABASE_ANON_KEY`.                                                                                         |
+| `src/lib/loaders/posts.ts` (new)                                 | Custom Content Loader. Fetch + transform + sanitize + Zod-validate.                                                                                     |
+| `src/lib/loaders/categories.ts` (new)                            | Categories loader.                                                                                                                                      |
+| `src/lib/loaders/keywords.ts` (new)                              | Derive keywords collection (slugify) from `post_keywords` join.                                                                                         |
+| `src/lib/database.types.ts` (new, generated)                     | `pnpm types:gen` output.                                                                                                                                |
+| `src/lib/sanitize.ts` (new)                                      | `sanitize-html` config. Allowlist depends on admin's editor (TBD).                                                                                      |
+| `src/components/ui/Image.astro`                                  | Switch raw `<img>` to Astro's `<Image>` (or wrap, preserving the existing API).                                                                         |
+| `src/components/app/PostGrid.astro`                              | Read `thumbnail` (was `portraitImage`). Use category collection.                                                                                        |
+| `src/pages/ca/reflexions/[...page].astro`                        | Drop hardcoded categories; use category collection. Filter by `lang === 'ca'`.                                                                          |
+| `src/pages/ca/reflexions/[category]/[...page].astro`             | Same.                                                                                                                                                   |
+| `src/pages/ca/reflexions/paraula-clau/[keyword]/[...page].astro` | Use keyword slug from collection.                                                                                                                       |
+| `src/pages/ca/reflexions/[...slug].astro`                        | Drop `images[]` grid. Render `<Fragment set:html={content}>`. References use new shape. Same.                                                           |
+| `src/pages/en/reflexions/...` (new, 4 files)                     | Mirror CA routes.                                                                                                                                       |
+| `src/pages/ca/rss.xml.ts`, `src/pages/en/rss.xml.ts` (new)       | Per-language RSS.                                                                                                                                       |
+| `src/content/posts/*.md`                                         | **Delete all 30 placeholder files.**                                                                                                                    |
+| `.env.example` (new/updated)                                     | `SUPABASE_URL=`, `SUPABASE_ANON_KEY=`.                                                                                                                  |
+| `README.md`                                                      | Document env setup, `pnpm types:gen`, deploy hook configuration.                                                                                        |
 
 ## 9. Implementation phases
 
@@ -195,15 +202,15 @@ Use the same path component on CA (`paraula-clau`) translated to `keyword` on EN
 
 ## 11. Risks & mitigations
 
-| Risk | Mitigation |
-|------|------------|
-| Rich text editor outputs unsafe HTML | Sanitize at admin write + at loader read (Q20). Allowlist matches editor capabilities. |
-| Build fails mid-publish (e.g. typo in admin) | Hybrid validation (Q19): hard-fail only on render-blocking fields. Soft fields use fallbacks. |
-| Build cost blows up with many posts | Astro content layer cache + digest sync (Q15) skips unchanged entries. Monitor first. |
-| Image fetch flakes during build | Astro caches optimized images; rerun resumes. If persistent, add retry in loader. |
-| Toni accidentally publishes a draft | Strict `is_published` filter (Q16). Admin UI confirms publish. |
-| Supabase outage during build | `astro build` fails fast; cache fallback (Q15) supports local dev only, not prod. Acceptable for static blog — site stays up; rebuild deferred. |
-| Schema drift between admin and Astro | `pnpm types:gen` re-run committed; CI can diff against current. Zod schema catches runtime drift. |
+| Risk                                         | Mitigation                                                                                                                                      |
+| -------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| Rich text editor outputs unsafe HTML         | Sanitize at admin write + at loader read (Q20). Allowlist matches editor capabilities.                                                          |
+| Build fails mid-publish (e.g. typo in admin) | Hybrid validation (Q19): hard-fail only on render-blocking fields. Soft fields use fallbacks.                                                   |
+| Build cost blows up with many posts          | Astro content layer cache + digest sync (Q15) skips unchanged entries. Monitor first.                                                           |
+| Image fetch flakes during build              | Astro caches optimized images; rerun resumes. If persistent, add retry in loader.                                                               |
+| Toni accidentally publishes a draft          | Strict `is_published` filter (Q16). Admin UI confirms publish.                                                                                  |
+| Supabase outage during build                 | `astro build` fails fast; cache fallback (Q15) supports local dev only, not prod. Acceptable for static blog — site stays up; rebuild deferred. |
+| Schema drift between admin and Astro         | `pnpm types:gen` re-run committed; CI can diff against current. Zod schema catches runtime drift.                                               |
 
 ## 12. Success criteria
 
