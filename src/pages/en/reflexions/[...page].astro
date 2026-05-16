@@ -8,17 +8,17 @@ import type { GetStaticPathsOptions } from 'astro';
 import { useTranslations } from '@/i18n';
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
-  const posts: Post[] = await getCollection('posts', ({ data }) => data.lang === 'ca');
+  const posts: Post[] = await getCollection('posts', ({ data }) => data.lang === 'en');
   return paginate(posts, { pageSize: 6 });
 }
 
 const { page } = Astro.props;
-const t = useTranslations('ca');
+const t = useTranslations('en');
 
 const categoryEntries = await getCollection('categories');
 const categories = categoryEntries
-  .map((c) => ({ id: c.data.slug, name: c.data.name.ca }))
-  .sort((a, b) => a.name.localeCompare(b.name, 'ca'));
+  .map((c) => ({ id: c.data.slug, name: c.data.name.en }))
+  .sort((a, b) => a.name.localeCompare(b.name, 'en'));
 
 const uniqueKeywords = [...new Set(page.data.flatMap((post) => post.data.keywords))];
 ---

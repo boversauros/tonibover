@@ -11,6 +11,11 @@ export default {
   'nav.biografia': 'BIOGRAFIA',
   'nav.documental': 'DOCUMENTAL',
   'nav.language': 'IDIOMA',
+  // Reflexions (post list + detail)
+  'reflexions.breadcrumb': 'Reflexions',
+  'reflexions.keywordPrefix': 'Paraula Clau',
+  'post.references': 'Referències',
+  'keywords.heading': 'Paraules Clau',
   // Footer
   'footer.contact': 'Contacte',
   'footer.acknowledgments': 'Agraïments',

@@ -11,7 +11,7 @@ import type { Post } from '@/types';
 import { getLocalizedPath, useTranslations } from '@/i18n';
 
 export async function getStaticPaths() {
-  const posts: Post[] = await getCollection('posts', ({ data }) => data.lang === 'ca');
+  const posts: Post[] = await getCollection('posts', ({ data }) => data.lang === 'en');
   return posts.map((post) => ({
     params: { slug: post.data.slug },
     props: { post },
@@ -23,12 +23,12 @@ interface Props {
 }
 
 const { post } = Astro.props;
-const t = useTranslations('ca');
+const t = useTranslations('en');
 
 const categoryEntries = await getCollection('categories');
 const categories = categoryEntries
-  .map((c) => ({ id: c.data.slug, name: c.data.name.ca }))
-  .sort((a, b) => a.name.localeCompare(b.name, 'ca'));
+  .map((c) => ({ id: c.data.slug, name: c.data.name.en }))
+  .sort((a, b) => a.name.localeCompare(b.name, 'en'));
 
 const categoryName = categories.find((c) => c.id === post.data.category)?.name;
 ---
@@ -40,7 +40,7 @@ const categoryName = categories.find((c) => c.id === post.data.category)?.name;
       <ol class="flex items-center space-x-sp-2 text-sm text-muted">
         <li>
           <Link
-            href={getLocalizedPath('/reflexions', 'ca')}
+            href={getLocalizedPath('/reflexions', 'en')}
             variant="muted"
             class="hover:text-white">{t('reflexions.breadcrumb')}</Link
           >
@@ -48,7 +48,7 @@ const categoryName = categories.find((c) => c.id === post.data.category)?.name;
         <li>/</li>
         <li>
           <Link
-            href={getLocalizedPath(`/reflexions/${post.data.category}`, 'ca')}
+            href={getLocalizedPath(`/reflexions/${post.data.category}`, 'en')}
             variant="muted"
             class="hover:text-white"
           >

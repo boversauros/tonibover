@@ -9,10 +9,10 @@ import { useTranslations } from '@/i18n';
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
   const categoryEntries = await getCollection('categories');
   const categories = categoryEntries
-    .map((c) => ({ id: c.data.slug, name: c.data.name.ca }))
-    .sort((a, b) => a.name.localeCompare(b.name, 'ca'));
+    .map((c) => ({ id: c.data.slug, name: c.data.name.en }))
+    .sort((a, b) => a.name.localeCompare(b.name, 'en'));
 
-  const posts = await getCollection('posts', ({ data }) => data.lang === 'ca');
+  const posts = await getCollection('posts', ({ data }) => data.lang === 'en');
   const pageSize = 6;
 
   return categories.flatMap(({ id }) => {
@@ -27,7 +27,7 @@ export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
 
 const { page, categories } = Astro.props;
 const { category } = Astro.params;
-const t = useTranslations('ca');
+const t = useTranslations('en');
 const categoryName = categories.find((c) => c.id === category)?.name;
 const uniqueKeywords = [...new Set(page.data.flatMap((post) => post.data.keywords))];
 ---

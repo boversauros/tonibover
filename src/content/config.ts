@@ -31,7 +31,8 @@ const posts = defineCollection({
     ),
     keywords: z.array(z.string()),
     sort_order: z.number(),
-    lang: z.literal('ca'),
+    lang: z.enum(['ca', 'en']),
+    availableLangs: z.array(z.enum(['ca', 'en'])),
   }),
 });
 
@@ -39,7 +40,10 @@ const categories = defineCollection({
   loader: categoriesLoader(),
   schema: z.object({
     slug: z.string(),
-    name: z.string(),
+    name: z.object({
+      ca: z.string(),
+      en: z.string(),
+    }),
   }),
 });
 
@@ -47,6 +51,7 @@ const keywords = defineCollection({
   loader: keywordsLoader(),
   schema: z.object({
     slug: z.string(),
+    lang: z.enum(['ca', 'en']),
     label: z.string(),
     postIds: z.array(z.string()),
   }),
