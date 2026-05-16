@@ -7,7 +7,8 @@ Source PRD: `PRD-issue.md` (companion: `PRD.md`, `ASTRO_INTEGRATION.md`)
 - **Phase 0 — Admin prerequisites: ✅ DONE** (Supabase project provisioned; `posts`, `post_translations`, `post_keywords`, `keywords`, `post_references`, `categories`, `category_translations`, `images`, `languages` tables live; admin UI in place; seed posts (6) inserted; RLS policies on read paths verified by anon SELECT through Astro loader).
 - **Phase 1 — CA-only tracer bullet: ✅ DONE** (delivered on branch `feat/phase-1-posts-loader`; see Phase 1 section below for what shipped + deltas).
 - **Phase 2 — Categories + keywords as collections (CA): ✅ DONE** (delivered on branch `feat/phase-2-categories-keywords`; see Phase 2 section below for what shipped + deltas).
-- Phase 3–6: pending.
+- **Phase 3 — English mirror for reflexions: ✅ DONE**.
+- Phase 4–6: pending.
 
 ## Architectural decisions
 
@@ -88,7 +89,7 @@ The keyword slug encoder is extracted as its own module here — it's reused by 
 - ✅ Keyword link rendered on a post detail page routes to the matching keyword index (via `slugify(keyword)` in `KeywordsList.astro`).
 - ✅ Diacritic-folded keywords (`Vivència` and `vivencia`) collapse to one slug — loader-side merge with deterministic label selection.
 
-## Phase 3 — English mirror for reflexions
+## Phase 3 — English mirror for reflexions ✅ DONE
 
 User stories: 2, 3, 6, 7, 8, 10, 11, 14, 26.
 
@@ -104,11 +105,11 @@ Language selection remains rooted at `/` (splash page in `src/pages/index.astro`
 
 ### Acceptance criteria
 
-- Seed post translated to EN renders at both `/ca/reflexions/<ca-slug>` and `/en/reflexions/<en-slug>`.
-- CA-only post: `/ca/reflexions/<ca-slug>` works; no `/en/reflexions/<en-slug>` route is generated; clicking the nav "language" link from such a post lands on `/` (splash), and selecting English routes to `/en/` (home).
-- `/en/reflexions/<category>/` and `/en/reflexions/keyword/<slug>/` list only EN-translated posts.
-- Posts listing order: ascending `sort_order`, then descending `date`.
-- Category names show in page locale (Vivències on CA, Experiences on EN).
+- ✅ Seed post translated to EN renders at both `/ca/reflexions/<ca-slug>` and `/en/reflexions/<en-slug>`.
+- ✅ CA-only post: `/ca/reflexions/<ca-slug>` works; no `/en/reflexions/<en-slug>` route is generated; clicking the nav "language" link from such a post lands on `/` (splash), and selecting English routes to `/en/` (home).
+- ✅ `/en/reflexions/<category>/` and `/en/reflexions/keyword/<slug>/` list only EN-translated posts.
+- ✅ Posts listing order: ascending `sort_order`, then descending `date`.
+- ✅ Category names show in page locale (Vivències on CA, Experiences on EN).
 
 ## Phase 4 — Validation, sanitization, types, tests
 
