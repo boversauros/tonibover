@@ -15,29 +15,29 @@ importers:
         specifier: 5.2.7
         version: 5.2.7
       '@lucide/astro':
-        specifier: ^0.563.0
+        specifier: 0.563.0
         version: 0.563.0(astro@5.18.1(jiti@2.7.0)(lightningcss@1.30.2)(rollup@4.60.4)(typescript@5.9.3))
       '@supabase/supabase-js':
-        specifier: ^2.105.4
+        specifier: 2.105.4
         version: 2.105.4
       '@tailwindcss/vite':
         specifier: 4.1.18
         version: 4.1.18(vite@6.4.2(jiti@2.7.0)(lightningcss@1.30.2))
       astro:
-        specifier: ^5.18.1
+        specifier: 5.18.1
         version: 5.18.1(jiti@2.7.0)(lightningcss@1.30.2)(rollup@4.60.4)(typescript@5.9.3)
       astro-lazy-youtube-embed:
         specifier: 0.5.4
         version: 0.5.4(astro@5.18.1(jiti@2.7.0)(lightningcss@1.30.2)(rollup@4.60.4)(typescript@5.9.3))
       sanitize-html:
-        specifier: ^2.17.4
+        specifier: 2.17.4
         version: 2.17.4
       tailwindcss:
         specifier: 4.1.18
         version: 4.1.18
     devDependencies:
       '@types/sanitize-html':
-        specifier: ^2.16.1
+        specifier: 2.16.1
         version: 2.16.1
       prettier:
         specifier: 3.4.2
