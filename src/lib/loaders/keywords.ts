@@ -2,10 +2,19 @@ import { supabase } from '../supabase';
 import { slugify } from '../slugify';
 
 const CA_LANGUAGE_ID = 1;
+const EN_LANGUAGE_ID = 2;
+
+type Lang = 'ca' | 'en';
+
+const LANGS: Array<{ id: number; code: Lang }> = [
+  { id: CA_LANGUAGE_ID, code: 'ca' },
+  { id: EN_LANGUAGE_ID, code: 'en' },
+];
 
 interface KeywordEntry {
   id: string;
   slug: string;
+  lang: Lang;
   label: string;
   postIds: string[];
 }
@@ -14,7 +23,7 @@ export function keywordsLoader() {
   return async (): Promise<KeywordEntry[]> => {
     const [pubPostsRes, kwRes] = await Promise.all([
       supabase.from('posts').select('id').eq('is_published', true),
-      supabase.from('keywords').select('id, keyword').eq('language_id', CA_LANGUAGE_ID),
+      supabase.from('keywords').select('id, keyword, language_id'),
     ]);
     if (pubPostsRes.error) throw pubPostsRes.error;
     if (kwRes.error) throw kwRes.error;
@@ -24,16 +33,18 @@ export function keywordsLoader() {
 
     const { data: trans, error: tErr } = await supabase
       .from('post_translations')
-      .select('id, post_id')
-      .eq('language_id', CA_LANGUAGE_ID)
+      .select('id, post_id, language_id')
       .in('post_id', pubPostIds);
     if (tErr) throw tErr;
 
-    const transToPost = new Map<number, number>();
+    const transInfo = new Map<number, { postId: number; languageId: number }>();
     for (const t of trans ?? []) {
-      transToPost.set(t.id as number, t.post_id as number);
+      transInfo.set(t.id as number, {
+        postId: t.post_id as number,
+        languageId: t.language_id as number,
+      });
     }
-    const transIds = [...transToPost.keys()];
+    const transIds = [...transInfo.keys()];
     if (transIds.length === 0) return [];
 
     const { data: pk, error: pkErr } = await supabase
@@ -42,42 +53,52 @@ export function keywordsLoader() {
       .in('post_translation_id', transIds);
     if (pkErr) throw pkErr;
 
-    const kwToPosts = new Map<number, Set<string>>();
-    for (const row of pk ?? []) {
-      const r = row as { keyword_id: number; post_translation_id: number };
-      const postId = transToPost.get(r.post_translation_id);
-      if (postId === undefined) continue;
-      const set = kwToPosts.get(r.keyword_id) ?? new Set<string>();
-      set.add(String(postId));
-      kwToPosts.set(r.keyword_id, set);
-    }
-
-    const kws = (kwRes.data ?? []) as Array<{ id: number; keyword: string }>;
-
-    type Bucket = { ids: number[]; postIds: Set<string> };
-    const bySlug = new Map<string, Bucket>();
-    for (const k of kws) {
-      const slug = slugify(k.keyword);
-      if (!slug) continue;
-      const bucket = bySlug.get(slug) ?? { ids: [], postIds: new Set<string>() };
-      bucket.ids.push(k.id);
-      const posts = kwToPosts.get(k.id);
-      if (posts) for (const pid of posts) bucket.postIds.add(pid);
-      bySlug.set(slug, bucket);
-    }
+    const allKws = (kwRes.data ?? []) as Array<{
+      id: number;
+      keyword: string;
+      language_id: number;
+    }>;
 
     const entries: KeywordEntry[] = [];
-    for (const [slug, bucket] of bySlug) {
-      if (bucket.postIds.size === 0) continue;
-      const smallestId = bucket.ids.reduce((a, b) => (a < b ? a : b));
-      const labelRow = kws.find((k) => k.id === smallestId);
-      if (!labelRow) continue;
-      entries.push({
-        id: slug,
-        slug,
-        label: labelRow.keyword,
-        postIds: [...bucket.postIds],
-      });
+
+    for (const { id: langId, code: lang } of LANGS) {
+      const kws = allKws.filter((k) => k.language_id === langId);
+
+      const kwToPosts = new Map<number, Set<string>>();
+      for (const row of pk ?? []) {
+        const r = row as { keyword_id: number; post_translation_id: number };
+        const info = transInfo.get(r.post_translation_id);
+        if (!info || info.languageId !== langId) continue;
+        const set = kwToPosts.get(r.keyword_id) ?? new Set<string>();
+        set.add(`${info.postId}-${lang}`);
+        kwToPosts.set(r.keyword_id, set);
+      }
+
+      type Bucket = { ids: number[]; postIds: Set<string> };
+      const bySlug = new Map<string, Bucket>();
+      for (const k of kws) {
+        const slug = slugify(k.keyword);
+        if (!slug) continue;
+        const bucket = bySlug.get(slug) ?? { ids: [], postIds: new Set<string>() };
+        bucket.ids.push(k.id);
+        const posts = kwToPosts.get(k.id);
+        if (posts) for (const pid of posts) bucket.postIds.add(pid);
+        bySlug.set(slug, bucket);
+      }
+
+      for (const [slug, bucket] of bySlug) {
+        if (bucket.postIds.size === 0) continue;
+        const smallestId = bucket.ids.reduce((a, b) => (a < b ? a : b));
+        const labelRow = kws.find((k) => k.id === smallestId);
+        if (!labelRow) continue;
+        entries.push({
+          id: `${lang}-${slug}`,
+          slug,
+          lang,
+          label: labelRow.keyword,
+          postIds: [...bucket.postIds],
+        });
+      }
     }
 
     return entries;

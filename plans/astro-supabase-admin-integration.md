@@ -88,22 +88,24 @@ The keyword slug encoder is extracted as its own module here — it's reused by 
 - ✅ Keyword link rendered on a post detail page routes to the matching keyword index (via `slugify(keyword)` in `KeywordsList.astro`).
 - ✅ Diacritic-folded keywords (`Vivència` and `vivencia`) collapse to one slug — loader-side merge with deterministic label selection.
 
-## Phase 3 — English mirror + language switcher
+## Phase 3 — English mirror for reflexions
 
 User stories: 2, 3, 6, 7, 8, 10, 11, 14, 26.
 
 ### What to build
 
-Bilingual surface lit up. EN entries appear in collections only when admin has non-empty translation rows. Listing/category/keyword/post pages mirror CA at `/en/reflexions/*` with admin-defined per-language slugs. The language switcher reflects translation availability.
+Bilingual surface lit up. EN entries appear in collections only when admin has non-empty translation rows. Listing/category/keyword/post pages mirror CA at `/en/reflexions/*` with admin-defined per-language slugs. Global language selection is unchanged — the existing splash page at `/` remains the single language-selection UX.
 
 Extend `posts` loader to emit one entry per non-empty `(post, lang)` translation, each carrying `availableLangs: ('ca'|'en')[]`. Apply ordering: primary `posts.sort_order ASC`, secondary `date DESC`. Extend `categories` loader to expose `name.ca` / `name.en` and render the localized name on CA vs EN pages. Extend `keywords` loader keyed by `(slug, lang)`.
 
-Add four new EN route files mirroring CA: `/en/reflexions/[...page].astro`, `/en/reflexions/[category]/[...page].astro`, `/en/reflexions/keyword/[keyword]/[...page].astro`, `/en/reflexions/[...slug].astro`. Each filters its collection by `lang === 'en'`. Update `LanguageSwitcher.astro` to read the current entry's `availableLangs`: if the other locale is missing, render the toggle visibly disabled with a "Not yet translated" tooltip — never a redirect, never silently hidden. Localized strings for the tooltip land in `i18n/{ca,en}.ts`.
+Add four new EN route files mirroring CA: `/en/reflexions/[...page].astro`, `/en/reflexions/[category]/[...page].astro`, `/en/reflexions/keyword/[keyword]/[...page].astro`, `/en/reflexions/[...slug].astro`. Each filters its collection by `lang === 'en'`.
+
+Language selection remains rooted at `/` (splash page in `src/pages/index.astro`). The in-nav "language" link in `Navigation.astro` continues to clear `preferred-lang` from `localStorage` and route to `/` for both locales — no per-post toggle is introduced in this phase. `availableLangs` is still emitted on each post entry so future phases (and Phase 5's `hreflang` / sitemap work) can consume it without a loader change. A per-post "Read in English / Llegir en català" affordance, if ever desired, is deferred and would live inside the post page, not in the global nav.
 
 ### Acceptance criteria
 
 - Seed post translated to EN renders at both `/ca/reflexions/<ca-slug>` and `/en/reflexions/<en-slug>`.
-- CA-only post: `/ca` URL works; EN switcher visible but disabled with tooltip; no `/en/reflexions/<en-slug>` route generated.
+- CA-only post: `/ca/reflexions/<ca-slug>` works; no `/en/reflexions/<en-slug>` route is generated; clicking the nav "language" link from such a post lands on `/` (splash), and selecting English routes to `/en/` (home).
 - `/en/reflexions/<category>/` and `/en/reflexions/keyword/<slug>/` list only EN-translated posts.
 - Posts listing order: ascending `sort_order`, then descending `date`.
 - Category names show in page locale (Vivències on CA, Experiences on EN).

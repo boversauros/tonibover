@@ -1,6 +1,6 @@
 ---
 import Link from '@components/ui/Link.astro';
-import { getLangFromUrl, getLocalizedPath } from '@/i18n';
+import { getLangFromUrl, getLocalizedPath, useTranslations } from '@/i18n';
 import { slugify } from '@/lib/slugify';
 
 interface Props {
@@ -9,15 +9,17 @@ interface Props {
 
 const { keywords } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const segment = lang === 'ca' ? 'paraula-clau' : 'keyword';
 ---
 
 <div class="border-t border-default pt-sp-8">
-  <h3 class="text-lg font-serif mb-sp-6 text-secondary">Paraules Clau</h3>
+  <h3 class="text-lg font-serif mb-sp-6 text-secondary">{t('keywords.heading')}</h3>
   <div class="flex flex-wrap gap-sp-2">
     {
       keywords.map((keyword) => (
         <Link
-          href={getLocalizedPath(`/reflexions/paraula-clau/${slugify(keyword)}`, lang)}
+          href={getLocalizedPath(`/reflexions/${segment}/${slugify(keyword)}`, lang)}
           variant="accent-border"
           class="text-sm"
         >

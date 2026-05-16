@@ -2,8 +2,14 @@ import sanitizeHtml from 'sanitize-html';
 import { supabase } from '../supabase';
 
 const CA_LANGUAGE_ID = 1;
+const EN_LANGUAGE_ID = 2;
 
-type Lang = 'ca';
+type Lang = 'ca' | 'en';
+
+const LANG_BY_ID: Record<number, Lang> = {
+  [CA_LANGUAGE_ID]: 'ca',
+  [EN_LANGUAGE_ID]: 'en',
+};
 
 interface RawImage {
   id: number;
@@ -50,6 +56,7 @@ interface PostEntry {
   keywords: string[];
   sort_order: number;
   lang: Lang;
+  availableLangs: Lang[];
 }
 
 // Phase 1 stop-gap: posts without any image in Supabase fall back to this asset
@@ -75,6 +82,14 @@ function sanitize(input: string): string {
   });
 }
 
+function isUsable(t: RawTranslation | undefined): t is RawTranslation & {
+  title: string;
+  slug: string;
+  content: string;
+} {
+  return !!t && !!t.title && !!t.slug && !!t.content;
+}
+
 export function postsLoader() {
   return async (): Promise<PostEntry[]> => {
     const { data: posts, error } = await supabase
@@ -93,19 +108,21 @@ export function postsLoader() {
 
     const rows = posts as unknown as RawPostRow[];
 
-    const caTranslationIds = rows.flatMap((p) =>
-      (p.post_translations ?? []).filter((t) => t.language_id === CA_LANGUAGE_ID).map((t) => t.id)
+    const allTranslationIds = rows.flatMap((p) =>
+      (p.post_translations ?? [])
+        .filter((t) => LANG_BY_ID[t.language_id] !== undefined)
+        .map((t) => t.id)
     );
 
     const [kwResult, refResult] = await Promise.all([
       supabase
         .from('post_keywords')
         .select('post_translation_id, keywords(keyword)')
-        .in('post_translation_id', caTranslationIds),
+        .in('post_translation_id', allTranslationIds),
       supabase
         .from('post_references')
         .select('id, post_translation_id, type, reference, blockquote, sort_order')
-        .in('post_translation_id', caTranslationIds)
+        .in('post_translation_id', allTranslationIds)
         .order('sort_order', { ascending: true }),
     ]);
     if (kwResult.error) throw kwResult.error;
@@ -144,37 +161,55 @@ export function postsLoader() {
 
     const entries: PostEntry[] = [];
     for (const post of rows) {
-      const ca = post.post_translations?.find((t) => t.language_id === CA_LANGUAGE_ID);
-      if (!ca?.title || !ca.slug || !ca.content) continue;
-
       const categorySlug = post.category?.slug;
       if (!categorySlug) continue;
+
+      const translationsByLang = new Map<Lang, RawTranslation>();
+      for (const t of post.post_translations ?? []) {
+        const lang = LANG_BY_ID[t.language_id];
+        if (lang && isUsable(t)) translationsByLang.set(lang, t);
+      }
+
+      const availableLangs: Lang[] = (['ca', 'en'] as Lang[]).filter((l) =>
+        translationsByLang.has(l)
+      );
+      if (availableLangs.length === 0) continue;
 
       const heroSource = post.image;
       const thumbSource = post.thumbnail ?? post.image;
 
-      const heroImage = heroSource
-        ? { url: heroSource.url, alt: heroSource.alt || heroSource.title || ca.title }
-        : undefined;
-      const thumbnail = thumbSource
-        ? { url: thumbSource.url, alt: thumbSource.alt || thumbSource.title || ca.title }
-        : { url: PLACEHOLDER_IMAGE_URL, alt: PLACEHOLDER_IMAGE_ALT };
+      for (const lang of availableLangs) {
+        const tr = translationsByLang.get(lang)!;
 
-      entries.push({
-        id: String(post.id),
-        slug: ca.slug,
-        title: ca.title,
-        date: post.date,
-        category: categorySlug,
-        html: sanitize(ca.content),
-        image: heroImage,
-        thumbnail,
-        references: refMap.get(ca.id) ?? [],
-        keywords: kwMap.get(ca.id) ?? [],
-        sort_order: post.sort_order ?? 0,
-        lang: 'ca',
-      });
+        const heroImage = heroSource
+          ? { url: heroSource.url, alt: heroSource.alt || heroSource.title || tr.title }
+          : undefined;
+        const thumbnail = thumbSource
+          ? { url: thumbSource.url, alt: thumbSource.alt || thumbSource.title || tr.title }
+          : { url: PLACEHOLDER_IMAGE_URL, alt: PLACEHOLDER_IMAGE_ALT };
+
+        entries.push({
+          id: `${post.id}-${lang}`,
+          slug: tr.slug,
+          title: tr.title,
+          date: post.date,
+          category: categorySlug,
+          html: sanitize(tr.content),
+          image: heroImage,
+          thumbnail,
+          references: refMap.get(tr.id) ?? [],
+          keywords: kwMap.get(tr.id) ?? [],
+          sort_order: post.sort_order ?? 0,
+          lang,
+          availableLangs,
+        });
+      }
     }
+
+    entries.sort(
+      (a, b) =>
+        a.sort_order - b.sort_order || new Date(b.date).getTime() - new Date(a.date).getTime()
+    );
 
     return entries;
   };

@@ -10,6 +10,11 @@ export default {
   'nav.biografia': 'BIOGRAPHY',
   'nav.documental': 'DOCUMENTARY',
   'nav.language': 'LANGUAGE',
+  // Reflexions (post list + detail)
+  'reflexions.breadcrumb': 'Reflections',
+  'reflexions.keywordPrefix': 'Keyword',
+  'post.references': 'References',
+  'keywords.heading': 'Keywords',
   // Footer
   'footer.contact': 'Contact',
   'footer.acknowledgments': 'Acknowledgments',
