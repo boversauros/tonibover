@@ -32,7 +32,7 @@ const categoryName = categories.find((c) => c.id === category)?.name;
 const uniqueKeywords = [...new Set(page.data.flatMap((post) => post.data.keywords))];
 ---
 
-<Layout>
+<Layout lang="en">
   <PostsListLayout
     title={`${t('nav.reflexions')}: ${categoryName}`}
     categories={categories}

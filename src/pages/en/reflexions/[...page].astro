@@ -23,7 +23,7 @@ const categories = categoryEntries
 const uniqueKeywords = [...new Set(page.data.flatMap((post) => post.data.keywords))];
 ---
 
-<Layout>
+<Layout lang="en">
   <PostsListLayout
     title={t('nav.reflexions')}
     categories={categories}
