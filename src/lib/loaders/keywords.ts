@@ -1,15 +1,16 @@
 import { supabase } from '../supabase';
 import { slugify } from '../slugify';
-
-const CA_LANGUAGE_ID = 1;
-const EN_LANGUAGE_ID = 2;
-
-type Lang = 'ca' | 'en';
+import type { Tables } from '../database.types';
+import { CA_LANGUAGE_ID, EN_LANGUAGE_ID, type Lang } from './types';
 
 const LANGS: Array<{ id: number; code: Lang }> = [
   { id: CA_LANGUAGE_ID, code: 'ca' },
   { id: EN_LANGUAGE_ID, code: 'en' },
 ];
+
+type KeywordRow = Pick<Tables<'keywords'>, 'id' | 'keyword' | 'language_id'>;
+type TranslationRow = Pick<Tables<'post_translations'>, 'id' | 'post_id' | 'language_id'>;
+type PostKeywordRow = Pick<Tables<'post_keywords'>, 'keyword_id' | 'post_translation_id'>;
 
 interface KeywordEntry {
   id: string;
@@ -28,7 +29,7 @@ export function keywordsLoader() {
     if (pubPostsRes.error) throw pubPostsRes.error;
     if (kwRes.error) throw kwRes.error;
 
-    const pubPostIds = (pubPostsRes.data ?? []).map((p) => p.id as number);
+    const pubPostIds = (pubPostsRes.data ?? []).map((p) => p.id);
     if (pubPostIds.length === 0) return [];
 
     const { data: trans, error: tErr } = await supabase
@@ -38,11 +39,8 @@ export function keywordsLoader() {
     if (tErr) throw tErr;
 
     const transInfo = new Map<number, { postId: number; languageId: number }>();
-    for (const t of trans ?? []) {
-      transInfo.set(t.id as number, {
-        postId: t.post_id as number,
-        languageId: t.language_id as number,
-      });
+    for (const t of (trans ?? []) as TranslationRow[]) {
+      transInfo.set(t.id, { postId: t.post_id, languageId: t.language_id });
     }
     const transIds = [...transInfo.keys()];
     if (transIds.length === 0) return [];
@@ -53,11 +51,8 @@ export function keywordsLoader() {
       .in('post_translation_id', transIds);
     if (pkErr) throw pkErr;
 
-    const allKws = (kwRes.data ?? []) as Array<{
-      id: number;
-      keyword: string;
-      language_id: number;
-    }>;
+    const allKws = (kwRes.data ?? []) as KeywordRow[];
+    const pkRows = (pk ?? []) as PostKeywordRow[];
 
     const entries: KeywordEntry[] = [];
 
@@ -65,8 +60,7 @@ export function keywordsLoader() {
       const kws = allKws.filter((k) => k.language_id === langId);
 
       const kwToPosts = new Map<number, Set<string>>();
-      for (const row of pk ?? []) {
-        const r = row as { keyword_id: number; post_translation_id: number };
+      for (const r of pkRows) {
         const info = transInfo.get(r.post_translation_id);
         if (!info || info.languageId !== langId) continue;
         const set = kwToPosts.get(r.keyword_id) ?? new Set<string>();

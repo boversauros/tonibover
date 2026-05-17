@@ -1,18 +1,11 @@
 import { supabase } from '../supabase';
+import type { Tables } from '../database.types';
+import { CA_LANGUAGE_ID, EN_LANGUAGE_ID } from './types';
 
-const CA_LANGUAGE_ID = 1;
-const EN_LANGUAGE_ID = 2;
-
-interface RawTranslation {
-  name: string;
-  language_id: number;
-}
-
-interface RawCategoryRow {
-  id: number;
-  slug: string;
-  category_translations: RawTranslation | RawTranslation[] | null;
-}
+type CategoryTranslation = Pick<Tables<'category_translations'>, 'name' | 'language_id'>;
+type CategoryRow = Pick<Tables<'categories'>, 'id' | 'slug'> & {
+  category_translations: CategoryTranslation | CategoryTranslation[] | null;
+};
 
 interface CategoryEntry {
   id: string;
@@ -29,7 +22,7 @@ export function categoriesLoader() {
     if (error) throw error;
     if (!data?.length) return [];
 
-    const rows = data as unknown as RawCategoryRow[];
+    const rows = data as unknown as CategoryRow[];
     const entries: CategoryEntry[] = [];
 
     for (const row of rows) {
