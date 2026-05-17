@@ -8,7 +8,8 @@ Source PRD: `PRD-issue.md` (companion: `PRD.md`, `ASTRO_INTEGRATION.md`)
 - **Phase 1 — CA-only tracer bullet: ✅ DONE** (delivered on branch `feat/phase-1-posts-loader`; see Phase 1 section below for what shipped + deltas).
 - **Phase 2 — Categories + keywords as collections (CA): ✅ DONE** (delivered on branch `feat/phase-2-categories-keywords`; see Phase 2 section below for what shipped + deltas).
 - **Phase 3 — English mirror for reflexions: ✅ DONE**.
-- Phase 4–6: pending.
+- **Phase 4 — Validation, sanitization, types, tests: ✅ DONE** (delivered on branch `feat/phase-4-loader-hardening`; see Phase 4 section below for what shipped + deltas).
+- Phase 5–6: pending.
 
 ## Architectural decisions
 
@@ -111,9 +112,34 @@ Language selection remains rooted at `/` (splash page in `src/pages/index.astro`
 - ✅ Posts listing order: ascending `sort_order`, then descending `date`.
 - ✅ Category names show in page locale (Vivències on CA, Experiences on EN).
 
-## Phase 4 — Validation, sanitization, types, tests
+## Phase 4 — Validation, sanitization, types, tests ✅ DONE
 
 User stories: 22, 23, 24, 31, 32, 33, 34, 35, 36.
+
+### Delivery notes (post-merge)
+
+Shipped on branch `feat/phase-4-loader-hardening`. Deltas vs. original plan text:
+
+- **Editor identity locked**: TipTap with minimal extension set (`Document, Paragraph, Text, Heading[1-3], Bold, Italic, Blockquote, BulletList, OrderedList, ListItem, Link, Image, HardBreak, HorizontalRule`). Allowlist in `src/lib/sanitize.ts`: `p, h1, h2, h3, strong, em, blockquote, ul, ol, li, a, img, br, hr`. `a`: `href` only, schemes `http`/`https`/`mailto`. `img`: `src`/`alt`/`title`. **Admin (admintonibover) must use the same TipTap extension set** or content will be silently stripped on render — see plan file `/Users/oriolbovervila/.claude/plans/hey-check-plans-astro-supabase-admin-int-serialized-token.md` for the snippet.
+- **Module decomposition**: `posts.ts` went from 217 lines to 26 (thin composer). Five pure modules extracted under `src/lib/`:
+  - `sanitize.ts` — TipTap-minimal allowlist.
+  - `loaders/types.ts` — shared raw row types (`RawJoinedPost`, `RawJoinedTranslation`, `RawJoinedImage`, `RawPostReferenceRow`, `RawPostKeywordRow`) derived from generated `Tables<>` helper, plus `Lang`, `PostEntry`, `Reference`, `LANG_BY_ID`. (Plan listed 5 modules; `types.ts` added as a shared deps file — no logic, just types/constants.)
+  - `loaders/validate.ts` — pure `validatePostRow(row): { ok } | { ok, errors[] }`.
+  - `loaders/normalize-references.ts` — pure `groupReferencesByTranslation(rows)`. Defensive re-sort by `sort_order` even though fetcher orders.
+  - `loaders/normalize-post.ts` — pure `normalizePosts({ rows, kwMap, refMap, sanitize })`. Calls `validatePostRow` per row; collects errors; throws single aggregated message at end so one bad row doesn't mask others.
+  - `loaders/fetch-posts.ts` — only I/O. Returns `{ rows, kwRows, refRows }`.
+  - **Keyword grouping stayed in `posts.ts` composer** (4-line `groupKeywordsByTranslation` helper). Not extracted to its own module — trivial loop, not worth a file.
+- **Supabase types**: generated via `mcp__plugin_supabase_supabase__generate_typescript_types` (project `vwqafhkuzymuovepempb`), committed to `src/lib/database.types.ts`. `supabase.ts` client now typed via `<Database>` generic. `categories.ts` and `keywords.ts` switched their hand-written `RawTranslation`/`RawCategoryRow` interfaces to `Pick<Tables<...>>` derivations.
+- **Vitest** installed (4.1.6). `vitest.config.ts` at repo root, node env, alias `@` → `src`. Scripts added: `pnpm test`, `pnpm test:watch`, `pnpm types:gen` (wraps `supabase gen types typescript --project-id $SUPABASE_PROJECT_ID`).
+- **Test coverage**: 5 files, **59 tests passing**:
+  - `slugify.test.ts` (8): diacritics, casing, whitespace/punctuation runs, trim dashes, empty input.
+  - `sanitize.test.ts` (21): all dangerous content stripped (`<script>`, `<iframe>`, `on*`, `javascript:`, `data:`), all allowlist tags survive, non-allowlist tags (`<table>`, `<figure>`, `<span>`, `<div>`, `<style>`) stripped.
+  - `normalize-references.test.ts` (6): empty input, grouping by translation id, sort_order preservation, defensive re-sort, type passthrough, unknown-type coercion to `text`.
+  - `validate.test.ts` (10): happy path, missing category, no translation, empty title/slug/content, mixed usable+empty, aggregated errors, unknown `language_id` ignored.
+  - `normalize-post.test.ts` (14): CA-only / CA+EN / empty-EN entry counts, alt fallback chain (`alt → title → post title`), thumbnail fallback to image, missing-image placeholder, sort order (`sort_order ASC, date DESC`), sanitize injection verified via spy, keyword/reference map attachment, aggregated validation throw.
+- **`.env.example`** updated with `SUPABASE_PROJECT_ID` (used only by `types:gen`, not read at build/runtime). **`README.md`** documents setup, scripts table, and `types:gen` requires Supabase CLI (`brew install supabase/tap/supabase`).
+- **Deploy hook / RLS docs deferred to Phase 6** (plan text mentioned them in Phase 4 acceptance but they belong to production cutover).
+- **Verification**: `pnpm test` → 59/59. `pnpm build` → 62 pages (same as pre-refactor dev branch). No regressions.
 
 ### What to build
 
