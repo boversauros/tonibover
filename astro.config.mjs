@@ -1,8 +1,10 @@
 // @ts-check
 import { defineConfig, envField } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
+import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://tonibover.cat',
   i18n: {
     locales: ['ca', 'en'],
     defaultLocale: 'ca',
@@ -11,6 +13,14 @@ export default defineConfig({
       redirectToDefaultLocale: false,
     },
   },
+  integrations: [
+    sitemap({
+      i18n: {
+        defaultLocale: 'ca',
+        locales: { ca: 'ca-ES', en: 'en-US' },
+      },
+    }),
+  ],
   image: {
     remotePatterns: [{ protocol: 'https', hostname: '**.supabase.co' }],
   },

@@ -39,5 +39,6 @@ const uniqueKeywords = [...new Set(page.data.flatMap((post) => post.data.keyword
     page={page}
     keywords={uniqueKeywords}
     activeCategory={category}
+    emptyMessage={t('reflexions.empty.category')}
   />
 </Layout>

@@ -14,8 +14,15 @@ export default {
   // Reflexions (post list + detail)
   'reflexions.breadcrumb': 'Reflexions',
   'reflexions.keywordPrefix': 'Paraula Clau',
+  'reflexions.empty': 'Encara no hi ha reflexions publicades.',
+  'reflexions.empty.category': 'Cap reflexió en aquesta categoria, de moment.',
+  'reflexions.empty.keyword': 'Cap reflexió amb aquesta paraula clau, de moment.',
   'post.references': 'Referències',
   'keywords.heading': 'Paraules Clau',
+  // RSS feed
+  'rss.title': 'Reflexions — Toni Bover',
+  'rss.description':
+    '100 reflexions iconotextuals sobre la comunicació visual i la fotografia.',
   // Footer
   'footer.contact': 'Contacte',
   'footer.acknowledgments': 'Agraïments',

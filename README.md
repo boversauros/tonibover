@@ -6,8 +6,13 @@ In development 🚧
 
 Copy `.env.example` to `.env` and fill in:
 
-- `SUPABASE_URL` and `SUPABASE_ANON_KEY` — read at build time by `src/lib/supabase.ts`. `astro build` fails if missing.
+- `SUPABASE_URL` and `SUPABASE_ANON_KEY` — read at build time by `src/lib/supabase.ts`. `astro build` fails fast if missing. In `pnpm dev`, if Supabase is unreachable (network error or query failure), the loaders log a warning and serve the last-known Astro content-layer cache so you can keep working offline.
 - `SUPABASE_PROJECT_ID` — used only by `pnpm types:gen`. Not read at build/runtime.
+
+## Discovery surfaces
+
+- Sitemap: `/sitemap-index.xml` (lists both `/ca/*` and `/en/*` URLs).
+- RSS feeds: `/ca/rss.xml` and `/en/rss.xml` (title + excerpt per item, scoped by language).
 
 ## Scripts
 

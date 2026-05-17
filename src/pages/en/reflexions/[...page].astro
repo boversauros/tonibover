@@ -4,11 +4,24 @@ import Layout from '@layouts/Layout.astro';
 import PostsListLayout from '@layouts/PostsListLayout.astro';
 import { getCollection } from 'astro:content';
 import type { Post } from '@/types';
-import type { GetStaticPathsOptions } from 'astro';
+import type { GetStaticPathsOptions, Page } from 'astro';
 import { useTranslations } from '@/i18n';
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
   const posts: Post[] = await getCollection('posts', ({ data }) => data.lang === 'en');
+  if (posts.length === 0) {
+    const emptyPage: Page<Post> = {
+      data: [],
+      start: 0,
+      end: -1,
+      size: 6,
+      total: 0,
+      currentPage: 1,
+      lastPage: 1,
+      url: { current: '/en/reflexions' },
+    };
+    return [{ params: { page: undefined }, props: { page: emptyPage } }];
+  }
   return paginate(posts, { pageSize: 6 });
 }
 
@@ -29,5 +42,6 @@ const uniqueKeywords = [...new Set(page.data.flatMap((post) => post.data.keyword
     categories={categories}
     page={page}
     keywords={uniqueKeywords}
+    emptyMessage={t('reflexions.empty')}
   />
 </Layout>
