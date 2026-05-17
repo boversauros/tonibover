@@ -13,8 +13,15 @@ export default {
   // Reflexions (post list + detail)
   'reflexions.breadcrumb': 'Reflections',
   'reflexions.keywordPrefix': 'Keyword',
+  'reflexions.empty': 'No reflections published yet.',
+  'reflexions.empty.category': 'No reflections in this category yet.',
+  'reflexions.empty.keyword': 'No reflections with this keyword yet.',
   'post.references': 'References',
   'keywords.heading': 'Keywords',
+  // RSS feed
+  'rss.title': 'Reflections — Toni Bover',
+  'rss.description':
+    '100 iconotextual reflections on visual communication and photography.',
   // Footer
   'footer.contact': 'Contact',
   'footer.acknowledgments': 'Acknowledgments',

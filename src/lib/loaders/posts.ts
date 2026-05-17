@@ -1,3 +1,4 @@
+import type { Loader } from 'astro/loaders';
 import { sanitize } from '../sanitize';
 import { fetchPosts } from './fetch-posts';
 import { groupReferencesByTranslation } from './normalize-references';
@@ -16,11 +17,33 @@ function groupKeywordsByTranslation(rows: RawPostKeywordRow[]): Map<number, stri
   return map;
 }
 
-export function postsLoader() {
-  return async (): Promise<PostEntry[]> => {
-    const { rows, kwRows, refRows } = await fetchPosts();
-    const kwMap = groupKeywordsByTranslation(kwRows);
-    const refMap = groupReferencesByTranslation(refRows);
-    return normalizePosts({ rows, kwMap, refMap, sanitize });
+export function postsLoader(): Loader {
+  return {
+    name: 'tonibover-posts',
+    async load({ store, logger, parseData, generateDigest }) {
+      try {
+        const { rows, kwRows, refRows } = await fetchPosts();
+        const kwMap = groupKeywordsByTranslation(kwRows);
+        const refMap = groupReferencesByTranslation(refRows);
+        const entries: PostEntry[] = normalizePosts({ rows, kwMap, refMap, sanitize });
+
+        store.clear();
+        for (const entry of entries) {
+          const data = await parseData({
+            id: entry.id,
+            data: entry as unknown as Record<string, unknown>,
+          });
+          store.set({ id: entry.id, data, digest: generateDigest(data) });
+        }
+      } catch (err) {
+        if (import.meta.env.DEV) {
+          logger.warn(
+            `[posts] fetch failed, keeping cached entries: ${err instanceof Error ? err.message : String(err)}`
+          );
+          return;
+        }
+        throw err;
+      }
+    },
   };
 }
