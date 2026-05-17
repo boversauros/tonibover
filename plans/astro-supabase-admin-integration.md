@@ -9,7 +9,8 @@ Source PRD: `PRD-issue.md` (companion: `PRD.md`, `ASTRO_INTEGRATION.md`)
 - **Phase 2 — Categories + keywords as collections (CA): ✅ DONE** (delivered on branch `feat/phase-2-categories-keywords`; see Phase 2 section below for what shipped + deltas).
 - **Phase 3 — English mirror for reflexions: ✅ DONE**.
 - **Phase 4 — Validation, sanitization, types, tests: ✅ DONE** (delivered on branch `feat/phase-4-loader-hardening`; see Phase 4 section below for what shipped + deltas).
-- Phase 5–6: pending.
+- **Phase 5 — SEO + dev experience: ✅ DONE** (delivered on branch `feat/phase-5-seo-rss-sitemap`; see Phase 5 section below for what shipped + deltas).
+- Phase 6: pending.
 
 ## Architectural decisions
 
@@ -169,7 +170,7 @@ Server-only env var enforcement verified (no `PUBLIC_` prefix; loader fails in C
 - `src/lib/database.types.ts` generated, committed, and imported by loaders.
 - `pnpm types:gen` script in `package.json`.
 
-## Phase 5 — SEO + dev experience
+## Phase 5 — SEO + dev experience ✅ DONE
 
 User stories: 18, 19, 28, 37.
 
