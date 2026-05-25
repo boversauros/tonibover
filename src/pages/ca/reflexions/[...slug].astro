@@ -73,7 +73,7 @@ const categoryName = categories.find((c) => c.id === post.data.category)?.name;
             <Image
               src={post.data.image.url}
               alt={post.data.image.alt}
-              height="h-[400px]"
+              height="h-auto md:h-[400px]"
               hover="none"
               loading="eager"
             >

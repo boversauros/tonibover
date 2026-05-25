@@ -1,4 +1,5 @@
 import type { Loader } from 'astro/loaders';
+import { paragraphify } from '../paragraphify';
 import { sanitize } from '../sanitize';
 import { fetchPosts } from './fetch-posts';
 import { groupReferencesByTranslation } from './normalize-references';
@@ -25,7 +26,12 @@ export function postsLoader(): Loader {
         const { rows, kwRows, refRows } = await fetchPosts();
         const kwMap = groupKeywordsByTranslation(kwRows);
         const refMap = groupReferencesByTranslation(refRows);
-        const entries: PostEntry[] = normalizePosts({ rows, kwMap, refMap, sanitize });
+        const entries: PostEntry[] = normalizePosts({
+          rows,
+          kwMap,
+          refMap,
+          sanitize: (content) => sanitize(paragraphify(content)),
+        });
 
         store.clear();
         for (const entry of entries) {
