@@ -1,4 +1,5 @@
 import { supabase } from '../supabase';
+import { fetchAllPages } from './paginate';
 import type { RawJoinedPost, RawPostKeywordRow, RawPostReferenceRow } from './types';
 
 export interface RawFetchResult {
@@ -31,23 +32,27 @@ export async function fetchPosts(): Promise<RawFetchResult> {
     return { rows, kwRows: [], refRows: [] };
   }
 
-  const [kwResult, refResult] = await Promise.all([
-    supabase
-      .from('post_keywords')
-      .select('post_translation_id, keywords(keyword)')
-      .in('post_translation_id', allTranslationIds),
-    supabase
-      .from('post_references')
-      .select('id, post_translation_id, type, reference, blockquote, sort_order')
-      .in('post_translation_id', allTranslationIds)
-      .order('sort_order', { ascending: true }),
+  const [kwRows, refRows] = await Promise.all([
+    fetchAllPages((from, to) =>
+      supabase
+        .from('post_keywords')
+        .select('post_translation_id, keywords(keyword)')
+        .in('post_translation_id', allTranslationIds)
+        .range(from, to)
+    ),
+    fetchAllPages((from, to) =>
+      supabase
+        .from('post_references')
+        .select('id, post_translation_id, type, reference, blockquote, sort_order')
+        .in('post_translation_id', allTranslationIds)
+        .order('sort_order', { ascending: true })
+        .range(from, to)
+    ),
   ]);
-  if (kwResult.error) throw kwResult.error;
-  if (refResult.error) throw refResult.error;
 
   return {
     rows,
-    kwRows: (kwResult.data ?? []) as unknown as RawPostKeywordRow[],
-    refRows: (refResult.data ?? []) as unknown as RawPostReferenceRow[],
+    kwRows: kwRows as unknown as RawPostKeywordRow[],
+    refRows: refRows as unknown as RawPostReferenceRow[],
   };
 }

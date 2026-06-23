@@ -1,5 +1,6 @@
 import type { Loader } from 'astro/loaders';
 import { supabase } from '../supabase';
+import { fetchAllPages } from './paginate';
 import { slugify } from '../slugify';
 import type { Tables } from '../database.types';
 import { CA_LANGUAGE_ID, EN_LANGUAGE_ID, type Lang } from './types';
@@ -45,14 +46,15 @@ async function fetchKeywordEntries(): Promise<KeywordEntry[]> {
   const transIds = [...transInfo.keys()];
   if (transIds.length === 0) return [];
 
-  const { data: pk, error: pkErr } = await supabase
-    .from('post_keywords')
-    .select('keyword_id, post_translation_id')
-    .in('post_translation_id', transIds);
-  if (pkErr) throw pkErr;
+  const pkRows = (await fetchAllPages((from, to) =>
+    supabase
+      .from('post_keywords')
+      .select('keyword_id, post_translation_id')
+      .in('post_translation_id', transIds)
+      .range(from, to)
+  )) as PostKeywordRow[];
 
   const allKws = (kwRes.data ?? []) as KeywordRow[];
-  const pkRows = (pk ?? []) as PostKeywordRow[];
 
   const entries: KeywordEntry[] = [];
 
