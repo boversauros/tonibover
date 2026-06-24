@@ -11,7 +11,7 @@ const { categories, activeCategory } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 ---
 
-<nav class="mb-sp-12">
+<nav>
   <ul class="flex flex-wrap gap-sp-6 text-muted">
     <li>
       <Link href={getLocalizedPath('/reflexions', lang)} variant="muted" active={!activeCategory}>

@@ -12,11 +12,14 @@ export default {
   'nav.language': 'LANGUAGE',
   // Reflexions (post list + detail)
   'reflexions.breadcrumb': 'Reflections',
-  'reflexions.keywordPrefix': 'Keyword',
+  'reflexions.keywordPrefix': 'Related with',
   'reflexions.empty': 'No reflections published yet.',
   'reflexions.empty.category': 'No reflections in this category yet.',
   'reflexions.empty.keyword': 'No reflections with this keyword yet.',
   'post.references': 'References',
+  'post.nav.label': 'Post navigation',
+  'post.nav.previous': 'Previous',
+  'post.nav.next': 'Next',
   'keywords.heading': 'Keywords',
   // RSS feed
   'rss.title': 'Reflections — Toni Bover',

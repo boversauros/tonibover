@@ -4,25 +4,38 @@ import { getCollection } from 'astro:content';
 import Layout from '@layouts/Layout.astro';
 import Container from '@components/ui/Container.astro';
 import KeywordsList from '@components/composed/KeywordsList.astro';
+import PostNavigation from '@components/composed/PostNavigation.astro';
 import Link from '@components/ui/Link.astro';
 import Heading from '@components/ui/Heading.astro';
+import { formatPostNumber, postIdFromEntryId } from '@/lib/format-post-number';
 import Image from '@components/ui/Image.astro';
 import type { Post } from '@/types';
 import { getLocalizedPath, useTranslations } from '@/i18n';
 
 export async function getStaticPaths() {
   const posts: Post[] = await getCollection('posts', ({ data }) => data.lang === 'en');
-  return posts.map((post) => ({
+  const sorted = [...posts].sort(
+    (a, b) =>
+      a.data.sort_order - b.data.sort_order ||
+      new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+  );
+  return sorted.map((post, index) => ({
     params: { slug: post.data.slug },
-    props: { post },
+    props: {
+      post,
+      prevPost: sorted[index - 1] ?? null,
+      nextPost: sorted[index + 1] ?? null,
+    },
   }));
 }
 
 interface Props {
   post: Post;
+  prevPost: Post | null;
+  nextPost: Post | null;
 }
 
-const { post } = Astro.props;
+const { post, prevPost, nextPost } = Astro.props;
 const t = useTranslations('en');
 
 const categoryEntries = await getCollection('categories');
@@ -31,37 +44,34 @@ const categories = categoryEntries
   .sort((a, b) => a.name.localeCompare(b.name, 'en'));
 
 const categoryName = categories.find((c) => c.id === post.data.category)?.name;
+const postNumber = formatPostNumber(postIdFromEntryId(post.id));
 ---
 
 <Layout lang="en">
   <Container>
-    <!-- Navigation breadcrumb -->
-    <nav class="mb-sp-12">
-      <ol class="flex items-center space-x-sp-2 text-sm text-muted">
-        <li>
-          <Link
-            href={getLocalizedPath('/reflexions', 'en')}
-            variant="muted"
-            class="hover:text-white">{t('reflexions.breadcrumb')}</Link
-          >
-        </li>
-        <li>/</li>
-        <li>
-          <Link
-            href={getLocalizedPath(`/reflexions/${post.data.category}`, 'en')}
-            variant="muted"
-            class="hover:text-white"
-          >
-            {categoryName}
-          </Link>
-        </li>
-      </ol>
+    <!-- Category back-link -->
+    <nav class="mb-sp-8">
+      <Link
+        href={getLocalizedPath(`/reflexions/${post.data.category}`, 'en')}
+        variant="muted"
+        class="hover:text-white text-sm"
+      >
+        {categoryName}
+      </Link>
     </nav>
 
-    <article class="space-y-sp-16">
+    <article class="space-y-sp-8">
       <!-- Header -->
-      <header class="space-y-sp-6">
-        <Heading as="h1" size="3xl" variant="primary" class="leading-tight">
+      <header class="space-y-sp-3">
+        <Heading
+          as="p"
+          size="2xl"
+          variant="primary"
+          class="text-primary-80 font-normal mb-0"
+        >
+          {postNumber}
+        </Heading>
+        <Heading as="h1" size="3xl" variant="primary" class="leading-tight mb-0">
           {post.data.title}
         </Heading>
       </header>
@@ -69,11 +79,11 @@ const categoryName = categories.find((c) => c.id === post.data.category)?.name;
       <!-- Hero image (optional) -->
       {
         post.data.image && (
-          <figure class="space-y-sp-8">
+          <figure>
             <Image
               src={post.data.image.url}
               alt={post.data.image.alt}
-              height="h-auto md:h-[400px]"
+              fit="natural"
               hover="none"
               loading="eager"
             >
@@ -93,14 +103,13 @@ const categoryName = categories.find((c) => c.id === post.data.category)?.name;
       <!-- References -->
       {
         post.data.references.length > 0 && (
-          <section class="border-t border-default pt-sp-10 space-y-sp-6">
+          <section class="border-t border-default pt-sp-8">
             <Heading as="h2" size="xl" variant="secondary">
               {t('post.references')}
             </Heading>
             <ul class="space-y-sp-4 text-sm text-muted leading-relaxed">
               {post.data.references.map((ref) => (
                 <li class="pl-sp-4">
-                  <span class="text-body mr-2">-</span>
                   <span>{ref.reference}</span>
                   {ref.blockquote && (
                     <blockquote class="mt-sp-2 ml-sp-4 italic border-l border-default pl-sp-3">
@@ -116,6 +125,8 @@ const categoryName = categories.find((c) => c.id === post.data.category)?.name;
 
       <!-- Keywords -->
       <KeywordsList keywords={post.data.keywords} />
+
+      <PostNavigation prevPost={prevPost} nextPost={nextPost} lang="en" />
     </article>
   </Container>
 </Layout>

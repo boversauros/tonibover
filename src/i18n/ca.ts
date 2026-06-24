@@ -13,11 +13,14 @@ export default {
   'nav.language': 'IDIOMA',
   // Reflexions (post list + detail)
   'reflexions.breadcrumb': 'Reflexions',
-  'reflexions.keywordPrefix': 'Paraula Clau',
+  'reflexions.keywordPrefix': 'Relacionades amb',
   'reflexions.empty': 'Encara no hi ha reflexions publicades.',
   'reflexions.empty.category': 'Cap reflexió en aquesta categoria, de moment.',
   'reflexions.empty.keyword': 'Cap reflexió amb aquesta paraula clau, de moment.',
   'post.references': 'Referències',
+  'post.nav.label': 'Navegació entre reflexions',
+  'post.nav.previous': 'Anterior',
+  'post.nav.next': 'Següent',
   'keywords.heading': 'Paraules Clau',
   // RSS feed
   'rss.title': 'Reflexions — Toni Bover',

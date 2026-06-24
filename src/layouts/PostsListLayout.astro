@@ -20,15 +20,17 @@ const isEmpty = page.data.length === 0;
 ---
 
 <Container>
-  <h2 class="text-xl font-serif italic mb-sp-8 text-secondary">{title}</h2>
-  <CategoryNav categories={categories} activeCategory={activeCategory} />
-  {
-    isEmpty && emptyMessage ? (
-      <p class="text-secondary italic my-sp-16 text-center">{emptyMessage}</p>
-    ) : (
-      <PostGrid posts={page.data} categories={categories} />
-    )
-  }
-  {page.total > 1 && <PaginationControl page={page} />}
-  <KeywordsList keywords={keywords} />
+  <div class="space-y-sp-8">
+    <h2 class="text-xl font-serif italic text-secondary">{title}</h2>
+    <CategoryNav categories={categories} activeCategory={activeCategory} />
+    {
+      isEmpty && emptyMessage ? (
+        <p class="text-secondary italic my-sp-16 text-center">{emptyMessage}</p>
+      ) : (
+        <PostGrid posts={page.data} categories={categories} />
+      )
+    }
+    {page.total > 1 && <PaginationControl page={page} />}
+    <KeywordsList keywords={keywords} />
+  </div>
 </Container>

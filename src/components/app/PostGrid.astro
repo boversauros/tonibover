@@ -2,6 +2,7 @@
 import type { Post } from '@/types';
 import Card from '@components/ui/Card.astro';
 import Image from '@components/ui/Image.astro';
+import { formatPostNumber, postIdFromEntryId } from '@/lib/format-post-number';
 import { getLangFromUrl, getLocalizedPath } from '@/i18n';
 
 interface Props {
@@ -29,9 +30,14 @@ const lang = getLangFromUrl(Astro.url);
           hover="scale"
         />
         <div class="space-y-2 pt-4">
-          <p class="text-sm text-muted font-serif">
-            {categories.find((c) => c.id === post.data.category)?.name}
-          </p>
+          <div class="flex items-baseline justify-between gap-sp-4">
+            <p class="text-sm text-muted font-serif">
+              {categories.find((c) => c.id === post.data.category)?.name}
+            </p>
+            <p class="text-sm font-serif text-primary-80 font-normal tabular-nums shrink-0">
+              {formatPostNumber(postIdFromEntryId(post.id))}
+            </p>
+          </div>
           <h3 class="text-lg font-serif text-secondary group-hover:text-primary transition-colors-default">
             {post.data.title}
           </h3>

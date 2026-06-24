@@ -5,6 +5,7 @@ interface Props {
   src: string;
   alt: string;
   aspect?: 'square' | '4/3' | 'video' | 'auto';
+  fit?: 'cover' | 'contain' | 'natural';
   hover?: 'opacity' | 'scale' | 'none';
   loading?: 'lazy' | 'eager';
   width?: string;
@@ -17,6 +18,7 @@ const {
   src,
   alt,
   aspect = 'auto',
+  fit = 'cover',
   hover = 'opacity',
   loading = 'lazy',
   width = 'w-full',
@@ -40,8 +42,14 @@ const hoverClasses = {
   none: '',
 };
 
+const fitClasses = {
+  cover: 'object-cover',
+  contain: 'object-contain',
+  natural: 'h-auto',
+};
+
 const imageClasses =
-  `${width} ${height} ${aspectClasses[aspect]} object-cover ${hoverClasses[hover]} ${className}`.trim();
+  `${width} ${height} ${aspectClasses[aspect]} ${fitClasses[fit]} ${hoverClasses[hover]} ${className}`.trim();
 const overflowClass = hover === 'scale' ? 'overflow-hidden' : '';
 
 // astro:assets <Image> can optimize remote URLs (with inferSize) but not public-folder paths.
