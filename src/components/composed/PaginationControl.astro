@@ -1,14 +1,17 @@
 ---
 import type { Page } from 'astro';
 import Link from '@components/ui/Link.astro';
-import { getLangFromUrl, getLocalizedPath } from '@/i18n';
 
 interface Props {
   page: Page;
 }
 
 const { page } = Astro.props;
-const lang = getLangFromUrl(Astro.url);
+const baseUrl = page.url.first ?? page.url.current;
+
+function getPageUrl(pageNum: number): string {
+  return pageNum === 1 ? baseUrl : `${baseUrl}/${pageNum}`;
+}
 ---
 
 <nav class="flex justify-center items-center gap-sp-8" aria-label="Pagination">
@@ -24,7 +27,7 @@ const lang = getLangFromUrl(Astro.url);
     {
       Array.from({ length: page.lastPage }, (_, i) => i + 1).map((pageNum) => (
         <Link
-          href={getLocalizedPath(`/reflexions/${pageNum > 1 ? pageNum : ''}`, lang)}
+          href={getPageUrl(pageNum)}
           variant="muted"
           active={page.currentPage === pageNum}
           aria-current={page.currentPage === pageNum ? 'page' : undefined}
