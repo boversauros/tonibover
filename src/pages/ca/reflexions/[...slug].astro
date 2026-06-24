@@ -7,7 +7,7 @@ import KeywordsList from '@components/composed/KeywordsList.astro';
 import PostNavigation from '@components/composed/PostNavigation.astro';
 import Link from '@components/ui/Link.astro';
 import Heading from '@components/ui/Heading.astro';
-import { formatPostNumber, postIdFromEntryId } from '@/lib/format-post-number';
+import { formatPostNumber } from '@/lib/format-post-number';
 import Image from '@components/ui/Image.astro';
 import type { Post } from '@/types';
 import { getLocalizedPath, useTranslations } from '@/i18n';
@@ -44,7 +44,7 @@ const categories = categoryEntries
   .sort((a, b) => a.name.localeCompare(b.name, 'ca'));
 
 const categoryName = categories.find((c) => c.id === post.data.category)?.name;
-const postNumber = formatPostNumber(postIdFromEntryId(post.id));
+const postNumber = formatPostNumber(post.data.sort_order);
 ---
 
 <Layout>

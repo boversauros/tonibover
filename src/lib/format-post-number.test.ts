@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { formatPostNumber, postIdFromEntryId } from './format-post-number';
+import { formatPostNumber } from './format-post-number';
 
 describe('formatPostNumber', () => {
   it('pads single digits to three characters', () => {
@@ -15,12 +15,5 @@ describe('formatPostNumber', () => {
   it('leaves three-digit and larger numbers unpadded', () => {
     expect(formatPostNumber(100)).toBe('100');
     expect(formatPostNumber(1321)).toBe('1321');
-  });
-});
-
-describe('postIdFromEntryId', () => {
-  it('parses the numeric id before the language suffix', () => {
-    expect(postIdFromEntryId('99-ca')).toBe(99);
-    expect(postIdFromEntryId('5-en')).toBe(5);
   });
 });
