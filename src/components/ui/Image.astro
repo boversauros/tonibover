@@ -4,7 +4,7 @@ import { Image as AstroImage } from 'astro:assets';
 interface Props {
   src: string;
   alt: string;
-  aspect?: 'square' | '4/3' | 'video' | 'auto';
+  aspect?: 'square' | '4/3' | '3/2' | 'video' | 'auto';
   fit?: 'cover' | 'contain' | 'natural';
   hover?: 'opacity' | 'scale' | 'none';
   loading?: 'lazy' | 'eager';
@@ -32,6 +32,7 @@ const hasCaption = Astro.slots.has('caption');
 const aspectClasses = {
   square: 'aspect-square',
   '4/3': 'aspect-4/3',
+  '3/2': 'aspect-3/2',
   video: 'aspect-video',
   auto: '',
 };

@@ -29,7 +29,6 @@ const { page, categories } = Astro.props;
 const { category } = Astro.params;
 const t = useTranslations('ca');
 const categoryName = categories.find((c) => c.id === category)?.name;
-const uniqueKeywords = [...new Set(page.data.flatMap((post) => post.data.keywords))];
 ---
 
 <Layout>
@@ -37,7 +36,6 @@ const uniqueKeywords = [...new Set(page.data.flatMap((post) => post.data.keyword
     title={`${t('nav.reflexions')}: ${categoryName}`}
     categories={categories}
     page={page}
-    keywords={uniqueKeywords}
     activeCategory={category}
     emptyMessage={t('reflexions.empty.category')}
   />

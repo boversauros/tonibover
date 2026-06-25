@@ -26,7 +26,8 @@ const lang = getLangFromUrl(Astro.url);
           slot="image"
           src={post.data.thumbnail.url}
           alt={post.data.thumbnail.alt}
-          aspect="4/3"
+          aspect="3/2"
+          fit="contain"
           hover="scale"
         />
         <div class="space-y-2 pt-4">

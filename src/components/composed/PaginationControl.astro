@@ -8,10 +8,20 @@ interface Props {
 
 const { page } = Astro.props;
 const baseUrl = page.url.first ?? page.url.current;
+const windowSize = 3;
 
 function getPageUrl(pageNum: number): string {
   return pageNum === 1 ? baseUrl : `${baseUrl}/${pageNum}`;
 }
+
+function getMobilePageNumbers(currentPage: number, lastPage: number): number[] {
+  const start = Math.max(1, Math.min(currentPage - 1, lastPage - windowSize + 1));
+  const end = Math.min(start + windowSize - 1, lastPage);
+  return Array.from({ length: end - start + 1 }, (_, i) => start + i);
+}
+
+const allPageNumbers = Array.from({ length: page.lastPage }, (_, i) => i + 1);
+const mobilePageNumbers = getMobilePageNumbers(page.currentPage, page.lastPage);
 ---
 
 <nav class="flex justify-center items-center gap-sp-8" aria-label="Pagination">
@@ -23,9 +33,24 @@ function getPageUrl(pageNum: number): string {
     )
   }
 
-  <div class="flex items-center gap-sp-4 text-sm">
+  <div class="hidden md:flex items-center gap-sp-4 text-sm">
     {
-      Array.from({ length: page.lastPage }, (_, i) => i + 1).map((pageNum) => (
+      allPageNumbers.map((pageNum) => (
+        <Link
+          href={getPageUrl(pageNum)}
+          variant="muted"
+          active={page.currentPage === pageNum}
+          aria-current={page.currentPage === pageNum ? 'page' : undefined}
+        >
+          {pageNum}
+        </Link>
+      ))
+    }
+  </div>
+
+  <div class="flex md:hidden items-center gap-sp-4 text-sm">
+    {
+      mobilePageNumbers.map((pageNum) => (
         <Link
           href={getPageUrl(pageNum)}
           variant="muted"

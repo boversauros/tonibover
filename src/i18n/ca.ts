@@ -13,6 +13,7 @@ export default {
   'nav.language': 'IDIOMA',
   // Reflexions (post list + detail)
   'reflexions.breadcrumb': 'Reflexions',
+  'reflexions.sequentialReading': 'Lectura Seqüencial',
   'reflexions.keywordPrefix': 'Relacionades amb',
   'reflexions.empty': 'Encara no hi ha reflexions publicades.',
   'reflexions.empty.category': 'Cap reflexió en aquesta categoria, de moment.',

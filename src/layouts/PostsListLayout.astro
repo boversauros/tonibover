@@ -11,11 +11,10 @@ interface Props {
   categories: Array<{ id: string; name: string }>;
   activeCategory?: string;
   page: Page;
-  keywords: Array<string>;
   emptyMessage?: string;
 }
 
-const { title, categories, activeCategory, page, keywords, emptyMessage } = Astro.props;
+const { title, categories, activeCategory, page, emptyMessage } = Astro.props;
 const isEmpty = page.data.length === 0;
 ---
 
@@ -31,6 +30,6 @@ const isEmpty = page.data.length === 0;
       )
     }
     {page.total > 1 && <PaginationControl page={page} />}
-    <KeywordsList keywords={keywords} />
+    <KeywordsList />
   </div>
 </Container>

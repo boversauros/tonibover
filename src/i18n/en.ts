@@ -12,6 +12,7 @@ export default {
   'nav.language': 'LANGUAGE',
   // Reflexions (post list + detail)
   'reflexions.breadcrumb': 'Reflections',
+  'reflexions.sequentialReading': 'Sequential Reading',
   'reflexions.keywordPrefix': 'Related with',
   'reflexions.empty': 'No reflections published yet.',
   'reflexions.empty.category': 'No reflections in this category yet.',

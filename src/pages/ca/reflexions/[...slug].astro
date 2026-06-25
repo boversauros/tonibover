@@ -100,6 +100,9 @@ const postNumber = formatPostNumber(post.data.sort_order);
         <Fragment set:html={post.data.html} />
       </div>
 
+      <!-- Keywords -->
+      <KeywordsList keywords={post.data.keywords} />
+
       <!-- References -->
       {
         post.data.references.length > 0 && (
@@ -112,7 +115,7 @@ const postNumber = formatPostNumber(post.data.sort_order);
                 <li class="pl-sp-4">
                   <span>{ref.reference}</span>
                   {ref.blockquote && (
-                    <blockquote class="mt-sp-2 ml-sp-4 italic border-l border-default pl-sp-3">
+                    <blockquote class="mt-sp-2 ml-sp-4 italic border-l-2 border-default pl-sp-4">
                       {ref.blockquote}
                     </blockquote>
                   )}
@@ -122,9 +125,6 @@ const postNumber = formatPostNumber(post.data.sort_order);
           </section>
         )
       }
-
-      <!-- Keywords -->
-      <KeywordsList keywords={post.data.keywords} />
 
       <PostNavigation prevPost={prevPost} nextPost={nextPost} lang="ca" />
     </article>
