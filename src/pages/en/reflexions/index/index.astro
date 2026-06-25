@@ -1,0 +1,41 @@
+---
+import '@styles/global.css';
+import { getCollection } from 'astro:content';
+import Layout from '@layouts/Layout.astro';
+import ReflexionsIndex from '@components/app/ReflexionsIndex.astro';
+import { formatPostNumber } from '@/lib/format-post-number';
+import { getLocalizedPath, useTranslations } from '@/i18n';
+import type { Post } from '@/types';
+
+const lang = 'en';
+const t = useTranslations(lang);
+
+const posts: Post[] = await getCollection('posts', ({ data }) => data.lang === lang);
+const sorted = [...posts].sort(
+  (a, b) =>
+    a.data.sort_order - b.data.sort_order ||
+    new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+
+const entries = sorted.map((post) => ({
+  number: formatPostNumber(post.data.sort_order),
+  title: post.data.title.trim(),
+  href: getLocalizedPath(`/reflexions/${post.data.slug}`, lang),
+}));
+
+const PAGE_SIZE = 6;
+const groups = Array.from({ length: Math.ceil(entries.length / PAGE_SIZE) }, (_, i) => ({
+  pageNumber: i + 1,
+  entries: entries.slice(i * PAGE_SIZE, i * PAGE_SIZE + PAGE_SIZE),
+}));
+---
+
+<Layout lang={lang}>
+  <ReflexionsIndex
+    lang={lang}
+    title={t('reflexionsIndex.title')}
+    intro={t('reflexionsIndex.intro')}
+    pageLabel={t('reflexionsIndex.pageLabel')}
+    groups={groups}
+  />
+</Layout>

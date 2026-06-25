@@ -4,6 +4,7 @@ import CategoryNav from '@components/composed/CategoryNav.astro';
 import PostGrid from '@components/app/PostGrid.astro';
 import KeywordsList from '@components/composed/KeywordsList.astro';
 import PaginationControl from '@components/composed/PaginationControl.astro';
+import Link from '@components/ui/Link.astro';
 import type { Page } from 'astro';
 
 interface Props {
@@ -12,15 +13,31 @@ interface Props {
   activeCategory?: string;
   page: Page;
   emptyMessage?: string;
+  indexHref?: string;
+  indexLabel?: string;
 }
 
-const { title, categories, activeCategory, page, emptyMessage } = Astro.props;
+const { title, categories, activeCategory, page, emptyMessage, indexHref, indexLabel } =
+  Astro.props;
 const isEmpty = page.data.length === 0;
 ---
 
 <Container>
   <div class="space-y-sp-8">
-    <h2 class="text-xl font-serif italic text-secondary">{title}</h2>
+    <div class="flex items-baseline justify-between gap-sp-4">
+      <h2 class="text-xl font-serif italic text-secondary">{title}</h2>
+      {
+        indexHref && indexLabel && (
+          <Link
+            href={indexHref}
+            underline
+            class="shrink-0 text-sm tracking-wide uppercase"
+          >
+            {indexLabel}
+          </Link>
+        )
+      }
+    </div>
     <CategoryNav categories={categories} activeCategory={activeCategory} />
     {
       isEmpty && emptyMessage ? (

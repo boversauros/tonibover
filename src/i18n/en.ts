@@ -7,6 +7,7 @@ export default {
   // Navigation
   'nav.preambul': 'PREAMBLE',
   'nav.reflexions': 'REFLECTIONS',
+  'nav.index': 'INDEX',
   'nav.biografia': 'BIOGRAPHY',
   'nav.documental': 'DOCUMENTARY',
   'nav.language': 'LANGUAGE',
@@ -17,6 +18,11 @@ export default {
   'reflexions.empty': 'No reflections published yet.',
   'reflexions.empty.category': 'No reflections in this category yet.',
   'reflexions.empty.keyword': 'No reflections with this keyword yet.',
+  // Reflexions index (book-style table of contents)
+  'reflexionsIndex.title': 'Reflexions: Index',
+  'reflexionsIndex.pageLabel': 'Page',
+  'reflexionsIndex.intro':
+    'The posts can be read sequentially, following the order in which they were written, or through conceptual interrelationships from 1 to 100, or via different sections: influences, perspectives, experiences, or keywords. Alternatively, they can also be read and viewed as independent entities, since each post has its own identity.',
   'post.references': 'References',
   'post.nav.label': 'Post navigation',
   'post.nav.previous': 'Previous',

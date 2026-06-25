@@ -8,6 +8,7 @@ export default {
   // Navigation
   'nav.preambul': 'PREÀMBUL',
   'nav.reflexions': 'REFLEXIONS',
+  'nav.index': 'ÍNDEX',
   'nav.biografia': 'BIOGRAFIA',
   'nav.documental': 'DOCUMENTAL',
   'nav.language': 'IDIOMA',
@@ -18,6 +19,11 @@ export default {
   'reflexions.empty': 'Encara no hi ha reflexions publicades.',
   'reflexions.empty.category': 'Cap reflexió en aquesta categoria, de moment.',
   'reflexions.empty.keyword': 'Cap reflexió amb aquesta paraula clau, de moment.',
+  // Reflexions index (book-style table of contents)
+  'reflexionsIndex.title': 'Reflexions: índex',
+  'reflexionsIndex.pageLabel': 'Pàgina',
+  'reflexionsIndex.intro':
+    "Els posts es poden llegir de manera seqüencial, segons la línia temporal en què s'han escrit, amb la interrelació conceptual entre ells de l'1 al 100, o a partir dels diferents apartats: influències, perspectives, vivències o mitjançant paraules clau. D'altra banda, també es poden llegir i visualitzar com a entitats independents, ja que cadascun té una identitat pròpia.",
   'post.references': 'Referències',
   'post.nav.label': 'Navegació entre reflexions',
   'post.nav.previous': 'Anterior',

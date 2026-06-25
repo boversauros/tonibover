@@ -4,7 +4,7 @@ import Layout from '@layouts/Layout.astro';
 import PostsListLayout from '@layouts/PostsListLayout.astro';
 import { getCollection } from 'astro:content';
 import type { GetStaticPathsOptions } from 'astro';
-import { useTranslations } from '@/i18n';
+import { useTranslations, getLocalizedPath } from '@/i18n';
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
   const [posts, keywordEntries] = await Promise.all([
@@ -39,5 +39,7 @@ const categories = categoryEntries
     categories={categories}
     page={page}
     emptyMessage={t('reflexions.empty.keyword')}
+    indexHref={getLocalizedPath('/reflexions/index', 'en')}
+    indexLabel={t('nav.index')}
   />
 </Layout>
