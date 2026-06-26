@@ -4,7 +4,7 @@ import { getCollection } from 'astro:content';
 import Layout from '@layouts/Layout.astro';
 import Container from '@components/ui/Container.astro';
 import KeywordsList from '@components/composed/KeywordsList.astro';
-import PostNavigation from '@components/composed/PostNavigation.astro';
+import SectionNavigation from '@components/composed/SectionNavigation.astro';
 import Link from '@components/ui/Link.astro';
 import Heading from '@components/ui/Heading.astro';
 import { formatPostNumber } from '@/lib/format-post-number';
@@ -121,7 +121,21 @@ const postNumber = formatPostNumber(post.data.sort_order);
         )
       }
 
-      <PostNavigation prevPost={prevPost} nextPost={nextPost} lang="en" />
+      <SectionNavigation
+        prev={prevPost && {
+          href: getLocalizedPath(`/reflexions/${prevPost.data.slug}`, 'en'),
+          title: prevPost.data.title,
+          number: formatPostNumber(prevPost.data.sort_order),
+        }}
+        next={nextPost && {
+          href: getLocalizedPath(`/reflexions/${nextPost.data.slug}`, 'en'),
+          title: nextPost.data.title,
+          number: formatPostNumber(nextPost.data.sort_order),
+        }}
+        previousLabel={t('post.nav.previous')}
+        nextLabel={t('post.nav.next')}
+        ariaLabel={t('post.nav.label')}
+      />
     </article>
   </Container>
 </Layout>

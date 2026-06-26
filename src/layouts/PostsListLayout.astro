@@ -1,5 +1,6 @@
 ---
 import Container from '@components/ui/Container.astro';
+import Heading from '@components/ui/Heading.astro';
 import CategoryNav from '@components/composed/CategoryNav.astro';
 import PostGrid from '@components/app/PostGrid.astro';
 import KeywordsList from '@components/composed/KeywordsList.astro';
@@ -25,7 +26,7 @@ const isEmpty = page.data.length === 0;
 <Container>
   <div class="space-y-sp-8">
     <div class="flex items-baseline justify-between gap-sp-4">
-      <h2 class="text-xl font-serif italic text-secondary">{title}</h2>
+      <Heading as="h2" size="3xl" variant="primary" class="mb-0 font-semibold">{title}</Heading>
       {
         indexHref && indexLabel && (
           <Link href={indexHref} underline class="shrink-0 text-sm tracking-wide uppercase">
