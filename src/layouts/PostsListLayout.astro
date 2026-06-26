@@ -28,11 +28,7 @@ const isEmpty = page.data.length === 0;
       <h2 class="text-xl font-serif italic text-secondary">{title}</h2>
       {
         indexHref && indexLabel && (
-          <Link
-            href={indexHref}
-            underline
-            class="shrink-0 text-sm tracking-wide uppercase"
-          >
+          <Link href={indexHref} underline class="shrink-0 text-sm tracking-wide uppercase">
             {indexLabel}
           </Link>
         )

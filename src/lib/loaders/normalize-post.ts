@@ -91,8 +91,7 @@ export function normalizePosts({ rows, kwMap, refMap, sanitize }: NormalizeInput
   }
 
   entries.sort(
-    (a, b) =>
-      a.sort_order - b.sort_order || new Date(b.date).getTime() - new Date(a.date).getTime()
+    (a, b) => a.sort_order - b.sort_order || new Date(b.date).getTime() - new Date(a.date).getTime()
   );
 
   return entries;

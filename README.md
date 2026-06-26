@@ -16,15 +16,15 @@ Copy `.env.example` to `.env` and fill in:
 
 ## Scripts
 
-| Command | Description |
-| --- | --- |
-| `pnpm dev` | Start dev server |
-| `pnpm build` | Production build (fetches from Supabase) |
-| `pnpm preview` | Preview built site |
-| `pnpm format` | Prettier write |
-| `pnpm test` | Run Vitest unit tests (pure modules) |
-| `pnpm test:watch` | Vitest watch mode |
-| `pnpm types:gen` | Regenerate `src/lib/database.types.ts` from Supabase schema. Requires `SUPABASE_PROJECT_ID` env + Supabase CLI installed (`brew install supabase/tap/supabase`). |
+| Command           | Description                                                                                                                                                      |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `pnpm dev`        | Start dev server                                                                                                                                                 |
+| `pnpm build`      | Production build (fetches from Supabase)                                                                                                                         |
+| `pnpm preview`    | Preview built site                                                                                                                                               |
+| `pnpm format`     | Prettier write                                                                                                                                                   |
+| `pnpm test`       | Run Vitest unit tests (pure modules)                                                                                                                             |
+| `pnpm test:watch` | Vitest watch mode                                                                                                                                                |
+| `pnpm types:gen`  | Regenerate `src/lib/database.types.ts` from Supabase schema. Requires `SUPABASE_PROJECT_ID` env + Supabase CLI installed (`brew install supabase/tap/supabase`). |
 
 ## Architecture
 

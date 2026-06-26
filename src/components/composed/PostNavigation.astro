@@ -15,10 +15,7 @@ const t = useTranslations(lang);
 if (!prevPost && !nextPost) return null;
 ---
 
-<nav
-  class="flex justify-center items-center gap-sp-8"
-  aria-label={t('post.nav.label')}
->
+<nav class="flex justify-center items-center gap-sp-8" aria-label={t('post.nav.label')}>
   {
     prevPost && (
       <Link

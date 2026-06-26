@@ -40,8 +40,7 @@ function isActive(href: string, path: string) {
           </span>
           <span
             aria-hidden="true"
-            class="hidden lg:inline-block self-center h-5 border-l border-subtle"
-          ></span>
+            class="hidden lg:inline-block self-center h-5 border-l border-subtle"></span>
           <span
             class="hidden lg:inline-block text-sm tracking-[0.25em] text-muted whitespace-nowrap"
           >
@@ -55,12 +54,7 @@ function isActive(href: string, path: string) {
           links.map((link) => {
             const active = isActive(link.href, currentPath);
             return (
-              <Link
-                href={link.href}
-                underline
-                active={active}
-                class="text-sm tracking-wide"
-              >
+              <Link href={link.href} underline active={active} class="text-sm tracking-wide">
                 {link.label}
               </Link>
             );

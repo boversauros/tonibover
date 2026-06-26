@@ -1,10 +1,7 @@
 const BLOCK_TAG_RE = /<(p|h[1-6]|ul|ol|li|blockquote|hr|br)\b/i;
 
 function escapeHtml(s: string): string {
-  return s
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;');
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 
 export function paragraphify(input: string): string {

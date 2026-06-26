@@ -36,11 +36,7 @@ const { title, intro, pageLabel, groups } = Astro.props;
       groups.map((group) => (
         <section>
           <div class="flex items-center gap-sp-4 mb-sp-5">
-            <Text
-              as="span"
-              variant="label"
-              class="shrink-0 uppercase"
-            >
+            <Text as="span" variant="label" class="shrink-0 uppercase">
               {`${pageLabel} ${group.pageNumber}`}
             </Text>
             <span aria-hidden="true" class="grow border-t border-subtle" />
@@ -49,11 +45,7 @@ const { title, intro, pageLabel, groups } = Astro.props;
           <ul class="space-y-sp-3">
             {group.entries.map((entry) => (
               <li>
-                <Link
-                  href={entry.href}
-                  variant="muted"
-                  class="group flex items-baseline gap-sp-4"
-                >
+                <Link href={entry.href} variant="muted" class="group flex items-baseline gap-sp-4">
                   <span class="shrink-0 font-serif tabular-nums text-primary-60 group-hover:text-primary transition-colors-default">
                     #{entry.number}
                   </span>

@@ -66,15 +66,13 @@ describe('validatePostRow', () => {
   });
 
   it('passes when at least one translation is usable even if another is empty', () => {
-    expect(
-      validatePostRow(post({ post_translations: [tr(1, { title: '' }), tr(2)] })).ok
-    ).toBe(true);
+    expect(validatePostRow(post({ post_translations: [tr(1, { title: '' }), tr(2)] })).ok).toBe(
+      true
+    );
   });
 
   it('reports both errors when category AND translation are missing', () => {
-    const result = validatePostRow(
-      post({ category: null, post_translations: [] })
-    );
+    const result = validatePostRow(post({ category: null, post_translations: [] }));
     expect(result.ok).toBe(false);
     if (!result.ok) {
       expect(result.errors).toHaveLength(2);

@@ -13,7 +13,7 @@ export default {
   'nav.language': 'LANGUAGE',
   // Reflexions (post list + detail)
   'reflexions.breadcrumb': 'Reflections',
-  'reflexions.sequentialReading': 'Sequential Reading',
+  'reflexions.sequentialReading': 'Sequential reading',
   'reflexions.keywordPrefix': 'Related with',
   'reflexions.empty': 'No reflections published yet.',
   'reflexions.empty.category': 'No reflections in this category yet.',
@@ -30,8 +30,7 @@ export default {
   'keywords.heading': 'Keywords',
   // RSS feed
   'rss.title': 'Reflections — Toni Bover',
-  'rss.description':
-    '100 iconotextual reflections on visual communication and photography.',
+  'rss.description': '100 iconotextual reflections on visual communication and photography.',
   // Footer
   'footer.contact': 'Contact',
   'footer.acknowledgments': 'Acknowledgments',

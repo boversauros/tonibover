@@ -24,9 +24,7 @@ export async function fetchPosts(): Promise<RawFetchResult> {
 
   const rows = (posts ?? []) as unknown as RawJoinedPost[];
 
-  const allTranslationIds = rows.flatMap((p) =>
-    (p.post_translations ?? []).map((t) => t.id)
-  );
+  const allTranslationIds = rows.flatMap((p) => (p.post_translations ?? []).map((t) => t.id));
 
   if (allTranslationIds.length === 0) {
     return { rows, kwRows: [], refRows: [] };

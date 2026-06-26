@@ -41,9 +41,7 @@ describe('groupReferencesByTranslation', () => {
   });
 
   it('passes through type, reference, blockquote', () => {
-    const rows = [
-      ref(1, 0, { type: 'blockquote', reference: 'src', blockquote: 'quoted text' }),
-    ];
+    const rows = [ref(1, 0, { type: 'blockquote', reference: 'src', blockquote: 'quoted text' })];
     const out = groupReferencesByTranslation(rows).get(1)!;
     expect(out[0]).toMatchObject({
       type: 'blockquote',

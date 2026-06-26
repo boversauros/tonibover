@@ -82,7 +82,9 @@ describe('sanitize', () => {
     });
 
     it('removes <figure> and <figcaption>', () => {
-      const out = sanitize('<figure><img src="https://x.example/a.png" alt="a" /><figcaption>cap</figcaption></figure>');
+      const out = sanitize(
+        '<figure><img src="https://x.example/a.png" alt="a" /><figcaption>cap</figcaption></figure>'
+      );
       expect(out).not.toContain('<figure');
       expect(out).not.toContain('<figcaption');
     });

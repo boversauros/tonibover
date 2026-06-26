@@ -3,9 +3,7 @@ import type { RawPostReferenceRow, Reference, ReferenceType } from './types';
 const VALID_TYPES: readonly ReferenceType[] = ['text', 'image', 'blockquote'];
 
 function asReferenceType(value: string): ReferenceType {
-  return (VALID_TYPES as readonly string[]).includes(value)
-    ? (value as ReferenceType)
-    : 'text';
+  return (VALID_TYPES as readonly string[]).includes(value) ? (value as ReferenceType) : 'text';
 }
 
 export function groupReferencesByTranslation(

@@ -152,10 +152,7 @@ describe('normalizePosts', () => {
 
   it('attaches keywords and references from injected maps', () => {
     const refMap = new Map([
-      [
-        10,
-        [{ type: 'text' as const, reference: 'r', blockquote: null, sort_order: 0 }],
-      ],
+      [10, [{ type: 'text' as const, reference: 'r', blockquote: null, sort_order: 0 }]],
     ]);
     const kwMap = new Map([[10, ['kw1', 'kw2']]]);
     const out = normalizePosts({
@@ -181,10 +178,7 @@ describe('normalizePosts', () => {
   it('aggregates errors across multiple bad rows', () => {
     try {
       normalizePosts({
-        rows: [
-          post({ id: 1, category: null }),
-          post({ id: 2, post_translations: [] }),
-        ],
+        rows: [post({ id: 1, category: null }), post({ id: 2, post_translations: [] })],
         ...emptyMaps(),
         sanitize: identity,
       });
