@@ -410,6 +410,11 @@
   .transition-transform-default {
     transition: var(--transition-transform);
   }
+
+  /* Text wrapping */
+  .break-anywhere {
+    overflow-wrap: anywhere;
+  }
 }
 
 @layer components {

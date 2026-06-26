@@ -105,9 +105,9 @@ const postNumber = formatPostNumber(post.data.sort_order);
             <Heading as="h2" size="xl" variant="secondary">
               {t('post.references')}
             </Heading>
-            <ul class="space-y-sp-4 text-sm text-muted leading-relaxed">
+            <ul class="space-y-sp-4 text-sm text-muted leading-relaxed break-anywhere">
               {post.data.references.map((ref) => (
-                <li class="pl-sp-4">
+                <li class="pl-sp-4 max-w-full">
                   <span>{ref.reference}</span>
                   {ref.blockquote && (
                     <blockquote class="mt-sp-2 ml-sp-4 italic border-l-2 border-default pl-sp-4">
