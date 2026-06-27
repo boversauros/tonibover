@@ -45,6 +45,9 @@ const categories = categoryEntries
 
 const categoryName = categories.find((c) => c.id === post.data.category)?.name;
 const postNumber = formatPostNumber(post.data.sort_order);
+
+const textReferences = post.data.references.filter((r) => r.type === 'text');
+const imageReferences = post.data.references.filter((r) => r.type === 'image');
 ---
 
 <Layout lang="en">
@@ -105,18 +108,46 @@ const postNumber = formatPostNumber(post.data.sort_order);
             <h2 class="text-lg font-serif mb-sp-6 text-secondary mt-0">
               {t('post.references')}
             </h2>
-            <ul class="space-y-sp-4 text-sm text-muted leading-relaxed break-anywhere">
-              {post.data.references.map((ref) => (
-                <li class="pl-sp-4 max-w-full">
-                  <span>{ref.reference}</span>
-                  {ref.blockquote && (
-                    <blockquote class="mt-sp-2 ml-sp-4 italic border-l-2 border-default pl-sp-4">
-                      {ref.blockquote}
-                    </blockquote>
-                  )}
-                </li>
-              ))}
-            </ul>
+            <div class="space-y-sp-8">
+              {textReferences.length > 0 && (
+                <div>
+                  <h3 class="text-sm font-serif text-secondary mb-sp-4 mt-0">
+                    {t('post.references.text')}
+                  </h3>
+                  <ul class="space-y-sp-4 text-sm text-muted leading-relaxed break-anywhere">
+                    {textReferences.map((ref) => (
+                      <li class="pl-sp-4 max-w-full">
+                        <span>{ref.reference}</span>
+                        {ref.blockquote && (
+                          <blockquote class="mt-sp-2 ml-sp-4 italic border-l-2 border-default pl-sp-4">
+                            {ref.blockquote}
+                          </blockquote>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              {imageReferences.length > 0 && (
+                <div>
+                  <h3 class="text-sm font-serif text-secondary mb-sp-4 mt-0">
+                    {t('post.references.image')}
+                  </h3>
+                  <ul class="space-y-sp-4 text-sm text-muted leading-relaxed break-anywhere">
+                    {imageReferences.map((ref) => (
+                      <li class="pl-sp-4 max-w-full">
+                        <span>{ref.reference}</span>
+                        {ref.blockquote && (
+                          <blockquote class="mt-sp-2 ml-sp-4 italic border-l-2 border-default pl-sp-4">
+                            {ref.blockquote}
+                          </blockquote>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
           </section>
         )
       }

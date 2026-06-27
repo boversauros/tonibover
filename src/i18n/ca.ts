@@ -25,6 +25,8 @@ export default {
   'reflexionsIndex.intro':
     "Els posts es poden llegir de manera seqüencial, segons la línia temporal en què s'han escrit, amb la interrelació conceptual entre ells de l'1 al 100, o a partir dels diferents apartats: influències, perspectives, vivències o mitjançant paraules clau. D'altra banda, també es poden llegir i visualitzar com a entitats independents, ja que cadascun té una identitat pròpia.",
   'post.references': 'Referències',
+  'post.references.text': 'Textos',
+  'post.references.image': 'Imatges',
   'post.nav.label': 'Navegació entre reflexions',
   'post.nav.previous': 'Anterior',
   'post.nav.next': 'Següent',
