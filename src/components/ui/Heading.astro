@@ -38,10 +38,11 @@ const marginClasses: Record<NonNullable<Props['size']>, string> = {
   '5xl': 'mb-sp-2',
 };
 
+const marginClass = /\bmb-sp-\d+\b/.test(className) ? '' : marginClasses[size];
 const italicClass = italic ? 'italic' : '';
 const fontWeightClass = Element === 'h1' ? 'font-semibold' : '';
 const finalClasses =
-  `font-serif ${sizeClasses[size]} ${variantClasses[variant]} ${marginClasses[size]} ${italicClass} ${fontWeightClass} ${className}`.trim();
+  `font-serif ${sizeClasses[size]} ${variantClasses[variant]} ${marginClass} ${italicClass} ${fontWeightClass} ${className}`.trim();
 ---
 
 <Element class={finalClasses}>

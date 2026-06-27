@@ -101,10 +101,10 @@ const postNumber = formatPostNumber(post.data.sort_order);
       <!-- References -->
       {
         post.data.references.length > 0 && (
-          <section class="border-t border-default pt-sp-8">
-            <Heading as="h2" size="xl" variant="secondary">
+          <section class="border-t border-default pt-sp-4">
+            <h2 class="text-lg font-serif mb-sp-6 text-secondary mt-0">
               {t('post.references')}
-            </Heading>
+            </h2>
             <ul class="space-y-sp-4 text-sm text-muted leading-relaxed break-anywhere">
               {post.data.references.map((ref) => (
                 <li class="pl-sp-4 max-w-full">

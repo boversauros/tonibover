@@ -47,7 +47,7 @@ const { title, intro, pageLabel, groups } = Astro.props;
               <li>
                 <Link href={entry.href} variant="muted" class="group flex items-baseline gap-sp-4">
                   <span class="shrink-0 font-serif tabular-nums text-primary-60 group-hover:text-primary transition-colors-default">
-                    #{entry.number}
+                    {entry.number}
                   </span>
                   <span class="text-body group-hover:text-primary transition-colors-default">
                     {entry.title}

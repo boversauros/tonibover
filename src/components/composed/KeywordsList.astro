@@ -23,8 +23,8 @@ const sortedEntries = [...filteredEntries].sort((a, b) =>
 if (postKeywords && sortedEntries.length === 0) return null;
 ---
 
-<div class="border-t border-default pt-sp-8">
-  <h3 class="text-lg font-serif mb-sp-6 text-secondary">{t('keywords.heading')}</h3>
+<div class="border-t border-default pt-sp-4">
+  <h3 class="text-lg font-serif mb-sp-6 text-secondary mt-0">{t('keywords.heading')}</h3>
   <div class="flex flex-wrap gap-sp-2">
     {
       sortedEntries.map((keyword) => (
