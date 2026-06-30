@@ -5,6 +5,7 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://tonibover.cat',
+  cacheDir: './node_modules/.cache/.astro',
   i18n: {
     locales: ['ca', 'en'],
     defaultLocale: 'ca',
