@@ -1,17 +1,30 @@
 ---
 import type { Page } from 'astro';
 import Link from '@components/ui/Link.astro';
-import { getLangFromUrl, getLocalizedPath } from '@/i18n';
 
 interface Props {
   page: Page;
 }
 
 const { page } = Astro.props;
-const lang = getLangFromUrl(Astro.url);
+const baseUrl = page.url.first ?? page.url.current;
+const windowSize = 3;
+
+function getPageUrl(pageNum: number): string {
+  return pageNum === 1 ? baseUrl : `${baseUrl}/${pageNum}`;
+}
+
+function getMobilePageNumbers(currentPage: number, lastPage: number): number[] {
+  const start = Math.max(1, Math.min(currentPage - 1, lastPage - windowSize + 1));
+  const end = Math.min(start + windowSize - 1, lastPage);
+  return Array.from({ length: end - start + 1 }, (_, i) => start + i);
+}
+
+const allPageNumbers = Array.from({ length: page.lastPage }, (_, i) => i + 1);
+const mobilePageNumbers = getMobilePageNumbers(page.currentPage, page.lastPage);
 ---
 
-<nav class="flex justify-center items-center gap-sp-8 mb-sp-16" aria-label="Pagination">
+<nav class="flex justify-center items-center gap-sp-8" aria-label="Pagination">
   {
     page.url.prev && (
       <Link href={page.url.prev} variant="muted" class="text-sm" aria-label="Previous page">
@@ -20,11 +33,26 @@ const lang = getLangFromUrl(Astro.url);
     )
   }
 
-  <div class="flex items-center gap-sp-4 text-sm">
+  <div class="hidden md:flex items-center gap-sp-4 text-sm">
     {
-      Array.from({ length: page.lastPage }, (_, i) => i + 1).map((pageNum) => (
+      allPageNumbers.map((pageNum) => (
         <Link
-          href={getLocalizedPath(`/reflexions/${pageNum > 1 ? pageNum : ''}`, lang)}
+          href={getPageUrl(pageNum)}
+          variant="muted"
+          active={page.currentPage === pageNum}
+          aria-current={page.currentPage === pageNum ? 'page' : undefined}
+        >
+          {pageNum}
+        </Link>
+      ))
+    }
+  </div>
+
+  <div class="flex md:hidden items-center gap-sp-4 text-sm">
+    {
+      mobilePageNumbers.map((pageNum) => (
+        <Link
+          href={getPageUrl(pageNum)}
           variant="muted"
           active={page.currentPage === pageNum}
           aria-current={page.currentPage === pageNum ? 'page' : undefined}

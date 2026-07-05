@@ -1,26 +1,39 @@
 ---
+import { getCollection } from 'astro:content';
 import Link from '@components/ui/Link.astro';
-import { getLangFromUrl, getLocalizedPath } from '@/i18n';
+import { getLangFromUrl, getLocalizedPath, useTranslations } from '@/i18n';
 
 interface Props {
-  keywords: Array<string>;
+  keywords?: Array<string>;
 }
 
-const { keywords } = Astro.props;
+const { keywords: postKeywords } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const segment = lang === 'ca' ? 'paraula-clau' : 'keyword';
+
+const keywordEntries = await getCollection('keywords', ({ data }) => data.lang === lang);
+const filteredEntries = postKeywords
+  ? keywordEntries.filter((entry) => postKeywords.includes(entry.data.label))
+  : keywordEntries;
+const sortedEntries = [...filteredEntries].sort((a, b) =>
+  a.data.label.localeCompare(b.data.label, lang, { sensitivity: 'base' })
+);
+
+if (postKeywords && sortedEntries.length === 0) return null;
 ---
 
-<div class="border-t border-default pt-sp-8">
-  <h3 class="text-lg font-serif mb-sp-6 text-secondary">Paraules Clau</h3>
+<div class="border-t border-default pt-sp-4">
+  <h3 class="text-lg font-serif mb-sp-6 text-secondary mt-0">{t('keywords.heading')}</h3>
   <div class="flex flex-wrap gap-sp-2">
     {
-      keywords.map((keyword) => (
+      sortedEntries.map((keyword) => (
         <Link
-          href={getLocalizedPath(`/reflexions/paraula-clau/${keyword}`, lang)}
+          href={getLocalizedPath(`/reflexions/${segment}/${keyword.data.slug}`, lang)}
           variant="accent-border"
           class="text-sm"
         >
-          {keyword}
+          {keyword.data.label}
         </Link>
       ))
     }

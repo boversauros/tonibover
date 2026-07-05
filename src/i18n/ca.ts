@@ -7,9 +7,33 @@ export default {
     'Aquesta web constitueix un espai iconotextual interactiu que articula 100 reflexions sobre la comunicació visual i la fotografia, així com sobre les relacions entre art i ciència, humanisme i tecnologia, i entre la mirada exterior i la mirada interior. Les reflexions es poden llegir de manera seqüencial, per àmbits temàtics o a través de paraules clau. En elles hi exposo perspectives de cultura visual i de semiòtica de la imatge, influències rebudes i vivències autobiogràfiques.',
   // Navigation
   'nav.preambul': 'PREÀMBUL',
+  'nav.reflexions': 'REFLEXIONS',
+  'nav.index': 'ÍNDEX',
   'nav.biografia': 'BIOGRAFIA',
   'nav.documental': 'DOCUMENTAL',
   'nav.language': 'IDIOMA',
+  // Reflexions (post list + detail)
+  'reflexions.breadcrumb': 'Reflexions',
+  'reflexions.sequentialReading': 'Lectura seqüencial',
+  'reflexions.keywordPrefix': 'Relacionades amb',
+  'reflexions.empty': 'Encara no hi ha reflexions publicades.',
+  'reflexions.empty.category': 'Cap reflexió en aquesta categoria, de moment.',
+  'reflexions.empty.keyword': 'Cap reflexió amb aquesta paraula clau, de moment.',
+  // Reflexions index (book-style table of contents)
+  'reflexionsIndex.title': 'Reflexions: índex',
+  'reflexionsIndex.pageLabel': 'Pàgina',
+  'reflexionsIndex.intro':
+    "Els posts es poden llegir de manera seqüencial, segons la línia temporal en què s'han escrit, amb la interrelació conceptual entre ells de l'1 al 100, o a partir dels diferents apartats: influències, perspectives, vivències o mitjançant paraules clau. D'altra banda, també es poden llegir i visualitzar com a entitats independents, ja que cadascun té una identitat pròpia.",
+  'post.references': 'Referències',
+  'post.references.text': 'Textos',
+  'post.references.image': 'Imatges',
+  'post.nav.label': 'Navegació entre reflexions',
+  'post.nav.previous': 'Anterior',
+  'post.nav.next': 'Següent',
+  'keywords.heading': 'Paraules Clau',
+  // RSS feed
+  'rss.title': 'Reflexions — Toni Bover',
+  'rss.description': '100 reflexions iconotextuals sobre la comunicació visual i la fotografia.',
   // Footer
   'footer.contact': 'Contacte',
   'footer.acknowledgments': 'Agraïments',
@@ -105,7 +129,7 @@ export default {
     "Els 20, els 40 i els 60 no són períodes temporals exactes, sinó processos de transició que depenen de les actituds i de les capacitats d'aprenentatge de cada persona.",
   'preambul.articleLink':
     "Article: 20/40/60. Una reflexió iconotextual de la fotografia com a art i ciència. Temps d'Educació, UB. 2021",
-  'preambul.articleTranslationLink': 'Traducció de l\'article (PDF)',
+  'preambul.articleTranslationLink': "Traducció de l'article (PDF)",
   'preambul.imageCredits': 'Fotografies: Pere Moscoso, Frank Gómez i Miquel Bigas.',
   'preambul.card20.alt': 'Un procés trans a la màquina',
   'preambul.card20.title': 'Un procés trans a la maduresa',

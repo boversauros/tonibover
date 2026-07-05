@@ -4,15 +4,15 @@ import Layout from '@layouts/Layout.astro';
 import PostsListLayout from '@layouts/PostsListLayout.astro';
 import { getCollection } from 'astro:content';
 import type { GetStaticPathsOptions } from 'astro';
+import { useTranslations, getLocalizedPath } from '@/i18n';
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
-  const categories = [
-    { id: 'influencies', name: 'Influències' },
-    { id: 'perspectives', name: 'Perspectives' },
-    { id: 'vivencies', name: 'Vivències' },
-  ];
+  const categoryEntries = await getCollection('categories');
+  const categories = categoryEntries
+    .map((c) => ({ id: c.data.slug, name: c.data.name.ca }))
+    .sort((a, b) => a.name.localeCompare(b.name, 'ca'));
 
-  const posts = await getCollection('posts');
+  const posts = await getCollection('posts', ({ data }) => data.lang === 'ca');
   const pageSize = 6;
 
   return categories.flatMap(({ id }) => {
@@ -27,16 +27,18 @@ export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
 
 const { page, categories } = Astro.props;
 const { category } = Astro.params;
+const t = useTranslations('ca');
 const categoryName = categories.find((c) => c.id === category)?.name;
-const uniqueKeywords = [...new Set(page.data.flatMap((post) => post.data.keywords))];
 ---
 
 <Layout>
   <PostsListLayout
-    title={`REFLEXIONS: ${categoryName}`}
+    title={`${t('nav.reflexions')}: ${categoryName}`}
     categories={categories}
     page={page}
-    keywords={uniqueKeywords}
     activeCategory={category}
+    emptyMessage={t('reflexions.empty.category')}
+    indexHref={getLocalizedPath('/reflexions/index', 'ca')}
+    indexLabel={t('nav.index')}
   />
 </Layout>

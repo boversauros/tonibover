@@ -1,9 +1,11 @@
 ---
 import Container from '@components/ui/Container.astro';
+import Heading from '@components/ui/Heading.astro';
 import CategoryNav from '@components/composed/CategoryNav.astro';
 import PostGrid from '@components/app/PostGrid.astro';
 import KeywordsList from '@components/composed/KeywordsList.astro';
 import PaginationControl from '@components/composed/PaginationControl.astro';
+import Link from '@components/ui/Link.astro';
 import type { Page } from 'astro';
 
 interface Props {
@@ -11,16 +13,37 @@ interface Props {
   categories: Array<{ id: string; name: string }>;
   activeCategory?: string;
   page: Page;
-  keywords: Array<string>;
+  emptyMessage?: string;
+  indexHref?: string;
+  indexLabel?: string;
 }
 
-const { title, categories, activeCategory, page, keywords } = Astro.props;
+const { title, categories, activeCategory, page, emptyMessage, indexHref, indexLabel } =
+  Astro.props;
+const isEmpty = page.data.length === 0;
 ---
 
 <Container>
-  <h2 class="text-xl font-serif italic mb-sp-8 text-secondary">{title}</h2>
-  <CategoryNav categories={categories} activeCategory={activeCategory} />
-  <PostGrid posts={page.data} categories={categories} />
-  {page.total > 1 && <PaginationControl page={page} />}
-  <KeywordsList keywords={keywords} />
+  <div class="space-y-sp-8">
+    <div class="flex items-baseline justify-between gap-sp-4">
+      <Heading as="h2" size="3xl" variant="primary" class="mb-0 font-semibold">{title}</Heading>
+      {
+        indexHref && indexLabel && (
+          <Link href={indexHref} underline class="shrink-0 text-sm tracking-wide uppercase">
+            {indexLabel}
+          </Link>
+        )
+      }
+    </div>
+    <CategoryNav categories={categories} activeCategory={activeCategory} />
+    {
+      isEmpty && emptyMessage ? (
+        <p class="text-secondary italic my-sp-16 text-center">{emptyMessage}</p>
+      ) : (
+        <PostGrid posts={page.data} categories={categories} />
+      )
+    }
+    {page.total > 1 && <PaginationControl page={page} />}
+    <KeywordsList />
+  </div>
 </Container>

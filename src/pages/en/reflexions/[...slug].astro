@@ -1,0 +1,175 @@
+---
+import '@styles/global.css';
+import { getCollection } from 'astro:content';
+import Layout from '@layouts/Layout.astro';
+import Container from '@components/ui/Container.astro';
+import KeywordsList from '@components/composed/KeywordsList.astro';
+import SectionNavigation from '@components/composed/SectionNavigation.astro';
+import Link from '@components/ui/Link.astro';
+import Heading from '@components/ui/Heading.astro';
+import { formatPostNumber } from '@/lib/format-post-number';
+import Image from '@components/ui/Image.astro';
+import type { Post } from '@/types';
+import { getLocalizedPath, useTranslations } from '@/i18n';
+import { italicize, stripEmphasis } from '@/lib/italicize';
+
+export async function getStaticPaths() {
+  const posts: Post[] = await getCollection('posts', ({ data }) => data.lang === 'en');
+  const sorted = [...posts].sort(
+    (a, b) =>
+      a.data.sort_order - b.data.sort_order ||
+      new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+  );
+  return sorted.map((post, index) => ({
+    params: { slug: post.data.slug },
+    props: {
+      post,
+      prevPost: sorted[index - 1] ?? null,
+      nextPost: sorted[index + 1] ?? null,
+    },
+  }));
+}
+
+interface Props {
+  post: Post;
+  prevPost: Post | null;
+  nextPost: Post | null;
+}
+
+const { post, prevPost, nextPost } = Astro.props;
+const t = useTranslations('en');
+
+const categoryEntries = await getCollection('categories');
+const categories = categoryEntries
+  .map((c) => ({ id: c.data.slug, name: c.data.name.en }))
+  .sort((a, b) => a.name.localeCompare(b.name, 'en'));
+
+const categoryName = categories.find((c) => c.id === post.data.category)?.name;
+const postNumber = formatPostNumber(post.data.sort_order);
+
+const textReferences = post.data.references.filter((r) => r.type === 'text');
+const imageReferences = post.data.references.filter((r) => r.type === 'image');
+---
+
+<Layout lang="en">
+  <Container>
+    <!-- Category back-link -->
+    <nav class="mb-sp-8">
+      <Link
+        href={getLocalizedPath(`/reflexions/${post.data.category}`, 'en')}
+        variant="muted"
+        class="hover:text-white text-sm"
+      >
+        {categoryName}
+      </Link>
+    </nav>
+
+    <article class="space-y-sp-8 [&_figcaption]:font-serif">
+      <!-- Header -->
+      <header class="space-y-sp-3">
+        <Heading as="p" size="2xl" variant="primary" class="text-primary-80 font-normal mb-0">
+          {postNumber}
+        </Heading>
+        <Heading as="h1" size="3xl" variant="primary" class="leading-tight mb-0">
+          {post.data.title}
+        </Heading>
+      </header>
+
+      <!-- Hero image (optional) -->
+      {
+        post.data.image && (
+          <figure>
+            <Image
+              src={post.data.image.url}
+              alt={stripEmphasis(post.data.image.alt)}
+              fit="natural"
+              hover="none"
+              loading="eager"
+            >
+              <span slot="caption" set:html={italicize(post.data.image.alt)} />
+            </Image>
+          </figure>
+        )
+      }
+
+      <!-- Content -->
+      <div
+        class="prose prose-xl max-w-none prose-headings:font-serif prose-headings:text-primary prose-p:text-body prose-p:leading-relaxed prose-p:text-lg"
+      >
+        <Fragment set:html={post.data.html} />
+      </div>
+
+      <!-- Keywords -->
+      <KeywordsList keywords={post.data.keywords} />
+
+      <!-- References -->
+      {
+        post.data.references.length > 0 && (
+          <section class="border-t border-default pt-sp-4">
+            <h2 class="text-lg font-serif mb-sp-6 text-secondary mt-0">
+              {t('post.references')}
+            </h2>
+            <div class="space-y-sp-8">
+              {textReferences.length > 0 && (
+                <div>
+                  <h3 class="text-sm font-serif text-secondary mb-sp-4 mt-0">
+                    {t('post.references.text')}
+                  </h3>
+                  <ul class="space-y-sp-4 text-sm text-muted leading-relaxed break-anywhere">
+                    {textReferences.map((ref) => (
+                      <li class="pl-sp-4 max-w-full">
+                        <span set:html={italicize(ref.reference)} />
+                        {ref.blockquote && (
+                          <blockquote
+                            class="mt-sp-2 ml-sp-4 italic border-l-2 border-default pl-sp-4"
+                            set:html={italicize(ref.blockquote)}
+                          />
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              {imageReferences.length > 0 && (
+                <div>
+                  <h3 class="text-sm font-serif text-secondary mb-sp-4 mt-0">
+                    {t('post.references.image')}
+                  </h3>
+                  <ul class="space-y-sp-4 text-sm text-muted leading-relaxed break-anywhere">
+                    {imageReferences.map((ref) => (
+                      <li class="pl-sp-4 max-w-full">
+                        <span set:html={italicize(ref.reference)} />
+                        {ref.blockquote && (
+                          <blockquote
+                            class="mt-sp-2 ml-sp-4 italic border-l-2 border-default pl-sp-4"
+                            set:html={italicize(ref.blockquote)}
+                          />
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          </section>
+        )
+      }
+
+      <SectionNavigation
+        prev={prevPost && {
+          href: getLocalizedPath(`/reflexions/${prevPost.data.slug}`, 'en'),
+          title: prevPost.data.title,
+          number: formatPostNumber(prevPost.data.sort_order),
+        }}
+        next={nextPost && {
+          href: getLocalizedPath(`/reflexions/${nextPost.data.slug}`, 'en'),
+          title: nextPost.data.title,
+          number: formatPostNumber(nextPost.data.sort_order),
+        }}
+        previousLabel={t('post.nav.previous')}
+        nextLabel={t('post.nav.next')}
+        ariaLabel={t('post.nav.label')}
+      />
+    </article>
+  </Container>
+</Layout>

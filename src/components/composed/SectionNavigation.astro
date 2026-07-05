@@ -1,0 +1,69 @@
+---
+import Icon from '@components/ui/Icon.astro';
+
+interface NavItem {
+  href: string;
+  title: string;
+  number?: string;
+}
+
+interface Props {
+  prev: NavItem | null;
+  next: NavItem | null;
+  previousLabel: string;
+  nextLabel: string;
+  ariaLabel?: string;
+}
+
+const { prev, next, previousLabel, nextLabel, ariaLabel } = Astro.props;
+
+if (!prev && !next) return null;
+---
+
+<nav class="mt-sp-16 border-t border-subtle pt-sp-8" aria-label={ariaLabel}>
+  <div class="flex justify-between items-center">
+    {
+      prev && (
+        <a
+          href={prev.href}
+          class="group flex items-center text-muted hover:text-secondary transition-colors"
+        >
+          <Icon
+            name="arrow-left"
+            size="5"
+            class="mr-2 transform group-hover:-translate-x-1 transition-transform"
+          />
+          <span>
+            <span class="block text-sm text-subtle">{previousLabel}</span>
+            <span class="block">
+              {prev.number && <span class="text-primary-80">{prev.number} · </span>}
+              {prev.title}
+            </span>
+          </span>
+        </a>
+      )
+    }
+
+    {
+      next && (
+        <a
+          href={next.href}
+          class="group flex items-center text-right text-muted hover:text-secondary transition-colors ml-auto"
+        >
+          <span>
+            <span class="block text-sm text-subtle">{nextLabel}</span>
+            <span class="block">
+              {next.number && <span class="text-primary-80">{next.number} · </span>}
+              {next.title}
+            </span>
+          </span>
+          <Icon
+            name="arrow-right"
+            size="5"
+            class="ml-2 transform group-hover:translate-x-1 transition-transform"
+          />
+        </a>
+      )
+    }
+  </div>
+</nav>

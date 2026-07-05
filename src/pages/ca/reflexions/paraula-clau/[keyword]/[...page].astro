@@ -4,38 +4,42 @@ import Layout from '@layouts/Layout.astro';
 import PostsListLayout from '@layouts/PostsListLayout.astro';
 import { getCollection } from 'astro:content';
 import type { GetStaticPathsOptions } from 'astro';
+import { useTranslations, getLocalizedPath } from '@/i18n';
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
-  const post = await getCollection('posts');
+  const [posts, keywordEntries] = await Promise.all([
+    getCollection('posts', ({ data }) => data.lang === 'ca'),
+    getCollection('keywords', ({ data }) => data.lang === 'ca'),
+  ]);
   const pageSize = 6;
-  const keywords = [...new Set(post.flatMap((post) => post.data.keywords))];
 
-  return keywords.flatMap((keyword) => {
-    const keywordPosts = post.filter((post) => post.data.keywords.includes(keyword));
+  return keywordEntries.flatMap((kw) => {
+    const ids = new Set(kw.data.postIds);
+    const keywordPosts = posts.filter((p) => ids.has(p.id));
     return paginate(keywordPosts, {
-      params: { keyword },
-      props: { keyword },
+      params: { keyword: kw.data.slug },
+      props: { label: kw.data.label },
       pageSize,
     });
   });
 }
 
-const { keyword, page } = Astro.props;
+const { label, page } = Astro.props;
+const t = useTranslations('ca');
 
-const categories = [
-  { id: 'influencies', name: 'Influències' },
-  { id: 'perspectives', name: 'Perspectives' },
-  { id: 'vivencies', name: 'Vivències' },
-];
-
-const uniqueKeywords = [...new Set(page.data.flatMap((post) => post.data.keywords))];
+const categoryEntries = await getCollection('categories');
+const categories = categoryEntries
+  .map((c) => ({ id: c.data.slug, name: c.data.name.ca }))
+  .sort((a, b) => a.name.localeCompare(b.name, 'ca'));
 ---
 
 <Layout>
   <PostsListLayout
-    title={`REFLEXIONS: Paraula Clau "${keyword}"`}
+    title={`${t('nav.reflexions')}: ${t('reflexions.keywordPrefix')} "${label}"`}
     categories={categories}
     page={page}
-    keywords={uniqueKeywords}
+    emptyMessage={t('reflexions.empty.keyword')}
+    indexHref={getLocalizedPath('/reflexions/index', 'ca')}
+    indexLabel={t('nav.index')}
   />
 </Layout>

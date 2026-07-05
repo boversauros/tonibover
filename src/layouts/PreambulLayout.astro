@@ -1,12 +1,12 @@
 ---
 import Layout from '@layouts/Layout.astro';
 import Container from '@components/ui/Container.astro';
-import PreambulNavigation from '@components/app/PreambulNavigation.astro';
+import SectionNavigation from '@components/composed/SectionNavigation.astro';
 import Image from '@components/ui/Image.astro';
 import Icon from '@components/ui/Icon.astro';
 import Link from '@/components/ui/Link.astro';
 import Text from '@components/ui/Text.astro';
-import { useTranslations, type Lang } from '@/i18n';
+import { useTranslations, getLocalizedPath, type Lang } from '@/i18n';
 
 interface Props {
   lang: Lang;
@@ -22,6 +22,15 @@ interface Props {
 const { lang, title, quote, image } = Astro.props;
 const t = useTranslations(lang);
 const currentSection = Astro.url.pathname.replace(/\/$/, '').split('/').pop() || '';
+
+const sections = [
+  { id: '20', title: t('preambul.card20.title') },
+  { id: '40', title: t('preambul.card40.title') },
+  { id: '60', title: t('preambul.card60.title') },
+];
+const currentIndex = sections.findIndex((s) => s.id === currentSection);
+const prevSection = currentIndex > 0 ? sections[currentIndex - 1] : null;
+const nextSection = currentIndex < sections.length - 1 ? sections[currentIndex + 1] : null;
 ---
 
 <Layout lang={lang}>
@@ -79,7 +88,18 @@ const currentSection = Astro.url.pathname.replace(/\/$/, '').split('/').pop() ||
         }
       </div>
 
-      <PreambulNavigation lang={lang} currentSection={currentSection} />
+      <SectionNavigation
+        prev={prevSection && {
+          href: getLocalizedPath(`/preambul/${prevSection.id}`, lang),
+          title: prevSection.title,
+        }}
+        next={nextSection && {
+          href: getLocalizedPath(`/preambul/${nextSection.id}`, lang),
+          title: nextSection.title,
+        }}
+        previousLabel={t('preambul.nav.previous')}
+        nextLabel={t('preambul.nav.next')}
+      />
     </div>
   </Container>
 </Layout>

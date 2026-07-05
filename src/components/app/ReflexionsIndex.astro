@@ -1,0 +1,63 @@
+---
+import Container from '@components/ui/Container.astro';
+import Heading from '@components/ui/Heading.astro';
+import Text from '@components/ui/Text.astro';
+import Link from '@components/ui/Link.astro';
+import type { Lang } from '@/i18n';
+
+interface Entry {
+  number: string;
+  title: string;
+  href: string;
+}
+
+interface Group {
+  pageNumber: number;
+  entries: Entry[];
+}
+
+interface Props {
+  lang: Lang;
+  title: string;
+  intro: string;
+  pageLabel: string;
+  groups: Group[];
+}
+
+const { title, intro, pageLabel, groups } = Astro.props;
+---
+
+<Container>
+  <Heading as="h1" size="3xl" variant="primary">{title}</Heading>
+  <Text variant="body" class="mb-sp-12">{intro}</Text>
+
+  <div class="space-y-sp-12">
+    {
+      groups.map((group) => (
+        <section>
+          <div class="flex items-center gap-sp-4 mb-sp-5">
+            <Text as="span" variant="label" class="shrink-0 uppercase">
+              {`${pageLabel} ${group.pageNumber}`}
+            </Text>
+            <span aria-hidden="true" class="grow border-t border-subtle" />
+          </div>
+
+          <ul class="space-y-sp-3">
+            {group.entries.map((entry) => (
+              <li>
+                <Link href={entry.href} variant="muted" class="group flex items-baseline gap-sp-4">
+                  <span class="shrink-0 font-serif tabular-nums text-primary-60 group-hover:text-primary transition-colors-default">
+                    {entry.number}
+                  </span>
+                  <span class="text-body group-hover:text-primary transition-colors-default">
+                    {entry.title}
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))
+    }
+  </div>
+</Container>

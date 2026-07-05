@@ -1,8 +1,11 @@
 ---
+import { Image as AstroImage } from 'astro:assets';
+
 interface Props {
   src: string;
   alt: string;
-  aspect?: 'square' | '4/3' | 'video' | 'auto';
+  aspect?: 'square' | '4/3' | '3/2' | 'video' | 'auto';
+  fit?: 'cover' | 'contain' | 'natural';
   hover?: 'opacity' | 'scale' | 'none';
   loading?: 'lazy' | 'eager';
   width?: string;
@@ -15,6 +18,7 @@ const {
   src,
   alt,
   aspect = 'auto',
+  fit = 'cover',
   hover = 'opacity',
   loading = 'lazy',
   width = 'w-full',
@@ -28,6 +32,7 @@ const hasCaption = Astro.slots.has('caption');
 const aspectClasses = {
   square: 'aspect-square',
   '4/3': 'aspect-4/3',
+  '3/2': 'aspect-3/2',
   video: 'aspect-video',
   auto: '',
 };
@@ -38,16 +43,37 @@ const hoverClasses = {
   none: '',
 };
 
+const fitClasses = {
+  cover: 'object-cover',
+  contain: 'object-contain',
+  natural: 'h-auto',
+};
+
 const imageClasses =
-  `${width} ${height} ${aspectClasses[aspect]} object-cover ${hoverClasses[hover]} ${className}`.trim();
+  `${width} ${height} ${aspectClasses[aspect]} ${fitClasses[fit]} ${hoverClasses[hover]} ${className}`.trim();
 const overflowClass = hover === 'scale' ? 'overflow-hidden' : '';
+
+// astro:assets <Image> can optimize remote URLs (with inferSize) but not public-folder paths.
+// Local public paths (e.g. /images/foo.webp) fall through to a plain <img>.
+const isRemote = /^https?:\/\//.test(src);
 ---
 
 {
   hasCaption ? (
     <figure class="space-y-sp-3">
       <div class={`group ${overflowClass}`}>
-        <img src={src} alt={alt} loading={loading} class={imageClasses} {...rest} />
+        {isRemote ? (
+          <AstroImage
+            src={src}
+            alt={alt}
+            inferSize
+            loading={loading}
+            class={imageClasses}
+            {...rest}
+          />
+        ) : (
+          <img src={src} alt={alt} loading={loading} class={imageClasses} {...rest} />
+        )}
       </div>
       <figcaption class="text-sm text-muted leading-relaxed">
         <slot name="caption" />
@@ -55,7 +81,18 @@ const overflowClass = hover === 'scale' ? 'overflow-hidden' : '';
     </figure>
   ) : (
     <div class={`group ${overflowClass}`}>
-      <img src={src} alt={alt} loading={loading} class={imageClasses} {...rest} />
+      {isRemote ? (
+        <AstroImage
+          src={src}
+          alt={alt}
+          inferSize
+          loading={loading}
+          class={imageClasses}
+          {...rest}
+        />
+      ) : (
+        <img src={src} alt={alt} loading={loading} class={imageClasses} {...rest} />
+      )}
     </div>
   )
 }

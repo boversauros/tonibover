@@ -6,9 +6,33 @@ export default {
     'This website constitutes an interactive iconotextual space that articulates 100 reflections on visual communication and photography, as well as on the relationships between art and science, humanism and technology, and between the external gaze and the internal gaze. The reflections can be read sequentially, by thematic areas or through keywords. In them I present perspectives on visual culture and image semiotics, influences received and autobiographical experiences.', // Navigation
   // Navigation
   'nav.preambul': 'PREAMBLE',
+  'nav.reflexions': 'REFLECTIONS',
+  'nav.index': 'INDEX',
   'nav.biografia': 'BIOGRAPHY',
   'nav.documental': 'DOCUMENTARY',
   'nav.language': 'LANGUAGE',
+  // Reflexions (post list + detail)
+  'reflexions.breadcrumb': 'Reflections',
+  'reflexions.sequentialReading': 'Sequential reading',
+  'reflexions.keywordPrefix': 'Related with',
+  'reflexions.empty': 'No reflections published yet.',
+  'reflexions.empty.category': 'No reflections in this category yet.',
+  'reflexions.empty.keyword': 'No reflections with this keyword yet.',
+  // Reflexions index (book-style table of contents)
+  'reflexionsIndex.title': 'Reflexions: Index',
+  'reflexionsIndex.pageLabel': 'Page',
+  'reflexionsIndex.intro':
+    'The posts can be read sequentially, following the order in which they were written, or through conceptual interrelationships from 1 to 100, or via different sections: influences, perspectives, experiences, or keywords. Alternatively, they can also be read and viewed as independent entities, since each post has its own identity.',
+  'post.references': 'References',
+  'post.references.text': 'Texts',
+  'post.references.image': 'Images',
+  'post.nav.label': 'Post navigation',
+  'post.nav.previous': 'Previous',
+  'post.nav.next': 'Next',
+  'keywords.heading': 'Keywords',
+  // RSS feed
+  'rss.title': 'Reflections — Toni Bover',
+  'rss.description': '100 iconotextual reflections on visual communication and photography.',
   // Footer
   'footer.contact': 'Contact',
   'footer.acknowledgments': 'Acknowledgments',

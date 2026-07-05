@@ -166,6 +166,17 @@
     background-color: var(--color-hover-surface);
   }
 
+  /* Group hover states (parent .group) */
+  .group:hover .group-hover\:text-primary,
+  .group:focus-within .group-hover\:text-primary,
+  .group:focus-visible .group-hover\:text-primary {
+    color: var(--color-text-primary);
+  }
+  .group:hover .group-hover\:text-body,
+  .group:focus-within .group-hover\:text-body {
+    color: var(--color-text-body);
+  }
+
   /* Border Colors */
   .border-default {
     border-color: var(--color-border);
@@ -398,6 +409,11 @@
   }
   .transition-transform-default {
     transition: var(--transition-transform);
+  }
+
+  /* Text wrapping */
+  .break-anywhere {
+    overflow-wrap: anywhere;
   }
 }
 

@@ -1,6 +1,6 @@
 ---
 import Link from '@components/ui/Link.astro';
-import { getLangFromUrl, getLocalizedPath } from '@/i18n';
+import { getLangFromUrl, getLocalizedPath, useTranslations } from '@/i18n';
 
 interface Props {
   categories: Array<{ id: string; name: string }>;
@@ -9,13 +9,14 @@ interface Props {
 
 const { categories, activeCategory } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
-<nav class="mb-sp-12">
+<nav>
   <ul class="flex flex-wrap gap-sp-6 text-muted">
     <li>
       <Link href={getLocalizedPath('/reflexions', lang)} variant="muted" active={!activeCategory}>
-        Tots
+        {t('reflexions.sequentialReading')}
       </Link>
     </li>
     {
