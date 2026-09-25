@@ -2,9 +2,13 @@ import { defineCollection, z } from 'astro:content';
 import { postsLoader } from '@/lib/loaders/posts';
 import { categoriesLoader } from '@/lib/loaders/categories';
 import { keywordsLoader } from '@/lib/loaders/keywords';
+import { siteCollectionLoader } from '@/lib/loaders/site-collections';
+import { resolveContentSource } from '@/lib/loaders/content-source';
+
+const contentSource = resolveContentSource();
 
 const posts = defineCollection({
-  loader: postsLoader(),
+  loader: contentSource === 'aws' ? siteCollectionLoader('posts') : postsLoader(),
   schema: z.object({
     slug: z.string(),
     title: z.string(),
@@ -37,7 +41,7 @@ const posts = defineCollection({
 });
 
 const categories = defineCollection({
-  loader: categoriesLoader(),
+  loader: contentSource === 'aws' ? siteCollectionLoader('categories') : categoriesLoader(),
   schema: z.object({
     slug: z.string(),
     name: z.object({
@@ -48,7 +52,7 @@ const categories = defineCollection({
 });
 
 const keywords = defineCollection({
-  loader: keywordsLoader(),
+  loader: contentSource === 'aws' ? siteCollectionLoader('keywords') : keywordsLoader(),
   schema: z.object({
     slug: z.string(),
     lang: z.enum(['ca', 'en']),

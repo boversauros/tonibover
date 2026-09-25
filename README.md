@@ -4,7 +4,9 @@ In development 🚧
 
 ## Setup
 
-Copy `.env.example` to `.env` and fill in the AWS reader values:
+Copy `.env.example` to `.env`. During development parity, `CONTENT_SOURCE` defaults to `supabase`, so existing Vercel Preview builds continue to use the current loaders. Set `CONTENT_SOURCE=aws` only in a build with the reader configuration below. An AWS build never falls back to Supabase after a reader failure.
+
+For the AWS reader build, fill in:
 
 - `AWS_READER_ENVIRONMENT=dev`, `AWS_READER_REGION`, and the exact development `AWS_READER_FUNCTION_ARN` from the private admin rollout. The build verifies every response's environment and schema version.
 - On Vercel Preview, enable OIDC and set `AWS_READER_ROLE_ARN` to the exact invoke-only development role. Vercel supplies `VERCEL_OIDC_TOKEN` during the build.
@@ -13,7 +15,7 @@ Copy `.env.example` to `.env` and fill in the AWS reader values:
 
 The previous Supabase settings remain in the repository until development parity is verified:
 
-- `SUPABASE_URL` and `SUPABASE_ANON_KEY` — retained for comparison with the former read path. The AWS loaders do not query Supabase. The Astro environment schema still declares these during this parity phase.
+- `SUPABASE_URL` and `SUPABASE_ANON_KEY` — used by the existing loaders while `CONTENT_SOURCE=supabase`; retained for development parity. The AWS loaders do not query Supabase. The Astro environment schema still declares these during this phase.
 - `SUPABASE_PROJECT_ID` — used only by `pnpm types:gen`. Not read at build/runtime.
 
 ## Discovery surfaces
@@ -26,7 +28,7 @@ The previous Supabase settings remain in the repository until development parity
 | Command           | Description                                                                                                                                                      |
 | ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `pnpm dev`        | Start dev server                                                                                                                                                 |
-| `pnpm build`      | Static build from a validated published AWS snapshot; fails on incomplete data.                                                                                  |
+| `pnpm build`      | Build from the selected content source. AWS builds validate the complete published snapshot and fail on incomplete data.                                         |
 | `pnpm preview`    | Preview built site                                                                                                                                               |
 | `pnpm format`     | Prettier write                                                                                                                                                   |
 | `pnpm test`       | Run Vitest unit tests (pure modules)                                                                                                                             |
