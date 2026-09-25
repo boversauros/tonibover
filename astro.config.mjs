@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig, envField } from 'astro/config';
+import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
@@ -22,15 +22,6 @@ export default defineConfig({
       },
     }),
   ],
-  image: {
-    remotePatterns: [{ protocol: 'https', hostname: '**.supabase.co' }],
-  },
-  env: {
-    schema: {
-      SUPABASE_URL: envField.string({ context: 'server', access: 'secret' }),
-      SUPABASE_ANON_KEY: envField.string({ context: 'server', access: 'secret' }),
-    },
-  },
   vite: {
     plugins: [tailwindcss()],
   },

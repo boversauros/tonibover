@@ -4,7 +4,7 @@ In development 🚧
 
 ## Setup
 
-Copy `.env.example` to `.env`. During development parity, `CONTENT_SOURCE` defaults to `supabase`, so existing Vercel Preview builds continue to use the current loaders. Set `CONTENT_SOURCE=aws` only in a build with the reader configuration below. An AWS build never falls back to Supabase after a reader failure.
+Copy `.env.example` to `.env`. Site content comes from the published AWS reader. Builds fail when the reader is unavailable or returns an incomplete snapshot.
 
 For the AWS reader build, fill in:
 
@@ -13,11 +13,6 @@ For the AWS reader build, fill in:
 - Locally, set `AWS_READER_PROFILE` to a temporary, invoke-only development AWS profile. No admin Cognito session, static AWS key, or direct table/bucket permission is needed.
 - If published posts have images, the image materialization step from issue #13 must write local assets under `public/content-images/` and a JSON manifest. Set `AWS_READER_IMAGE_MANIFEST` to that manifest's path. Its format is `{ "revision": 1, "images": { "<post-id>": { "version": 1, "main": "/content-images/<hash>.jpg", "thumb": "/content-images/<hash>.jpg" } } }`; `main` and `thumb` are present only for attached images. The loader rejects missing or stale assets.
 
-The previous Supabase settings remain in the repository until development parity is verified:
-
-- `SUPABASE_URL` and `SUPABASE_ANON_KEY` — used by the existing loaders while `CONTENT_SOURCE=supabase`; retained for development parity. The AWS loaders do not query Supabase. The Astro environment schema still declares these during this phase.
-- `SUPABASE_PROJECT_ID` — used only by `pnpm types:gen`. Not read at build/runtime.
-
 ## Discovery surfaces
 
 - Sitemap: `/sitemap-index.xml` (lists both `/ca/*` and `/en/*` URLs).
@@ -25,16 +20,15 @@ The previous Supabase settings remain in the repository until development parity
 
 ## Scripts
 
-| Command           | Description                                                                                                                                                      |
-| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `pnpm dev`        | Start dev server                                                                                                                                                 |
-| `pnpm build`      | Build from the selected content source. AWS builds validate the complete published snapshot and fail on incomplete data.                                         |
-| `pnpm preview`    | Preview built site                                                                                                                                               |
-| `pnpm format`     | Prettier write                                                                                                                                                   |
-| `pnpm test`       | Run Vitest unit tests (pure modules)                                                                                                                             |
-| `pnpm test:watch` | Vitest watch mode                                                                                                                                                |
-| `pnpm types:gen`  | Regenerate `src/lib/database.types.ts` from Supabase schema. Requires `SUPABASE_PROJECT_ID` env + Supabase CLI installed (`brew install supabase/tap/supabase`). |
+| Command           | Description                                                        |
+| ----------------- | ------------------------------------------------------------------ |
+| `pnpm dev`        | Start dev server                                                   |
+| `pnpm build`      | Build from the AWS published snapshot and fail on incomplete data. |
+| `pnpm preview`    | Preview built site                                                 |
+| `pnpm format`     | Prettier write                                                     |
+| `pnpm test`       | Run Vitest unit tests (pure modules)                               |
+| `pnpm test:watch` | Vitest watch mode                                                  |
 
 ## Architecture
 
-See `CLAUDE.md` for stack/conventions and `plans/astro-supabase-admin-integration.md` for the phased Supabase integration plan.
+See `CLAUDE.md` for stack/conventions and [issue #12](https://github.com/boversauros/tonibover/issues/12) for the published snapshot migration.

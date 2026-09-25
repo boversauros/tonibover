@@ -10,8 +10,7 @@
     "astro": "astro",
     "format": "prettier --write .",
     "test": "vitest run",
-    "test:watch": "vitest",
-    "types:gen": "supabase gen types typescript --project-id $SUPABASE_PROJECT_ID > src/lib/database.types.ts"
+    "test:watch": "vitest"
   },
   "dependencies": {
     "@astrojs/rss": "4.0.18",
@@ -21,7 +20,6 @@
     "@fontsource-variable/bodoni-moda": "5.2.7",
     "@fontsource/nunito": "5.2.7",
     "@lucide/astro": "0.563.0",
-    "@supabase/supabase-js": "2.105.4",
     "@tailwindcss/vite": "4.1.18",
     "@vercel/oidc-aws-credentials-provider": "3.3.9",
     "astro": "5.18.1",
@@ -35,6 +33,7 @@
     "@types/sanitize-html": "2.16.1",
     "prettier": "3.4.2",
     "prettier-plugin-astro": "0.14.1",
+    "typescript": "5.9.3",
     "vitest": "4.1.6"
   },
   "pnpm": {
