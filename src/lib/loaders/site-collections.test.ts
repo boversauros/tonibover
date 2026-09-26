@@ -1,9 +1,13 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { getPublishedSnapshot } from '../aws-reader/snapshot';
+import { preparePublishedImages } from '../aws-reader/materialize';
 import { adaptSnapshot } from '../aws-reader/adapt';
 import { siteCollectionLoader } from './site-collections';
 
-vi.mock('../aws-reader/snapshot', () => ({ getPublishedSnapshot: vi.fn() }));
+vi.mock('../aws-reader/materialize', () => ({ preparePublishedImages: vi.fn() }));
+vi.mock('../aws-reader/client', () => ({
+  readerConfig: vi.fn(() => ({ environment: 'dev', region: 'eu-west-1' })),
+  createReaderClient: vi.fn(),
+}));
 vi.mock('../aws-reader/adapt', () => ({ adaptSnapshot: vi.fn() }));
 vi.mock('../aws-reader/image-manifest', () => ({ imagePathFromManifest: vi.fn() }));
 
@@ -12,8 +16,11 @@ afterEach(() => vi.clearAllMocks());
 describe('Astro collection refresh', () => {
   it('keeps the last good dev entries when the next snapshot fails', async () => {
     vi.stubEnv('DEV', true);
-    vi.mocked(getPublishedSnapshot)
-      .mockResolvedValueOnce({ revision: 1 } as never)
+    vi.mocked(preparePublishedImages)
+      .mockResolvedValueOnce({
+        snapshot: { revision: 1 },
+        manifestPath: '/tmp/manifest.json',
+      } as never)
       .mockRejectedValueOnce(new Error('reader unavailable'));
     vi.mocked(adaptSnapshot).mockReturnValue({
       posts: [{ id: '1-ca', title: 'First' }],

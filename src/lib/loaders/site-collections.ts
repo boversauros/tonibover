@@ -1,6 +1,8 @@
 import type { Loader } from 'astro/loaders';
 import { adaptSnapshot, type SiteEntries } from '../aws-reader/adapt';
 import { imagePathFromManifest } from '../aws-reader/image-manifest';
+import { createReaderClient, readerConfig } from '../aws-reader/client';
+import { preparePublishedImages } from '../aws-reader/materialize';
 import { getPublishedSnapshot } from '../aws-reader/snapshot';
 
 let entriesPromise: Promise<SiteEntries> | undefined;
@@ -18,15 +20,29 @@ function getSiteEntries(name: keyof SiteEntries): Promise<SiteEntries> {
   }
   if (!entriesPromise) {
     startedAt = Date.now();
-    entriesPromise = getPublishedSnapshot()
-      .then((snapshot) =>
-        adaptSnapshot(
-          snapshot,
-          imagePathFromManifest(
-            snapshot.revision,
-            process.env.AWS_READER_IMAGE_MANIFEST ?? import.meta.env.AWS_READER_IMAGE_MANIFEST
-          )
-        )
+    const load = async () => {
+      if (import.meta.env.DEV) {
+        const config = readerConfig({ ...import.meta.env, ...process.env });
+        const { snapshot, manifestPath } = await preparePublishedImages(
+          createReaderClient(config),
+          config.environment,
+          {
+            manifestPath:
+              process.env.AWS_READER_IMAGE_MANIFEST || import.meta.env.AWS_READER_IMAGE_MANIFEST,
+            region: config.region,
+          }
+        );
+        return { snapshot, manifestPath };
+      }
+      return {
+        snapshot: await getPublishedSnapshot(),
+        manifestPath:
+          process.env.AWS_READER_IMAGE_MANIFEST || import.meta.env.AWS_READER_IMAGE_MANIFEST,
+      };
+    };
+    entriesPromise = load()
+      .then(({ snapshot, manifestPath }) =>
+        adaptSnapshot(snapshot, imagePathFromManifest(snapshot.revision, manifestPath))
       )
       .catch((error) => {
         entriesPromise = undefined;
