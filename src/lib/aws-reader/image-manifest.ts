@@ -2,6 +2,7 @@ import { readFileSync, realpathSync, statSync } from 'node:fs';
 import { resolve, sep } from 'node:path';
 import { z } from 'zod';
 import type { ImagePath } from './adapt';
+import { defaultImageManifest } from './materialize';
 
 const pathSchema = z.string().regex(/^\/content-images\/[A-Za-z0-9._-]+$/);
 const manifestSchema = z
@@ -21,7 +22,7 @@ const manifestSchema = z
 
 export function imagePathFromManifest(
   revision: number,
-  filename = process.env.AWS_READER_IMAGE_MANIFEST,
+  filename = process.env.AWS_READER_IMAGE_MANIFEST || defaultImageManifest,
   publicRoot = resolve(process.cwd(), 'public')
 ): ImagePath {
   if (!filename)
