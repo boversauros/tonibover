@@ -3,6 +3,7 @@ import '@styles/global.css';
 import Layout from '@layouts/Layout.astro';
 import PostsListLayout from '@layouts/PostsListLayout.astro';
 import { getCollection } from 'astro:content';
+import { POSTS_PAGE_SIZE } from '@/lib/pagination';
 import type { GetStaticPathsOptions } from 'astro';
 import { useTranslations, getLocalizedPath } from '@/i18n';
 
@@ -11,7 +12,7 @@ export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
     getCollection('posts', ({ data }) => data.lang === 'ca'),
     getCollection('keywords', ({ data }) => data.lang === 'ca'),
   ]);
-  const pageSize = 6;
+  const pageSize = POSTS_PAGE_SIZE;
 
   return keywordEntries.flatMap((kw) => {
     const ids = new Set(kw.data.postIds);

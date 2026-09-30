@@ -71,4 +71,28 @@ describe('AWS to Astro adaptation', () => {
     expect(result.posts[0].thumbnail).toEqual(result.posts[0].image);
     expect(() => adaptSnapshot(snapshot([raw]))).toThrow(/materialization/);
   });
+
+  it.each(['index', 'vivencies'])('rejects post slug %s that a listing route shadows', (slug) => {
+    const raw = post();
+    raw.translations.en.slug = slug;
+    expect(() => adaptSnapshot(snapshot([raw]))).toThrow(/collides with a listing route/);
+  });
+
+  it('rejects a numeric slug only once that listing page exists', () => {
+    // Legacy "-68" slugs were normalized to "68" during the AWS import.
+    const numbered = post('68');
+    numbered.translations.en.slug = '2';
+    expect(adaptSnapshot(snapshot([numbered])).posts.map((item) => item.slug)).toContain('2');
+    const fillers = Array.from({ length: 6 }, (_, index) => post(String(index + 100)));
+    expect(() => adaptSnapshot(snapshot([numbered, ...fillers]))).toThrow(
+      /Post 68-en slug "2" collides with a listing route/
+    );
+  });
+
+  it.each(['a/b', 'Upper', ''])('rejects non-segment post slug %j', (slug) => {
+    const raw = post();
+    raw.translations.ca.slug = slug;
+    raw.translations.en.slug = '';
+    expect(() => adaptSnapshot(snapshot([raw]))).toThrow(/slug|usable/);
+  });
 });
