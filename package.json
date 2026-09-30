@@ -10,7 +10,8 @@
     "astro": "astro",
     "format": "prettier --write .",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "test:site": "vitest run --config vitest.site.config.ts"
   },
   "dependencies": {
     "@astrojs/rss": "4.0.18",

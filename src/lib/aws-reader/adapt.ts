@@ -1,5 +1,6 @@
 import { paragraphify } from '../paragraphify';
 import { sanitize } from '../sanitize';
+import { POSTS_PAGE_SIZE } from '../pagination';
 import { slugify } from '../slugify';
 import type { PostEntry, Lang } from '../loaders/types';
 import type { PublishedSnapshot } from './snapshot';
@@ -101,12 +102,36 @@ function keywordEntries(
     });
 }
 
+/**
+ * Post pages share `/<lang>/reflexions/<segment>` with listing routes. Astro
+ * gives those routes priority and only warns, so a colliding post would be
+ * silently missing from a successful build. A numeric slug is only a
+ * collision once that listing page exists, which publishing more posts can
+ * cause later; the build then fails instead of dropping the post.
+ */
+function assertPostRoutes(posts: PostEntry[], categorySlugs: Set<string>): void {
+  for (const lang of ['ca', 'en'] as const) {
+    const inLanguage = posts.filter((post) => post.lang === lang);
+    const lastPage = Math.ceil(inLanguage.length / POSTS_PAGE_SIZE);
+    for (const { id, slug } of inLanguage) {
+      if (!/^[a-z0-9_-]+$/.test(slug)) {
+        throw new Error(`Post ${id} slug is not a single normalized URL segment`);
+      }
+      const page = /^[1-9]\d*$/.test(slug) ? Number(slug) : 0;
+      if ((page >= 2 && page <= lastPage) || slug === 'index' || categorySlugs.has(slug)) {
+        throw new Error(`Post ${id} slug "${slug}" collides with a listing route`);
+      }
+    }
+  }
+}
+
 export function adaptSnapshot(
   snapshot: PublishedSnapshot,
   imagePath: ImagePath = () => {
     throw new Error('Published image materialization is required');
   }
 ): SiteEntries {
+  const categorySlugs = new Set(snapshot.catalog.categories.map((category) => category.slug));
   const posts: PostEntry[] = [];
   for (const post of snapshot.posts) {
     const usable = (['ca', 'en'] as Lang[]).filter((lang) => {
@@ -155,6 +180,7 @@ export function adaptSnapshot(
       new Date(b.date).getTime() - new Date(a.date).getTime() ||
       a.id.localeCompare(b.id)
   );
+  assertPostRoutes(posts, categorySlugs);
   const categories: CategoryEntry[] = snapshot.catalog.categories.map((category) => ({
     id: category.slug,
     slug: category.slug,
