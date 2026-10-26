@@ -5,9 +5,7 @@ allowBuilds:
   esbuild: true
   sharp: true
 
+
 overrides:
-  vite: 6.4.2
-  rollup: 4.59.0
-  postcss: 8.5.10
-  picomatch@2: 2.3.2
-  picomatch@4: 4.0.4
+  source-map-js: 1.2.2
+  zod@4: 4.6.7

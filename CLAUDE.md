@@ -13,7 +13,7 @@ pnpm format    # Format code with Prettier
 
 ## Architecture
 
-This is **Toni Bover's personal site** - an Astro 5 site with Tailwind CSS 4, supporting Catalan (default) and English.
+This is **Toni Bover's personal site** - an Astro 7 site with Tailwind CSS 4, supporting Catalan (default) and English.
 
 ### Internationalization
 

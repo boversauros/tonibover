@@ -8,9 +8,10 @@ import type { GetStaticPathsOptions } from 'astro';
 import { useTranslations, getLocalizedPath } from '@/i18n';
 import { emptyPage } from '@/lib/empty-page';
 import { POSTS_PAGE_SIZE } from '@/lib/pagination';
+import { sortPosts } from '@/lib/sort-posts';
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
-  const posts: Post[] = await getCollection('posts', ({ data }) => data.lang === 'ca');
+  const posts: Post[] = sortPosts(await getCollection('posts', ({ data }) => data.lang === 'ca'));
   if (posts.length === 0) {
     return [{ params: { page: undefined }, props: { page: emptyPage<Post>('/ca/reflexions') } }];
   }

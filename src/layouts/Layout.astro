@@ -30,41 +30,41 @@ const currentPath = Astro.url.pathname;
   <body class="min-h-screen bg-background text-primary font-sans antialiased flex flex-col">
     <Navigation lang={lang} currentPath={currentPath} />
     <slot />
-  </body>
-  <footer class="border-t border-subtle mt-auto">
-    <div class="max-w-4xl mx-auto px-sp-6 py-sp-6">
-      <div class="flex flex-col gap-sp-4 md:flex-row md:justify-between md:items-center text-sm">
-        <p class="text-muted font-serif">
-          © Toni Bover, {new Date().getFullYear()}
-        </p>
-        <div class="flex flex-col gap-sp-4 md:flex-row md:gap-sp-6 text-muted">
-          <Link href={getLocalizedPath('/agraiments', lang)} variant="muted"
-            >{t('footer.acknowledgments')}</Link
-          >
-          <Link
-            href="mailto:contact.webtonibover@gmail.com"
-            variant="muted"
-            aria-label="Contactar per correu electrònic"
-          >
-            {t('footer.contact')}
-          </Link>
-          <Link
-            href={`/files/${legalFileName}`}
-            variant="muted"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {t('footer.legal')}
-          </Link>
+    <footer class="border-t border-subtle mt-auto">
+      <div class="max-w-4xl mx-auto px-sp-6 py-sp-6">
+        <div class="flex flex-col gap-sp-4 md:flex-row md:justify-between md:items-center text-sm">
+          <p class="text-muted font-serif">
+            © Toni Bover, {new Date().getFullYear()}
+          </p>
+          <div class="flex flex-col gap-sp-4 md:flex-row md:gap-sp-6 text-muted">
+            <Link href={getLocalizedPath('/agraiments', lang)} variant="muted"
+              >{t('footer.acknowledgments')}</Link
+            >
+            <Link
+              href="mailto:contact.webtonibover@gmail.com"
+              variant="muted"
+              aria-label="Contactar per correu electrònic"
+            >
+              {t('footer.contact')}
+            </Link>
+            <Link
+              href={`/files/${legalFileName}`}
+              variant="muted"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {t('footer.legal')}
+            </Link>
+          </div>
         </div>
       </div>
-    </div>
-  </footer>
-  <script>
-    document.querySelectorAll('[data-lang-switch]').forEach((el) => {
-      el.addEventListener('click', () => {
-        localStorage.removeItem('preferred-lang');
+    </footer>
+    <script>
+      document.querySelectorAll('[data-lang-switch]').forEach((el) => {
+        el.addEventListener('click', () => {
+          localStorage.removeItem('preferred-lang');
+        });
       });
-    });
-  </script>
+    </script>
+  </body>
 </html>
