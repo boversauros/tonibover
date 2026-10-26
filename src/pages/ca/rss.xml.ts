@@ -3,11 +3,13 @@ import { getCollection } from 'astro:content';
 import type { APIContext } from 'astro';
 import { useTranslations, getLocalizedPath } from '@/i18n';
 import { excerpt } from '@/lib/excerpt';
+import { sortPosts } from '@/lib/sort-posts';
 
 export async function GET(context: APIContext) {
   const t = useTranslations('ca');
   const posts = await getCollection('posts', ({ data }) => data.lang === 'ca');
-  const sorted = posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+  // Same-date posts keep site order.
+  const sorted = sortPosts(posts).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 
   return rss({
     title: t('rss.title'),

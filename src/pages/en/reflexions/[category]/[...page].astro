@@ -4,6 +4,7 @@ import Layout from '@layouts/Layout.astro';
 import PostsListLayout from '@layouts/PostsListLayout.astro';
 import { getCollection } from 'astro:content';
 import { POSTS_PAGE_SIZE } from '@/lib/pagination';
+import { sortPosts } from '@/lib/sort-posts';
 import type { GetStaticPathsOptions } from 'astro';
 import { useTranslations, getLocalizedPath } from '@/i18n';
 
@@ -13,7 +14,7 @@ export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
     .map((c) => ({ id: c.data.slug, name: c.data.name.en }))
     .sort((a, b) => a.name.localeCompare(b.name, 'en'));
 
-  const posts = await getCollection('posts', ({ data }) => data.lang === 'en');
+  const posts = sortPosts(await getCollection('posts', ({ data }) => data.lang === 'en'));
   const pageSize = POSTS_PAGE_SIZE;
 
   return categories.flatMap(({ id }) => {
