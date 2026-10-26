@@ -3,6 +3,9 @@
   "type": "module",
   "version": "1.0.0",
   "packageManager": "pnpm@11.0.9",
+  "engines": {
+    "node": "24.22.1"
+  },
   "scripts": {
     "dev": "astro dev",
     "build": "node scripts/materialize-images.mjs && astro build",
@@ -14,29 +17,29 @@
     "test:site": "vitest run --config vitest.site.config.ts"
   },
   "dependencies": {
-    "@astrojs/rss": "4.0.18",
-    "@astrojs/sitemap": "3.7.2",
+    "@astrojs/rss": "4.0.19",
+    "@astrojs/sitemap": "3.7.4",
     "@aws-sdk/client-lambda": "3.1101.0",
     "@aws-sdk/credential-providers": "3.1101.0",
     "@fontsource-variable/bodoni-moda": "5.2.7",
     "@fontsource/nunito": "5.2.7",
-    "@lucide/astro": "0.563.0",
-    "@tailwindcss/vite": "4.1.18",
-    "@vercel/oidc-aws-credentials-provider": "3.3.9",
-    "astro": "5.18.1",
-    "astro-lazy-youtube-embed": "0.5.4",
-    "sanitize-html": "2.17.4",
-    "sharp": "0.34.5",
-    "tailwindcss": "4.1.18",
-    "zod": "3.25.76"
+    "@lucide/astro": "1.61.0",
+    "@tailwindcss/vite": "4.3.3",
+    "@vercel/oidc-aws-credentials-provider": "3.3.15",
+    "astro": "7.4.2",
+    "astro-lazy-youtube-embed": "0.5.5",
+    "sanitize-html": "2.18.1",
+    "sharp": "0.35.5",
+    "tailwindcss": "4.3.3",
+    "zod": "4.6.7"
   },
   "devDependencies": {
-    "@types/sanitize-html": "2.16.1",
-    "esbuild": "0.25.12",
+    "@types/sanitize-html": "2.16.2",
+    "esbuild": "0.28.2",
     "prettier": "3.4.2",
     "prettier-plugin-astro": "0.14.1",
     "typescript": "5.9.3",
-    "vitest": "4.1.6"
+    "vitest": "4.1.12"
   },
   "pnpm": {
     "onlyBuiltDependencies": [

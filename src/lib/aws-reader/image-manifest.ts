@@ -9,6 +9,7 @@ const manifestSchema = z
   .object({
     revision: z.number().int().nonnegative().safe(),
     images: z.record(
+      z.string(),
       z
         .object({
           version: z.number().int().positive().safe(),
